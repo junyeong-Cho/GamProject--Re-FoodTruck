@@ -16,11 +16,11 @@ public:
 	void DrawBowl();
 	void DrawStove();
 	Math::vec2 WhereISMouse();
-	void SetIngredientWhere();
+	KitchenPosition GetWhere(Math::vec2 pos);
+	void SetIngredientsWhere();
 	void Cutting();
 	void WriteCuttingNum();
-	void CheckWhereIngredient();
-
+	void CreateUsingIngredient();
 
 	void Update();
 
