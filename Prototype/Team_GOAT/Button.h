@@ -28,6 +28,7 @@ struct Button
     {
     };
 
+
     //have name button
     //Button(double tempX, double tempY, double tempWidth, double tempHeight, std::string name)
     //    : x(tempX), y(tempY), width(tempWidth), height(tempHeight), buttonName(name) {};

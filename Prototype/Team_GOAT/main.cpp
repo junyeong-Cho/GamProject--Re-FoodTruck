@@ -38,12 +38,31 @@ void jh_Updatd()
     }
 }
 
+
+void print_text(doodle::HexColor color, std::string text, int x, int y)
+{
+	doodle::push_settings();
+
+	doodle::set_font_size(48);
+	doodle::set_fill_color(133, 226, 0, 151);
+	doodle::set_outline_color(doodle::HexColor{ color });
+	doodle::draw_text(text, x, y);
+
+	doodle::pop_settings();
+}
+
+
 void jy_Updated()
 {
+	
 	doodle::create_window(1400, 800);
 	doodle::set_frame_of_reference(doodle::FrameOfReference::LeftHanded_OriginTopLeft);
 	doodle::set_image_mode(doodle::RectMode::Corner);
 	//doodle::no_fill();
+
+	State current_state = State::Main;
+	State prev_state;
+
 
 	const auto oscillate = [](double t) { return (std::sin(t) * 0.5 + 0.5); };
 
@@ -52,7 +71,7 @@ void jy_Updated()
 	{
 		doodle::update_window();
 		doodle::clear_background(doodle::HexColor{ 0xFFFFFFFF });
-
+		
 
 		doodle::push_settings();
 
@@ -60,48 +79,66 @@ void jy_Updated()
 		doodle::set_fill_color(doodle::HexColor{ 0xEBE3C0FF });
 		doodle::set_outline_width(3.0);
 
+		//메인 배경
 		doodle::draw_quad(0, 0, 1400, 0, 1375, 200, 25, 200);
 		doodle::draw_quad(25, 200, 1375, 200, 1400, 800, 0, 800);
 
 		doodle::pop_settings();
 
 
+
+		//도마 그림
 		doodle::push_settings();
 
 		doodle::set_outline_color(doodle::HexColor{ 0xE7C0ABFF });
 		doodle::set_outline_width(5.0);
 		doodle::smooth_drawing();
 		doodle::draw_rectangle(50, 425, 570, 330);
+		Button cutting_board(50, 425, 570, 330, current_state);
 
 
 		doodle::pop_settings();
 
 
-
+		//샐러드 보울
 		doodle::push_settings();
 
+
+		doodle::draw_ellipse(800, 580, 280);
+		Button salad_bowl(660, 440, 280, 280, current_state);
+
+
+		doodle::pop_settings();
+
+
+		//버너 커밍순
+		doodle::push_settings();
 
 		doodle::set_outline_color(doodle::HexColor{ 0xFF7171FF });
 		const double inside_distance = 0.4 + 0.3 * oscillate(doodle::ElapsedTime);
 		const double completely_outside_distance = inside_distance +
 			(1 - inside_distance) * oscillate(doodle::ElapsedTime * 2);
 		doodle::set_font_backdrop_fade_out_interval(inside_distance, completely_outside_distance);
-		doodle::draw_text("Comming\nsoooonake", 850, 600);
+		doodle::draw_text("Comming\nsoooonake", 1000, 600);
 
 		doodle::pop_settings();
 
 
+
+		//반찬통
 		doodle::push_settings();
 
 		doodle::set_outline_color(doodle::HexColor{ 0xFFF688FF });
 		doodle::set_outline_width(5.0);
 		doodle::draw_rectangle(60, 225, 1200, 140);
+		Button cavage(60, 225, 170, 140, current_state);
+		Button source(230, 225, 170, 140, current_state);
 
 		doodle::pop_settings();
 
 
 
-
+		//시간표시, 주문내역
 		doodle::push_settings();
 
 		doodle::set_outline_color(doodle::HexColor{ 0xAD4A3BFF });
@@ -113,7 +150,8 @@ void jy_Updated()
 
 		doodle::pop_settings();
 
-
+		
+		//카운터로 돌아가는 버튼, 서랍장, 냉장고 버튼
 		doodle::push_settings();
 
 		doodle::set_outline_color(doodle::HexColor{ 0xFF7171FF });
@@ -126,7 +164,60 @@ void jy_Updated()
 
 		doodle::pop_settings();
 
-		
+
+
+		switch (current_state)
+		{
+		case State::Main:
+			prev_state = current_state;
+
+			cutting_board.update(doodle::get_mouse_x(), doodle::get_mouse_y(), State::Counter);
+			cavage.update(doodle::get_mouse_x(), doodle::get_mouse_y(), State::Cavage);
+			source.update(doodle::get_mouse_x(), doodle::get_mouse_y(), State::Source);
+			salad_bowl.update(doodle::get_mouse_x(), doodle::get_mouse_y(), State::Counter);
+			break;
+
+		case State::Counter:
+			prev_state = current_state;
+			cutting_board.update(doodle::get_mouse_x(), doodle::get_mouse_y(), State::Counter);
+
+
+			break;
+		case State::Kitchen:
+			prev_state = current_state;
+			doodle::clear_background(0, 255, 0);
+
+			break;
+
+		case State::Cavage:
+			prev_state = current_state;
+			cavage.update(doodle::get_mouse_x(), doodle::get_mouse_y(), State::Cavage);
+			source.update(doodle::get_mouse_x(), doodle::get_mouse_y(), State::Source);
+			salad_bowl.update(doodle::get_mouse_x(), doodle::get_mouse_y(), State::Counter);
+
+			doodle::push_settings();
+
+			print_text(0x3F6C00FF, "This is Cavage", 140, 630);
+
+			doodle::pop_settings();
+
+			break;
+
+		case State::Source:
+			prev_state = current_state;
+			cavage.update(doodle::get_mouse_x(), doodle::get_mouse_y(), State::Cavage);
+			source.update(doodle::get_mouse_x(), doodle::get_mouse_y(), State::Source);
+			salad_bowl.update(doodle::get_mouse_x(), doodle::get_mouse_y(), State::Counter);
+
+			doodle::push_settings();
+
+			print_text(0xF5BA83FF, "This is Source", 140, 630);
+
+			doodle::pop_settings();
+
+			break;
+		}
+
 	}
 
 }

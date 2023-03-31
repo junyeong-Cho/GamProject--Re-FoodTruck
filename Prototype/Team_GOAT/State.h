@@ -4,6 +4,8 @@ enum class State
 {
     Main,
     Counter,
-    Kitchen
+    Kitchen,
+    Cavage,
+    Source
 };
 
