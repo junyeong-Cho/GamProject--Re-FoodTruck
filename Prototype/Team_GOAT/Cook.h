@@ -7,20 +7,24 @@ class Cook
 {
 public:
 	Cook();
-	std::vector<Ingredient> seven_ingredients;
-	std::vector<Ingredient> using_ingredients;
-	std::vector<Ingredient> cuttingBoard;
+	std::vector<Ingredient*> seven_ingredients;
+	std::vector<Ingredient*> using_ingredients; 
 
 	void DrawGrid();
 	void DrawCuttingBoard();
 	void DrawBowl();
 	void DrawStove();
+	void DrawIngredients();
+
 	Math::vec2 WhereISMouse();
 	KitchenPosition GetWhere(Math::vec2 pos);
 	void SetIngredientsWhere();
 	void Cutting();
 	void WriteCuttingNum();
 	void CreateUsingIngredient();
+	void FollowMouseIngredient();
+	void SetIsClick();
+	double GetPercentOfComplete();
 
 	void Update();
 

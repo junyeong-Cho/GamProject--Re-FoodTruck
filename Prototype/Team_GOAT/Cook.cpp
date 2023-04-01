@@ -2,11 +2,12 @@
 #include <doodle/drawing.hpp>
 #include <doodle/input.hpp>
 #include <math.h>
+#include <iostream>
 
 Cook::Cook()
 {
-	Lettuce lettuce(COUNTER1,Math::vec2(60,20)); 
-	Sauce sauce(COUNTER2, Math::vec2(230, 20));
+	Lettuce* lettuce = new Lettuce(COUNTER1, Math::vec2{100, 80});
+	Sauce* sauce= new Sauce(COUNTER2, Math::vec2{ 250, 80});
 	
 	seven_ingredients.push_back(lettuce);
 	seven_ingredients.push_back(sauce);
@@ -20,8 +21,31 @@ void Cook::Update()
 	DrawCuttingBoard();
 	DrawBowl(); 
 	DrawStove();
+	DrawIngredients();
+	WriteCuttingNum();
+	CreateUsingIngredient();
+	FollowMouseIngredient();
+	SetIsClick();
 }
 
+void Cook::DrawIngredients()
+{
+	if (seven_ingredients.size() != 0)
+	{
+		for (int i = 0; i < seven_ingredients.size(); ++i)
+		{
+			seven_ingredients[i]->DrawImage();
+		}
+	}
+	if (using_ingredients.size() != 0)
+	{
+		for (int i = 0; i < using_ingredients.size(); ++i)
+		{
+			using_ingredients[i]->DrawImage();
+		}
+
+	}
+}
 
 void Cook::DrawGrid()
 {
@@ -112,11 +136,12 @@ void Cook::SetIngredientsWhere()
 	{
 		for (int i = 0; i < using_ingredients.size(); ++i)
 		{
-			using_ingredients[i].where = GetWhere(using_ingredients[i].position);
+			using_ingredients[i]->where = GetWhere(using_ingredients[i]->position);
 		}
 	}
 }
 
+// 칼을 든 상태에서는 재료를 클릭할 때 칼질이 되고, 칼을 두고 재료를 클릭할 땐 그냥 위치 이동되게 해야함.
 void Cook::Cutting()
 {
 	if (doodle::MouseButton == doodle::MouseButtons::Left)
@@ -128,11 +153,11 @@ void Cook::Cutting()
 			{
 				for (int i = 0; i < using_ingredients.size(); ++i)
 				{
-					if (using_ingredients[i].where == CUTTING_BOARD)
+					if (using_ingredients[i]->where == CUTTING_BOARD)
 					{
-						if (using_ingredients[i].cuttingNum > 0)
+						if (using_ingredients[i]->cuttingNum > 0)
 						{
-							--using_ingredients[i].cuttingNum;
+							--using_ingredients[i]->cuttingNum;
 						}
 					}
 				}
@@ -148,9 +173,9 @@ void Cook::WriteCuttingNum()
 	{
 		for (int i = 0; i < using_ingredients.size(); ++i)
 		{
-			if (using_ingredients[i].where == CUTTING_BOARD)
+			if (using_ingredients[i]->where == CUTTING_BOARD)
 			{
-				doodle::draw_text(std::to_string(using_ingredients[i].cuttingNum), cuttingBoard_X + 20, cuttingBoard_Y + 20);
+				doodle::draw_text(std::to_string(using_ingredients[i]->cuttingNum), cuttingBoard_X + 20, cuttingBoard_Y + 20);
 			}
 		}
 	}
@@ -165,22 +190,55 @@ void Cook::CreateUsingIngredient()
 		{
 			for (int i = 0; i < seven_ingredients.size(); ++i)
 			{
-				if (seven_ingredients[i].where == GetWhere(WhereISMouse()))
+				if (seven_ingredients[i]->where == GetWhere(WhereISMouse()))
 				{
-					//이거 pos 설정 안해주고, 그냥 이렇게 push_back 하면 되는지 고민, where을 바로 cUTTING_BOARD로 만들기.
-					//그래서 눌렀을 때 바로 도마로 가게 만들기.
 					using_ingredients.push_back(seven_ingredients[i]);
-					
-					--seven_ingredients[i].number;
-					if(seven_ingredients[i].number == 0)
-					{
-						seven_ingredients.erase(seven_ingredients.begin()+i);
-					}
+					using_ingredients[using_ingredients.size() - 1]->isClick = true;
 				}
 			}
 		}
 	}
 }
 
+void Cook::FollowMouseIngredient()
+{
+	if (using_ingredients.size() != 0)
+	{
+		for (int i = 0; i < using_ingredients.size(); ++i)
+		{
+			if (using_ingredients[i]->isClick == true)
+			{
+				using_ingredients[i]->ChangePos(WhereISMouse());
+			}
+		}
+	}
+}
 
+void Cook::SetIsClick()
+{
+	//이부분 고장남 고쳐야함.
+	if (using_ingredients.size() != 0)
+	{
+		for (int i = 0; i < using_ingredients.size(); ++i)
+		{
+			if (using_ingredients[i]->IsMouseOn(WhereISMouse()) == true && doodle::MouseButton == doodle::MouseButtons::Left)
+			{
+				if (using_ingredients[i]->isClick == false)
+				{
+					using_ingredients[i]->isClick = true;
+					break;
+				}
+				if (using_ingredients[i]->isClick == true)
+				{
+					using_ingredients[i]->isClick = false;
+					break;
+				}
+			}
+		}
+	}
+}
 
+double Cook::GetPercentOfComplete()
+{
+	return 100.0;
+}

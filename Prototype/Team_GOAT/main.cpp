@@ -42,9 +42,6 @@ void ys_Update()
     State state = State::Kitchen;
     Cook cook{};
 
-    //Button main_button(0,0,100,100, state);
-    Button main_button(-100, -100, 200, 300, state);
-
     while (!doodle::is_window_closed())
     {
         doodle::update_window();
