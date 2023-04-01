@@ -14,6 +14,7 @@ void Button::draw(const int mouse_x, const int mouse_y)
 		doodle::set_fill_color(doodle::HexColor{ 0xFFFFFF });
 	}
 	doodle::draw_rectangle(x, y, width, height);
+
 	doodle::pop_settings();
 }
 
@@ -27,9 +28,14 @@ void Button::check_click(const int mouse_x, const int mouse_y, State next_state)
 			checkMouse = true;
 		}
 	}
-
-	if (checkMouse == true)
+	else
 	{
+		checkMouse = false;
+	}
+
+	if (doodle::MouseIsPressed == false && checkMouse == true)
+	{
+		checkMouse = false;
 		*current_state = next_state;
 	}
 }
