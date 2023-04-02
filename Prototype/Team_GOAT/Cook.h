@@ -26,6 +26,7 @@ public:
 	void FollowMouseIngredient();
 	double GetPercentOfComplete();
 	int WhatIndexMouseClick();
+	void DrawToolName();
 
 	void Update();
 

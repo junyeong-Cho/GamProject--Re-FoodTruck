@@ -1,7 +1,7 @@
 #include "Cook.h"
 #include <doodle/drawing.hpp>
 #include <doodle/input.hpp>
-#include <math.h>
+#include <cmath>
 #include <iostream>
 
 
@@ -29,6 +29,7 @@ void Cook::Update()
 	DrawIngredients();
 	WriteCuttingNum();
 	SetIngredientsWhere();
+	DrawToolName();
 	if (whatTool == HAND)
 	{
 		CreateUsingIngredient();
@@ -292,7 +293,17 @@ void Cook::FollowMouseIngredient()
 	}
 }
 
-
+void Cook::DrawToolName()
+{
+	if (whatTool == HAND)
+	{
+		doodle::draw_text("Tool : Hand", cuttingBoard_X + 20, cuttingBoard_Y + cuttingBoard_height + 100);
+	}
+	else if(whatTool == KNIFE)
+	{
+		doodle::draw_text("Tool : Knife", cuttingBoard_X + 20, cuttingBoard_Y + cuttingBoard_height + 100);
+	}
+}
 
 double Cook::GetPercentOfComplete()
 {
