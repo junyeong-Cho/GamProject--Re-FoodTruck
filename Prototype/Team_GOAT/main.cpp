@@ -14,17 +14,16 @@ void draw_background();
 void draw_customer(doodle::Image guest_image);
 //손님 주문 텍스트
 void draw_text(std::string text);
-//대답용 버튼
-void answer_button();
+
 
 void jh_Updatd()
 {
-
-
     State state = State::Main;
     const doodle::Image guest_image("giraffe.png");
     Button main_button(-100, -100, 200, 300, state);
     Button to_kitchen_button(doodle::Width / 3, 0, 200, 100, state);
+    Button yes(doodle::Width / 3.0, doodle::Height / 3.0, doodle::Width / 10.0, doodle::Height / 10.0, state);
+    Button no(doodle::Width / 2, doodle::Height / 3.0, doodle::Width / 10.0, doodle::Height / 10.0, state);
     const std::string giraffe_text= "People without faith will go to hell.";
     while (!doodle::is_window_closed())
     {
@@ -45,6 +44,8 @@ void jh_Updatd()
             draw_text(giraffe_text);
             draw_stand();
             draw_UI();
+            yes.update(doodle::get_mouse_x(), doodle::get_mouse_y(), State::Kitchen);
+            no.update(doodle::get_mouse_x(), doodle::get_mouse_y(), State::Counter);
             to_kitchen_button.update(doodle::get_mouse_x(), doodle::get_mouse_y(), State::Kitchen);
 
             break;
@@ -115,7 +116,3 @@ void draw_text(std::string text)
     doodle::draw_text(text, doodle::Width / 4.0 + doodle::Width / 30.0, doodle::Height / 2.0 + doodle::Height / 10.0);
 }
 
-void answer_button()
-{
-    Button first_answer
-}
