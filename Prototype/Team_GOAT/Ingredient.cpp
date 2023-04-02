@@ -36,9 +36,7 @@ bool Ingredient::IsMouseOn(Math::vec2 mousePos)
 	if (position.x - spriteHalfWidth < mousePos.x && position.x + spriteHalfWidth > mousePos.x
 		&& position.y - spriteHalfWidth < mousePos.y && position.y + spriteHalfWidth > mousePos.y)
 	{
-		std::cout << "true\n";
 		return true;
 	}
-	std::cout << "false\n";
 	return false;
 }

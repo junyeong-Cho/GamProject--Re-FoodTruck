@@ -4,6 +4,11 @@
 #include <math.h>
 #include <iostream>
 
+
+//static함수는 전역범위에서만 초기화 가능. & 헤더 파일에선 초기화 불가능.
+bool Cook::isMouseClick = false;
+Tool Cook::whatTool = HAND;
+
 Cook::Cook()
 {
 	Lettuce* lettuce = new Lettuce(COUNTER1, Math::vec2{100, 80});
@@ -23,9 +28,17 @@ void Cook::Update()
 	DrawStove();
 	DrawIngredients();
 	WriteCuttingNum();
-	CreateUsingIngredient();
-	FollowMouseIngredient();
-	SetIsClick();
+	SetIngredientsWhere();
+	if (whatTool == HAND)
+	{
+		CreateUsingIngredient();
+		FollowMouseIngredient();
+		WhatIndexMouseClick();
+	}
+	else if (whatTool == KNIFE)
+	{
+		Cutting();
+	}
 }
 
 void Cook::DrawIngredients()
@@ -141,102 +154,145 @@ void Cook::SetIngredientsWhere()
 	}
 }
 
-// 칼을 든 상태에서는 재료를 클릭할 때 칼질이 되고, 칼을 두고 재료를 클릭할 땐 그냥 위치 이동되게 해야함.
-void Cook::Cutting()
-{
-	if (doodle::MouseButton == doodle::MouseButtons::Left)
-	{
-		if (WhereISMouse().x > cuttingBoard_X && WhereISMouse().x < cuttingBoard_X + cuttingBoard_width
-			&& WhereISMouse().y > cuttingBoard_Y && WhereISMouse().y < cuttingBoard_Y + cuttingBoard_height)
-		{
-			if (using_ingredients.size() != 0)
-			{
-				for (int i = 0; i < using_ingredients.size(); ++i)
-				{
-					if (using_ingredients[i]->where == CUTTING_BOARD)
-					{
-						if (using_ingredients[i]->cuttingNum > 0)
-						{
-							--using_ingredients[i]->cuttingNum;
-						}
-					}
-				}
-				
-			}
-		}
-	}
-}
-
 void Cook::WriteCuttingNum()
 {
 	if (using_ingredients.size() != 0)
 	{
 		for (int i = 0; i < using_ingredients.size(); ++i)
 		{
-			if (using_ingredients[i]->where == CUTTING_BOARD)
+			if (using_ingredients[i]->where != CUTTING_BOARD)
 			{
-				doodle::draw_text(std::to_string(using_ingredients[i]->cuttingNum), cuttingBoard_X + 20, cuttingBoard_Y + 20);
+				cuttingBoardIndex = -1;
+			}
+			else if (using_ingredients[i]->where == CUTTING_BOARD)
+			{
+				cuttingBoardIndex = i;
+				break;
+			}
+		}
+	}
+	if (cuttingBoardIndex != -1)
+	{
+		if (using_ingredients[cuttingBoardIndex]->cuttingNum > 0)
+		{
+			doodle::draw_text("Cut : " + std::to_string(using_ingredients[cuttingBoardIndex]->cuttingNum), cuttingBoard_X + 20, cuttingBoard_Y + 20);
+		}
+		else
+		{
+			doodle::draw_text("Done. Move ingredient", cuttingBoard_X + 20, cuttingBoard_Y + 20);
+		}
+
+	}
+	else
+	{
+		doodle::draw_text("Put Ingredient", cuttingBoard_X + 20, cuttingBoard_Y + 20);
+	}
+}
+
+void Cook::Cutting()
+{
+	if (using_ingredients.size() != 0)
+	{
+		for (int i = 0; i < using_ingredients.size(); ++i)
+		{
+			if (using_ingredients[i]->IsMouseOn(WhereISMouse()) == true && isMouseClick == true && GetWhere(WhereISMouse()) == CUTTING_BOARD)
+			{
+				--using_ingredients[i]->cuttingNum;
+				isMouseClick = false;
 			}
 		}
 	}
 }
 
+void on_key_pressed(doodle::KeyboardButtons button)
+{
+	if (button == doodle::KeyboardButtons::Z)
+	{
+		Cook::whatTool = KNIFE;
+	}
+	if (button == doodle::KeyboardButtons::X)
+	{
+		Cook::whatTool = HAND;
+	}
+	std::cout << Cook::whatTool << '\n';
+}
 
 void Cook::CreateUsingIngredient()
 {
 	if (seven_ingredients.size() != 0)
 	{
-		if (doodle::MouseButton == doodle::MouseButtons::Left)
+		if (isMouseClick == true)
 		{
 			for (int i = 0; i < seven_ingredients.size(); ++i)
 			{
-				if (seven_ingredients[i]->where == GetWhere(WhereISMouse()))
+				if (seven_ingredients[i]->where == GetWhere(WhereISMouse()) && whatMouseclickIndex == -1)
 				{
 					using_ingredients.push_back(seven_ingredients[i]);
-					using_ingredients[using_ingredients.size() - 1]->isClick = true;
+					seven_ingredients.erase(seven_ingredients.begin() + i);
+					whatMouseclickIndex = using_ingredients.size() - 1;
+					isMouseClick = false;
 				}
 			}
 		}
 	}
+
+
 }
+
+int Cook::WhatIndexMouseClick()
+{
+	if (isMouseClick == true)
+	{
+		if (using_ingredients.size() != 0)
+		{
+			if (whatMouseclickIndex != -1)
+			{
+				whatMouseclickIndex = -1;
+				isMouseClick = false;
+			}
+			else
+			{
+				for (int i = 0; i < using_ingredients.size(); ++i)
+				{
+					if (using_ingredients[i]->IsMouseOn(WhereISMouse()) == true)
+					{
+						whatMouseclickIndex = i;
+						isMouseClick = false;
+						break;
+					}
+				}
+			}
+		}
+	}
+	return whatMouseclickIndex;
+}
+
+void on_mouse_pressed(doodle::MouseButtons button)
+{
+	if (button == doodle::MouseButtons::Left && Cook::isMouseClick == false)
+	{
+		Cook::isMouseClick = true;
+	}
+}
+
+void on_mouse_released(doodle::MouseButtons button)
+{
+	if (button == doodle::MouseButtons::Left)
+	{
+		Cook::isMouseClick = false;
+	}
+}
+
 
 void Cook::FollowMouseIngredient()
 {
-	if (using_ingredients.size() != 0)
+	if (using_ingredients.size() != 0 && WhatIndexMouseClick() != -1)
 	{
-		for (int i = 0; i < using_ingredients.size(); ++i)
-		{
-			if (using_ingredients[i]->isClick == true)
-			{
-				using_ingredients[i]->ChangePos(WhereISMouse());
-			}
-		}
+		using_ingredients[WhatIndexMouseClick()]->ChangePos(WhereISMouse());
 	}
 }
 
-void Cook::SetIsClick()
-{
-	//이부분 고장남 고쳐야함.
-	if (using_ingredients.size() != 0)
-	{
-		for (int i = 0; i < using_ingredients.size(); ++i)
-		{
-			if (using_ingredients[i]->IsMouseOn(WhereISMouse()) == true && doodle::MouseButton == doodle::MouseButtons::Left)
-			{
-				if (using_ingredients[i]->isClick == false)
-				{
-					using_ingredients[i]->isClick = true;
-					break;
-				}
-				if (using_ingredients[i]->isClick == true)
-				{
-					using_ingredients[i]->isClick = false;
-					break;
-				}
-			}
-		}
-	}
-}
+
 
 double Cook::GetPercentOfComplete()
 {

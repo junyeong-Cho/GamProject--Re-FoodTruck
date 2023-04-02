@@ -7,7 +7,6 @@ class Ingredient
 {
 public:
 	CS230::Sprite sprite;
-	bool isClick = false;
 	Math::vec2 position{ 100,300 };
 	int cuttingNum = 5;
 	KitchenPosition where;
@@ -22,6 +21,7 @@ public:
 	virtual void DrawImage() = 0;
 	void ChangePos(Math::vec2 pos);
 	bool IsMouseOn(Math::vec2 mousePos);
+	void ChangeWhere();
 
 private:
 

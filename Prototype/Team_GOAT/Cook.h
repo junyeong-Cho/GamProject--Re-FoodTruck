@@ -1,5 +1,6 @@
 #pragma once
 #include "Ingredient.h"
+#include "Tool.h"
 #include <vector>
 
 
@@ -23,10 +24,13 @@ public:
 	void WriteCuttingNum();
 	void CreateUsingIngredient();
 	void FollowMouseIngredient();
-	void SetIsClick();
 	double GetPercentOfComplete();
+	int WhatIndexMouseClick();
 
 	void Update();
+
+	static bool isMouseClick;
+	static Tool whatTool;
 
 private:
 	double first_X{ 50.0 };
@@ -52,4 +56,7 @@ private:
 	double trashCan_Y{ first_Y };
 	double trashCan_width{ 100.0 };
 	double trashCan_height{ height };
+
+	int whatMouseclickIndex = -1;
+	int cuttingBoardIndex = -1;
 };
