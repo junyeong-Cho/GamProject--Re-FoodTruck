@@ -39,8 +39,7 @@ void jh_Updatd()
         case State::Counter:
             doodle::clear_background(255, 255, 255);
             draw_background();
-            doodle::set_frame_of_reference(doodle::FrameOfReference::RightHanded_OriginCenter);
-            doodle::draw_image(guest_image, -doodle::Width / 2.5, -doodle::Height / 4.0);
+            doodle::draw_image(guest_image, doodle::Width / 10.5, doodle::Height / 4.0, doodle::Width / 6.0, doodle::Height / 7.0 * 4.4);
             draw_text(giraffe_text);
             draw_stand();
             draw_UI();
@@ -111,7 +110,7 @@ void draw_text(std::string text)
     doodle::draw_rectangle(doodle::Width / 4.0, doodle::Height / 2.0, doodle::Width / 2.3, doodle::Height / 4.0);
     doodle::pop_settings();
     doodle::set_font_fade_out_interval(0.5, 0.0);
-    doodle::set_font_size(24);
+    doodle::set_font_size(doodle::Width / 60.0);
     doodle::set_fill_color(0, 0, 0);
     doodle::draw_text(text, doodle::Width / 4.0 + doodle::Width / 30.0, doodle::Height / 2.0 + doodle::Height / 10.0);
 }
