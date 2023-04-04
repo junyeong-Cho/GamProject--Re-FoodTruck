@@ -3,6 +3,8 @@
 #include "Button.h"
 #include "State.h"
 
+
+
 void jh_Updatd()
 {
 
@@ -56,6 +58,8 @@ void jy_Updated()
 {
 	
 	doodle::create_window(1400, 800);
+	
+
 	doodle::set_frame_of_reference(doodle::FrameOfReference::LeftHanded_OriginTopLeft);
 	doodle::set_image_mode(doodle::RectMode::Corner);
 	//doodle::no_fill();
@@ -69,6 +73,10 @@ void jy_Updated()
 
 	while (!doodle::is_window_closed())
 	{
+		double Width_raito = doodle::Width / 1400.0;
+		double Height_raito = doodle::Height / 800.0;
+
+
 		doodle::update_window();
 		doodle::clear_background(doodle::HexColor{ 0xFFFFFFFF });
 		
@@ -80,8 +88,8 @@ void jy_Updated()
 		doodle::set_outline_width(3.0);
 
 		//메인 배경
-		doodle::draw_quad(0, 0, 1400, 0, 1375, 200, 25, 200);
-		doodle::draw_quad(25, 200, 1375, 200, 1400, 800, 0, 800);
+		doodle::draw_quad(0.0, 0.0, Width_raito * 1400.0, 0.0, Width_raito * 1375.0, Height_raito * 200.0, Width_raito * 25.0, Height_raito * 200.0);
+		doodle::draw_quad(Width_raito * 25.0, Height_raito * 200.0, Width_raito * 1375.0, Height_raito * 200.0, Width_raito * 1400.0, Height_raito * 800.0, 0.0, Height_raito * 800.0);
 
 		doodle::pop_settings();
 
@@ -93,8 +101,8 @@ void jy_Updated()
 		doodle::set_outline_color(doodle::HexColor{ 0xE7C0ABFF });
 		doodle::set_outline_width(5.0);
 		doodle::smooth_drawing();
-		doodle::draw_rectangle(50, 425, 570, 330);
-		Button cutting_board(50, 425, 570, 330, current_state);
+		doodle::draw_rectangle(Width_raito * 50.0, Height_raito * 425.0, Width_raito * 570.0, Height_raito * 330.0);
+		Button cutting_board(Width_raito * 50.0, Height_raito * 425.0, Width_raito * 570.0, Height_raito * 330.0, current_state);
 
 
 		doodle::pop_settings();
@@ -104,8 +112,8 @@ void jy_Updated()
 		doodle::push_settings();
 
 
-		doodle::draw_ellipse(800, 580, 280);
-		Button salad_bowl(660, 440, 280, 280, current_state);
+		doodle::draw_ellipse(Width_raito * 800.0, Height_raito * 580.0, Width_raito * 280.0);
+		Button salad_bowl(Width_raito * 660.0, Height_raito * 440.0, Width_raito * 280.0, Height_raito * 280.0, current_state);
 
 
 		doodle::pop_settings();
@@ -119,7 +127,7 @@ void jy_Updated()
 		const double completely_outside_distance = inside_distance +
 			(1 - inside_distance) * oscillate(doodle::ElapsedTime * 2);
 		doodle::set_font_backdrop_fade_out_interval(inside_distance, completely_outside_distance);
-		doodle::draw_text("Comming\nsoooonake", 1000, 600);
+		doodle::draw_text("Comming\nsoooonake", Width_raito * 1000.0, Height_raito * 600.0);
 
 		doodle::pop_settings();
 
@@ -130,9 +138,9 @@ void jy_Updated()
 
 		doodle::set_outline_color(doodle::HexColor{ 0xFFF688FF });
 		doodle::set_outline_width(5.0);
-		doodle::draw_rectangle(60, 225, 1200, 140);
-		Button cavage(60, 225, 170, 140, current_state);
-		Button source(230, 225, 170, 140, current_state);
+		doodle::draw_rectangle(Width_raito * 60.0, Height_raito * 225.0, Width_raito * 1200.0, Height_raito * 140.0);
+		Button cavage(Width_raito * 60.0, Height_raito * 225.0, Width_raito * 170.0, Height_raito * 140.0, current_state);
+		Button source(Width_raito * 230.0, Height_raito * 225.0, Width_raito * 170.0, Height_raito * 140.0, current_state);
 
 		doodle::pop_settings();
 
@@ -145,8 +153,8 @@ void jy_Updated()
 		doodle::set_fill_color(doodle::HexColor{ 0xEBE3C0FF });
 		doodle::set_outline_width(5.0);
 		doodle::smooth_drawing();
-		doodle::draw_rectangle(35, 20, 150, 60);
-		doodle::draw_rectangle(250, 20, 150, 100);
+		doodle::draw_rectangle(Width_raito * 35.0, Height_raito * 20.0, Width_raito * 150.0, Height_raito * 60.0);
+		doodle::draw_rectangle(Width_raito * 250.0, Height_raito * 20.0, Width_raito * 150.0, Height_raito * 100.0);
 
 		doodle::pop_settings();
 
@@ -158,9 +166,9 @@ void jy_Updated()
 		doodle::set_fill_color(doodle::HexColor{ 0xEBE3C0FF });
 		doodle::set_outline_width(5.0);
 		doodle::smooth_drawing();
-		doodle::draw_rectangle(800, 130, 220, 60);
-		doodle::draw_rectangle(1050, 100, 140, 90);
-		doodle::draw_rectangle(1225, 100, 100, 90);
+		doodle::draw_rectangle(Width_raito * 800.0, Height_raito * 130.0, Width_raito * 220.0, Height_raito * 60.0);
+		doodle::draw_rectangle(Width_raito * 1050.0, Height_raito * 100.0, Width_raito * 140.0, Height_raito * 90.0);
+		doodle::draw_rectangle(Width_raito * 1225.0, Height_raito * 100.0, Width_raito * 100.0, Height_raito * 90.0);
 
 		doodle::pop_settings();
 
@@ -197,7 +205,7 @@ void jy_Updated()
 
 			doodle::push_settings();
 
-			print_text(0x3F6C00FF, "This is Cavage", 140, 630);
+			print_text(0x3F6C00FF, "This is Cavage", Width_raito * 140.0, Height_raito * 630.0);
 
 			doodle::pop_settings();
 
@@ -211,7 +219,7 @@ void jy_Updated()
 
 			doodle::push_settings();
 
-			print_text(0xF5BA83FF, "This is Source", 140, 630);
+			print_text(0xF5BA83FF, "This is Source", Width_raito * 140.0, Height_raito * 630.0);
 
 			doodle::pop_settings();
 
