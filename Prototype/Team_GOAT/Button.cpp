@@ -4,6 +4,7 @@
 void Button::draw(const int mouse_x, const int mouse_y)
 {
 	doodle::push_settings();
+	
 	//mouse on button
 	if ((mouse_x > x && mouse_x < x + width) && (mouse_y > y && mouse_y < y + height))
 	{
@@ -13,6 +14,9 @@ void Button::draw(const int mouse_x, const int mouse_y)
 	{
 		doodle::set_fill_color(doodle::HexColor{ 0xFFFFFF });
 	}
+	
+	doodle::set_frame_of_reference(doodle::FrameOfReference::RightHanded_OriginCenter);
+	doodle::set_rectangle_mode(doodle::RectMode::Corner);
 	doodle::draw_rectangle(x, y, width, height);
 
 	doodle::pop_settings();
