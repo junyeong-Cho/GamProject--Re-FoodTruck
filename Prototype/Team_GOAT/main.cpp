@@ -73,8 +73,8 @@ void jy_Updated()
 
 	while (!doodle::is_window_closed())
 	{
-		double Width_raito = doodle::Width / 1400.0;
-		double Height_raito = doodle::Height / 800.0;
+		double Width_raito = doodle::Width / 1400.0; // 7
+		double Height_raito = doodle::Height / 800.0; //  4
 
 
 		doodle::update_window();
@@ -127,6 +127,7 @@ void jy_Updated()
 		const double completely_outside_distance = inside_distance +
 			(1 - inside_distance) * oscillate(doodle::ElapsedTime * 2);
 		doodle::set_font_backdrop_fade_out_interval(inside_distance, completely_outside_distance);
+		doodle::set_font_size((Width_raito * 0.5 + Height_raito * 0.5) * 55.0);
 		doodle::draw_text("Comming\nsoooonake", Width_raito * 1000.0, Height_raito * 600.0);
 
 		doodle::pop_settings();
