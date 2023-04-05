@@ -48,8 +48,8 @@ void Kitchen::SetVariables(double Width, double Height)
 	cuttingBoard_height = Height_raito * 330.0;
 
 	//bowl
-	bowl_X = Height_raito * 580.0;
-	bowl_Y = Width_raito * 800.0;
+	bowl_X = Width_raito * 800.0;
+	bowl_Y = Height_raito * 580.0;
 	bowl_width = Width_raito * 280.0;
 
 	//stove
@@ -58,6 +58,12 @@ void Kitchen::SetVariables(double Width, double Height)
 	stove_width = Width_raito * 280.0;
 
 	//trashCan
+
+	//Bell
+	bell_X = Width_raito * 800.0;
+	bell_Y = Height_raito * 60.0;
+	bell_width = Width_raito * 60.0;
+	bell_height = Height_raito * 60.0;
 }
 
 void Kitchen::SetCookVariables()
@@ -85,6 +91,12 @@ void Kitchen::SetCookVariables()
 	cook.stove_width = stove_width;
 
 	//trashCan
+
+	//bell
+	cook.bell_X = bell_X;
+	cook.bell_Y = bell_Y;
+	cook.bell_width = bell_width;
+	cook.bell_height = bell_height;
 }
 
 void Kitchen::Draw_BackGround()
@@ -100,7 +112,6 @@ void Kitchen::Draw_BackGround()
 
 	doodle::pop_settings();
 }
-
 
 void Kitchen::Draw_CuttingBoard()
 {
@@ -220,5 +231,14 @@ void Kitchen::Draw_Refrigerator()
 
 void Kitchen::Draw_Bell()
 {
+	doodle::push_settings();
 
+	doodle::set_outline_color(doodle::HexColor{ 0xFF7171FF });
+	doodle::set_fill_color(doodle::HexColor{ 0xEBE3C0FF });
+	doodle::set_outline_width(5.0);
+	doodle::smooth_drawing();
+	doodle::draw_rectangle(bell_X, bell_Y, bell_width, bell_height);
+	doodle::set_font_size(bell_width / 3.0);
+	doodle::draw_text(" bell", bell_X, bell_Y+bell_width);
+	doodle::pop_settings();
 }

@@ -150,6 +150,7 @@
     <ClInclude Include="Button.h" />
     <ClInclude Include="Cook.h" />
     <ClInclude Include="Ingredient.h" />
+    <ClInclude Include="IngredientName.h" />
     <ClInclude Include="Kitchen.h" />
     <ClInclude Include="KitchenPosition.h" />
     <ClInclude Include="State.h" />

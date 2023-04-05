@@ -50,6 +50,11 @@ public:
 	double trashCan_width{ 100.0 };
 	double trashCan_height{ height };
 
+	double bell_X{ 50.0 };
+	double bell_Y{ 200.0 };
+	double bell_width{ 500.0 };
+	double bell_height{ 400.0 };
+
 private:
 	double Width_raito = 0;
 	double Height_raito = 0;

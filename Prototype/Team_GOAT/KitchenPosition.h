@@ -12,5 +12,6 @@ enum class KitchenPosition
 	BOWL,
 	STOVE,
 	TRASH_CAN,
+	BELL,
 	ELSE
 };

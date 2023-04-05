@@ -3,21 +3,24 @@
 #include <doodle/input.hpp>
 #include <cmath>
 #include <iostream>
+#include "State.h"
 
 
 //static함수는 전역범위에서만 초기화 가능. & 헤더 파일에선 초기화 불가능.
 bool Cook::isMouseClick = false;
 Tool Cook::whatTool = Tool::HAND;
 
+extern State* state;
+
 Cook::Cook()
 {
-	Lettuce* lettuce1 = new Lettuce(KitchenPosition::COUNTER1, Math::vec2{ first_X, first_Y });
-	Lettuce* lettuce2 = new Lettuce(KitchenPosition::COUNTER1, Math::vec2{ first_X, first_Y });
-	Lettuce* lettuce3 = new Lettuce(KitchenPosition::COUNTER1, Math::vec2{ first_X, first_Y });
+	Lettuce* lettuce1 = new Lettuce(KitchenPosition::COUNTER1, Math::vec2{ first_X, first_Y }, IngredientName::Lettuce);
+	Lettuce* lettuce2 = new Lettuce(KitchenPosition::COUNTER1, Math::vec2{ first_X, first_Y }, IngredientName::Lettuce);
+	Lettuce* lettuce3 = new Lettuce(KitchenPosition::COUNTER1, Math::vec2{ first_X, first_Y }, IngredientName::Lettuce);
 	
-	Sauce* sauce1 = new Sauce(KitchenPosition::COUNTER2, Math::vec2{ first_X + width, first_Y });
-	Sauce* sauce2 = new Sauce(KitchenPosition::COUNTER2, Math::vec2{ first_X + width, first_Y });
-	Sauce* sauce3 = new Sauce(KitchenPosition::COUNTER2, Math::vec2{ first_X + width, first_Y });
+	Sauce* sauce1 = new Sauce(KitchenPosition::COUNTER2, Math::vec2{ first_X + width, first_Y }, IngredientName::Sauce);
+	Sauce* sauce2 = new Sauce(KitchenPosition::COUNTER2, Math::vec2{ first_X + width, first_Y }, IngredientName::Sauce);
+	Sauce* sauce3 = new Sauce(KitchenPosition::COUNTER2, Math::vec2{ first_X + width, first_Y }, IngredientName::Sauce);
 
 	for (int i = 0; i < ingredient_number; ++i)
 	{
@@ -46,16 +49,21 @@ void Cook::Update()
 	WriteCuttingNum();
 	SetIngredientsWhere();
 	DrawToolName();
+	ChangeIngredientSize();
+	PutBowl();
+	Salad();
 	if (whatTool == Tool::HAND)
 	{
 		CreateUsingIngredient();
 		FollowMouseIngredient();
 		WhatIndexMouseClick();
+		PutBell();
 	}
 	else if (whatTool == Tool::KNIFE)
 	{
 		Cutting();
 	}
+	Draw_CompletePoint();
 	
 	doodle::pop_settings();
 }
@@ -85,9 +93,6 @@ void Cook::DrawIngredients()
 
 	}
 }
-
-
-
 
 Math::vec2 Cook::WhereISMouse()
 {
@@ -145,6 +150,11 @@ KitchenPosition Cook::GetWhere(Math::vec2 pos)
 	{
 		return KitchenPosition::TRASH_CAN;
 	}
+	else if(pos.x > bell_X && pos.x <= bell_X + bell_width
+		&& pos.y > bell_Y && pos.y < bell_Y + bell_height)
+	{
+		return KitchenPosition::BELL;
+	}
 	
 	return KitchenPosition::ELSE;
 }
@@ -166,32 +176,27 @@ void Cook::WriteCuttingNum()
 	{
 		for (int i = 0; i < using_ingredients.size(); ++i)
 		{
-			if (using_ingredients[i]->where != KitchenPosition::CUTTING_BOARD)
+			if (using_ingredients[i]->where == KitchenPosition::CUTTING_BOARD)
 			{
-				cuttingBoardIndex = -1;
+				doodle::push_settings();
+				doodle::set_frame_of_reference(doodle::FrameOfReference::LeftHanded_OriginTopLeft);
+				doodle::set_font_size(width/10.0);
+				if (using_ingredients[i]->cuttingNum > 0)
+				{
+					doodle::draw_text("Cut\n" + std::to_string(using_ingredients[i]->cuttingNum) + " / 5",
+						using_ingredients[i]->position.x - using_ingredients[i]->spriteHalfWidth / 2.0,
+						using_ingredients[i]->position.y);
+				}
+				else
+				{
+					doodle::draw_text("Done", 
+						using_ingredients[i]->position.x - using_ingredients[i]->spriteHalfWidth / 2.0,
+						using_ingredients[i]->position.y);
+				}
+				
+				doodle::pop_settings();
 			}
-			else if (using_ingredients[i]->where == KitchenPosition::CUTTING_BOARD)
-			{
-				cuttingBoardIndex = i;
-				break;
-			}
 		}
-	}
-	if (cuttingBoardIndex != -1)
-	{
-		if (using_ingredients[cuttingBoardIndex]->cuttingNum > 0)
-		{
-			doodle::draw_text("Cut : " + std::to_string(using_ingredients[cuttingBoardIndex]->cuttingNum), cuttingBoard_X + 20, cuttingBoard_Y + 20);
-		}
-		else
-		{
-			doodle::draw_text("Done. Move ingredient", cuttingBoard_X + 20, cuttingBoard_Y + 20);
-		}
-
-	}
-	else
-	{
-		doodle::draw_text("Put Ingredient", cuttingBoard_X + 20, cuttingBoard_Y + 20);
 	}
 }
 
@@ -203,7 +208,10 @@ void Cook::Cutting()
 		{
 			if (using_ingredients[i]->IsMouseOn(WhereISMouse()) == true && isMouseClick == true && GetWhere(WhereISMouse()) == KitchenPosition::CUTTING_BOARD)
 			{
-				--using_ingredients[i]->cuttingNum;
+				if (using_ingredients[i]->cuttingNum > 0)
+				{
+					--using_ingredients[i]->cuttingNum;
+				}
 				isMouseClick = false;
 			}
 		}
@@ -295,7 +303,6 @@ void on_mouse_released(doodle::MouseButtons button)
 	}
 }
 
-
 void Cook::FollowMouseIngredient()
 {
 	if (using_ingredients.size() != 0 && WhatIndexMouseClick() != -1)
@@ -306,17 +313,145 @@ void Cook::FollowMouseIngredient()
 
 void Cook::DrawToolName()
 {
+	doodle::push_settings();
+	doodle::set_frame_of_reference(doodle::FrameOfReference::LeftHanded_OriginTopLeft);
+	doodle::set_font_size(width / 10.0);
 	if (whatTool == Tool::HAND)
 	{
-		doodle::draw_text("Tool : Hand", cuttingBoard_X + 20, cuttingBoard_Y + cuttingBoard_height + 100);
+		doodle::draw_text("Tool : Hand", first_X, cuttingBoard_Y - cuttingBoard_height /20.0);
 	}
 	else if(whatTool == Tool::KNIFE)
 	{
-		doodle::draw_text("Tool : Knife", cuttingBoard_X + 20, cuttingBoard_Y + cuttingBoard_height + 100);
+		doodle::draw_text("Tool : Knife", first_X, cuttingBoard_Y - cuttingBoard_height / 20.0);
+	}
+	doodle::pop_settings();
+}
+
+void Cook::ChangeIngredientSize() 
+{
+	if (seven_ingredients.size() != 0)
+	{
+		for (int i = 0; i < seven_ingredients.size(); ++i)
+		{
+			if (seven_ingredients[i].size() != 0)
+			{
+				for (int j = 0; j < seven_ingredients[i].size(); ++j)
+				{
+					seven_ingredients[i][j] -> position = Math::vec2{ first_X + (width * i) + (width / 2.0) , first_Y + height / 2.0 };
+					seven_ingredients[i][j]-> spriteHalfWidth = width / 4.0;
+				}
+			}
+		}
+	}
+
+	if (using_ingredients.size() != 0)
+	{
+		for (int i = 0; i < using_ingredients.size(); ++i)
+		{
+			//이거 position을 어떻게 바꿔야할지 모르겠음.
+			using_ingredients[i]->spriteHalfWidth = width / 4.0;
+		}
 	}
 }
 
-double Cook::GetPercentOfComplete()
+void Cook::PutBowl()
 {
-	return 100.0;
+	if (using_ingredients.size() != 0)
+	{
+		if (isMouseClick == true)
+		{
+			for (int i = 0; i < using_ingredients.size(); ++i)
+			{
+				if (using_ingredients[i]->where == KitchenPosition::BOWL)
+				{
+					inBowl.push_back(using_ingredients[i]);
+					using_ingredients.erase(using_ingredients.begin() + i);
+					whatMouseclickIndex = -1;
+					break;
+				}
+			}
+		}
+	}
+}
+
+void Cook::Salad() // 점수 계산을 손봐야함.
+{
+	int needdLettuceNum = 3; // 필요한 상추 갯수
+	int nowLettuceNum = 0; // 만족하는 상추 갯수
+	int lettuceCutNum = 0; // 샐러드 만들 때 상추가 칼질되고 남아 있어야 하는 횟수.
+
+	int needSuaceNum = 2; //필요한 소스 갯수
+	int nowSuaceNum = 0; //만족하는 소스 갯수
+	int sauceCutNum = 0; // 샐러드 만들 때 소스가 칼질되고 남아 있어야 하는 횟수.
+
+	int point = 0;
+
+	if (inBowl.size() != 0)
+	{
+		for (int i = 0; i < inBowl.size(); ++i)
+		{
+			if (inBowl[i]->name == IngredientName::Lettuce)
+			{
+				if (inBowl[i]->cuttingNum == lettuceCutNum)
+				{
+					nowLettuceNum += 1;
+					point += 20;
+				}
+				else
+				{
+					point += 15;
+				}
+			}
+			else if (inBowl[i]->name == IngredientName::Sauce)
+			{
+				if (inBowl[i]->cuttingNum == sauceCutNum)
+				{
+					nowSuaceNum += 1;
+					point += 20;
+				}
+				else
+				{
+					point += 15;
+				}
+			}
+		}
+
+		if (nowLettuceNum == needdLettuceNum && nowSuaceNum == needSuaceNum)
+		{
+			point = 100;
+		}
+		else if (nowLettuceNum != needdLettuceNum && nowSuaceNum != needSuaceNum)
+		{
+			point -= 10;
+		}
+		else
+		{
+			point -= 10;
+		}
+	}
+	completePoint = point;
+}
+
+void Cook::Draw_CompletePoint()
+{
+	doodle::push_settings();
+
+	doodle::set_frame_of_reference(doodle::FrameOfReference::LeftHanded_OriginTopLeft);
+	doodle::set_font_size(width/10.0);
+	doodle::draw_text("Complete : " + std::to_string(completePoint) + "%", first_X, first_Y/1.2);
+
+	doodle::pop_settings();
+}
+
+int Cook::GetPercentOfComplete()
+{
+	return completePoint;
+}
+
+void Cook::PutBell()
+{
+	if (GetWhere(WhereISMouse()) == KitchenPosition::BELL && isMouseClick == true)
+	{
+		*state = State::Counter;
+	}
 }
