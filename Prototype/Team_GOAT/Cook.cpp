@@ -7,12 +7,12 @@
 
 //static함수는 전역범위에서만 초기화 가능. & 헤더 파일에선 초기화 불가능.
 bool Cook::isMouseClick = false;
-Tool Cook::whatTool = HAND;
+Tool Cook::whatTool = Tool::HAND;
 
 Cook::Cook()
 {
-	Lettuce* lettuce = new Lettuce(COUNTER1, Math::vec2{100, 80});
-	Sauce* sauce= new Sauce(COUNTER2, Math::vec2{ 250, 80});
+	Lettuce* lettuce = new Lettuce(KitchenPosition::COUNTER1, Math::vec2{100, 80});
+	Sauce* sauce= new Sauce(KitchenPosition::COUNTER2, Math::vec2{ 250, 80});
 	
 	seven_ingredients.push_back(lettuce);
 	seven_ingredients.push_back(sauce);
@@ -30,13 +30,13 @@ void Cook::Update()
 	WriteCuttingNum();
 	SetIngredientsWhere();
 	DrawToolName();
-	if (whatTool == HAND)
+	if (whatTool == Tool::HAND)
 	{
 		CreateUsingIngredient();
 		FollowMouseIngredient();
 		WhatIndexMouseClick();
 	}
-	else if (whatTool == KNIFE)
+	else if (whatTool == Tool::KNIFE)
 	{
 		Cutting();
 	}
@@ -95,53 +95,53 @@ KitchenPosition Cook::GetWhere(Math::vec2 pos)
 	{
 		if (pos.x > first_X + width * 0 && pos.x <= first_X + width * 0 + width)
 		{
-			return COUNTER1;
+			return KitchenPosition::COUNTER1;
 		}
 		else if (pos.x > first_X + width * 1 && pos.x <= first_X + width * 1 + width)
 		{
-			return COUNTER2;
+			return KitchenPosition::COUNTER2;
 		}
 		else if (pos.x > first_X + width * 2 && pos.x <= first_X + width * 2 + width)
 		{
-			return COUNTER3;
+			return KitchenPosition::COUNTER3;
 		}
 		else if (pos.x > first_X + width * 3 && pos.x <= first_X + width * 3 + width)
 		{
-			return COUNTER4;
+			return KitchenPosition::COUNTER4;
 		}
 		else if (pos.x > first_X + width * 4 && pos.x <= first_X + width * 4 + width)
 		{
-			return COUNTER5;
+			return KitchenPosition::COUNTER5;
 		}
 		else if (pos.x > first_X + width * 5 && pos.x <= first_X + width * 5 + width)
 		{
-			return COUNTER6;
+			return KitchenPosition::COUNTER6;
 		}
 		else if (pos.x > first_X + width * 6 && pos.x <= first_X + width * 6 + width)
 		{
-			return COUNTER7;
+			return KitchenPosition::COUNTER7;
 		}
 	}
 	else if (pos.x > cuttingBoard_X && pos.x <= cuttingBoard_X + cuttingBoard_width
 		&& pos.y > cuttingBoard_Y && pos.y < cuttingBoard_Y + cuttingBoard_height)
 	{
-		return CUTTING_BOARD;
+		return KitchenPosition::CUTTING_BOARD;
 	}
 	else if (std::sqrt((std::pow((pos.x - bowl_X), 2) + (std::pow((pos.y - bowl_Y), 2)))) <= bowl_width)
 	{
-		return BOWL;
+		return KitchenPosition::BOWL;
 	}
 	else if (std::sqrt((std::pow((pos.x - stove_X), 2) + (std::pow((pos.y - stove_Y), 2)))) <= stove_width)
 	{
-		return STOVE;
+		return KitchenPosition::STOVE;
 	}
 	else if (pos.x > trashCan_X && pos.x <= trashCan_X + trashCan_width
 		&& pos.y > trashCan_Y && pos.y < trashCan_Y + trashCan_height)
 	{
-		return TRASH_CAN;
+		return KitchenPosition::TRASH_CAN;
 	}
 	
-	return ELSE;
+	return KitchenPosition::ELSE;
 }
 
 void Cook::SetIngredientsWhere()
@@ -161,11 +161,11 @@ void Cook::WriteCuttingNum()
 	{
 		for (int i = 0; i < using_ingredients.size(); ++i)
 		{
-			if (using_ingredients[i]->where != CUTTING_BOARD)
+			if (using_ingredients[i]->where != KitchenPosition::CUTTING_BOARD)
 			{
 				cuttingBoardIndex = -1;
 			}
-			else if (using_ingredients[i]->where == CUTTING_BOARD)
+			else if (using_ingredients[i]->where == KitchenPosition::CUTTING_BOARD)
 			{
 				cuttingBoardIndex = i;
 				break;
@@ -196,7 +196,7 @@ void Cook::Cutting()
 	{
 		for (int i = 0; i < using_ingredients.size(); ++i)
 		{
-			if (using_ingredients[i]->IsMouseOn(WhereISMouse()) == true && isMouseClick == true && GetWhere(WhereISMouse()) == CUTTING_BOARD)
+			if (using_ingredients[i]->IsMouseOn(WhereISMouse()) == true && isMouseClick == true && GetWhere(WhereISMouse()) == KitchenPosition::CUTTING_BOARD)
 			{
 				--using_ingredients[i]->cuttingNum;
 				isMouseClick = false;
@@ -209,13 +209,12 @@ void on_key_pressed(doodle::KeyboardButtons button)
 {
 	if (button == doodle::KeyboardButtons::Z)
 	{
-		Cook::whatTool = KNIFE;
+		Cook::whatTool = Tool::KNIFE;
 	}
 	if (button == doodle::KeyboardButtons::X)
 	{
-		Cook::whatTool = HAND;
+		Cook::whatTool = Tool::HAND;
 	}
-	std::cout << Cook::whatTool << '\n';
 }
 
 void Cook::CreateUsingIngredient()
@@ -295,11 +294,11 @@ void Cook::FollowMouseIngredient()
 
 void Cook::DrawToolName()
 {
-	if (whatTool == HAND)
+	if (whatTool == Tool::HAND)
 	{
 		doodle::draw_text("Tool : Hand", cuttingBoard_X + 20, cuttingBoard_Y + cuttingBoard_height + 100);
 	}
-	else if(whatTool == KNIFE)
+	else if(whatTool == Tool::KNIFE)
 	{
 		doodle::draw_text("Tool : Knife", cuttingBoard_X + 20, cuttingBoard_Y + cuttingBoard_height + 100);
 	}

@@ -1,12 +1,10 @@
 #pragma once
-#include "Sprite.h"
 #include "Vec2.h"
 #include "KitchenPosition.h"
 
 class Ingredient
 {
 public:
-	CS230::Sprite sprite;
 	Math::vec2 position{ 100,300 };
 	int cuttingNum = 5;
 	KitchenPosition where;
