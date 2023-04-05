@@ -11,21 +11,37 @@ Tool Cook::whatTool = Tool::HAND;
 
 Cook::Cook()
 {
-	Lettuce* lettuce = new Lettuce(KitchenPosition::COUNTER1, Math::vec2{100, 80});
-	Sauce* sauce= new Sauce(KitchenPosition::COUNTER2, Math::vec2{ 250, 80});
+	Lettuce* lettuce1 = new Lettuce(KitchenPosition::COUNTER1, Math::vec2{ first_X, first_Y });
+	Lettuce* lettuce2 = new Lettuce(KitchenPosition::COUNTER1, Math::vec2{ first_X, first_Y });
+	Lettuce* lettuce3 = new Lettuce(KitchenPosition::COUNTER1, Math::vec2{ first_X, first_Y });
 	
-	seven_ingredients.push_back(lettuce);
-	seven_ingredients.push_back(sauce);
-}
+	Sauce* sauce1 = new Sauce(KitchenPosition::COUNTER2, Math::vec2{ first_X + width, first_Y });
+	Sauce* sauce2 = new Sauce(KitchenPosition::COUNTER2, Math::vec2{ first_X + width, first_Y });
+	Sauce* sauce3 = new Sauce(KitchenPosition::COUNTER2, Math::vec2{ first_X + width, first_Y });
 
+	for (int i = 0; i < ingredient_number; ++i)
+	{
+		seven_ingredients.push_back(std::vector<Ingredient*>());
+	}
+	
+	if (seven_ingredients.size() != 0)
+	{
+		seven_ingredients[0].push_back(lettuce1);
+		seven_ingredients[0].push_back(lettuce2);
+		seven_ingredients[0].push_back(lettuce3);
+
+		seven_ingredients[1].push_back(sauce1);
+		seven_ingredients[1].push_back(sauce2);
+		seven_ingredients[1].push_back(sauce3);
+	}
+}
 
 void Cook::Update()
 {
+	doodle::push_settings();
+
 	doodle::set_frame_of_reference(doodle::FrameOfReference::LeftHanded_OriginTopLeft);
-	DrawGrid();
-	DrawCuttingBoard();
-	DrawBowl(); 
-	DrawStove();
+
 	DrawIngredients();
 	WriteCuttingNum();
 	SetIngredientsWhere();
@@ -40,7 +56,10 @@ void Cook::Update()
 	{
 		Cutting();
 	}
+	
+	doodle::pop_settings();
 }
+
 
 void Cook::DrawIngredients()
 {
@@ -48,7 +67,13 @@ void Cook::DrawIngredients()
 	{
 		for (int i = 0; i < seven_ingredients.size(); ++i)
 		{
-			seven_ingredients[i]->DrawImage();
+			if (seven_ingredients[i].size() != 0)
+			{
+				for (int j = 0; j < seven_ingredients[i].size(); ++j)
+				{
+					seven_ingredients[i][j]->DrawImage();
+				}
+			}
 		}
 	}
 	if (using_ingredients.size() != 0)
@@ -61,28 +86,8 @@ void Cook::DrawIngredients()
 	}
 }
 
-void Cook::DrawGrid()
-{
-	for (int i = 0; i < ingredient_number; ++i)
-	{
-		doodle::draw_rectangle(first_X + (width * i), first_Y, width, height);
-	}
-}
 
-void Cook::DrawCuttingBoard()
-{
-	doodle::draw_rectangle(cuttingBoard_X, cuttingBoard_Y, cuttingBoard_width, cuttingBoard_height);
-}
 
-void Cook::DrawBowl()
-{
-	doodle::draw_ellipse(bowl_X, bowl_Y, bowl_width);
-}
-
-void Cook::DrawStove()
-{
-	doodle::draw_ellipse(stove_X, stove_Y, stove_width);
-}
 
 Math::vec2 Cook::WhereISMouse()
 {
@@ -225,12 +230,18 @@ void Cook::CreateUsingIngredient()
 		{
 			for (int i = 0; i < seven_ingredients.size(); ++i)
 			{
-				if (seven_ingredients[i]->where == GetWhere(WhereISMouse()) && whatMouseclickIndex == -1)
+				if (seven_ingredients[i].size() != 0)
 				{
-					using_ingredients.push_back(seven_ingredients[i]);
-					seven_ingredients.erase(seven_ingredients.begin() + i);
-					whatMouseclickIndex = using_ingredients.size() - 1;
-					isMouseClick = false;
+					for (int j = 0; j < seven_ingredients[i].size(); ++j)
+					{
+						if (seven_ingredients[i][j]->where == GetWhere(WhereISMouse()) && whatMouseclickIndex == -1)
+						{
+							using_ingredients.push_back(seven_ingredients[i][j]);
+							seven_ingredients[i].erase(seven_ingredients[i].begin() + j);
+							whatMouseclickIndex = using_ingredients.size() - 1;
+							isMouseClick = false;
+						}
+					}
 				}
 			}
 		}
@@ -272,6 +283,7 @@ void on_mouse_pressed(doodle::MouseButtons button)
 	if (button == doodle::MouseButtons::Left && Cook::isMouseClick == false)
 	{
 		Cook::isMouseClick = true;
+		
 	}
 }
 

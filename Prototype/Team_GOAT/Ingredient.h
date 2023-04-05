@@ -19,7 +19,6 @@ public:
 	virtual void DrawImage() = 0;
 	void ChangePos(Math::vec2 pos);
 	bool IsMouseOn(Math::vec2 mousePos);
-	void ChangeWhere();
 
 private:
 

@@ -6,4 +6,3 @@ enum class State
     Counter,
     Kitchen
 };
-

@@ -8,7 +8,7 @@ class Cook
 {
 public:
 	Cook();
-	std::vector<Ingredient*> seven_ingredients;
+	std::vector<std::vector<Ingredient*>> seven_ingredients;
 	std::vector<Ingredient*> using_ingredients; 
 
 	void DrawGrid();
@@ -33,12 +33,12 @@ public:
 	static bool isMouseClick;
 	static Tool whatTool;
 
-private:
-	double first_X{ 50.0 };
-	double first_Y{ 10.0 };
-	double width{ 150.0 };
-	double height{ 120.0 };
 	int ingredient_number{ 7 };
+
+	double first_X{ 150.0 };
+	double first_Y{ 300.0 };
+	double width{ 170.0 };
+	double height{ 120.0 };
 
 	double cuttingBoard_X{ 50.0 };
 	double cuttingBoard_Y{ 200.0 };
@@ -58,6 +58,13 @@ private:
 	double trashCan_width{ 100.0 };
 	double trashCan_height{ height };
 
+private:
+
+	//using_ingredients 벡터 중 몇번째 인덱스를 가리키고 있는지.
 	int whatMouseclickIndex = -1;
+
 	int cuttingBoardIndex = -1;
+
+	double Width_raito = 0;
+	double Height_raito = 0;
 };
