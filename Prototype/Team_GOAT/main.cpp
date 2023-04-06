@@ -117,24 +117,29 @@ int main(void)
 
 void draw_stand()
 {
+    doodle::push_settings();
     doodle::set_frame_of_reference(doodle::FrameOfReference::RightHanded_OriginBottomLeft);
     doodle::set_fill_color(255, 255, 0);
     doodle::draw_rectangle(0.0, 0.0, doodle::Width / 6.0 * 5.0, doodle::Height / 4.0);
     doodle::draw_triangle(doodle::Width / 6.0 * 5.0, doodle::Height / 4.0, doodle::Width / 6.0 * 5.0 + 100.0, 0.0, doodle::Width / 6.0 * 5.0, 0.0);
+    doodle::pop_settings();
 }
 
 void draw_background()
 {
+    doodle::push_settings();
     doodle::set_frame_of_reference(doodle::FrameOfReference::RightHanded_OriginBottomLeft);
     doodle::set_fill_color(128, 128, 0);
     doodle::draw_rectangle(doodle::Width / 12.0, doodle::Height / 4.0, doodle::Width / 3.0 * 2.0, doodle::Height / 7.0 * 4.4);
+    doodle::pop_settings();
 }
 
 void draw_customer(doodle::Image guest_image)
 {
     double guest_image_y = 0.0;
     double delta_time = 0.0;
-
+    
+    doodle::push_settings();
     doodle::set_frame_of_reference(doodle::FrameOfReference::RightHanded_OriginBottomLeft);
     doodle::draw_image(guest_image, doodle::Width / 10.5, guest_image_y, doodle::Width / 6.0, doodle::Height / 7.0 * 4.4);
     if (delta_time <= 2)
@@ -142,10 +147,12 @@ void draw_customer(doodle::Image guest_image)
         delta_time += doodle::DeltaTime;
         guest_image_y = doodle::Height / 2.0 * delta_time;
     }
+    doodle::pop_settings();
 }
 
 void draw_UI()
 {
+
     //시간
     doodle::draw_rectangle(doodle::Width / 12.0, doodle::Height / 8.0 * 7.3, doodle::Width * 0.10, doodle::Height * 0.07 );
     //명성
@@ -158,14 +165,18 @@ void draw_UI()
 
 void draw_text(std::string text)
 {
-    doodle::set_frame_of_reference(doodle::FrameOfReference::RightHanded_OriginBottomLeft);
     doodle::push_settings();
+    doodle::set_frame_of_reference(doodle::FrameOfReference::RightHanded_OriginBottomLeft);
     doodle::set_fill_color(255, 255, 255);
     doodle::draw_rectangle(doodle::Width / 4.0, doodle::Height / 2.0, doodle::Width / 2.3, doodle::Height / 4.0);
     doodle::pop_settings();
+ 
+    doodle::push_settings();
+    doodle::set_frame_of_reference(doodle::FrameOfReference::RightHanded_OriginBottomLeft);
     doodle::set_font_fade_out_interval(0.5, 0.0);
     doodle::set_font_size(doodle::Width / 60.0);
     doodle::set_fill_color(0, 0, 0);
     doodle::draw_text(text, doodle::Width / 4.0 + doodle::Width / 30.0, doodle::Height / 2.0 + doodle::Height / 10.0);
+    doodle::pop_settings();
 }
 
