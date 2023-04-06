@@ -5,7 +5,7 @@
 void Lettuce::DrawImage()
 {
 	doodle::push_settings();
-	doodle::set_frame_of_reference(doodle::FrameOfReference::LeftHanded_OriginTopLeft);
+	doodle::set_frame_of_reference(doodle::FrameOfReference::RightHanded_OriginBottomLeft);
 	doodle::set_fill_color(0, 128, 0);
 	doodle::draw_quad(position.x - spriteHalfWidth, position.y + spriteHalfWidth,
 					  position.x + spriteHalfWidth, position.y + spriteHalfWidth,
@@ -17,7 +17,7 @@ void Lettuce::DrawImage()
 void Sauce::DrawImage()
 {
 	doodle::push_settings();
-	doodle::set_frame_of_reference(doodle::FrameOfReference::LeftHanded_OriginTopLeft);
+	doodle::set_frame_of_reference(doodle::FrameOfReference::RightHanded_OriginBottomLeft);
 	doodle::set_fill_color(255, 255, 0);
 	doodle::draw_quad(position.x - spriteHalfWidth, position.y + spriteHalfWidth,
 					  position.x + spriteHalfWidth, position.y + spriteHalfWidth,

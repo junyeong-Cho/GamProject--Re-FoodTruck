@@ -27,7 +27,7 @@ void ys_Update()
 
         case State::Counter:
             doodle::push_settings();
-            doodle::set_frame_of_reference(doodle::FrameOfReference::LeftHanded_OriginTopLeft);
+            doodle::set_frame_of_reference(doodle::FrameOfReference::RightHanded_OriginBottomLeft);
             doodle::set_outline_color(doodle::HexColor{ 0xFF7171FF });
             doodle::set_fill_color(doodle::HexColor{ 0xEBE3C0FF });
             doodle::draw_text("Counter", Width_raito * 700, Width_raito * 400);

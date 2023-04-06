@@ -57,18 +57,13 @@ public:
 	double bowl_Y{ 200.0 + bowl_width / 2 };
 
 	double stove_width{ 400 };
+	double stove_height{ 0.0 };
 	double stove_X{ 1000.0 + stove_width / 2 };
 	double stove_Y{ 200.0 + stove_width / 2 };
-
-	double trashCan_X{ first_X + width * 6 + 50 };
-	double trashCan_Y{ first_Y };
-	double trashCan_width{ 100.0 };
-	double trashCan_height{ height };
 
 	double bell_X{ 50.0 };
 	double bell_Y{ 200.0 };
 	double bell_width{ 500.0 };
-	double bell_height{ 400.0 };
 
 private:
 

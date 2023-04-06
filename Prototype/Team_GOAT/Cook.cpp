@@ -43,7 +43,7 @@ void Cook::Update()
 {
 	doodle::push_settings();
 
-	doodle::set_frame_of_reference(doodle::FrameOfReference::LeftHanded_OriginTopLeft);
+	doodle::set_frame_of_reference(doodle::FrameOfReference::RightHanded_OriginBottomLeft);
 
 	DrawIngredients();
 	WriteCuttingNum();
@@ -105,57 +105,63 @@ KitchenPosition Cook::GetWhere(Math::vec2 pos)
 	{
 		if (pos.x > first_X + width * 0 && pos.x <= first_X + width * 0 + width)
 		{
+			std::cout << "COUNTER1\n";
 			return KitchenPosition::COUNTER1;
 		}
 		else if (pos.x > first_X + width * 1 && pos.x <= first_X + width * 1 + width)
 		{
+			std::cout << "COUNTER2\n";
 			return KitchenPosition::COUNTER2;
 		}
 		else if (pos.x > first_X + width * 2 && pos.x <= first_X + width * 2 + width)
 		{
+			std::cout << "COUNTER3\n";
 			return KitchenPosition::COUNTER3;
 		}
 		else if (pos.x > first_X + width * 3 && pos.x <= first_X + width * 3 + width)
 		{
+			std::cout << "COUNTER4\n";
 			return KitchenPosition::COUNTER4;
 		}
 		else if (pos.x > first_X + width * 4 && pos.x <= first_X + width * 4 + width)
 		{
+			std::cout << "COUNTER5\n";
 			return KitchenPosition::COUNTER5;
 		}
 		else if (pos.x > first_X + width * 5 && pos.x <= first_X + width * 5 + width)
 		{
+			std::cout << "COUNTER6\n";
 			return KitchenPosition::COUNTER6;
 		}
 		else if (pos.x > first_X + width * 6 && pos.x <= first_X + width * 6 + width)
 		{
+			std::cout << "COUNTER7\n";
 			return KitchenPosition::COUNTER7;
 		}
 	}
 	else if (pos.x > cuttingBoard_X && pos.x <= cuttingBoard_X + cuttingBoard_width
 		&& pos.y > cuttingBoard_Y && pos.y < cuttingBoard_Y + cuttingBoard_height)
 	{
+		std::cout << "CUTTING_BOARD\n";
 		return KitchenPosition::CUTTING_BOARD;
 	}
-	else if (std::sqrt((std::pow((pos.x - bowl_X), 2) + (std::pow((pos.y - bowl_Y), 2)))) <= bowl_width)
+	else if (std::sqrt((std::pow((pos.x - bowl_X), 2) + (std::pow((pos.y - bowl_Y), 2)))) <= bowl_width/2.0)
 	{
+		std::cout << "BOWL\n";
 		return KitchenPosition::BOWL;
 	}
-	else if (std::sqrt((std::pow((pos.x - stove_X), 2) + (std::pow((pos.y - stove_Y), 2)))) <= stove_width)
+	else if (pos.x > stove_X && pos.x <= stove_X + stove_width
+		&& pos.y > stove_Y && pos.y < stove_Y + stove_height)
 	{
+		std::cout << "STOVE\n";
 		return KitchenPosition::STOVE;
 	}
-	else if (pos.x > trashCan_X && pos.x <= trashCan_X + trashCan_width
-		&& pos.y > trashCan_Y && pos.y < trashCan_Y + trashCan_height)
+	else if(std::sqrt((std::pow((pos.x - bell_X), 2) + (std::pow((pos.y - bell_Y), 2)))) <= bell_width/2.0)
 	{
-		return KitchenPosition::TRASH_CAN;
-	}
-	else if(pos.x > bell_X && pos.x <= bell_X + bell_width
-		&& pos.y > bell_Y && pos.y < bell_Y + bell_height)
-	{
+		std::cout << "BELL\n";
 		return KitchenPosition::BELL;
 	}
-	
+	std::cout << "ELSE\n";
 	return KitchenPosition::ELSE;
 }
 
@@ -179,7 +185,7 @@ void Cook::WriteCuttingNum()
 			if (using_ingredients[i]->where == KitchenPosition::CUTTING_BOARD)
 			{
 				doodle::push_settings();
-				doodle::set_frame_of_reference(doodle::FrameOfReference::LeftHanded_OriginTopLeft);
+				doodle::set_frame_of_reference(doodle::FrameOfReference::RightHanded_OriginBottomLeft);
 				doodle::set_font_size(width/10.0);
 				if (using_ingredients[i]->cuttingNum > 0)
 				{
@@ -314,7 +320,7 @@ void Cook::FollowMouseIngredient()
 void Cook::DrawToolName()
 {
 	doodle::push_settings();
-	doodle::set_frame_of_reference(doodle::FrameOfReference::LeftHanded_OriginTopLeft);
+	doodle::set_frame_of_reference(doodle::FrameOfReference::RightHanded_OriginBottomLeft);
 	doodle::set_font_size(width / 10.0);
 	if (whatTool == Tool::HAND)
 	{
@@ -436,9 +442,10 @@ void Cook::Draw_CompletePoint()
 {
 	doodle::push_settings();
 
-	doodle::set_frame_of_reference(doodle::FrameOfReference::LeftHanded_OriginTopLeft);
-	doodle::set_font_size(width/10.0);
-	doodle::draw_text("Complete : " + std::to_string(completePoint) + "%", first_X, first_Y/1.2);
+	doodle::set_frame_of_reference(doodle::FrameOfReference::RightHanded_OriginBottomLeft);
+	doodle::set_font_size(width/6.0);
+	doodle::set_fill_color(doodle::Color(0, 0, 0));
+	doodle::draw_text("Complete : " + std::to_string(completePoint) + "%", first_X, first_Y + width);
 
 	doodle::pop_settings();
 }

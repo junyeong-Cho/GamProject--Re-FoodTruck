@@ -19,7 +19,7 @@ public:
 	void Draw_ToolDrawer();
 	void Draw_Refrigerator();
 	void Draw_Bell();
-	void SetVariables(double Width, double Height);
+	void SetVariables();
 	void SetCookVariables();
 
 	void Update(double Width, double Height);
@@ -27,33 +27,82 @@ public:
 
 	int ingredient_number{ 7 };
 
-	double first_X{ 50.0 };
-	double first_Y{ 10.0 };
-	double width{ 150.0 };
-	double height{ 120.0 };
+	double first_X{ 0.0 };
+	double first_Y{ 0.0 };
+	double width{ 0.0 };
+	double height{ 0.0 };
 
-	double cuttingBoard_X{ 50.0 };
-	double cuttingBoard_Y{ 200.0 };
-	double cuttingBoard_width{ 500.0 };
-	double cuttingBoard_height{ 400.0 };
+	double cuttingBoard_X{ 0.0 };
+	double cuttingBoard_Y{ 0.0 };
+	double cuttingBoard_width{ 0.0 };
+	double cuttingBoard_height{ 0.0 };
 
-	double bowl_width{ 400 };
-	double bowl_X{ 580.0 + bowl_width / 2 };
-	double bowl_Y{ 200.0 + bowl_width / 2 };
+	double bowl_width{ 0.0 };
+	double bowl_X{ 0.0 };
+	double bowl_Y{ 0.0 };
 
-	double stove_width{ 400 };
-	double stove_X{ 1000.0 + stove_width / 2 };
-	double stove_Y{ 200.0 + stove_width / 2 };
+	double stove_width{ 0.0 };
+	double stove_height{ 0.0 };
+	double stove_X{ 0.0 };
+	double stove_Y{ 0.0 };
 
-	double trashCan_X{ first_X + width * 6 + 50 };
-	double trashCan_Y{ first_Y };
-	double trashCan_width{ 100.0 };
-	double trashCan_height{ height };
+	double trashCan_X{ 0.0 };
+	double trashCan_Y{ 0.0 };
+	double trashCan_width{ 0.0 };
+	double trashCan_height{ 0.0 };
 
-	double bell_X{ 50.0 };
-	double bell_Y{ 200.0 };
-	double bell_width{ 500.0 };
-	double bell_height{ 400.0 };
+	double bell_X{ 0.0 };
+	double bell_Y{ 0.0 };
+	double bell_width{ 0.0 };
+
+	double zero{ 0.0 };
+	double endWidth{ 0.0};
+	double endHeight{ 0.0 };
+
+	double topBackground_X1{ 0.0 };
+	double topBackground_Y1{ 0.0 };
+	double topBackground_X2{ 0.0 };
+	double topBackground_Y2{ 0.0 };
+	double topBackground_X3{ 0.0 };
+	double topBackground_Y3{ 0.0 };
+	double topBackground_X4{ 0.0 };
+	double topBackground_Y4{ 0.0 };
+
+	double bottomBackground_X1{ 0.0 };
+	double bottomBackground_Y1{ 0.0 };
+	double bottomBackground_X2{ 0.0 };
+	double bottomBackground_Y2{ 0.0 };
+	double bottomBackground_X3{ 0.0 };
+	double bottomBackground_Y3{ 0.0 };
+	double bottomBackground_X4{ 0.0 };
+	double bottomBackground_Y4{ 0.0 };
+
+	double clock_X{ 0.0 };
+	double clock_Y{ 0.0 };
+	double clock_width{ 0.0 };
+	double clock_height{ 0.0 };
+
+	double receipt_X{ 0.0 };
+	double receipt_Y{ 0.0 };
+	double receipt_width{ 0.0 };
+	double receipt_height{ 0.0 };
+
+	double backCounter_X{ 0.0 };
+	double backCounter_Y{ 0.0 };
+	double backCounter_width{ 0.0 };
+	double backCounter_height{ 0.0 };
+
+	double toolDrawer_X{ 0.0 };
+	double toolDrawer_Y{ 0.0 };
+	double toolDrawer_width{ 0.0 };
+	double toolDrawer_height{ 0.0 };
+
+	double refrigerator_X{ 0.0 };
+	double refrigerator_Y{ 0.0 };
+	double refrigerator_width{ 0.0 };
+	double refrigerator_height{ 0.0 };
+	
+
 
 private:
 	double Width_raito = 0;
