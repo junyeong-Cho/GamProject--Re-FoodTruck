@@ -16,7 +16,7 @@ void draw_customer(doodle::Image guest_image);
 void draw_text(std::string text);
 
 
-/*void jh_Updatd()
+void jh_Updatd()
 {
     State state = State::Main;
 
@@ -64,7 +64,7 @@ void draw_text(std::string text);
         }
     }
 }
-*/
+
 
 void sm_Updatd()
 {
@@ -110,7 +110,8 @@ void sm_Updatd()
 
 int main(void)
 {
-    doodle::create_window("Team_GOAT");
+    doodle::create_window("Team_GOAT",1400, 800);
+    //jh_Updatd();
     sm_Updatd();
 
 }
