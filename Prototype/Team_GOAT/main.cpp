@@ -16,7 +16,57 @@ void draw_customer(doodle::Image guest_image);
 void draw_text(std::string text);
 
 
-void jh_Updatd()
+/*void jh_Updatd()
+{
+    State state = State::Main;
+
+    Button main_button(-100, -100, 200, 300, state);
+    Button counter_button((doodle::Width / 14) * 5.5, (doodle::Height / 8.0) * 3.0, doodle::Width / 28.0, doodle::Height / 16.0, state);
+    Button game_over_button(100, 100, 100, 100, state);
+
+
+    //Button main_button(0,0,100,100, state);
+    while (!doodle::is_window_closed())
+    {
+        doodle::update_window();
+
+        switch (state)
+        {
+        case State::Main:
+            doodle::clear_background(255, 255, 255);
+            main_button.update(doodle::get_mouse_x(), doodle::get_mouse_y(), State::Counter);
+
+            break;
+        case State::Counter:
+            doodle::clear_background(255, 255, 255);
+            doodle::push_settings();
+
+            //speech bubble
+            doodle::set_fill_color(0, 88);
+            doodle::draw_rectangle(-((doodle::Width / 7.0) * 3.0), -((doodle::Height / 8) * 3), ((doodle::Width / 7.0) * 6.0), ((doodle::Height / 8.0) * 5.0));
+
+            //customer's satisfaction - 추후 추가 예정
+            doodle::draw_rectangle(-((doodle::Width / 7.0) * 3.0), ((doodle::Height / 8.0) * 2.0), (doodle::Width / 7.0) * 2.0, (doodle::Height / 8.0));
+            doodle::draw_text(" 0 % / o x o", -((doodle::Width / 7.0) * 3.0), ((doodle::Height / 8.0) * 2.0));
+            doodle::pop_settings();
+
+            counter_button.update(doodle::get_mouse_x(), doodle::get_mouse_y(), State::Game_over);
+            break;
+        case State::Game_over:
+            doodle::clear_background(255, 255, 255);
+            doodle::push_settings();
+            doodle::set_font_size(100.0);
+            doodle::draw_text(" RE \n Try?", -((doodle::Width / 7.0) * 3.0), -((doodle::Height / 8.0) * 0.5));
+            doodle::pop_settings();
+            game_over_button.update(doodle::get_mouse_x(), doodle::get_mouse_y(), State::Counter);
+            break;
+
+        }
+    }
+}
+*/
+
+void sm_Updatd()
 {
     State state = State::Main;
     const doodle::Image guest_image("giraffe.png");
@@ -41,6 +91,7 @@ void jh_Updatd()
             draw_background();
             doodle::draw_image(guest_image, doodle::Width / 10.5, doodle::Height / 4.0, doodle::Width / 6.0, doodle::Height / 7.0 * 4.4);
             draw_text(giraffe_text);
+            //draw_customer(guest_image);
             draw_stand();
             draw_UI();
             yes.update(doodle::get_mouse_x(), doodle::get_mouse_y(), State::Kitchen);
@@ -60,7 +111,7 @@ void jh_Updatd()
 int main(void)
 {
     doodle::create_window("Team_GOAT");
-    jh_Updatd();
+    sm_Updatd();
 
 }
 
@@ -82,11 +133,14 @@ void draw_background()
 void draw_customer(doodle::Image guest_image)
 {
     double guest_image_y = 0.0;
-    doodle::set_frame_of_reference(doodle::FrameOfReference::RightHanded_OriginCenter);
-    doodle::draw_image(guest_image, -doodle::Width / 4.0, guest_image_y);
-    if (guest_image_y != -doodle::Height / 4.0)
+    double delta_time = 0.0;
+
+    doodle::set_frame_of_reference(doodle::FrameOfReference::RightHanded_OriginBottomLeft);
+    doodle::draw_image(guest_image, doodle::Width / 10.5, guest_image_y, doodle::Width / 6.0, doodle::Height / 7.0 * 4.4);
+    if (delta_time <= 2)
     {
-        //guest_image_x += ;
+        delta_time += doodle::DeltaTime;
+        guest_image_y = doodle::Height / 2.0 * delta_time;
     }
 }
 
