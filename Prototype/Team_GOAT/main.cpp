@@ -16,65 +16,17 @@ void draw_customer(doodle::Image guest_image);
 void draw_text(std::string text);
 
 
-/*void jh_Updatd()
-{
-    State state = State::Main;
-
-    Button main_button(-100, -100, 200, 300, state);
-    Button counter_button((doodle::Width / 14) * 5.5, (doodle::Height / 8.0) * 3.0, doodle::Width / 28.0, doodle::Height / 16.0, state);
-    Button game_over_button(100, 100, 100, 100, state);
-
-
-    //Button main_button(0,0,100,100, state);
-    while (!doodle::is_window_closed())
-    {
-        doodle::update_window();
-
-        switch (state)
-        {
-        case State::Main:
-            doodle::clear_background(255, 255, 255);
-            main_button.update(doodle::get_mouse_x(), doodle::get_mouse_y(), State::Counter);
-
-            break;
-        case State::Counter:
-            doodle::clear_background(255, 255, 255);
-            doodle::push_settings();
-
-            //speech bubble
-            doodle::set_fill_color(0, 88);
-            doodle::draw_rectangle(-((doodle::Width / 7.0) * 3.0), -((doodle::Height / 8) * 3), ((doodle::Width / 7.0) * 6.0), ((doodle::Height / 8.0) * 5.0));
-
-            //customer's satisfaction - 추후 추가 예정
-            doodle::draw_rectangle(-((doodle::Width / 7.0) * 3.0), ((doodle::Height / 8.0) * 2.0), (doodle::Width / 7.0) * 2.0, (doodle::Height / 8.0));
-            doodle::draw_text(" 0 % / o x o", -((doodle::Width / 7.0) * 3.0), ((doodle::Height / 8.0) * 2.0));
-            doodle::pop_settings();
-
-            counter_button.update(doodle::get_mouse_x(), doodle::get_mouse_y(), State::Game_over);
-            break;
-        case State::Game_over:
-            doodle::clear_background(255, 255, 255);
-            doodle::push_settings();
-            doodle::set_font_size(100.0);
-            doodle::draw_text(" RE \n Try?", -((doodle::Width / 7.0) * 3.0), -((doodle::Height / 8.0) * 0.5));
-            doodle::pop_settings();
-            game_over_button.update(doodle::get_mouse_x(), doodle::get_mouse_y(), State::Counter);
-            break;
-
-        }
-    }
-}*/
-
-
 void sm_Updatd()
 {
     State state = State::Main;
     const doodle::Image guest_image("giraffe.png");
-    Button main_button(-100, -100, 200, 300, state);
-    Button to_kitchen_button(doodle::Width / 3, 0, 200, 100, state);
+    Button main_button(600, 300, 200, 300, state);
     Button yes(doodle::Width / 3.0, doodle::Height / 3.0, doodle::Width / 10.0, doodle::Height / 10.0, state);
     Button no(doodle::Width / 2, doodle::Height / 3.0, doodle::Width / 10.0, doodle::Height / 10.0, state);
     const std::string giraffe_text= "People without faith will go to hell.";
+    Button counter_button(1250, 700, 50, 50, state);
+    Button game_over_button(800, 500, 100, 100, state);
+
     while (!doodle::is_window_closed())
     {
         doodle::update_window();
@@ -83,8 +35,8 @@ void sm_Updatd()
         {
         case State::Main:
             doodle::clear_background(255, 255, 255);
+            doodle::set_frame_of_reference(doodle::FrameOfReference::RightHanded_OriginBottomLeft);
             main_button.update(doodle::get_mouse_x(), doodle::get_mouse_y(), State::Counter);
-
             break;
         case State::Counter:
             doodle::clear_background(255, 255, 255, 200);
@@ -95,14 +47,40 @@ void sm_Updatd()
             //draw_customer(guest_image);
             draw_stand();
             draw_UI();
-            yes.update(doodle::get_mouse_x(), doodle::get_mouse_y(), State::Kitchen);
-            no.update(doodle::get_mouse_x(), doodle::get_mouse_y(), State::Counter);
-            to_kitchen_button.update(doodle::get_mouse_x(), doodle::get_mouse_y(), State::Kitchen);
+
+            doodle::push_settings();
+            doodle::set_font_size(22);
+            yes.update(doodle::get_mouse_x(), doodle::get_mouse_y(), State::Kitchen, "Yes!");
+            no.update(doodle::get_mouse_x(), doodle::get_mouse_y(), State::Evaluation_screen, "NO!");
+            doodle::pop_settings();
 
             break;
         case State::Kitchen:
             doodle::clear_background(0, 255, 0);
 
+            break;
+        case State::Evaluation_screen:
+            doodle::clear_background(255, 255, 255);
+            doodle::push_settings();
+
+            //speech bubble
+            doodle::set_fill_color(0, 88);
+            doodle::draw_rectangle(100, 100, 1200, 500);
+
+            //customer's satisfaction - 추후 추가 예정
+            doodle::draw_rectangle(100, 600, 400, 100);
+            doodle::draw_text(" 0 % / o x o", 100, 600);
+            doodle::pop_settings();
+
+            counter_button.update(doodle::get_mouse_x(), doodle::get_mouse_y(), State::Game_over);
+            break;
+        case State::Game_over:
+            doodle::clear_background(255, 255, 255);
+            doodle::push_settings();
+            doodle::set_font_size(100.0);
+            doodle::draw_text(" RE \n Try?", 100, 350);
+            doodle::pop_settings();
+            game_over_button.update(doodle::get_mouse_x(), doodle::get_mouse_y(), State::Counter);
             break;
 
         }
@@ -112,7 +90,7 @@ void sm_Updatd()
 int main(void)
 {
     doodle::create_window("Team_GOAT",1400, 800);
-    //jh_Updatd();
+
     sm_Updatd();
 
 }

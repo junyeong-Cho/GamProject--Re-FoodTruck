@@ -13,11 +13,12 @@ struct Button
     double      width;
     double      height;
 
+    //Draw
+    double  alpha = 255;
+
     //State
     State* current_state;
 
-    //Button_name
-    std::string   buttonName;
 
     //Check_button
     bool checkMouse = false;
@@ -34,8 +35,10 @@ struct Button
 
 
     void draw(const int mouse_x, const int mouse_y);
+    void draw(const int mouse_x, const int mouse_y, std::string text);
     void check_click(const int mouse_x, const int mouse_y, State next_state);
 
     /** 마우스x좌표, 마우스y좌표, 다음장면 순으로 적으세용*/
     void update(const int mouse_x, const int mouse_y, State next_state);
+    void update(const int mouse_x, const int mouse_y, State next_state, std::string text);
 };
