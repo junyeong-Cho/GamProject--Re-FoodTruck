@@ -15,7 +15,7 @@ void Button::draw(const int mouse_x, const int mouse_y)
 		doodle::set_fill_color(doodle::HexColor{ 0xFFFFFF });
 	}
 	
-	doodle::set_frame_of_reference(doodle::FrameOfReference::RightHanded_OriginCenter);
+	doodle::set_frame_of_reference(doodle::FrameOfReference::RightHanded_OriginBottomLeft);
 	doodle::set_rectangle_mode(doodle::RectMode::Corner);
 	doodle::draw_rectangle(x, y, width, height);
 
