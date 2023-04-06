@@ -21,6 +21,7 @@ public:
 	void Draw_Bell();
 	void SetVariables();
 	void SetCookVariables();
+	void Draw_Recipe();
 
 	void Update(double Width, double Height);
 

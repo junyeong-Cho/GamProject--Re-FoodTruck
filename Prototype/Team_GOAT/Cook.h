@@ -12,10 +12,6 @@ public:
 	std::vector<Ingredient*> using_ingredients;
 	std::vector<Ingredient*> inBowl;
 
-	void DrawGrid();
-	void DrawCuttingBoard();
-	void DrawBowl();
-	void DrawStove();
 	void DrawIngredients();
 
 	Math::vec2 WhereISMouse();
@@ -33,6 +29,7 @@ public:
 	void PutBowl();
 	void Draw_CompletePoint();
 	void PutBell();
+	void DrawStoveText();
 
 	void Update();
 
@@ -61,9 +58,9 @@ public:
 	double stove_X{ 1000.0 + stove_width / 2 };
 	double stove_Y{ 200.0 + stove_width / 2 };
 
-	double bell_X{ 50.0 };
-	double bell_Y{ 200.0 };
-	double bell_width{ 500.0 };
+	double bell_X{ 0.0 };
+	double bell_Y{ 0.0 };
+	double bell_width{ 0.0 };
 
 private:
 

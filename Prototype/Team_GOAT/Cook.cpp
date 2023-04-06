@@ -1,6 +1,7 @@
 #include "Cook.h"
 #include <doodle/drawing.hpp>
 #include <doodle/input.hpp>
+#include "doodle/environment.hpp"
 #include <cmath>
 #include <iostream>
 #include "State.h"
@@ -52,12 +53,13 @@ void Cook::Update()
 	ChangeIngredientSize();
 	PutBowl();
 	Salad();
+	DrawStoveText();
+	PutBell();
 	if (whatTool == Tool::HAND)
 	{
 		CreateUsingIngredient();
 		FollowMouseIngredient();
 		WhatIndexMouseClick();
-		PutBell();
 	}
 	else if (whatTool == Tool::KNIFE)
 	{
@@ -139,6 +141,11 @@ KitchenPosition Cook::GetWhere(Math::vec2 pos)
 			return KitchenPosition::COUNTER7;
 		}
 	}
+	else if (std::sqrt((std::pow((pos.x - bell_X), 2) + (std::pow((pos.y - bell_Y), 2)))) <= bell_width / 2.0)
+	{
+		std::cout << "BELL\n";
+		return KitchenPosition::BELL;
+	}
 	else if (pos.x > cuttingBoard_X && pos.x <= cuttingBoard_X + cuttingBoard_width
 		&& pos.y > cuttingBoard_Y && pos.y < cuttingBoard_Y + cuttingBoard_height)
 	{
@@ -155,11 +162,6 @@ KitchenPosition Cook::GetWhere(Math::vec2 pos)
 	{
 		std::cout << "STOVE\n";
 		return KitchenPosition::STOVE;
-	}
-	else if(std::sqrt((std::pow((pos.x - bell_X), 2) + (std::pow((pos.y - bell_Y), 2)))) <= bell_width/2.0)
-	{
-		std::cout << "BELL\n";
-		return KitchenPosition::BELL;
 	}
 	std::cout << "ELSE\n";
 	return KitchenPosition::ELSE;
@@ -321,14 +323,15 @@ void Cook::DrawToolName()
 {
 	doodle::push_settings();
 	doodle::set_frame_of_reference(doodle::FrameOfReference::RightHanded_OriginBottomLeft);
-	doodle::set_font_size(width / 10.0);
+	doodle::set_font_size(width / 6.0);
+	doodle::set_fill_color(doodle::Color(0, 0, 0));
 	if (whatTool == Tool::HAND)
 	{
-		doodle::draw_text("Tool : Hand", first_X, cuttingBoard_Y - cuttingBoard_height /20.0);
+		doodle::draw_text("Tool : Hand", first_X, first_Y - height / 2.0);
 	}
 	else if(whatTool == Tool::KNIFE)
 	{
-		doodle::draw_text("Tool : Knife", first_X, cuttingBoard_Y - cuttingBoard_height / 20.0);
+		doodle::draw_text("Tool : Knife", first_X, first_Y - height / 2.0);
 	}
 	doodle::pop_settings();
 }
@@ -460,5 +463,33 @@ void Cook::PutBell()
 	if (GetWhere(WhereISMouse()) == KitchenPosition::BELL && isMouseClick == true)
 	{
 		*state = State::Counter;
+	}
+}
+
+void Cook::DrawStoveText()
+{
+	if (GetWhere(WhereISMouse()) == KitchenPosition::STOVE)
+	{
+		doodle::push_settings();
+
+		const auto oscillate = [](double t) { return (std::sin(t) * 0.5 + 0.5); };
+		doodle::set_outline_color(doodle::HexColor{ 0xFF7171FF });
+		const double inside_distance = 0.4 + 0.3 * oscillate(doodle::ElapsedTime);
+		const double completely_outside_distance = inside_distance + (1 - inside_distance) * oscillate(doodle::ElapsedTime * 2);
+		doodle::set_font_backdrop_fade_out_interval(inside_distance, completely_outside_distance);
+		doodle::set_font_size(stove_width / 7.0);
+		doodle::draw_text("Coming\nsoon", stove_X + stove_width / 7.0, stove_Y + stove_height / 2.0);
+
+		doodle::pop_settings();
+	}
+	else
+	{
+		doodle::push_settings();
+
+		doodle::set_outline_color(doodle::HexColor{ 0xFF7171FF });
+		doodle::set_font_size(stove_width / 7.0);
+		doodle::draw_text("Burner", stove_X + stove_width / 5.0, stove_Y + stove_height / 3.0);
+
+		doodle::pop_settings();
 	}
 }

@@ -1,6 +1,6 @@
 #include "Kitchen.h"
 #include "doodle/drawing.hpp"
-#include "doodle/environment.hpp"
+#include <iostream>
 
 
 void Kitchen::Update(double Width, double Height)
@@ -26,6 +26,7 @@ void Kitchen::Update(double Width, double Height)
 	Draw_ToolDrawer();
 	Draw_Refrigerator();
 	Draw_Bell();
+	Draw_Recipe();
 
 	cook.Update();
 
@@ -149,6 +150,7 @@ void Kitchen::SetCookVariables()
 	cook.bell_X = bell_X;
 	cook.bell_Y = bell_Y;
 	cook.bell_width = bell_width;
+	
 }
 
 void Kitchen::Draw_BackGround()
@@ -192,7 +194,12 @@ void Kitchen::Draw_Bowl()
 {
 	doodle::push_settings();
 
+	doodle::set_outline_color(doodle::HexColor{ 0xE7C0ABFF });
+	doodle::set_outline_width(5.0);
+	doodle::smooth_drawing();
 	doodle::draw_ellipse(bowl_X, bowl_Y, bowl_width);
+	doodle::set_font_size(bowl_width / 5.0);
+	doodle::draw_text("Bowl", bowl_X - bowl_width/3.7, bowl_Y - bowl_width / 5.0);
 
 	doodle::pop_settings();
 }
@@ -201,14 +208,8 @@ void Kitchen::Draw_Stove()
 {
 	doodle::push_settings();
 
-	const auto oscillate = [](double t) { return (std::sin(t) * 0.5 + 0.5); };
 	doodle::set_outline_color(doodle::HexColor{ 0xFF7171FF });
-	const double inside_distance = 0.4 + 0.3 * oscillate(doodle::ElapsedTime);
-	const double completely_outside_distance = inside_distance + (1 - inside_distance) * oscillate(doodle::ElapsedTime * 2);
-	doodle::set_font_backdrop_fade_out_interval(inside_distance, completely_outside_distance);
-	doodle::set_font_size(stove_width / 7.0);
 	doodle::draw_rectangle(stove_X, stove_Y, stove_width, stove_height);
-	doodle::draw_text("Coming\nsoon", stove_X+stove_width/7.0, stove_Y+stove_height/2.0);
 
 	doodle::pop_settings();
 }
@@ -312,5 +313,29 @@ void Kitchen::Draw_Bell()
 	doodle::set_fill_color(doodle::Color(0, 0, 0));
 	doodle::set_font_size(bell_width / 3.0);
 	doodle::draw_text(" bell", bell_X - bell_width / 2.0, bell_Y-bell_width / 3.0);
+
+	doodle::pop_settings();
+}
+
+void Kitchen::Draw_Recipe()
+{
+	//상추
+	doodle::push_settings();
+	doodle::set_fill_color(0, 128, 0);
+	doodle::draw_rectangle(receipt_X + receipt_width/5.0, receipt_Y + receipt_height/2.5, receipt_width / 10.0, receipt_width / 10.0);
+	doodle::pop_settings();
+
+	//소스
+	doodle::push_settings();
+	doodle::set_fill_color(255, 255, 0);
+	doodle::draw_rectangle(receipt_X + receipt_width / 5.0, receipt_Y + receipt_height / 6.0, receipt_width/10.0, receipt_width / 10.0);
+	doodle::pop_settings();
+
+	doodle::push_settings();
+	doodle::set_fill_color(0,0,0);
+	doodle::set_font_size(receipt_width / 10.0);
+	doodle::draw_text("<Salad Recipe>", receipt_X + receipt_width / 27.0, receipt_Y + receipt_height / 1.5);
+	doodle::draw_text("x  3", receipt_X + receipt_width / 2.5, receipt_Y + receipt_height / 2.7);
+	doodle::draw_text("x  3", receipt_X + receipt_width / 2.5, receipt_Y + receipt_height / 9.7);
 	doodle::pop_settings();
 }
