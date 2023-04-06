@@ -1,0 +1,16 @@
+#pragma once
+enum KitchenPosition
+{
+	COUNTER1,
+	COUNTER2,
+	COUNTER3,
+	COUNTER4,
+	COUNTER5,
+	COUNTER6,
+	COUNTER7,
+	CUTTING_BOARD,
+	BOWL,
+	STOVE,
+	TRASH_CAN,
+	ELSE
+};
