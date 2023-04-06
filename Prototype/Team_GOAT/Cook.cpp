@@ -348,7 +348,7 @@ void Cook::ChangeIngredientSize()
 	{
 		for (int i = 0; i < using_ingredients.size(); ++i)
 		{
-			//이거 position을 어떻게 바꿔야할지 모르겠음.
+			//이거 position을 어떻게 바꿔야할지 모르겠음.;
 			using_ingredients[i]->spriteHalfWidth = width / 4.0;
 		}
 	}
