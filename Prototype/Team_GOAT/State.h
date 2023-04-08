@@ -8,4 +8,3 @@ enum class State
     Evaluation_screen,
     Game_over
 };
-

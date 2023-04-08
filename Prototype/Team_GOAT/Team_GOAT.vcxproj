@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Cook.cpp" />
+
     <ClCompile Include="EvaluationScene.cpp" />
     <ClCompile Include="Ingredient.cpp" />
     <ClCompile Include="Kitchen.cpp" />
@@ -154,11 +155,13 @@
     <ClInclude Include="Cook.h" />
     <ClInclude Include="EvaluationScene.h" />
     <ClInclude Include="Ingredient.h" />
+    <ClInclude Include="IngredientName.h" />
     <ClInclude Include="Kitchen.h" />
     <ClInclude Include="KitchenPosition.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="Texture.h" />
+
     <ClInclude Include="Tool.h" />
     <ClInclude Include="Vec2.h" />
   </ItemGroup>

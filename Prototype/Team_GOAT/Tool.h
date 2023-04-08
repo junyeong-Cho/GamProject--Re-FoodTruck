@@ -1,5 +1,5 @@
 #pragma once
-enum Tool
+enum class Tool
 {
 	HAND,
 	KNIFE

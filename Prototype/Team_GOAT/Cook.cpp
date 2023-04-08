@@ -1,45 +1,75 @@
 #include "Cook.h"
 #include <doodle/drawing.hpp>
 #include <doodle/input.hpp>
-#include <math.h>
+#include "doodle/environment.hpp"
+#include <cmath>
 #include <iostream>
+#include "State.h"
 
 
-//static�Լ��� �������������� �ʱ�ȭ ����. & ��� ���Ͽ��� �ʱ�ȭ �Ұ���.
+//static함수는 전역범위에서만 초기화 가능. & 헤더 파일에선 초기화 불가능.
 bool Cook::isMouseClick = false;
-Tool Cook::whatTool = HAND;
+Tool Cook::whatTool = Tool::HAND;
+
+extern State* state;
 
 Cook::Cook()
 {
-	Lettuce* lettuce = new Lettuce(COUNTER1, Math::vec2{ 100, 80 });
-	Sauce* sauce = new Sauce(COUNTER2, Math::vec2{ 250, 80 });
+	Lettuce* lettuce1 = new Lettuce(KitchenPosition::COUNTER1, Math::vec2{ first_X, first_Y }, IngredientName::Lettuce);
+	Lettuce* lettuce2 = new Lettuce(KitchenPosition::COUNTER1, Math::vec2{ first_X, first_Y }, IngredientName::Lettuce);
+	Lettuce* lettuce3 = new Lettuce(KitchenPosition::COUNTER1, Math::vec2{ first_X, first_Y }, IngredientName::Lettuce);
+	
+	Sauce* sauce1 = new Sauce(KitchenPosition::COUNTER2, Math::vec2{ first_X + width, first_Y }, IngredientName::Sauce);
+	Sauce* sauce2 = new Sauce(KitchenPosition::COUNTER2, Math::vec2{ first_X + width, first_Y }, IngredientName::Sauce);
+	Sauce* sauce3 = new Sauce(KitchenPosition::COUNTER2, Math::vec2{ first_X + width, first_Y }, IngredientName::Sauce);
 
-	seven_ingredients.push_back(lettuce);
-	seven_ingredients.push_back(sauce);
+	for (int i = 0; i < ingredient_number; ++i)
+	{
+		seven_ingredients.push_back(std::vector<Ingredient*>());
+	}
+	
+	if (seven_ingredients.size() != 0)
+	{
+		seven_ingredients[0].push_back(lettuce1);
+		seven_ingredients[0].push_back(lettuce2);
+		seven_ingredients[0].push_back(lettuce3);
+
+		seven_ingredients[1].push_back(sauce1);
+		seven_ingredients[1].push_back(sauce2);
+		seven_ingredients[1].push_back(sauce3);
+	}
 }
-
 
 void Cook::Update()
 {
-	doodle::set_frame_of_reference(doodle::FrameOfReference::LeftHanded_OriginTopLeft);
-	DrawGrid();
-	DrawCuttingBoard();
-	DrawBowl();
-	DrawStove();
+	doodle::push_settings();
+
+	doodle::set_frame_of_reference(doodle::FrameOfReference::RightHanded_OriginBottomLeft);
+
 	DrawIngredients();
 	WriteCuttingNum();
 	SetIngredientsWhere();
-	if (whatTool == HAND)
+	DrawToolName();
+	ChangeIngredientSize();
+	PutBowl();
+	Salad();
+	DrawStoveText();
+	PutBell();
+	if (whatTool == Tool::HAND)
 	{
 		CreateUsingIngredient();
 		FollowMouseIngredient();
 		WhatIndexMouseClick();
 	}
-	else if (whatTool == KNIFE)
+	else if (whatTool == Tool::KNIFE)
 	{
 		Cutting();
 	}
+	Draw_CompletePoint();
+	
+	doodle::pop_settings();
 }
+
 
 void Cook::DrawIngredients()
 {
@@ -47,7 +77,13 @@ void Cook::DrawIngredients()
 	{
 		for (int i = 0; i < seven_ingredients.size(); ++i)
 		{
-			seven_ingredients[i]->DrawImage();
+			if (seven_ingredients[i].size() != 0)
+			{
+				for (int j = 0; j < seven_ingredients[i].size(); ++j)
+				{
+					seven_ingredients[i][j]->DrawImage();
+				}
+			}
 		}
 	}
 	if (using_ingredients.size() != 0)
@@ -60,29 +96,6 @@ void Cook::DrawIngredients()
 	}
 }
 
-void Cook::DrawGrid()
-{
-	for (int i = 0; i < ingredient_number; ++i)
-	{
-		doodle::draw_rectangle(first_X + (width * i), first_Y, width, height);
-	}
-}
-
-void Cook::DrawCuttingBoard()
-{
-	doodle::draw_rectangle(cuttingBoard_X, cuttingBoard_Y, cuttingBoard_width, cuttingBoard_height);
-}
-
-void Cook::DrawBowl()
-{
-	doodle::draw_ellipse(bowl_X, bowl_Y, bowl_width);
-}
-
-void Cook::DrawStove()
-{
-	doodle::draw_ellipse(stove_X, stove_Y, stove_width);
-}
-
 Math::vec2 Cook::WhereISMouse()
 {
 	return Math::vec2(doodle::get_mouse_x(), doodle::get_mouse_y());
@@ -90,57 +103,71 @@ Math::vec2 Cook::WhereISMouse()
 
 KitchenPosition Cook::GetWhere(Math::vec2 pos)
 {
+	doodle::push_settings();
+	doodle::set_frame_of_reference(doodle::FrameOfReference::RightHanded_OriginBottomLeft);
 	if (pos.y > first_Y && pos.y < first_Y + height)
 	{
 		if (pos.x > first_X + width * 0 && pos.x <= first_X + width * 0 + width)
 		{
-			return COUNTER1;
+			std::cout << "COUNTER1\n";
+			return KitchenPosition::COUNTER1;
 		}
 		else if (pos.x > first_X + width * 1 && pos.x <= first_X + width * 1 + width)
 		{
-			return COUNTER2;
+			std::cout << "COUNTER2\n";
+			return KitchenPosition::COUNTER2;
 		}
 		else if (pos.x > first_X + width * 2 && pos.x <= first_X + width * 2 + width)
 		{
-			return COUNTER3;
+			std::cout << "COUNTER3\n";
+			return KitchenPosition::COUNTER3;
 		}
 		else if (pos.x > first_X + width * 3 && pos.x <= first_X + width * 3 + width)
 		{
-			return COUNTER4;
+			std::cout << "COUNTER4\n";
+			return KitchenPosition::COUNTER4;
 		}
 		else if (pos.x > first_X + width * 4 && pos.x <= first_X + width * 4 + width)
 		{
-			return COUNTER5;
+			std::cout << "COUNTER5\n";
+			return KitchenPosition::COUNTER5;
 		}
 		else if (pos.x > first_X + width * 5 && pos.x <= first_X + width * 5 + width)
 		{
-			return COUNTER6;
+			std::cout << "COUNTER6\n";
+			return KitchenPosition::COUNTER6;
 		}
 		else if (pos.x > first_X + width * 6 && pos.x <= first_X + width * 6 + width)
 		{
-			return COUNTER7;
+			std::cout << "COUNTER7\n";
+			return KitchenPosition::COUNTER7;
 		}
+	}
+	else if (std::sqrt((std::pow((pos.x - bell_X), 2) + (std::pow((pos.y - bell_Y), 2)))) <= bell_width / 2.0)
+	{
+		std::cout << "BELL\n";
+		return KitchenPosition::BELL;
 	}
 	else if (pos.x > cuttingBoard_X && pos.x <= cuttingBoard_X + cuttingBoard_width
 		&& pos.y > cuttingBoard_Y && pos.y < cuttingBoard_Y + cuttingBoard_height)
 	{
-		return CUTTING_BOARD;
+		std::cout << "CUTTING_BOARD\n";
+		return KitchenPosition::CUTTING_BOARD;
 	}
-	else if (std::sqrt((std::pow((pos.x - bowl_X), 2) + (std::pow((pos.y - bowl_Y), 2)))) <= bowl_width)
+	else if (std::sqrt((std::pow((pos.x - bowl_X), 2) + (std::pow((pos.y - bowl_Y), 2)))) <= bowl_width/2.0)
 	{
-		return BOWL;
+		std::cout << "BOWL\n";
+		return KitchenPosition::BOWL;
 	}
-	else if (std::sqrt((std::pow((pos.x - stove_X), 2) + (std::pow((pos.y - stove_Y), 2)))) <= stove_width)
+	else if (pos.x > stove_X && pos.x <= stove_X + stove_width
+		&& pos.y > stove_Y && pos.y < stove_Y + stove_height)
 	{
-		return STOVE;
+		std::cout << "STOVE\n";
+		return KitchenPosition::STOVE;
 	}
-	else if (pos.x > trashCan_X && pos.x <= trashCan_X + trashCan_width
-		&& pos.y > trashCan_Y && pos.y < trashCan_Y + trashCan_height)
-	{
-		return TRASH_CAN;
-	}
-
-	return ELSE;
+	std::cout << "ELSE\n";
+	doodle::pop_settings();
+	return KitchenPosition::ELSE;
 }
 
 void Cook::SetIngredientsWhere()
@@ -160,32 +187,27 @@ void Cook::WriteCuttingNum()
 	{
 		for (int i = 0; i < using_ingredients.size(); ++i)
 		{
-			if (using_ingredients[i]->where != CUTTING_BOARD)
+			if (using_ingredients[i]->where == KitchenPosition::CUTTING_BOARD)
 			{
-				cuttingBoardIndex = -1;
+				doodle::push_settings();
+				doodle::set_frame_of_reference(doodle::FrameOfReference::RightHanded_OriginBottomLeft);
+				doodle::set_font_size(width/10.0);
+				if (using_ingredients[i]->cuttingNum > 0)
+				{
+					doodle::draw_text("Cut\n" + std::to_string(using_ingredients[i]->cuttingNum) + " / 5",
+						using_ingredients[i]->position.x - using_ingredients[i]->spriteHalfWidth / 2.0,
+						using_ingredients[i]->position.y);
+				}
+				else
+				{
+					doodle::draw_text("Done", 
+						using_ingredients[i]->position.x - using_ingredients[i]->spriteHalfWidth / 2.0,
+						using_ingredients[i]->position.y);
+				}
+				
+				doodle::pop_settings();
 			}
-			else if (using_ingredients[i]->where == CUTTING_BOARD)
-			{
-				cuttingBoardIndex = i;
-				break;
-			}
 		}
-	}
-	if (cuttingBoardIndex != -1)
-	{
-		if (using_ingredients[cuttingBoardIndex]->cuttingNum > 0)
-		{
-			doodle::draw_text("Cut : " + std::to_string(using_ingredients[cuttingBoardIndex]->cuttingNum), cuttingBoard_X + 20, cuttingBoard_Y + 20);
-		}
-		else
-		{
-			doodle::draw_text("Done. Move ingredient", cuttingBoard_X + 20, cuttingBoard_Y + 20);
-		}
-
-	}
-	else
-	{
-		doodle::draw_text("Put Ingredient", cuttingBoard_X + 20, cuttingBoard_Y + 20);
 	}
 }
 
@@ -195,9 +217,12 @@ void Cook::Cutting()
 	{
 		for (int i = 0; i < using_ingredients.size(); ++i)
 		{
-			if (using_ingredients[i]->IsMouseOn(WhereISMouse()) == true && isMouseClick == true && GetWhere(WhereISMouse()) == CUTTING_BOARD)
+			if (using_ingredients[i]->IsMouseOn(WhereISMouse()) == true && isMouseClick == true && GetWhere(WhereISMouse()) == KitchenPosition::CUTTING_BOARD)
 			{
-				--using_ingredients[i]->cuttingNum;
+				if (using_ingredients[i]->cuttingNum > 0)
+				{
+					--using_ingredients[i]->cuttingNum;
+				}
 				isMouseClick = false;
 			}
 		}
@@ -208,13 +233,12 @@ void on_key_pressed(doodle::KeyboardButtons button)
 {
 	if (button == doodle::KeyboardButtons::Z)
 	{
-		Cook::whatTool = KNIFE;
+		Cook::whatTool = Tool::KNIFE;
 	}
 	if (button == doodle::KeyboardButtons::X)
 	{
-		Cook::whatTool = HAND;
+		Cook::whatTool = Tool::HAND;
 	}
-	std::cout << Cook::whatTool << '\n';
 }
 
 void Cook::CreateUsingIngredient()
@@ -225,12 +249,18 @@ void Cook::CreateUsingIngredient()
 		{
 			for (int i = 0; i < seven_ingredients.size(); ++i)
 			{
-				if (seven_ingredients[i]->where == GetWhere(WhereISMouse()) && whatMouseclickIndex == -1)
+				if (seven_ingredients[i].size() != 0)
 				{
-					using_ingredients.push_back(seven_ingredients[i]);
-					seven_ingredients.erase(seven_ingredients.begin() + i);
-					whatMouseclickIndex = using_ingredients.size() - 1;
-					isMouseClick = false;
+					for (int j = 0; j < seven_ingredients[i].size(); ++j)
+					{
+						if (seven_ingredients[i][j]->where == GetWhere(WhereISMouse()) && whatMouseclickIndex == -1)
+						{
+							using_ingredients.push_back(seven_ingredients[i][j]);
+							seven_ingredients[i].erase(seven_ingredients[i].begin() + j);
+							whatMouseclickIndex = using_ingredients.size() - 1;
+							isMouseClick = false;
+						}
+					}
 				}
 			}
 		}
@@ -272,6 +302,7 @@ void on_mouse_pressed(doodle::MouseButtons button)
 	if (button == doodle::MouseButtons::Left && Cook::isMouseClick == false)
 	{
 		Cook::isMouseClick = true;
+		
 	}
 }
 
@@ -283,7 +314,6 @@ void on_mouse_released(doodle::MouseButtons button)
 	}
 }
 
-
 void Cook::FollowMouseIngredient()
 {
 	if (using_ingredients.size() != 0 && WhatIndexMouseClick() != -1)
@@ -292,9 +322,177 @@ void Cook::FollowMouseIngredient()
 	}
 }
 
-
-
-double Cook::GetPercentOfComplete()
+void Cook::DrawToolName()
 {
-	return 100.0;
+	doodle::push_settings();
+	doodle::set_frame_of_reference(doodle::FrameOfReference::RightHanded_OriginBottomLeft);
+	doodle::set_font_size(width / 6.0);
+	doodle::set_fill_color(doodle::Color(0, 0, 0));
+	if (whatTool == Tool::HAND)
+	{
+		doodle::draw_text("Tool : Hand", first_X, first_Y - height / 2.0);
+	}
+	else if(whatTool == Tool::KNIFE)
+	{
+		doodle::draw_text("Tool : Knife", first_X, first_Y - height / 2.0);
+	}
+	doodle::pop_settings();
+}
+
+void Cook::ChangeIngredientSize() 
+{
+	if (seven_ingredients.size() != 0)
+	{
+		for (int i = 0; i < seven_ingredients.size(); ++i)
+		{
+			if (seven_ingredients[i].size() != 0)
+			{
+				for (int j = 0; j < seven_ingredients[i].size(); ++j)
+				{
+					seven_ingredients[i][j] -> position = Math::vec2{ first_X + (width * i) + (width / 2.0) , first_Y + height / 2.0 };
+					seven_ingredients[i][j]-> spriteHalfWidth = width / 4.0;
+				}
+			}
+		}
+	}
+
+	if (using_ingredients.size() != 0)
+	{
+		for (int i = 0; i < using_ingredients.size(); ++i)
+		{
+			//이거 position을 어떻게 바꿔야할지 모르겠음.;
+			using_ingredients[i]->spriteHalfWidth = width / 4.0;
+		}
+	}
+}
+
+void Cook::PutBowl()
+{
+	if (using_ingredients.size() != 0)
+	{
+		if (isMouseClick == true)
+		{
+			for (int i = 0; i < using_ingredients.size(); ++i)
+			{
+				if (using_ingredients[i]->where == KitchenPosition::BOWL)
+				{
+					inBowl.push_back(using_ingredients[i]);
+					using_ingredients.erase(using_ingredients.begin() + i);
+					whatMouseclickIndex = -1;
+					break;
+				}
+			}
+		}
+	}
+}
+
+void Cook::Salad() // 점수 계산을 손봐야함.
+{
+	int needdLettuceNum = 3; // 필요한 상추 갯수
+	int nowLettuceNum = 0; // 만족하는 상추 갯수
+	int lettuceCutNum = 0; // 샐러드 만들 때 상추가 칼질되고 남아 있어야 하는 횟수.
+
+	int needSuaceNum = 2; //필요한 소스 갯수
+	int nowSuaceNum = 0; //만족하는 소스 갯수
+	int sauceCutNum = 0; // 샐러드 만들 때 소스가 칼질되고 남아 있어야 하는 횟수.
+
+	int point = 0;
+
+	if (inBowl.size() != 0)
+	{
+		for (int i = 0; i < inBowl.size(); ++i)
+		{
+			if (inBowl[i]->name == IngredientName::Lettuce)
+			{
+				if (inBowl[i]->cuttingNum == lettuceCutNum)
+				{
+					nowLettuceNum += 1;
+					point += 20;
+				}
+				else
+				{
+					point += 15;
+				}
+			}
+			else if (inBowl[i]->name == IngredientName::Sauce)
+			{
+				if (inBowl[i]->cuttingNum == sauceCutNum)
+				{
+					nowSuaceNum += 1;
+					point += 20;
+				}
+				else
+				{
+					point += 15;
+				}
+			}
+		}
+
+		if (nowLettuceNum == needdLettuceNum && nowSuaceNum == needSuaceNum)
+		{
+			point = 100;
+		}
+		else if (nowLettuceNum != needdLettuceNum && nowSuaceNum != needSuaceNum)
+		{
+			point -= 10;
+		}
+		else
+		{
+			point -= 10;
+		}
+	}
+	completePoint = point;
+}
+
+void Cook::Draw_CompletePoint()
+{
+	doodle::push_settings();
+
+	doodle::set_frame_of_reference(doodle::FrameOfReference::RightHanded_OriginBottomLeft);
+	doodle::set_font_size(width/6.0);
+	doodle::set_fill_color(doodle::Color(0, 0, 0));
+	doodle::draw_text("Complete : " + std::to_string(completePoint) + "%", first_X, first_Y + width);
+
+	doodle::pop_settings();
+}
+
+int Cook::GetPercentOfComplete()
+{
+	return completePoint;
+}
+
+void Cook::PutBell()
+{
+	if (GetWhere(WhereISMouse()) == KitchenPosition::BELL && isMouseClick == true)
+	{
+		*state = State::Counter;
+	}
+}
+
+void Cook::DrawStoveText()
+{
+	if (GetWhere(WhereISMouse()) == KitchenPosition::STOVE)
+	{
+		doodle::push_settings();
+
+		const auto oscillate = [](double t) { return (std::sin(t) * 0.5 + 0.5); };
+		doodle::set_outline_color(doodle::HexColor{ 0xFF7171FF });
+		const double inside_distance = 0.4 + 0.3 * oscillate(doodle::ElapsedTime);
+		const double completely_outside_distance = inside_distance + (1 - inside_distance) * oscillate(doodle::ElapsedTime * 2);
+		doodle::set_font_backdrop_fade_out_interval(inside_distance, completely_outside_distance);
+		doodle::set_font_size(stove_width / 7.0);
+		doodle::draw_text("Coming\nsoon", stove_X + stove_width / 7.0, stove_Y + stove_height / 2.0);
+
+		doodle::pop_settings();
+	}
+	else
+	{
+		doodle::push_settings();
+
+		doodle::set_outline_color(doodle::HexColor{ 0xFF7171FF });
+		doodle::set_font_size(stove_width / 7.0);
+		doodle::draw_text("Burner", stove_X + stove_width / 5.0, stove_Y + stove_height / 3.0);
+
+		doodle::pop_settings();
+	}
 }

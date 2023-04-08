@@ -3,6 +3,7 @@
 //Draw
 void Button::draw(const int mouse_x, const int mouse_y)
 {
+
 	doodle::push_settings();
 	
 	//mouse on button
@@ -48,6 +49,7 @@ void Button::draw(const int mouse_x, const int mouse_y , std::string text)
 
 void Button::check_click(const int mouse_x, const int mouse_y, State next_state)
 {
+
 	if ((mouse_x > x && mouse_x < x + width) && (mouse_y > y && mouse_y < y + height))
 	{
 		if (doodle::MouseIsPressed == true)
@@ -65,11 +67,13 @@ void Button::check_click(const int mouse_x, const int mouse_y, State next_state)
 		checkMouse = false;
 		*current_state = next_state;
 	}
+
 }
 
 
 void Button::update(const int mouse_x, const int mouse_y, State next_state)
 {
+
 	draw(mouse_x, mouse_y);
 	check_click(mouse_x, mouse_y, next_state);
 }

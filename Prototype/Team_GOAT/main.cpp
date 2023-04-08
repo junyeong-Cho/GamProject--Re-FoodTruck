@@ -3,16 +3,18 @@
 #include "Button.h"
 #include "State.h"
 #include <chrono>
+#include "Cook.h"
+#include "Kitchen.h"
 
-//°¡ÆÇ´ë
+//ê°€íŒëŒ€
 void draw_stand();
-//µ·, ¸í¿¹, ½Ã°£ °ü·ÃµÈ UIÀ§Ä¡
+//ëˆ, ëª…ì˜ˆ, ì‹œê°„ ê´€ë ¨ëœ UIìœ„ì¹˜
 void draw_UI();
-//¼Õ´Ô µÚ¿¡ ³ª¿Ã ¹è°æ Å©±â, À§Ä¡
+//ì†ë‹˜ ë’¤ì— ë‚˜ì˜¬ ë°°ê²½ í¬ê¸°, ìœ„ì¹˜
 void draw_background();
-//¼Õ´Ô ÀÌ¹ÌÁö À§Ä¡³ª ¼Õ´Ô °ü·Ã È¿°ú
+//ì†ë‹˜ ì´ë¯¸ì§€ ìœ„ì¹˜ë‚˜ ì†ë‹˜ ê´€ë ¨ íš¨ê³¼
 void draw_customer(doodle::Image guest_image);
-//¼Õ´Ô ÁÖ¹® ÅØ½ºÆ®
+//ì†ë‹˜ ì£¼ë¬¸ í…ìŠ¤íŠ¸
 void draw_text(std::string text);
 
 
@@ -67,7 +69,7 @@ void sm_Updatd()
             doodle::set_fill_color(0, 88);
             doodle::draw_rectangle(100, 100, 1200, 500);
 
-            //customer's satisfaction - ÃßÈÄ Ãß°¡ ¿¹Á¤
+            //customer's satisfaction - ì¶”í›„ ì¶”ê°€ ì˜ˆì •
             doodle::draw_rectangle(100, 600, 400, 100);
             doodle::draw_text(" 0 % / o x o", 100, 600);
             doodle::pop_settings();
@@ -81,6 +83,44 @@ void sm_Updatd()
             doodle::draw_text(" RE \n Try?", 100, 350);
             doodle::pop_settings();
             game_over_button.update(doodle::get_mouse_x(), doodle::get_mouse_y(), State::Counter);
+            break;
+
+        }
+    }
+}
+
+extern State* state = new State{ State::Kitchen };
+void ys_Update()
+{
+    Kitchen kitchen{};
+
+    while (!doodle::is_window_closed())
+    {
+        doodle::update_window();
+        doodle::clear_background(255, 255, 255);
+
+        double Width_raito = doodle::Width / 1400.0; // 7
+        double Height_raito = doodle::Height / 800.0; //  4
+
+        switch (*state)
+        {
+        case State::Main:
+
+            break;
+
+        case State::Counter:
+            doodle::push_settings();
+            doodle::set_frame_of_reference(doodle::FrameOfReference::RightHanded_OriginBottomLeft);
+            doodle::set_outline_color(doodle::HexColor{ 0xFF7171FF });
+            doodle::set_fill_color(doodle::HexColor{ 0xEBE3C0FF });
+            doodle::draw_text("Counter", Width_raito * 700, Width_raito * 400);
+            doodle::pop_settings();
+            break;
+
+        case State::Kitchen:
+            
+            kitchen.Update(Width_raito, Height_raito);
+
             break;
 
         }
@@ -133,13 +173,13 @@ void draw_customer(doodle::Image guest_image)
 void draw_UI()
 {
 
-    //½Ã°£
+    //ì‹œê°„
     doodle::draw_rectangle(doodle::Width / 12.0, doodle::Height / 8.0 * 7.3, doodle::Width * 0.10, doodle::Height * 0.07 );
-    //¸í¼º
+    //ëª…ì„±
     doodle::draw_rectangle(doodle::Width / 5.0, doodle::Height / 8.0 * 7.3, doodle::Width * 0.15, doodle::Height * 0.07);
-    //µ·
+    //ëˆ
     doodle::draw_rectangle(doodle::Width / 2.75, doodle::Height / 8.0 * 7.3, doodle::Width * 0.10, doodle::Height * 0.07);
-    //¹Û¿¡ ¼Õ´Ô È®ÀÎ¿ë
+    //ë°–ì— ì†ë‹˜ í™•ì¸ìš©
     doodle::draw_rectangle(doodle::Width * 4.0 / 5.0, doodle::Height / 8.0 * 5.0, doodle::Width * 0.15, doodle::Height * 0.35);
 }
 
@@ -159,4 +199,3 @@ void draw_text(std::string text)
     doodle::draw_text(text, doodle::Width / 4.0 + doodle::Width / 30.0, doodle::Height / 2.0 + doodle::Height / 10.0);
     doodle::pop_settings();
 }
-

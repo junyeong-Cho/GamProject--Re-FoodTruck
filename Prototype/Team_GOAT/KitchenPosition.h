@@ -1,5 +1,5 @@
 #pragma once
-enum KitchenPosition
+enum class KitchenPosition
 {
 	COUNTER1,
 	COUNTER2,
@@ -12,5 +12,6 @@ enum KitchenPosition
 	BOWL,
 	STOVE,
 	TRASH_CAN,
+	BELL,
 	ELSE
 };
