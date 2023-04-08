@@ -142,11 +142,11 @@ KitchenPosition Cook::GetWhere(Math::vec2 pos)
 			std::cout << "COUNTER7\n";
 			return KitchenPosition::COUNTER7;
 		}
-	}
-	else if (std::sqrt((std::pow((pos.x - bell_X), 2) + (std::pow((pos.y - bell_Y), 2)))) <= bell_width / 2.0)
-	{
-		std::cout << "BELL\n";
-		return KitchenPosition::BELL;
+		else if (std::sqrt((std::pow((pos.x - bell_X), 2) + (std::pow((pos.y - bell_Y), 2)))) <= bell_width / 2.0)
+		{
+			std::cout << "BELL\n";
+			return KitchenPosition::BELL;
+		}
 	}
 	else if (pos.x > cuttingBoard_X && pos.x <= cuttingBoard_X + cuttingBoard_width
 		&& pos.y > cuttingBoard_Y && pos.y < cuttingBoard_Y + cuttingBoard_height)
@@ -465,7 +465,7 @@ void Cook::PutBell()
 {
 	if (GetWhere(WhereISMouse()) == KitchenPosition::BELL && isMouseClick == true)
 	{
-		*state = State::Counter;
+		*state = State::Evaluation_screen;
 	}
 }
 

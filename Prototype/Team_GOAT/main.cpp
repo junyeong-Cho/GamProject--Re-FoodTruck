@@ -17,17 +17,17 @@ void draw_customer(doodle::Image guest_image);
 //손님 주문 텍스트
 void draw_text(std::string text);
 
-
+extern State* state = new State{ State::Main };
 void sm_Updatd()
 {
-    State state = State::Main;
+    //State state = State::Main;
     const doodle::Image guest_image("giraffe.png");
-    Button main_button(600, 300, 200, 300, state);
-    Button yes(doodle::Width / 3.0, doodle::Height / 3.0, doodle::Width / 10.0, doodle::Height / 10.0, state);
-    Button no(doodle::Width / 2, doodle::Height / 3.0, doodle::Width / 10.0, doodle::Height / 10.0, state);
+    Button main_button(600, 300, 200, 300, *state);
+    Button yes(doodle::Width / 3.0, doodle::Height / 3.0, doodle::Width / 10.0, doodle::Height / 10.0, *state);
+    Button no(doodle::Width / 2, doodle::Height / 3.0, doodle::Width / 10.0, doodle::Height / 10.0, *state);
     const std::string giraffe_text= "People without faith will go to hell.";
-    Button counter_button(1250, 700, 50, 50, state);
-    Button game_over_button(800, 500, 100, 100, state);
+    Button counter_button(1250, 700, 50, 50, *state);
+    Button game_over_button(800, 500, 100, 100, *state);
     
     Kitchen kitchen{};
     double Width_raito = doodle::Width / 1400.0; // 7
@@ -37,7 +37,7 @@ void sm_Updatd()
     {
         doodle::update_window();
 
-        switch (state)
+        switch (*state)
         {
         case State::Main:
             doodle::clear_background(255, 255, 255);
@@ -75,10 +75,22 @@ void sm_Updatd()
 
             //customer's satisfaction - 추후 추가 예정
             doodle::draw_rectangle(100, 600, 400, 100);
-            doodle::draw_text(" 0 % / o x o", 100, 600);
+            //Cook::GetPercentOfComplete() 
+            doodle::draw_text(" " + std::to_string(kitchen.cook.GetPercentOfComplete()) + " % / o x o", 100, 600);
             doodle::pop_settings();
 
-            counter_button.update(doodle::get_mouse_x(), doodle::get_mouse_y(), State::Game_over);
+            if (kitchen.cook.GetPercentOfComplete() > 100)
+            {
+                //클리어 화면으로 가기
+                counter_button.update(doodle::get_mouse_x(), doodle::get_mouse_y(), State::Counter);
+
+            }
+            else
+            {
+                counter_button.update(doodle::get_mouse_x(), doodle::get_mouse_y(), State::Game_over);
+
+            }
+
             break;
         case State::Game_over:
             doodle::clear_background(255, 255, 255);
@@ -93,7 +105,6 @@ void sm_Updatd()
     }
 }
 
-extern State* state = new State{ State::Kitchen };
 void ys_Update()
 {
     Kitchen kitchen{};
