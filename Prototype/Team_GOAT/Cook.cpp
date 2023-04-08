@@ -103,6 +103,8 @@ Math::vec2 Cook::WhereISMouse()
 
 KitchenPosition Cook::GetWhere(Math::vec2 pos)
 {
+	doodle::push_settings();
+	doodle::set_frame_of_reference(doodle::FrameOfReference::RightHanded_OriginBottomLeft);
 	if (pos.y > first_Y && pos.y < first_Y + height)
 	{
 		if (pos.x > first_X + width * 0 && pos.x <= first_X + width * 0 + width)
@@ -164,6 +166,7 @@ KitchenPosition Cook::GetWhere(Math::vec2 pos)
 		return KitchenPosition::STOVE;
 	}
 	std::cout << "ELSE\n";
+	doodle::pop_settings();
 	return KitchenPosition::ELSE;
 }
 
