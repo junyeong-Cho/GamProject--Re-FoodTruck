@@ -28,6 +28,10 @@ void sm_Updatd()
     const std::string giraffe_text= "People without faith will go to hell.";
     Button counter_button(1250, 700, 50, 50, state);
     Button game_over_button(800, 500, 100, 100, state);
+    
+    Kitchen kitchen{};
+    double Width_raito = doodle::Width / 1400.0; // 7
+    double Height_raito = doodle::Height / 800.0; //  4
 
     while (!doodle::is_window_closed())
     {
@@ -59,7 +63,7 @@ void sm_Updatd()
             break;
         case State::Kitchen:
             doodle::clear_background(0, 255, 0);
-
+            kitchen.Update(Width_raito, Height_raito);
             break;
         case State::Evaluation_screen:
             doodle::clear_background(255, 255, 255);
