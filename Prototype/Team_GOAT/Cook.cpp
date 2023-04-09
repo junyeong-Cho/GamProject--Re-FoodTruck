@@ -15,20 +15,20 @@ extern State* state;
 
 Cook::Cook()
 {
-	Lettuce* lettuce1 = new Lettuce(KitchenPosition::COUNTER1, Math::vec2{ first_X, first_Y }, IngredientName::Lettuce);
+	/*Lettuce* lettuce1 = new Lettuce(KitchenPosition::COUNTER1, Math::vec2{ first_X, first_Y }, IngredientName::Lettuce);
 	Lettuce* lettuce2 = new Lettuce(KitchenPosition::COUNTER1, Math::vec2{ first_X, first_Y }, IngredientName::Lettuce);
 	Lettuce* lettuce3 = new Lettuce(KitchenPosition::COUNTER1, Math::vec2{ first_X, first_Y }, IngredientName::Lettuce);
 	
 	Sauce* sauce1 = new Sauce(KitchenPosition::COUNTER2, Math::vec2{ first_X + width, first_Y }, IngredientName::Sauce);
 	Sauce* sauce2 = new Sauce(KitchenPosition::COUNTER2, Math::vec2{ first_X + width, first_Y }, IngredientName::Sauce);
-	Sauce* sauce3 = new Sauce(KitchenPosition::COUNTER2, Math::vec2{ first_X + width, first_Y }, IngredientName::Sauce);
+	Sauce* sauce3 = new Sauce(KitchenPosition::COUNTER2, Math::vec2{ first_X + width, first_Y }, IngredientName::Sauce);*/
 
 	for (int i = 0; i < ingredient_number; ++i)
 	{
 		seven_ingredients.push_back(std::vector<Ingredient*>());
 	}
 	
-	if (seven_ingredients.size() != 0)
+	/*if (seven_ingredients.size() == ingredient_number)
 	{
 		seven_ingredients[0].push_back(lettuce1);
 		seven_ingredients[0].push_back(lettuce2);
@@ -37,7 +37,7 @@ Cook::Cook()
 		seven_ingredients[1].push_back(sauce1);
 		seven_ingredients[1].push_back(sauce2);
 		seven_ingredients[1].push_back(sauce3);
-	}
+	}*/
 }
 
 void Cook::Update()
@@ -109,63 +109,51 @@ KitchenPosition Cook::GetWhere(Math::vec2 pos)
 	{
 		if (pos.x > first_X + width * 0 && pos.x <= first_X + width * 0 + width)
 		{
-			std::cout << "COUNTER1\n";
 			return KitchenPosition::COUNTER1;
 		}
 		else if (pos.x > first_X + width * 1 && pos.x <= first_X + width * 1 + width)
 		{
-			std::cout << "COUNTER2\n";
 			return KitchenPosition::COUNTER2;
 		}
 		else if (pos.x > first_X + width * 2 && pos.x <= first_X + width * 2 + width)
 		{
-			std::cout << "COUNTER3\n";
 			return KitchenPosition::COUNTER3;
 		}
 		else if (pos.x > first_X + width * 3 && pos.x <= first_X + width * 3 + width)
 		{
-			std::cout << "COUNTER4\n";
 			return KitchenPosition::COUNTER4;
 		}
 		else if (pos.x > first_X + width * 4 && pos.x <= first_X + width * 4 + width)
 		{
-			std::cout << "COUNTER5\n";
 			return KitchenPosition::COUNTER5;
 		}
 		else if (pos.x > first_X + width * 5 && pos.x <= first_X + width * 5 + width)
 		{
-			std::cout << "COUNTER6\n";
 			return KitchenPosition::COUNTER6;
 		}
 		else if (pos.x > first_X + width * 6 && pos.x <= first_X + width * 6 + width)
 		{
-			std::cout << "COUNTER7\n";
 			return KitchenPosition::COUNTER7;
 		}
 		else if (std::sqrt((std::pow((pos.x - bell_X), 2) + (std::pow((pos.y - bell_Y), 2)))) <= bell_width / 2.0)
 		{
-			std::cout << "BELL\n";
 			return KitchenPosition::BELL;
 		}
 	}
 	else if (pos.x > cuttingBoard_X && pos.x <= cuttingBoard_X + cuttingBoard_width
 		&& pos.y > cuttingBoard_Y && pos.y < cuttingBoard_Y + cuttingBoard_height)
 	{
-		std::cout << "CUTTING_BOARD\n";
 		return KitchenPosition::CUTTING_BOARD;
 	}
 	else if (std::sqrt((std::pow((pos.x - bowl_X), 2) + (std::pow((pos.y - bowl_Y), 2)))) <= bowl_width/2.0)
 	{
-		std::cout << "BOWL\n";
 		return KitchenPosition::BOWL;
 	}
 	else if (pos.x > stove_X && pos.x <= stove_X + stove_width
 		&& pos.y > stove_Y && pos.y < stove_Y + stove_height)
 	{
-		std::cout << "STOVE\n";
 		return KitchenPosition::STOVE;
 	}
-	std::cout << "ELSE\n";
 	doodle::pop_settings();
 	return KitchenPosition::ELSE;
 }
@@ -466,6 +454,7 @@ void Cook::PutBell()
 	if (GetWhere(WhereISMouse()) == KitchenPosition::BELL && isMouseClick == true)
 	{
 		*state = State::Evaluation_screen;
+		Unload();
 	}
 }
 
@@ -494,5 +483,53 @@ void Cook::DrawStoveText()
 		doodle::draw_text("Burner", stove_X + stove_width / 5.0, stove_Y + stove_height / 3.0);
 
 		doodle::pop_settings();
+	}
+}
+
+void Cook::Unload()
+{
+	if (seven_ingredients.size() != 0)
+	{
+		for (int i = 0; i < seven_ingredients.size(); ++i)
+		{
+			for (int j = 0; j < seven_ingredients[i].size(); ++j)
+			{
+				delete seven_ingredients[i][j];
+				seven_ingredients[i].clear();
+			}
+		}
+	}
+
+	if (using_ingredients.size() != 0)
+	{
+		for (int i = 0; i < using_ingredients.size(); ++i)
+		{
+			delete using_ingredients[i];
+			using_ingredients.clear();
+		}
+	}
+}
+
+void Cook::Load()
+{
+	isMouseClick = false;
+	whatTool = Tool::HAND;
+	Lettuce* lettuce1 = new Lettuce(KitchenPosition::COUNTER1, Math::vec2{ first_X, first_Y }, IngredientName::Lettuce);
+	Lettuce* lettuce2 = new Lettuce(KitchenPosition::COUNTER1, Math::vec2{ first_X, first_Y }, IngredientName::Lettuce);
+	Lettuce* lettuce3 = new Lettuce(KitchenPosition::COUNTER1, Math::vec2{ first_X, first_Y }, IngredientName::Lettuce);
+
+	Sauce* sauce1 = new Sauce(KitchenPosition::COUNTER2, Math::vec2{ first_X + width, first_Y }, IngredientName::Sauce);
+	Sauce* sauce2 = new Sauce(KitchenPosition::COUNTER2, Math::vec2{ first_X + width, first_Y }, IngredientName::Sauce);
+	Sauce* sauce3 = new Sauce(KitchenPosition::COUNTER2, Math::vec2{ first_X + width, first_Y }, IngredientName::Sauce);
+	
+	if (seven_ingredients.size() == ingredient_number)
+	{
+		seven_ingredients[0].push_back(lettuce1);
+		seven_ingredients[0].push_back(lettuce2);
+		seven_ingredients[0].push_back(lettuce3);
+
+		seven_ingredients[1].push_back(sauce1);
+		seven_ingredients[1].push_back(sauce2);
+		seven_ingredients[1].push_back(sauce3);
 	}
 }

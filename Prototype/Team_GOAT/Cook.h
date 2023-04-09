@@ -30,6 +30,8 @@ public:
 	void Draw_CompletePoint();
 	void PutBell();
 	void DrawStoveText();
+	void Unload();
+	void Load();
 
 	void Update();
 

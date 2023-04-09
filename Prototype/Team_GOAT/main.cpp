@@ -16,6 +16,10 @@ void draw_background();
 void draw_customer(doodle::Image guest_image);
 //손님 주문 텍스트
 void draw_text(std::string text);
+//요리 다 하고 100퍼 넘었을 때 카운터에서 보여주는 요리
+void draw_Salad();
+//엔딩멘트로 계속 지켜봐달라고 적을 text
+void draw_ending_word();
 
 extern State* state = new State{ State::Main };
 void sm_Updatd()
@@ -28,6 +32,8 @@ void sm_Updatd()
     const std::string giraffe_text= "People without faith will go to hell.";
     Button counter_button(1250, 700, 50, 50, *state);
     Button game_over_button(800, 500, 100, 100, *state);
+    Button ending_word_button(doodle::Width / 3.0, doodle::Height / 3.0, doodle::Width / 10.0, doodle::Height / 10.0, *state);
+    Button back_main_buton(doodle::Width / 2, doodle::Height / 3.0, doodle::Width / 10.0, doodle::Height / 10.0, *state);
     
     Kitchen kitchen{};
     double Width_raito = doodle::Width / 1400.0; // 7
@@ -59,6 +65,10 @@ void sm_Updatd()
             yes.update(doodle::get_mouse_x(), doodle::get_mouse_y(), State::Kitchen, "Yes!");
             no.update(doodle::get_mouse_x(), doodle::get_mouse_y(), State::Evaluation_screen, "NO!");
             doodle::pop_settings();
+            if (*state == State::Kitchen)
+            {
+                kitchen.cook.Load();
+            }
 
             break;
         case State::Kitchen:
@@ -79,10 +89,10 @@ void sm_Updatd()
             doodle::draw_text(" " + std::to_string(kitchen.cook.GetPercentOfComplete()) + " % / o x o", 100, 600);
             doodle::pop_settings();
 
-            if (kitchen.cook.GetPercentOfComplete() > 100)
+            if (kitchen.cook.GetPercentOfComplete() >= 100)
             {
                 //클리어 화면으로 가기
-                counter_button.update(doodle::get_mouse_x(), doodle::get_mouse_y(), State::Counter);
+                counter_button.update(doodle::get_mouse_x(), doodle::get_mouse_y(), State::Clear);
 
             }
             else
@@ -99,6 +109,22 @@ void sm_Updatd()
             doodle::draw_text(" RE \n Try?", 100, 350);
             doodle::pop_settings();
             game_over_button.update(doodle::get_mouse_x(), doodle::get_mouse_y(), State::Counter);
+            break;
+        case State::Clear:
+            doodle::clear_background(255, 255, 255, 200);
+            draw_background();
+            doodle::set_frame_of_reference(doodle::FrameOfReference::RightHanded_OriginBottomLeft);
+            doodle::draw_image(guest_image, doodle::Width / 10.5, doodle::Height / 4.0, doodle::Width / 6.0, doodle::Height / 7.0 * 4.4);
+            draw_stand();
+            draw_UI();
+            draw_Salad();
+            ending_word_button.update(doodle::get_mouse_x(), doodle::get_mouse_y(), State::Ending_word);
+            break;
+        case State::Ending_word:
+            doodle::clear_background(255, 255, 255, 200);
+            doodle::set_frame_of_reference(doodle::FrameOfReference::RightHanded_OriginBottomLeft);
+            draw_ending_word();
+            back_main_buton.update(doodle::get_mouse_x(), doodle::get_mouse_y(), State::Main);
             break;
 
         }
@@ -212,5 +238,25 @@ void draw_text(std::string text)
     doodle::set_font_size(doodle::Width / 60.0);
     doodle::set_fill_color(0, 0, 0);
     doodle::draw_text(text, doodle::Width / 4.0 + doodle::Width / 30.0, doodle::Height / 2.0 + doodle::Height / 10.0);
+    doodle::pop_settings();
+}
+
+void draw_Salad()
+{
+    doodle::push_settings();
+    doodle::set_frame_of_reference(doodle::FrameOfReference::RightHanded_OriginBottomLeft);
+    doodle::set_fill_color(255, 255, 255);
+    doodle::draw_ellipse(doodle::Width / 2.0, doodle::Height / 7.0, doodle::Width / 5.0, doodle::Height / 7.0);
+    doodle::pop_settings();
+}
+
+void draw_ending_word()
+{
+    doodle::push_settings();
+    doodle::set_frame_of_reference(doodle::FrameOfReference::RightHanded_OriginBottomLeft);
+    doodle::set_font_fade_out_interval(0.5, 0.0);
+    doodle::set_font_size(doodle::Width / 60.0);
+    doodle::set_fill_color(0, 0, 0);
+    doodle::draw_text("Thank you.\nPlease look forward to it.\n- Team G.O.A.T", doodle::Width / 4.0 + doodle::Width / 30.0, doodle::Height / 2.0 + doodle::Height / 10.0);
     doodle::pop_settings();
 }

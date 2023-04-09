@@ -6,5 +6,7 @@ enum class State
     Counter,
     Kitchen,
     Evaluation_screen,
-    Game_over
+    Game_over,
+    Clear,
+    Ending_word
 };
