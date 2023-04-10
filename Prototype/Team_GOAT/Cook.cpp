@@ -66,6 +66,7 @@ void Cook::Update()
 		Cutting();
 	}
 	Draw_CompletePoint();
+
 	
 	doodle::pop_settings();
 }
@@ -430,6 +431,7 @@ void Cook::Salad() // 점수 계산을 손봐야함.
 		}
 	}
 	completePoint = point;
+	
 }
 
 void Cook::Draw_CompletePoint()
@@ -488,6 +490,7 @@ void Cook::DrawStoveText()
 
 void Cook::Unload()
 {
+	completePoint = 0;
 	if (seven_ingredients.size() != 0)
 	{
 		for (int i = 0; i < seven_ingredients.size(); ++i)
@@ -508,6 +511,16 @@ void Cook::Unload()
 			using_ingredients.clear();
 		}
 	}
+
+	if (inBowl.size() != 0)
+	{
+		for (int i = 0; i < inBowl.size(); ++i)
+		{
+			delete inBowl[i];
+			inBowl.clear();
+		}
+	}
+	
 }
 
 void Cook::Load()
@@ -532,4 +545,6 @@ void Cook::Load()
 		seven_ingredients[1].push_back(sauce2);
 		seven_ingredients[1].push_back(sauce3);
 	}
+
+
 }

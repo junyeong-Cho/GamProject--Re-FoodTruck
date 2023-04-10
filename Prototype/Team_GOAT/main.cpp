@@ -39,6 +39,8 @@ void sm_Updatd()
     double Width_raito = doodle::Width / 1400.0; // 7
     double Height_raito = doodle::Height / 800.0; //  4
 
+    int complete_point = 0;
+
     while (!doodle::is_window_closed())
     {
         doodle::update_window();
@@ -51,7 +53,7 @@ void sm_Updatd()
             main_button.update(doodle::get_mouse_x(), doodle::get_mouse_y(), State::Counter);
             break;
         case State::Counter:
-            doodle::clear_background(255, 255, 255, 200);
+            doodle::clear_background(doodle::HexColor{ 0xEBE3C0FF });
             draw_background();
             doodle::set_frame_of_reference(doodle::FrameOfReference::RightHanded_OriginBottomLeft);
             doodle::draw_image(guest_image, doodle::Width / 10.5, doodle::Height / 4.0, doodle::Width / 6.0, doodle::Height / 7.0 * 4.4);
@@ -73,6 +75,7 @@ void sm_Updatd()
             break;
         case State::Kitchen:
             doodle::clear_background(0, 255, 0);
+            complete_point = kitchen.cook.GetPercentOfComplete();
             kitchen.Update(Width_raito, Height_raito);
             break;
         case State::Evaluation_screen:
@@ -81,37 +84,41 @@ void sm_Updatd()
 
             //speech bubble
             doodle::set_fill_color(0, 88);
-            doodle::draw_rectangle(100, 100, 1200, 500);
+            doodle::draw_rectangle(Width_raito*100, Height_raito * 100, Width_raito * 1200, Height_raito * 500);
 
-            //customer's satisfaction - 추후 추가 예정
-            doodle::draw_rectangle(100, 600, 400, 100);
-            //Cook::GetPercentOfComplete() 
-            doodle::draw_text(" " + std::to_string(kitchen.cook.GetPercentOfComplete()) + " % / o x o", 100, 600);
-            doodle::pop_settings();
+            doodle::draw_rectangle(Width_raito * 100, Height_raito * 600, Width_raito * 400, Height_raito * 100);
 
-            if (kitchen.cook.GetPercentOfComplete() >= 100)
+            if (complete_point >= 100)
             {
-                //클리어 화면으로 가기
+                doodle::draw_text(" " + std::to_string(complete_point) + " % / ^^b", Width_raito * 100, Height_raito * 600);
                 counter_button.update(doodle::get_mouse_x(), doodle::get_mouse_y(), State::Clear);
-
+                doodle::draw_text(" HAHA, Sooooooooooo delicious", Width_raito * 100, Height_raito * 500);
+            }
+            else if (complete_point == 0) // no dish
+            {
+                doodle::draw_text(" " + std::to_string(complete_point) + " % / TxT", Width_raito * 100, Height_raito * 600);
+                counter_button.update(doodle::get_mouse_x(), doodle::get_mouse_y(), State::Game_over);
+                doodle::draw_text(" I don't think that's \n how business works", Width_raito * 100, Height_raito * 500);
             }
             else
             {
+                doodle::draw_text(" " + std::to_string(complete_point) + " % / oxo", Width_raito * 100, Height_raito * 600);
                 counter_button.update(doodle::get_mouse_x(), doodle::get_mouse_y(), State::Game_over);
+                doodle::draw_text(" Oooops, This is not food.\n This is blasphemy!!", Width_raito * 100, Height_raito * 500);
 
             }
-
+            doodle::pop_settings();
             break;
         case State::Game_over:
             doodle::clear_background(255, 255, 255);
             doodle::push_settings();
             doodle::set_font_size(100.0);
-            doodle::draw_text(" RE \n Try?", 100, 350);
+            doodle::draw_text(" RE \n Try?", Width_raito * 100, Height_raito * 350);
             doodle::pop_settings();
             game_over_button.update(doodle::get_mouse_x(), doodle::get_mouse_y(), State::Counter);
             break;
         case State::Clear:
-            doodle::clear_background(255, 255, 255, 200);
+            doodle::clear_background(doodle::HexColor{ 0xEBE3C0FF });
             draw_background();
             doodle::set_frame_of_reference(doodle::FrameOfReference::RightHanded_OriginBottomLeft);
             doodle::draw_image(guest_image, doodle::Width / 10.5, doodle::Height / 4.0, doodle::Width / 6.0, doodle::Height / 7.0 * 4.4);
@@ -213,13 +220,30 @@ void draw_customer(doodle::Image guest_image)
 
 void draw_UI()
 {
-
     //시간
-    doodle::draw_rectangle(doodle::Width / 12.0, doodle::Height / 8.0 * 7.3, doodle::Width * 0.10, doodle::Height * 0.07 );
+    doodle::draw_rectangle(doodle::Width / 12.0, doodle::Height / 8.0 * 7.3, doodle::Width * 0.10, doodle::Height * 0.07);
+    doodle::push_settings();
+    doodle::set_font_fade_out_interval(0.5, 0.0);
+    doodle::set_font_size(doodle::Width / 60.0);
+    doodle::set_fill_color(0, 0, 0);
+    doodle::draw_text("Time", doodle::Width / 12.0 + doodle::Width * 0.025, doodle::Height / 8.0 * 7.3);
+    doodle::pop_settings();
     //명성
     doodle::draw_rectangle(doodle::Width / 5.0, doodle::Height / 8.0 * 7.3, doodle::Width * 0.15, doodle::Height * 0.07);
+    doodle::push_settings();
+    doodle::set_font_fade_out_interval(0.5, 0.0);
+    doodle::set_font_size(doodle::Width / 60.0);
+    doodle::set_fill_color(0, 0, 0);
+    doodle::draw_text("Rate", doodle::Width / 5.0 + doodle::Width * 0.025, doodle::Height / 8.0 * 7.3);
+    doodle::pop_settings();
     //돈
     doodle::draw_rectangle(doodle::Width / 2.75, doodle::Height / 8.0 * 7.3, doodle::Width * 0.10, doodle::Height * 0.07);
+    doodle::push_settings();
+    doodle::set_font_fade_out_interval(0.5, 0.0);
+    doodle::set_font_size(doodle::Width / 60.0);
+    doodle::set_fill_color(0, 0, 0);
+    doodle::draw_text("Money", doodle::Width / 2.75 + doodle::Width * 0.025, doodle::Height / 8.0 * 7.3);
+    doodle::pop_settings();
     //밖에 손님 확인용
     doodle::draw_rectangle(doodle::Width * 4.0 / 5.0, doodle::Height / 8.0 * 5.0, doodle::Width * 0.15, doodle::Height * 0.35);
 }
