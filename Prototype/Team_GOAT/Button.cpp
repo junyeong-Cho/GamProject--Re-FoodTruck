@@ -23,6 +23,8 @@ void Button::draw(const int mouse_x, const int mouse_y)
 	doodle::pop_settings();
 }
 
+
+
 void Button::draw(const int mouse_x, const int mouse_y , std::string text)
 {
 	doodle::push_settings();
@@ -42,7 +44,29 @@ void Button::draw(const int mouse_x, const int mouse_y , std::string text)
 	doodle::set_fill_color(255, 100, 100 , alpha);
 	doodle::draw_rectangle(x, y, width, height);
 	doodle::set_fill_color(0,alpha);
+	doodle::set_font_size(width / 7.0);
 	doodle::draw_text(text,x + width/3, y + height/4);
+	doodle::pop_settings();
+}
+
+void Button::text_draw(const int mouse_x, const int mouse_y, std::string text)
+{
+	doodle::push_settings();
+
+	//mouse on button
+	if ((mouse_x > x && mouse_x < x + width) && (mouse_y > y && mouse_y < y + height))
+	{
+		alpha = 100;
+	}
+	else
+	{
+		alpha = 255;
+	}
+
+	doodle::set_frame_of_reference(doodle::FrameOfReference::RightHanded_OriginBottomLeft);
+	doodle::set_fill_color(0, alpha);
+	doodle::set_font_size(width / 7.0);
+	doodle::draw_text(text, x + width / 3, y + height / 4);
 	doodle::pop_settings();
 }
 
@@ -81,5 +105,11 @@ void Button::update(const int mouse_x, const int mouse_y, State next_state)
 void Button::update(const int mouse_x, const int mouse_y, State next_state, std::string text)
 {
 	draw(mouse_x, mouse_y, text);
+	check_click(mouse_x, mouse_y, next_state);
+}
+
+void Button::update(std::string text ,const int mouse_x, const int mouse_y, State next_state)
+{
+	text_draw(mouse_x, mouse_y, text);
 	check_click(mouse_x, mouse_y, next_state);
 }

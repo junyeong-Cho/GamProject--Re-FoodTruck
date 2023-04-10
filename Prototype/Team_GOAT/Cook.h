@@ -69,6 +69,7 @@ private:
 	//using_ingredients 벡터 중 몇번째 인덱스를 가리키고 있는지.
 	int whatMouseclickIndex = -1;
 
+	bool is_Hand = true;
 
 	double Width_raito = 0;
 	double Height_raito = 0;

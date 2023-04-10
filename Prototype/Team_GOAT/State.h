@@ -7,6 +7,5 @@ enum class State
     Kitchen,
     Evaluation_screen,
     Game_over,
-    Clear,
     Ending_word
 };

@@ -27,6 +27,8 @@ void Kitchen::Update(double Width, double Height)
 	Draw_Refrigerator();
 	Draw_Bell();
 	Draw_Recipe();
+	Draw_ToolExplainText();
+
 
 	cook.Update();
 
@@ -117,6 +119,12 @@ void Kitchen::SetVariables()
 	refrigerator_Y = Height_raito * 610.0;
 	refrigerator_width = Width_raito * 100.0;
 	refrigerator_height = Height_raito * 90.0;
+
+	//tool Explain
+	toolExplain_X = Width_raito * 450.0;
+	toolExplain_Y = Height_raito * 680.0;
+	toolExplain_width = Width_raito * 150.0;
+	toolExplain_height = Height_raito * 100.0;
 }
 
 void Kitchen::SetCookVariables()
@@ -336,6 +344,25 @@ void Kitchen::Draw_Recipe()
 	doodle::set_font_size(receipt_width / 10.0);
 	doodle::draw_text("<Salad Recipe>", receipt_X + receipt_width / 27.0, receipt_Y + receipt_height / 1.5);
 	doodle::draw_text("x  3", receipt_X + receipt_width / 2.5, receipt_Y + receipt_height / 2.7);
-	doodle::draw_text("x  3", receipt_X + receipt_width / 2.5, receipt_Y + receipt_height / 9.7);
+	doodle::draw_text("x  2", receipt_X + receipt_width / 2.5, receipt_Y + receipt_height / 9.7);
+	doodle::pop_settings();
+}
+
+void  Kitchen::Draw_ToolExplainText()
+{
+	doodle::push_settings();
+	doodle::set_outline_color(doodle::HexColor{ 0xAD4A3BFF });
+	doodle::set_fill_color(doodle::HexColor{ 0xEBE3C0FF });
+	doodle::set_outline_width(5.0);
+	doodle::smooth_drawing();
+	doodle::draw_rectangle(toolExplain_X, toolExplain_Y, toolExplain_width, toolExplain_height);
+	doodle::pop_settings();
+
+	doodle::push_settings();
+	doodle::set_fill_color(0, 0, 0);
+	doodle::set_font_size(toolExplain_width / 10.0);
+	doodle::draw_text("<Tool>", toolExplain_X + toolExplain_width / 3.7, toolExplain_Y + toolExplain_height / 1.5);
+	doodle::draw_text("Key Z : Knife", toolExplain_X + toolExplain_width / 10.0, toolExplain_Y + toolExplain_height / 2.7);
+	doodle::draw_text("Key X : Hand", toolExplain_X + toolExplain_width / 10.0, toolExplain_Y + toolExplain_height / 9.7);
 	doodle::pop_settings();
 }

@@ -55,8 +55,10 @@ void Cook::Update()
 	Salad();
 	DrawStoveText();
 	PutBell();
+
 	if (whatTool == Tool::HAND)
 	{
+		is_Hand = true;
 		CreateUsingIngredient();
 		FollowMouseIngredient();
 		WhatIndexMouseClick();
@@ -66,7 +68,12 @@ void Cook::Update()
 		Cutting();
 	}
 	Draw_CompletePoint();
-
+	
+	if (whatTool != Tool::HAND && is_Hand == true)
+	{
+		whatMouseclickIndex = -1;
+		is_Hand = false;
+	}
 	
 	doodle::pop_settings();
 }
@@ -283,6 +290,8 @@ int Cook::WhatIndexMouseClick()
 			}
 		}
 	}
+	
+
 	return whatMouseclickIndex;
 }
 
@@ -309,6 +318,8 @@ void Cook::FollowMouseIngredient()
 	{
 		using_ingredients[WhatIndexMouseClick()]->ChangePos(WhereISMouse());
 	}
+
+
 }
 
 void Cook::DrawToolName()
@@ -374,64 +385,61 @@ void Cook::PutBowl()
 		}
 	}
 }
-
-void Cook::Salad() // 점수 계산을 손봐야함.
+void Cook::Salad()
 {
-	int needdLettuceNum = 3; // 필요한 상추 갯수
-	int nowLettuceNum = 0; // 만족하는 상추 갯수
-	int lettuceCutNum = 0; // 샐러드 만들 때 상추가 칼질되고 남아 있어야 하는 횟수.
-
-	int needSuaceNum = 2; //필요한 소스 갯수
-	int nowSuaceNum = 0; //만족하는 소스 갯수
-	int sauceCutNum = 0; // 샐러드 만들 때 소스가 칼질되고 남아 있어야 하는 횟수.
+	int nowSuaceNum = 0;
 
 	int point = 0;
 
-	if (inBowl.size() != 0)
+	if (inBowl.size() > 0)
 	{
 		for (int i = 0; i < inBowl.size(); ++i)
 		{
 			if (inBowl[i]->name == IngredientName::Lettuce)
 			{
-				if (inBowl[i]->cuttingNum == lettuceCutNum)
+				if (inBowl[i]->cuttingNum == 0)
 				{
-					nowLettuceNum += 1;
 					point += 20;
 				}
 				else
 				{
-					point += 15;
+					point += 10;
 				}
 			}
-			else if (inBowl[i]->name == IngredientName::Sauce)
+			else
 			{
-				if (inBowl[i]->cuttingNum == sauceCutNum)
+				nowSuaceNum += 1;
+				if (inBowl[i]->cuttingNum == 0)
 				{
-					nowSuaceNum += 1;
-					point += 20;
+					if (nowSuaceNum > 2)
+					{
+						point -= 20;
+					}
+					else
+					{
+						point += 20;
+					}
 				}
 				else
 				{
-					point += 15;
+					if (nowSuaceNum > 2)
+					{
+						point -= 30;
+					}
+					else
+					{
+						point += 10;
+					}
 				}
 			}
-		}
-
-		if (nowLettuceNum == needdLettuceNum && nowSuaceNum == needSuaceNum)
-		{
-			point = 100;
-		}
-		else if (nowLettuceNum != needdLettuceNum && nowSuaceNum != needSuaceNum)
-		{
-			point -= 10;
-		}
-		else
-		{
-			point -= 10;
 		}
 	}
+
+	if (point < 0)
+	{
+		point = 0;
+	}
 	completePoint = point;
-	
 }
 
 void Cook::Draw_CompletePoint()

@@ -36,9 +36,12 @@ struct Button
 
     void draw(const int mouse_x, const int mouse_y);
     void draw(const int mouse_x, const int mouse_y, std::string text);
+    void text_draw(const int mouse_x, const int mouse_y, std::string text);
     void check_click(const int mouse_x, const int mouse_y, State next_state);
 
     /** 마우스x좌표, 마우스y좌표, 다음장면 순으로 적으세용*/
     void update(const int mouse_x, const int mouse_y, State next_state);
     void update(const int mouse_x, const int mouse_y, State next_state, std::string text);
+    void update(std::string text, const int mouse_x, const int mouse_y, State next_state);
+
 };

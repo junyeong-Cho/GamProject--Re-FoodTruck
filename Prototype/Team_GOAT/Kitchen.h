@@ -103,6 +103,12 @@ public:
 	double refrigerator_width{ 0.0 };
 	double refrigerator_height{ 0.0 };
 	
+	double toolExplain_X{ 0.0 };
+	double toolExplain_Y{ 0.0 };
+	double toolExplain_width{ 0.0 };
+	double toolExplain_height{ 0.0 };
+
+	void Draw_ToolExplainText();
 
 
 private:
