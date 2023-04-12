@@ -32,6 +32,8 @@ public:
 	void DrawStoveText();
 	void Unload();
 	void Load();
+	void Draw_TrickButton();
+	bool ClickTrickButton = false;
 
 	void Update();
 

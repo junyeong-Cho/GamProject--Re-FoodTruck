@@ -15,29 +15,10 @@ extern State* state;
 
 Cook::Cook()
 {
-	/*Lettuce* lettuce1 = new Lettuce(KitchenPosition::COUNTER1, Math::vec2{ first_X, first_Y }, IngredientName::Lettuce);
-	Lettuce* lettuce2 = new Lettuce(KitchenPosition::COUNTER1, Math::vec2{ first_X, first_Y }, IngredientName::Lettuce);
-	Lettuce* lettuce3 = new Lettuce(KitchenPosition::COUNTER1, Math::vec2{ first_X, first_Y }, IngredientName::Lettuce);
-	
-	Sauce* sauce1 = new Sauce(KitchenPosition::COUNTER2, Math::vec2{ first_X + width, first_Y }, IngredientName::Sauce);
-	Sauce* sauce2 = new Sauce(KitchenPosition::COUNTER2, Math::vec2{ first_X + width, first_Y }, IngredientName::Sauce);
-	Sauce* sauce3 = new Sauce(KitchenPosition::COUNTER2, Math::vec2{ first_X + width, first_Y }, IngredientName::Sauce);*/
-
 	for (int i = 0; i < ingredient_number; ++i)
 	{
 		seven_ingredients.push_back(std::vector<Ingredient*>());
 	}
-	
-	/*if (seven_ingredients.size() == ingredient_number)
-	{
-		seven_ingredients[0].push_back(lettuce1);
-		seven_ingredients[0].push_back(lettuce2);
-		seven_ingredients[0].push_back(lettuce3);
-
-		seven_ingredients[1].push_back(sauce1);
-		seven_ingredients[1].push_back(sauce2);
-		seven_ingredients[1].push_back(sauce3);
-	}*/
 }
 
 void Cook::Update()
@@ -52,6 +33,7 @@ void Cook::Update()
 	DrawToolName();
 	ChangeIngredientSize();
 	PutBowl();
+	Draw_TrickButton();
 	Salad();
 	DrawStoveText();
 	PutBell();
@@ -385,61 +367,90 @@ void Cook::PutBowl()
 		}
 	}
 }
+
+void Cook::Draw_TrickButton()
+{
+	if (GetWhere(WhereISMouse()) == KitchenPosition::COUNTER7)
+	{
+		doodle::push_settings();
+
+		doodle::set_frame_of_reference(doodle::FrameOfReference::RightHanded_OriginBottomLeft);
+		doodle::set_font_size(width / 10.0);
+		doodle::set_fill_color(doodle::Color(0, 0, 0));
+		doodle::draw_text("Trick\nButton", first_X+width*6.3, first_Y+height / 2);
+
+		doodle::pop_settings();
+	}
+	if (isMouseClick == true)
+	{
+		ClickTrickButton = true;
+	}
+}
+
+
 void Cook::Salad()
 {
-	int nowSuaceNum = 0;
-
-	int point = 0;
-
-	if (inBowl.size() > 0)
+	if (ClickTrickButton == false)
 	{
-		for (int i = 0; i < inBowl.size(); ++i)
+		int nowSuaceNum = 0;
+
+		int point = 0;
+
+		if (inBowl.size() > 0)
 		{
-			if (inBowl[i]->name == IngredientName::Lettuce)
+			for (int i = 0; i < inBowl.size(); ++i)
 			{
-				if (inBowl[i]->cuttingNum == 0)
+				if (inBowl[i]->name == IngredientName::Lettuce)
 				{
-					point += 20;
-				}
-				else
-				{
-					point += 10;
-				}
-			}
-			else
-			{
-				nowSuaceNum += 1;
-				if (inBowl[i]->cuttingNum == 0)
-				{
-					if (nowSuaceNum > 2)
-					{
-						point -= 20;
-					}
-					else
+					if (inBowl[i]->cuttingNum == 0)
 					{
 						point += 20;
-					}
-				}
-				else
-				{
-					if (nowSuaceNum > 2)
-					{
-						point -= 30;
 					}
 					else
 					{
 						point += 10;
 					}
 				}
+				else
+				{
+					nowSuaceNum += 1;
+					if (inBowl[i]->cuttingNum == 0)
+					{
+						if (nowSuaceNum > 2)
+						{
+							point -= 20;
+						}
+						else
+						{
+							point += 20;
+						}
+					}
+					else
+					{
+						if (nowSuaceNum > 2)
+						{
+							point -= 30;
+						}
+						else
+						{
+							point += 10;
+						}
+					}
+				}
 			}
 		}
-	}
 
-	if (point < 0)
-	{
-		point = 0;
+		if (point < 0)
+		{
+			point = 0;
+		}
+		completePoint = point;
 	}
-	completePoint = point;
+	else
+	{
+		completePoint = 100;
+	}
+	
 }
 
 void Cook::Draw_CompletePoint()
@@ -554,5 +565,5 @@ void Cook::Load()
 		seven_ingredients[1].push_back(sauce3);
 	}
 
-
+	ClickTrickButton = false;
 }
