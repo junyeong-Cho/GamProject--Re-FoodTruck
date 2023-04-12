@@ -380,10 +380,10 @@ void Cook::Draw_TrickButton()
 		doodle::draw_text("Trick\nButton", first_X+width*6.3, first_Y+height / 2);
 
 		doodle::pop_settings();
-	}
-	if (isMouseClick == true)
-	{
-		ClickTrickButton = true;
+		if (isMouseClick == true)
+		{
+			ClickTrickButton = true;
+		}
 	}
 }
 
