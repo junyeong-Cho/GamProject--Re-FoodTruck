@@ -1,10 +1,16 @@
 #include <iostream>
+#include <chrono>
+
 #include "doodle/doodle.hpp"
+
 #include "Button.h"
 #include "State.h"
-#include <chrono>
-#include "Cook.h"
+
 #include "Kitchen.h"
+#include "Cook.h"
+
+#include "Pet.h"
+
 
 //stand
 void draw_stand();
@@ -22,6 +28,7 @@ void draw_Salad(doodle::Image image);
 void draw_ending_word();
 
 extern State* state = new State{ State::Main };
+
 void sm_Updatd()
 {
     //State state = State::Main;
@@ -36,6 +43,8 @@ void sm_Updatd()
     Button ending_word_button(doodle::Width / 3.0, doodle::Height / 3.0, doodle::Width / 10.0, doodle::Height / 10.0, *state);
     Button back_main_buton(600, 200, 250, 100, *state);
 
+    Pet pet{};
+
     Kitchen kitchen{};
 
     int complete_point = 0;
@@ -43,6 +52,8 @@ void sm_Updatd()
 
     while (!doodle::is_window_closed())
     {
+        pet.PetHungerUpdate();
+
         double Width_raito = doodle::Width / 1400.0; // 7
         double Height_raito = doodle::Height / 800.0; //  4
 
@@ -51,12 +62,21 @@ void sm_Updatd()
         switch (*state)
         {
         case State::Main:
+
+           
             doodle::clear_background(255, 255, 255);
-            doodle::set_frame_of_reference(doodle::FrameOfReference::RightHanded_OriginBottomLeft);
+            doodle::set_frame_of_reference(doodle::FrameOfReference::RightHanded_OriginBottomLeft); 
+
+            pet.PrintInfo();
+
+
             doodle::draw_text("Re:Truck", doodle::Width / 2 - doodle::Width / 12.0, doodle::Height / 2.0 + doodle::Height / 12.0);
             main_button.update(doodle::get_mouse_x(), doodle::get_mouse_y(), State::Counter, "Play");
+            
+
             break;
         case State::Counter:
+
             complete_point = 0;
             doodle::clear_background(doodle::HexColor{ 0xEBE3C0FF });
             draw_background();
@@ -97,6 +117,11 @@ void sm_Updatd()
             {
                 kitchen.cook.Load();
             }
+
+
+            pet.PrintInfo();
+            pet.PetHungerUpdate();
+
             break;
         case State::Kitchen:
             doodle::clear_background(0, 255, 0);
@@ -136,6 +161,9 @@ void sm_Updatd()
             }
             doodle::pop_settings();
             break;
+        case State::Midnight:
+
+
         case State::Game_over:
             doodle::clear_background(255, 255, 255);
             doodle::push_settings();
@@ -159,6 +187,8 @@ void sm_Updatd()
 int main(void)
 {
     doodle::create_window("Team_GOAT",1400, 800);
+
+
 
     sm_Updatd();
 
