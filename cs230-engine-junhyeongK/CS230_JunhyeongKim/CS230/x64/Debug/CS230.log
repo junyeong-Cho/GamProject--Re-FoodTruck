@@ -1,0 +1,4 @@
+﻿A:\Visual Studio 2022\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(517,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (CS230.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  Inventory.cpp
+  CS230.vcxproj -> C:\Users\yeaseul\Desktop\cs230-engine-junhyeongK\CS230_JunhyeongKim\x64\Debug\Gam150.exe
+  0개 파일이 복사되었습니다.
