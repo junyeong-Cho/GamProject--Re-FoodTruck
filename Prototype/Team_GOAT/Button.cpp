@@ -32,10 +32,12 @@ void Button::draw(const int mouse_x, const int mouse_y , std::string text)
 	//mouse on button
 	if ((mouse_x > x && mouse_x < x + width) && (mouse_y > y && mouse_y < y + height))
 	{
+		
 		alpha = 100;
 	}
 	else
 	{
+		
 		alpha = 255;
 	}
 

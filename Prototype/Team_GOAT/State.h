@@ -7,5 +7,10 @@ enum class State
     Kitchen,
     Evaluation_screen,
     Game_over,
-    Ending_word
+    Ending_word,
+    Encount,
+    Day_1,
+    Day_2,
+    Day_3,
+    Day_4,
 };

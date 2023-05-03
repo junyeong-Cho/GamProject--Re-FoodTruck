@@ -145,6 +145,7 @@
     <ClCompile Include="Ingredient.cpp" />
     <ClCompile Include="Kitchen.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Pet.cpp" />
     <ClCompile Include="Vec2.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -155,6 +156,7 @@
     <ClInclude Include="IngredientName.h" />
     <ClInclude Include="Kitchen.h" />
     <ClInclude Include="KitchenPosition.h" />
+    <ClInclude Include="Pet.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="Tool.h" />
     <ClInclude Include="Vec2.h" />
