@@ -1,5 +1,3 @@
-#include <iostream>
-#include <chrono>
 
 #include "doodle/doodle.hpp"
 
@@ -9,7 +7,10 @@
 #include "Kitchen.h"
 #include "Cook.h"
 
+
+#include "Store.h"
 #include "Pet.h"
+
 
 
 //stand
@@ -47,12 +48,17 @@ void sm_Updatd()
 
     Kitchen kitchen{};
 
-    int complete_point = 0;
+    Store store{};
+
+    
+
+     int complete_point = 0;
      double guest_image_x = -300.0;
 
     while (!doodle::is_window_closed())
     {
         pet.PetHungerUpdate();
+        pet.DrawPetSprite(state);
 
         double Width_raito = doodle::Width / 1400.0; // 7
         double Height_raito = doodle::Height / 800.0; //  4
@@ -63,7 +69,6 @@ void sm_Updatd()
         {
         case State::Main:
 
-           
             doodle::clear_background(255, 255, 255);
             doodle::set_frame_of_reference(doodle::FrameOfReference::RightHanded_OriginBottomLeft); 
 
@@ -71,10 +76,11 @@ void sm_Updatd()
 
 
             doodle::draw_text("Re:Truck", doodle::Width / 2 - doodle::Width / 12.0, doodle::Height / 2.0 + doodle::Height / 12.0);
-            main_button.update(doodle::get_mouse_x(), doodle::get_mouse_y(), State::Counter, "Play");
+            main_button.update(doodle::get_mouse_x(), doodle::get_mouse_y(), State::Midnight, "Play");
             
 
             break;
+
         case State::Counter:
 
             complete_point = 0;
@@ -118,12 +124,12 @@ void sm_Updatd()
                 kitchen.cook.Load();
             }
 
-
             pet.PrintInfo();
-            pet.PetHungerUpdate();
 
             break;
         case State::Kitchen:
+
+
             doodle::clear_background(0, 255, 0);
             complete_point = kitchen.cook.GetPercentOfComplete();
             kitchen.Update(Width_raito, Height_raito);
@@ -160,8 +166,12 @@ void sm_Updatd()
                 draw_Salad(fail_food);
             }
             doodle::pop_settings();
+
+            pet.PrintInfo();
+
             break;
         case State::Midnight:
+            //store.Update(Width_raito, Height_raito);
 
 
         case State::Game_over:

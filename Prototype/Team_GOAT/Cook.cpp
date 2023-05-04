@@ -5,6 +5,7 @@
 #include <cmath>
 #include <iostream>
 #include "State.h"
+#include "Pet.h"
 
 
 //static함수는 전역범위에서만 초기화 가능. & 헤더 파일에선 초기화 불가능.
@@ -85,6 +86,7 @@ void Cook::DrawIngredients()
 
 	}
 }
+
 
 Math::vec2 Cook::WhereISMouse()
 {
@@ -251,11 +253,15 @@ int Cook::WhatIndexMouseClick()
 {
 	if (isMouseClick == true)
 	{
+
 		if (using_ingredients.size() != 0)
 		{
 			if (whatMouseclickIndex != -1)
 			{
+				//isCooking == true;
+
 				whatMouseclickIndex = -1;
+				
 				isMouseClick = false;
 			}
 			else
@@ -265,6 +271,7 @@ int Cook::WhatIndexMouseClick()
 					if (using_ingredients[i]->IsMouseOn(WhereISMouse()) == true)
 					{
 						whatMouseclickIndex = i;
+
 						isMouseClick = false;
 						break;
 					}

@@ -1,12 +1,17 @@
 #pragma once
+//#include "Pet.h"
 #include "Ingredient.h"
 #include "Tool.h"
 #include <vector>
 
 
+
 class Cook
 {
 public:
+
+	//friend Pet;
+
 	Cook();
 	std::vector<std::vector<Ingredient*>> seven_ingredients;
 	std::vector<Ingredient*> using_ingredients;
@@ -16,6 +21,7 @@ public:
 
 	Math::vec2 WhereISMouse();
 	KitchenPosition GetWhere(Math::vec2 pos);
+
 	void SetIngredientsWhere();
 	void Cutting();
 	void WriteCuttingNum();

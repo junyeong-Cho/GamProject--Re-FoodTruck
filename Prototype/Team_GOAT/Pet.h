@@ -1,3 +1,5 @@
+#pragma once
+
 #include<doodle/input.hpp>
 #include<doodle/drawing.hpp>
 #include<doodle/image.hpp>
@@ -13,24 +15,14 @@ class Pet
 {
 public:
 	
-	const enum ElementState
+	const enum PetPropertyName
 	{
-		NORMAL,
 		FIRE,
 		WATER,
-		GROUND
+		NORMAL
 	};
 
-	const enum PetFoods
-	{
-		APPLE,
-		CHICKEN,
-		PIZZA,
-		CAKE,
-		ICECREAM,
-		CHOCOLATE,
-		PIE
-	};
+
 
 	//name, age, hungry, elementstate를 담는 constructor
 	Pet();
@@ -38,9 +30,9 @@ public:
 	~Pet();
 
 
+	//PetFoods들을 
+	
 
-	//Tutorial을 담을 수 있는 vector생성
-	std::vector<std::string> tutorial;
 
 	/** Pet의 이름을 설정하는 기능입니다. */
 	void SetInfo();
@@ -60,7 +52,7 @@ public:
 	
 
 	/** 펫의 상태를 업데이트 하는 기능입니다. */
-	int ChangePetState(ElementState state);
+	int ChangePetState(PetPropertyName state);
 	
 	/** Pet의 sprite를 화면에 배치하는 기능입니다. */
 	void DrawPetSprite(State* state);
@@ -68,10 +60,11 @@ public:
 	/** Pet의 먹이를 구매하고 먹여주는 기능입니다.*/
 	void catRevive();
 
+
 private:
 	bool canCooking = false;
 
-	bool isCooking  = false;
+	bool isCooking = false;
 	bool isHungry   = false;
 	bool isSitting  = false;
 	
@@ -84,7 +77,7 @@ private:
 
 	std::string name;
 
-	ElementState elementState;
+	PetPropertyName elementState;
 
-	std::vector<PetFoods> *petfoods;
 };
+

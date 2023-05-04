@@ -15,9 +15,9 @@ public:
 
 	Ingredient(KitchenPosition whereis, Math::vec2 pos, IngredientName id)
 	{ 
-		where = whereis;
+		where	 = whereis;
 		position = pos;
-		name = id;
+		name	 = id;
 	}
 
 	virtual void DrawImage() = 0;

@@ -43,7 +43,6 @@ std::string Pet::GetName() const
 
 void Pet::PrintInfo()
 {
-    //print info with doodle::draw_text()
 	doodle::set_outline_color(0, 102, 153);
 	doodle::set_fill_color(255);
 
@@ -64,15 +63,12 @@ void Pet::PrintInfo()
 	{
 		doodle::draw_text("Element: WATER", 100, 150);
 	}
-	else if (elementState == GROUND)
-	{
-		doodle::draw_text("Element: GROUND", 100, 150);
-	}
 	
 	doodle::draw_text("isCooking: " + std::to_string(isCooking), 100, 100);
 	doodle::draw_text("isHungry : " + std::to_string(isHungry), 100, 50);
 
 }
+
 
 void Pet::PetHungerUpdate()
 {
@@ -89,11 +85,11 @@ void Pet::PetHungerUpdate()
 	{
 		isHungry = false;
 	}
-
 }
 
 
-int Pet::ChangePetState(ElementState state)
+
+int Pet::ChangePetState(PetPropertyName state)
 {
 	if (isHungry == false)
 	{
@@ -107,20 +103,14 @@ int Pet::ChangePetState(ElementState state)
 
 			case FIRE:
 				elementState = FIRE;
+				canCooking = true;
 
-				return isCooking = true;
 				break;
 
 			case WATER:
 				elementState = WATER;
+				canCooking = true;
 
-				return isCooking = true;
-				break;
-
-			case GROUND:
-				elementState = GROUND;
-
-				return isCooking = true;
 				break;
 
 			default:
@@ -131,7 +121,7 @@ int Pet::ChangePetState(ElementState state)
 	}
 	else
 	{
-		isHungry = true;
+		elementState = NORMAL;
 	}
 
 
@@ -182,17 +172,6 @@ void Pet::DrawPetSprite(State* state)
 				  doodle::draw_text("He is now happy!", 200, 300);
 			  }
 		  }
-		  else if (elementState == GROUND)
-		  {
-			  if (isHungry == true)
-			  {
-				  doodle::draw_text("He is hungry right now!", 100, 100);
-			  }
-			  else
-			  {
-				  doodle::draw_text("He is now happy!", 200, 300);
-			  }
-		  }
 
 		break;
 
@@ -200,24 +179,21 @@ void Pet::DrawPetSprite(State* state)
 	case State::Evaluation_screen:
 		switch (elementState)
 		{
-		case Pet::NORMAL:
-			//blabla
+			case Pet::NORMAL:
+				//blabla
 			break;
 		
-		case Pet::FIRE:
-			//blabla
+			case Pet::FIRE:
+				//blabla
 			break;
 		
-		case Pet::WATER:
+			case Pet::WATER:
 			//blabla
 			break;
-		
-		case Pet::GROUND:
-			//blabla
-			break;
-		
-		default:
-			break;
+
+			default:
+			
+				break;
 		}
 
 		break;
@@ -225,7 +201,7 @@ void Pet::DrawPetSprite(State* state)
 	case State::Kitchen:
 		if (isHungry == false)
 		{
-			doodle::draw_text("Ready to cook!", 200, 300);
+			doodle::draw_text("Ready to cook!", 50, 400);
 
 			if (canCooking == true && isCooking == true)
 			{
@@ -240,7 +216,4 @@ void Pet::DrawPetSprite(State* state)
 	}
 }
 
-void Pet::catRevive()
-{
 
-}
