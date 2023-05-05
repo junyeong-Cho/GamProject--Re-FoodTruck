@@ -99,6 +99,7 @@ int Pet::ChangePetState(PetPropertyName state)
 			{
 			case NORMAL:
 				elementState = NORMAL;
+				canCooking = false;
 				break;
 
 			case FIRE:
@@ -122,6 +123,7 @@ int Pet::ChangePetState(PetPropertyName state)
 	else
 	{
 		elementState = NORMAL;
+		canCooking = false;
 	}
 
 

@@ -134,6 +134,7 @@ void sm_Updatd()
             complete_point = kitchen.cook.GetPercentOfComplete();
             kitchen.Update(Width_raito, Height_raito);
             break;
+
         case State::Evaluation_screen:
             doodle::clear_background(255, 255, 255);
             doodle::push_settings();
@@ -171,8 +172,13 @@ void sm_Updatd()
 
             break;
         case State::Midnight:
-            //store.Update(Width_raito, Height_raito);
 
+            doodle::clear_background(0, 0, 0);
+            store.Load();
+            store.Update(Width_raito, Height_raito);
+
+
+            break;
 
         case State::Game_over:
             doodle::clear_background(255, 255, 255);

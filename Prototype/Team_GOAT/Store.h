@@ -15,9 +15,9 @@ class Store
 	Store();
 	~Store();
 
-	std::vector<std::vector<SaleItem *>> storeItems;
-	std::vector<SaleItem *>				 buyingItems;
-	std::vector<SaleItem *>				 inPocket;
+	std::vector<SaleItem *> storeItems;
+	std::vector<SaleItem *>	buyingItems;
+	std::vector<SaleItem *>	inPocket;
 
 	int itemNum{ 3 };
 
@@ -26,6 +26,7 @@ class Store
 	void Update(double Width, double Height);
 
 	void BuyItem();
+	void DrawItem();
 	void CreatingItems();
 	void WriteItemsQuantity();
 
@@ -45,12 +46,7 @@ class Store
 
 		int whatMouseclickIndex = -1;
 
-
-		std::vector<int> storeItemsQuantity;
-		std::vector<int> storeItemsPrice;
-		std::map<std::string, int> storeItemsMap;
-		std::map<std::string, int> storeItemsPriceMap;
-		std::map<std::string, int> storeItemsQuantityMap;
-
+		double Width_raito = 0;
+		double Height_raito = 0;
 
 };

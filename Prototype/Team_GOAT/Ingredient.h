@@ -7,9 +7,12 @@ class Ingredient
 {
 public:
 	Math::vec2 position{ 100,300 };
+	
 	int cuttingNum = 5;
-	KitchenPosition where;
+	
 	double spriteHalfWidth = 30;
+
+	KitchenPosition where;
 	IngredientName name;
 
 
@@ -21,6 +24,7 @@ public:
 	}
 
 	virtual void DrawImage() = 0;
+
 	void ChangePos(Math::vec2 pos);
 	bool IsMouseOn(Math::vec2 mousePos);
 
