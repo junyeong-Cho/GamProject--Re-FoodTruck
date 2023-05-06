@@ -18,6 +18,12 @@ public:
     void Unload() override;
     std::string GetName() override { return "Kitchen"; }
 
+    void Draw_UI();
+    void Draw_Base();
+    void Draw_Clock();
+    void Draw_Money();
+    void Draw_Recipe();
+
 private:
     Cook cook;
 };

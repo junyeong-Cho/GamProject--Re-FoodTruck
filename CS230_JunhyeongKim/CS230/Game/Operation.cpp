@@ -24,11 +24,11 @@ void on_mouse_wheel(int scroll_amount)
 {
 	if (scroll_amount > 0)
 	{
-		Operation::wheel = 1;
+		Operation::wheel = -1;
 	}
 	else if (scroll_amount < 0)
 	{
-		Operation::wheel = -1;
+		Operation::wheel = 1;
 	}
 	else
 	{

@@ -36,21 +36,21 @@ void Lemon::Draw()
 
 
 
-Leggttuce::Leggttuce(IngredientName id, Math::vec2 pos, int cuttingNumber)
+Lettuce::Lettuce(IngredientName id, Math::vec2 pos, int cuttingNumber)
 	:Ingredient(id, pos, cuttingNumber)
 {}
-void Leggttuce::Load()
+void Lettuce::Load()
 {
 	texture.push_back(Engine::GetTextureManager().Load("Assets/Leggttuce1.png"));
 	texture.push_back(Engine::GetTextureManager().Load("Assets/Leggttuce2.png"));
 	texture.push_back(Engine::GetTextureManager().Load("Assets/Leggttuce3.png"));
 	texture.push_back(Engine::GetTextureManager().Load("Assets/Leggttuce4.png"));
 }
-void Leggttuce::Update(double dt)
+void Lettuce::Update(double dt)
 {
 
 }
-void Leggttuce::Draw()
+void Lettuce::Draw()
 {
 	if (cutNum <= 0)
 	{
@@ -197,3 +197,25 @@ void MermaidScales::Draw()
 	}
 }
 
+Water::Water(IngredientName id, Math::vec2 pos, int cuttingNumber)
+	:Ingredient(id, pos, cuttingNumber)
+{}
+void Water::Load()
+{
+	texture.push_back(Engine::GetTextureManager().Load("Assets/Ingredient_Water.png"));
+}
+void Water::Update(double dt)
+{
+
+}
+void Water::Draw()
+{
+	if (cutNum <= 0)
+	{
+		texture[texture.size() - 1]->Draw(Math::TranslationMatrix(position));
+	}
+	else
+	{
+		texture[texture.size() - cutNum]->Draw(Math::TranslationMatrix(position));
+	}
+}

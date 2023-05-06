@@ -79,6 +79,12 @@
     <ClCompile Include="Game\Operation.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Recipe.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\RecipeBook.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Logger.h">
@@ -175,6 +181,15 @@
       <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="Game\InventoryTexture.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Recipe.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\RecipeName.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\RecipeBook.h">
       <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>

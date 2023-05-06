@@ -1,13 +1,14 @@
 #pragma once
 enum class IngredientName
 {
-	Remon,
+	Lemon,
 	Lettuce,
 	Ant,
 	Leaf,
 	Salt,
 	DragonFruit,
 	MermaidScales,
+	Water,
 	Nothing
 };
 
@@ -19,11 +20,11 @@ inline IngredientName& operator+=(IngredientName& name, int value)
 	}
 	if (value > 0)
 	{
-		name = (name == IngredientName::MermaidScales) ? IngredientName::Remon : IngredientName(static_cast<int>(name) + value);
+		name = (name == IngredientName::Water) ? IngredientName::Lemon : IngredientName(static_cast<int>(name) + value);
 	}
 	else if (value < 0)
 	{
-		name = (name == IngredientName::Remon) ? IngredientName::MermaidScales : IngredientName(static_cast<int>(name) + value);
+		name = (name == IngredientName::Lemon) ? IngredientName::Water : IngredientName(static_cast<int>(name) + value);
 	}
 	return name;
 }

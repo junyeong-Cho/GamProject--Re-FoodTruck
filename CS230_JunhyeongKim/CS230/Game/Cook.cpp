@@ -2,7 +2,7 @@
 
 Cook::Cook()
 {
-
+	/*ingredients.push_back(new Lemon{IngredientName::Lemon, })*/
 }
 
 void Cook::Load()

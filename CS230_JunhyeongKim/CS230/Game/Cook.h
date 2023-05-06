@@ -17,4 +17,5 @@ private:
     std::vector<Ingredient*> ingredients;
     Tool tool;
     Operation operation;
+
 };

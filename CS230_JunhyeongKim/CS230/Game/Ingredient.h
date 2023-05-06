@@ -16,12 +16,13 @@ public:
 
     void Cut() { --cutNum; }
     int GetCutNum() { return cutNum; }
-    void Boil() { boiled = true; }
-    bool GetBoiled() { return boiled; }
+    virtual void Boil() { boiled = true; }
+    virtual bool GetBoiled() { return boiled; }
     void ChangeMouseClick(bool ForT) { mouseClick = ForT; }
     bool IsMouseOn() { return mouseClick; }
     void ChangePos(Math::vec2 pos) { position = pos; }
     Math::vec2 GetPos() { return position; }
+    IngredientName GetName() { return name; }
 
 protected:
     IngredientName name;
@@ -32,10 +33,10 @@ protected:
     std::vector< CS230::Texture*> texture;
 };
 
-class Remon : Ingredient
+class Lemon : public Ingredient
 {
 public:
-    Remon(IngredientName id, Math::vec2 pos, int cuttingNumber);
+    Lemon(IngredientName id, Math::vec2 pos, int cuttingNumber);
     void Load() override;
     void Update(double dt)override;
     void Draw()override;
@@ -44,10 +45,10 @@ private:
 
 };
 
-class Legguce : Ingredient
+class Lettuce : public Ingredient
 {
 public:
-    Legguce(IngredientName id, Math::vec2 pos, int cuttingNumber);
+    Lettuce(IngredientName id, Math::vec2 pos, int cuttingNumber);
     void Load() override;
     void Update(double dt)override;
     void Draw()override;
@@ -56,7 +57,7 @@ private:
 
 };
 
-class Ant : Ingredient
+class Ant : public Ingredient
 {
 public:
     Ant(IngredientName id, Math::vec2 pos, int cuttingNumber);
@@ -68,7 +69,7 @@ private:
 
 };
 
-class Leaf : Ingredient
+class Leaf : public Ingredient
 {
 public:
     Leaf(IngredientName id, Math::vec2 pos, int cuttingNumber);
@@ -80,7 +81,7 @@ private:
 
 };
 
-class Salt : Ingredient
+class Salt : public Ingredient
 {
 public:
     Salt(IngredientName id, Math::vec2 pos, int cuttingNumber);
@@ -92,7 +93,7 @@ private:
 
 };
 
-class DragonFruit : Ingredient
+class DragonFruit : public Ingredient
 {
 public:
     DragonFruit(IngredientName id, Math::vec2 pos, int cuttingNumber);
@@ -104,7 +105,7 @@ private:
 
 };
 
-class MermaidScales : Ingredient
+class MermaidScales : public Ingredient
 {
 public:
     MermaidScales(IngredientName id, Math::vec2 pos, int cuttingNumber);
@@ -116,3 +117,12 @@ private:
 
 };
 
+class Water : public Ingredient
+{
+public:
+    Water(IngredientName id, Math::vec2 pos, int cuttingNumber);
+    void Load() override;
+    void Update(double dt)override;
+    void Draw()override;
+private:
+};
