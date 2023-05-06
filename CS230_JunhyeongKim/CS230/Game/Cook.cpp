@@ -1,16 +1,16 @@
 #include "Cook.h"
 
-Cook::Cook() : inventory(Inventory{})
+Cook::Cook() : inventoryManager(InventoryManager{})
 {
 
 }
 
 void Cook::Update(double dt)
 {
-	inventory.Update();
+	inventoryManager.Update();
 }
 
 void Cook::Draw()
 {
-	inventory.Draw();
+	inventoryManager.Draw();
 }

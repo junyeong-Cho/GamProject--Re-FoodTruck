@@ -2,7 +2,7 @@
 #include <vector>
 #include "Ingredient.h"
 #include "Tool.h"
-#include "Inventory.h"
+#include "InventoryManager.h"
 
 class Cook
 {
@@ -15,5 +15,5 @@ private:
     std::vector<Cook> cooks;
     std::vector<Ingredient*> ingredients;
     std::vector<Tool*> tools;
-    Inventory inventory;
+    std::vector<InventoryManager> inventoryManager;
 };
