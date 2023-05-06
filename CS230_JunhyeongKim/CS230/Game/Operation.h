@@ -3,11 +3,12 @@
 #include "ToolName.h"
 #include "IngredientName.h"
 #include "PetPropertyName.h"
+#include "..\Engine\Texture.h"
 
 class Operation
 {
 public:
-	Operation(){}
+	virtual void Load() = 0;
 	virtual void Update() = 0;
 	virtual void Draw() = 0;
 
@@ -17,13 +18,14 @@ public:
 
 private:
 	InventoryName clickInventory;
-
+	CS230::Texture* operationTexture;
 };
 
 class Inventory : public Operation
 {
 public:
-	Inventory() : Operation(){}
+	Inventory();
+	void Load() override;
 	void Draw() override;
 	void Update() override;
 	InventoryName Return() { return inventory; }
@@ -34,7 +36,8 @@ private:
 class ToolBox : public Operation
 {
 public:
-	ToolBox(){}
+	ToolBox();
+	void Load() override;
 	void Draw() override;
 	void Update() override;
 	ToolName Return() { return tool; }
@@ -45,7 +48,8 @@ private:
 class Refrigerator : public Operation
 {
 public:
-	Refrigerator(){}
+	Refrigerator();
+	void Load() override;
 	void Draw() override;
 	void Update() override;
 	IngredientName Return() { return ingredient; }
@@ -56,7 +60,8 @@ private:
 class PetProperty : public Operation
 {
 public:
-	PetProperty(){}
+	PetProperty();
+	void Load() override;
 	void Draw() override;
 	void Update() override;
 	PetPropertyName Return() { return property; }

@@ -7,6 +7,20 @@ int Operation::wheel = 0;
 bool Operation::leftClick = false;
 bool Operation::rightClick = false;
 
+void Operation::Load()
+{
+	matrix *= Math::TranslationMatrix(Engine::GetWindow().GetSize());
+	operationTexture.push_back(Engine::GetTextureManager().Load("Assets/Toolbox.png"));
+	operationTexture.push_back(Engine::GetTextureManager().Load("Assets/PetProperty.png"));
+	operationTexture.push_back(Engine::GetTextureManager().Load("Assets/Refrigerator.png"));
+	operationTexture.push_back(Engine::GetTextureManager().Load("Assets/Hand.png"));
+	operationTexture.push_back(Engine::GetTextureManager().Load("Assets/Knife.png"));
+	operationTexture.push_back(Engine::GetTextureManager().Load("Assets/Ladle.png"));
+	operationTexture.push_back(Engine::GetTextureManager().Load("Assets/Scoop.png"));
+	operationTexture.push_back(Engine::GetTextureManager().Load("Assets/TrashCan.png"));
+	operationTexture.push_back(Engine::GetTextureManager().Load("Assets/Fire.png"));
+	operationTexture.push_back(Engine::GetTextureManager().Load("Assets/Water.png"));
+}
 
 void on_mouse_wheel(int scroll_amount)
 {
@@ -49,58 +63,49 @@ void on_mouse_released(doodle::MouseButtons button)
 	}
 }
 
+
+
 void Inventory::Draw()
 {
 	inventory += wheel;
 	wheel = 0;
 
-	doodle::push_settings();
-	std::string text;
 	switch (inventory)
 	{
 	case InventoryName::ToolBox:
-		text = "ToolBox";
+		operationTexture[static_cast<int>(InventoryTexture::ToolBox)]->Draw(matrix);
 		break;
 	case InventoryName::Refrigerator:
-		text = "Refrigerator";
+		operationTexture[static_cast<int>(InventoryTexture::Refrigerator)]->Draw(matrix);
 		break;
 	case InventoryName::PetProperty:
-		text = "PetProperty";
+		operationTexture[static_cast<int>(InventoryTexture::PetProperty)]->Draw(matrix);
 		break;
 	}
-	doodle::set_font_size(20);
-	doodle::draw_text(text, doodle::get_mouse_x(), doodle::get_mouse_y());
-	doodle::pop_settings();
-}
 
 void ToolBox::Draw()
 {
 	tool += wheel;
 	wheel = 0;
 
-	doodle::push_settings();
-	std::string text;
 	switch (tool)
 	{
 	case ToolName::HAND:
-		text = "HAND";
+		operationTexture[static_cast<int>(InventoryTexture::Hand)]->Draw(matrix);
 		break;
 	case ToolName::KNIFE:
-		text = "KNIFE";
+		operationTexture[static_cast<int>(InventoryTexture::Knife)]->Draw(matrix);
 		break;
 	case ToolName::LADLE:
-		text = "LADLE";
+		operationTexture[static_cast<int>(InventoryTexture::Ladle)]->Draw(matrix);
 		break;
 	case ToolName::SCOOP:
-		text = "SCOOP";
+		operationTexture[static_cast<int>(InventoryTexture::Scoop)]->Draw(matrix);
 		break;
 	case ToolName::TRASHCAN:
-		text = "TRASHCAN";
+		operationTexture[static_cast<int>(InventoryTexture::TrashCan)]->Draw(matrix);
 		break;
 	}
-	doodle::set_font_size(20);
-	doodle::draw_text(text, doodle::get_mouse_x(), doodle::get_mouse_y());
-	doodle::pop_settings();
 }
 
 void Refrigerator::Draw()
@@ -123,20 +128,15 @@ void PetProperty::Draw()
 	property += wheel;
 	wheel = 0;
 
-	doodle::push_settings();
-	std::string text;
 	switch (property)
 	{
 	case PetPropertyName::FIRE:
-		text = "FIRE";
+		operationTexture[static_cast<int>(InventoryTexture::Fire)]->Draw(matrix);
 		break;
 	case PetPropertyName::WATER:
-		text = "WATER";
+		operationTexture[static_cast<int>(InventoryTexture::Water)]->Draw(matrix);
 		break;
 	}
-	doodle::set_font_size(20);
-	doodle::draw_text(text, doodle::get_mouse_x(), doodle::get_mouse_y());
-	doodle::pop_settings();
 }
 
 void Inventory::Update()

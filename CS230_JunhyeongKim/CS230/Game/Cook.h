@@ -15,5 +15,5 @@ private:
     std::vector<Cook> cooks;
     std::vector<Ingredient*> ingredients;
     std::vector<Tool*> tools;
-    std::vector<InventoryManager> inventoryManager;
+    InventoryManager inventoryManager;
 };

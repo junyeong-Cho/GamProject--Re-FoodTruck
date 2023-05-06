@@ -7,5 +7,6 @@ enum class IngredientName
 	Leaf,
 	Salt,
 	DragonFruit,
-	MermaidScales
+	MermaidScales,
+	Nothing
 };
