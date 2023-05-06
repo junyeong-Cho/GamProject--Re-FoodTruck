@@ -178,7 +178,6 @@ xcopy /d /y Assets\* "$(OutputPath)Assets"
     <ClCompile Include="Game\Cook.cpp" />
     <ClCompile Include="Game\Counter.cpp" />
     <ClCompile Include="Game\Ingredient.cpp" />
-    <ClCompile Include="Game\InventoryManager.cpp" />
     <ClCompile Include="Game\Kitchen.cpp" />
     <ClCompile Include="Game\Main_menu.cpp" />
     <ClCompile Include="Game\Operation.cpp" />
@@ -208,8 +207,8 @@ xcopy /d /y Assets\* "$(OutputPath)Assets"
     <ClInclude Include="Game\Counter.h" />
     <ClInclude Include="Game\Ingredient.h" />
     <ClInclude Include="Game\IngredientName.h" />
-    <ClInclude Include="Game\InventoryManager.h" />
     <ClInclude Include="Game\InventoryName.h" />
+    <ClInclude Include="Game\InventoryTexture.h" />
     <ClInclude Include="Game\Kitchen.h" />
     <ClInclude Include="Game\KitchenPos.h" />
     <ClInclude Include="Game\Main_menu.h" />

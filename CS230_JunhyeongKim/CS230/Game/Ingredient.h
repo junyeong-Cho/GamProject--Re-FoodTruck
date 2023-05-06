@@ -2,12 +2,15 @@
 #include "IngredientName.h"
 #include "KitchenPos.h"
 #include "..\Engine\vec2.h"
-#include "..\Engine\Sprite.h"
+#include "..\Engine\Texture.h"
+#include "..\Engine\Engine.h"
+#include <vector>
 
 class Ingredient
 {
 public:
     Ingredient(IngredientName id, Math::vec2 pos, int cuttingNumber);
+    virtual void Load() = 0;
     virtual void Update(double dt) = 0;
     virtual void Draw() = 0;
 
@@ -19,21 +22,21 @@ public:
     bool IsMouseOn() { return mouseClick; }
     void ChangePos(Math::vec2 pos) { position = pos; }
     Math::vec2 GetPos() { return position; }
-    CS230::Sprite sprite;
 
-private:
+protected:
     IngredientName name;
     Math::vec2 position;
-    int cutNum;
+    int cutNum = 0;
     bool boiled = false;
     bool mouseClick = false;
-
+    std::vector< CS230::Texture*> texture;
 };
 
 class Remon : Ingredient
 {
 public:
-    Remon(Ingredient id, Math::vec2 pos, int cuttingNumber);
+    Remon(IngredientName id, Math::vec2 pos, int cuttingNumber);
+    void Load() override;
     void Update(double dt)override;
     void Draw()override;
 
@@ -44,7 +47,8 @@ private:
 class Legguce : Ingredient
 {
 public:
-    Legguce(Ingredient id, Math::vec2 pos, int cuttingNumber);
+    Legguce(IngredientName id, Math::vec2 pos, int cuttingNumber);
+    void Load() override;
     void Update(double dt)override;
     void Draw()override;
 private:
@@ -55,7 +59,8 @@ private:
 class Ant : Ingredient
 {
 public:
-    Ant(Ingredient id, Math::vec2 pos, int cuttingNumber);
+    Ant(IngredientName id, Math::vec2 pos, int cuttingNumber);
+    void Load() override;
     void Update(double dt)override;
     void Draw()override;
 private:
@@ -66,7 +71,8 @@ private:
 class Leaf : Ingredient
 {
 public:
-    Leaf(Ingredient id, Math::vec2 pos, int cuttingNumber);
+    Leaf(IngredientName id, Math::vec2 pos, int cuttingNumber);
+    void Load() override;
     void Update(double dt)override;
     void Draw()override;
 private:
@@ -77,7 +83,8 @@ private:
 class Salt : Ingredient
 {
 public:
-    Salt(Ingredient id, Math::vec2 pos, int cuttingNumber);
+    Salt(IngredientName id, Math::vec2 pos, int cuttingNumber);
+    void Load() override;
     void Update(double dt)override;
     void Draw()override;
 private:
@@ -88,7 +95,8 @@ private:
 class DragonFruit : Ingredient
 {
 public:
-    DragonFruit(Ingredient id, Math::vec2 pos, int cuttingNumber);
+    DragonFruit(IngredientName id, Math::vec2 pos, int cuttingNumber);
+    void Load() override;
     void Update(double dt)override;
     void Draw()override;
 private:
@@ -99,7 +107,8 @@ private:
 class MermaidScales : Ingredient
 {
 public:
-    MermaidScales(Ingredient id, Math::vec2 pos, int cuttingNumber);
+    MermaidScales(IngredientName id, Math::vec2 pos, int cuttingNumber);
+    void Load() override;
     void Update(double dt)override;
     void Draw()override;
 private:

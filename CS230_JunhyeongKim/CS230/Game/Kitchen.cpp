@@ -7,7 +7,7 @@ Kitchen::Kitchen() : cook(Cook{})
 
 void Kitchen::Load()
 {
-
+	cook.Load();
 }
 
 void Kitchen::Update(double dt)

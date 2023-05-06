@@ -76,9 +76,6 @@
     <ClCompile Include="Game\Tool.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="Game\InventoryManager.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
     <ClCompile Include="Game\Operation.cpp">
       <Filter>Game</Filter>
     </ClCompile>
@@ -171,13 +168,13 @@
     <ClInclude Include="Game\InventoryName.h">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="Game\InventoryManager.h">
-      <Filter>Game</Filter>
-    </ClInclude>
     <ClInclude Include="Game\PetPropertyName.h">
       <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="Game\Operation.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\InventoryTexture.h">
       <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>

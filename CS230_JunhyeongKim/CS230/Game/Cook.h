@@ -2,18 +2,19 @@
 #include <vector>
 #include "Ingredient.h"
 #include "Tool.h"
-#include "InventoryManager.h"
+#include "Operation.h"
 
 class Cook
 {
 public:
 	Cook();
+    void Load();
 	void Update(double dt);
     void Draw();
     
 private:
     std::vector<Cook> cooks;
     std::vector<Ingredient*> ingredients;
-    std::vector<Tool*> tools;
-    InventoryManager inventoryManager;
+    Tool tool;
+    Operation operation;
 };
