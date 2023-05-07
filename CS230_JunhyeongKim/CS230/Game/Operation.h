@@ -16,10 +16,6 @@ public:
 	void Draw();
 	InventoryTexture Return();
 
-	static int wheel;
-	static bool leftClick;
-	static bool rightClick;
-
 private:
 	std::vector<CS230::Texture*> operationTexture;
 

@@ -1,15 +1,24 @@
 #include "Ingredient.h"
+#include <iostream>
 
-Ingredient::Ingredient(IngredientName id, Math::vec2 pos, int cuttingNumber)
-	:name(id), position(pos), cutNum(cuttingNumber)
+Ingredient::Ingredient(IngredientName id, Math::vec2 pos, int cuttingNumber, KitchenPosition place)
+	:name(id), position(pos), cutNum(cuttingNumber), place(place)
 {
 
 }
 
+bool Ingredient::IsMouseOn(Math::vec2 mousePos)
+{
+	if (position.x - 50 < mousePos.x && position.x + 50 > mousePos.x
+		&& position.y - 50 < mousePos.y && position.y + 50 > mousePos.y)
+	{
+		return true;
+	}
+	return false;
+}
 
-
-Lemon::Lemon(IngredientName id, Math::vec2 pos, int cuttingNumber)
-	:Ingredient(id, pos, cuttingNumber)
+Lemon::Lemon(IngredientName id, Math::vec2 pos, int cuttingNumber, KitchenPosition place)
+	:Ingredient(id, pos, cuttingNumber, place)
 {}
 void Lemon::Load()
 {
@@ -36,15 +45,15 @@ void Lemon::Draw()
 
 
 
-Lettuce::Lettuce(IngredientName id, Math::vec2 pos, int cuttingNumber)
-	:Ingredient(id, pos, cuttingNumber)
+Lettuce::Lettuce(IngredientName id, Math::vec2 pos, int cuttingNumber, KitchenPosition place)
+	:Ingredient(id, pos, cuttingNumber, place)
 {}
 void Lettuce::Load()
 {
-	texture.push_back(Engine::GetTextureManager().Load("Assets/Leggttuce1.png"));
-	texture.push_back(Engine::GetTextureManager().Load("Assets/Leggttuce2.png"));
-	texture.push_back(Engine::GetTextureManager().Load("Assets/Leggttuce3.png"));
-	texture.push_back(Engine::GetTextureManager().Load("Assets/Leggttuce4.png"));
+	texture.push_back(Engine::GetTextureManager().Load("Assets/Lettuce1.png"));
+	texture.push_back(Engine::GetTextureManager().Load("Assets/Lettuce2.png"));
+	texture.push_back(Engine::GetTextureManager().Load("Assets/Lettuce3.png"));
+	texture.push_back(Engine::GetTextureManager().Load("Assets/Lettuce4.png"));
 }
 void Lettuce::Update(double dt)
 {
@@ -65,8 +74,8 @@ void Lettuce::Draw()
 
 
 
-Ant::Ant(IngredientName id, Math::vec2 pos, int cuttingNumber)
-	:Ingredient(id, pos, cuttingNumber)
+Ant::Ant(IngredientName id, Math::vec2 pos, int cuttingNumber, KitchenPosition place)
+	:Ingredient(id, pos, cuttingNumber, place)
 {}
 void Ant::Load()
 {
@@ -91,8 +100,8 @@ void Ant::Draw()
 
 
 
-Leaf::Leaf(IngredientName id, Math::vec2 pos, int cuttingNumber)
-	:Ingredient(id, pos, cuttingNumber)
+Leaf::Leaf(IngredientName id, Math::vec2 pos, int cuttingNumber, KitchenPosition place)
+	:Ingredient(id, pos, cuttingNumber, place)
 {}
 void Leaf::Load()
 {
@@ -117,8 +126,8 @@ void Leaf::Draw()
 
 
 
-Salt::Salt(IngredientName id, Math::vec2 pos, int cuttingNumber)
-	:Ingredient(id, pos, cuttingNumber)
+Salt::Salt(IngredientName id, Math::vec2 pos, int cuttingNumber, KitchenPosition place)
+	:Ingredient(id, pos, cuttingNumber, place)
 {}
 void Salt::Load()
 {
@@ -145,8 +154,8 @@ void Salt::Draw()
 
 
 
-DragonFruit::DragonFruit(IngredientName id, Math::vec2 pos, int cuttingNumber)
-	:Ingredient(id, pos, cuttingNumber)
+DragonFruit::DragonFruit(IngredientName id, Math::vec2 pos, int cuttingNumber, KitchenPosition place)
+	:Ingredient(id, pos, cuttingNumber, place)
 {}
 void DragonFruit::Load()
 {
@@ -173,8 +182,8 @@ void DragonFruit::Draw()
 
 
 
-MermaidScales::MermaidScales(IngredientName id, Math::vec2 pos, int cuttingNumber)
-	:Ingredient(id, pos, cuttingNumber)
+MermaidScales::MermaidScales(IngredientName id, Math::vec2 pos, int cuttingNumber, KitchenPosition place)
+	:Ingredient(id, pos, cuttingNumber, place)
 {}
 void MermaidScales::Load()
 {
@@ -197,8 +206,8 @@ void MermaidScales::Draw()
 	}
 }
 
-Water::Water(IngredientName id, Math::vec2 pos, int cuttingNumber)
-	:Ingredient(id, pos, cuttingNumber)
+Water::Water(IngredientName id, Math::vec2 pos, int cuttingNumber, KitchenPosition place)
+	:Ingredient(id, pos, cuttingNumber, place)
 {}
 void Water::Load()
 {

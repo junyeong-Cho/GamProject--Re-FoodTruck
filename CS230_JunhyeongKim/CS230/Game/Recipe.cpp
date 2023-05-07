@@ -2,42 +2,42 @@
 
 Recipe::Recipe(RecipeName name, int TotalNum) : recippeName(name), totalNum(TotalNum)
 {
-	lemon = new Lemon(IngredientName::Lemon, { 0,0 }, 0);
-	boiledLemon = new Lemon(IngredientName::Lemon, { 0,0 }, 0);
+	lemon = new Lemon(IngredientName::Lemon, { 0,0 }, 0, KitchenPosition::COUNTER1);
+	boiledLemon = new Lemon(IngredientName::Lemon, { 0,0 }, 0, KitchenPosition::COUNTER1);
 	boiledLemon->Boil();
 
-	lettuce = new Lettuce(IngredientName::Lettuce, { 0,0 }, 0);
+	lettuce = new Lettuce(IngredientName::Lettuce, { 0,0 }, 0, KitchenPosition::COUNTER1);
 
-	ant = new Ant(IngredientName::Ant, { 0,0 }, 0);
-	boiledAnt = new Ant(IngredientName::Ant, { 0,0 }, 0);
+	ant = new Ant(IngredientName::Ant, { 0,0 }, 0, KitchenPosition::COUNTER1);
+	boiledAnt = new Ant(IngredientName::Ant, { 0,0 }, 0, KitchenPosition::COUNTER1);
 	boiledAnt->Boil();
 
-	leaf = new Leaf(IngredientName::Leaf, { 0,0 }, 0);
-	boiledLeaf = new Leaf(IngredientName::Leaf, { 0,0 }, 0);
+	leaf = new Leaf(IngredientName::Leaf, { 0,0 }, 0, KitchenPosition::COUNTER1);
+	boiledLeaf = new Leaf(IngredientName::Leaf, { 0,0 }, 0, KitchenPosition::COUNTER1);
 	boiledLeaf->Boil();
 
-	salt = new Salt(IngredientName::Salt, { 0,0 }, 0);
-	boiledSalt = new Salt(IngredientName::Salt, { 0,0 }, 0);
+	salt = new Salt(IngredientName::Salt, { 0,0 }, 0, KitchenPosition::COUNTER1);
+	boiledSalt = new Salt(IngredientName::Salt, { 0,0 }, 0, KitchenPosition::COUNTER1);
 	boiledSalt->Boil();
 
-	dragonFruit = new DragonFruit(IngredientName::DragonFruit, { 0,0 }, 0);
-	boiledDragonFruit = new DragonFruit(IngredientName::DragonFruit, { 0,0 }, 0);
+	dragonFruit = new DragonFruit(IngredientName::DragonFruit, { 0,0 }, 0, KitchenPosition::COUNTER1);
+	boiledDragonFruit = new DragonFruit(IngredientName::DragonFruit, { 0,0 }, 0, KitchenPosition::COUNTER1);
 	boiledDragonFruit->Boil();
 
-	mermaidScales = new MermaidScales(IngredientName::MermaidScales, { 0,0 }, 0);
-	boiledMermaidScales = new MermaidScales(IngredientName::MermaidScales, { 0,0 }, 0);
+	mermaidScales = new MermaidScales(IngredientName::MermaidScales, { 0,0 }, 0, KitchenPosition::COUNTER1);
+	boiledMermaidScales = new MermaidScales(IngredientName::MermaidScales, { 0,0 }, 0, KitchenPosition::COUNTER1);
 	boiledMermaidScales->Boil();
 
-	boiledwater = new Water(IngredientName::Water, { 0,0 }, 0);
+	boiledwater = new Water(IngredientName::Water, { 0,0 }, 0, KitchenPosition::COUNTER1);
 	boiledwater->Boil();
 }
 
 int Recipe::CheckComplete(std::vector<Ingredient*>& plating)
 {
 	int checkTotal = 0;
-	int size = (plating.size() > recipe.size()) ? recipe.size() : plating.size();
+	size_t size = (plating.size() > recipe.size()) ? recipe.size() : plating.size();
 
-	for (int i = 0; i < size; ++i)
+	for (size_t i = 0; i < size; ++i)
 	{
 		if (plating[i]->GetName() == recipe[i]->GetName())
 		{

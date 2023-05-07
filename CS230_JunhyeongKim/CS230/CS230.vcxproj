@@ -212,7 +212,7 @@ xcopy /d /y Assets\* "$(OutputPath)Assets"
     <ClInclude Include="Game\InventoryName.h" />
     <ClInclude Include="Game\InventoryTexture.h" />
     <ClInclude Include="Game\Kitchen.h" />
-    <ClInclude Include="Game\KitchenPos.h" />
+    <ClInclude Include="Game\KitchenPosition.h" />
     <ClInclude Include="Game\Main_menu.h" />
     <ClInclude Include="Game\Operation.h" />
     <ClInclude Include="Game\PetPropertyName.h" />

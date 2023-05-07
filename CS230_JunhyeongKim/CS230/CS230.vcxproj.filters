@@ -165,9 +165,6 @@
     <ClInclude Include="Game\IngredientName.h">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="Game\KitchenPos.h">
-      <Filter>Game</Filter>
-    </ClInclude>
     <ClInclude Include="Game\ToolName.h">
       <Filter>Game</Filter>
     </ClInclude>
@@ -190,6 +187,9 @@
       <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="Game\RecipeBook.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\KitchenPosition.h">
       <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>

@@ -2,9 +2,9 @@
 #include "Operation.h"
 #include <iostream>
 
-int Operation::wheel = 0;
-bool Operation::leftClick = false;
-bool Operation::rightClick = false;
+int wheel = 0;
+bool leftClick = false;
+bool rightClick = false;
 
 void Operation::Load()
 {
@@ -24,15 +24,15 @@ void on_mouse_wheel(int scroll_amount)
 {
 	if (scroll_amount > 0)
 	{
-		Operation::wheel = -1;
+		wheel = -1;
 	}
 	else if (scroll_amount < 0)
 	{
-		Operation::wheel = 1;
+		wheel = 1;
 	}
 	else
 	{
-		Operation::wheel = 0;
+		wheel = 0;
 	}
 }
 
@@ -40,11 +40,11 @@ void on_mouse_pressed(doodle::MouseButtons button)
 {
 	if (button == doodle::MouseButtons::Right)
 	{
-		Operation::rightClick = true;
+		rightClick = true;
 	}
 	else if (button == doodle::MouseButtons::Left)
 	{
-		Operation::leftClick = true;
+		leftClick = true;
 
 	}
 }
@@ -53,11 +53,11 @@ void on_mouse_released(doodle::MouseButtons button)
 {
 	if (button == doodle::MouseButtons::Right)
 	{
-		Operation::rightClick = false;
+		rightClick = false;
 	}
 	else if (button == doodle::MouseButtons::Left)
 	{
-		Operation::leftClick = false;
+		leftClick = false;
 	}
 }
 

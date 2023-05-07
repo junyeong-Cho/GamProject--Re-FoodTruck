@@ -1,9 +1,11 @@
 #include "RecipeBook.h"
 #include "doodle/drawing.hpp"
 #include "doodle/input.hpp"
+#include <iostream>
 
-bool RecipeBook::rightClick = false;
-int RecipeBook::wheel = 0;
+extern int wheel;
+extern bool leftClick;
+extern bool rightClick;
 
 RecipeBook::RecipeBook()
 {
@@ -19,18 +21,44 @@ RecipeBook::RecipeBook()
 
 }
 
+void RecipeBook::Load()
+{
+	for (Recipe* recipe : recipeBook)
+	{
+		recipe->Load();
+	}
+}
+
 void RecipeBook::Update()
 {
+	for (Recipe* recipe : recipeBook)
+	{
+		recipe->Update();
+	}
+
 	if (doodle::get_mouse_x() >= x && doodle::get_mouse_x() <= x + width &&
 		doodle::get_mouse_y() >= y && doodle::get_mouse_y() <= y + height)
 	{
-		if (rightClick == true)
+		if (leftClick == true)
 		{
-			rightClick = false;
+			leftClick = false;
 			bookOpen = true;
-			page += wheel;
-			wheel = 0;
 		}
+	}
+	else if (doodle::get_mouse_x() >= closeX && doodle::get_mouse_x() <= closeX + closeWidth &&
+		doodle::get_mouse_y() >= closeY && doodle::get_mouse_y() <= closeY + closewHeight)
+	{
+		if (leftClick == true)
+		{
+			leftClick = false;
+			bookOpen = false;
+			page = RecipeName::LemonSalad;
+		}
+	}
+	if (bookOpen == true)
+	{
+		page += wheel;
+		wheel = 0;
 	}
 }
 
@@ -40,47 +68,17 @@ void RecipeBook::Draw()
 {
 	if (bookOpen == true)
 	{
-		
 		recipeBook[static_cast<int>(page)]->Draw();
 	}
+	doodle::draw_rectangle(x, y, width, height);
+	doodle::draw_rectangle(closeX, closeY, closeWidth, closewHeight);
 }
 
 void RecipeBook::Unload()
 {
 	for (Recipe* recipe : recipeBook)
 	{
+		recipe->Unload();
 		delete recipe;
-	}
-}
-
-void on_mouse_wheel(int scroll_amount)
-{
-	if (scroll_amount > 0)
-	{
-		RecipeBook::wheel = -1;
-	}
-	else if (scroll_amount < 0)
-	{
-		RecipeBook::wheel = 1;
-	}
-	else
-	{
-		RecipeBook::wheel = 0;
-	}
-}
-
-void on_mouse_pressed(doodle::MouseButtons button)
-{
-	if (button == doodle::MouseButtons::Right)
-	{
-		RecipeBook::rightClick = true;
-	}
-}
-
-void on_mouse_released(doodle::MouseButtons button)
-{
-	if (button == doodle::MouseButtons::Right)
-	{
-		RecipeBook::rightClick = false;
 	}
 }

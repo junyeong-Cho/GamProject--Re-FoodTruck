@@ -7,6 +7,7 @@
 #include "States.h"
 #include "Button.h"
 #include "Cook.h"
+#include "RecipeBook.h"
 
 class Kitchen : public CS230::GameState
 {
@@ -19,11 +20,21 @@ public:
     std::string GetName() override { return "Kitchen"; }
 
     void Draw_UI();
-    void Draw_Base();
+    void Draw_Background();
     void Draw_Clock();
     void Draw_Money();
-    void Draw_Recipe();
+    void Draw_RecipeBook();
+    void Draw_Order();
+    void Draw_CounterButton();
+    void Draw_Bell();
+    void Draw_IngredientBowl();
+    void Draw_CuttingBoard();
+	void Draw_PaltingSpot();
+	void Draw_Pot();
+
 
 private:
     Cook cook;
+    RecipeBook recipeBook;
+
 };
