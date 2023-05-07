@@ -6,6 +6,7 @@ extern bool leftClick;
 
 Cook::Cook()
 {
+	Set_Variables();
 	for (int i = 0; i < ingredient_number; ++i)
 	{
 		seven_ingredients.push_back(std::vector<Ingredient*>());
@@ -82,8 +83,20 @@ void Cook::Load()
 			seven_ingredients[i][j]->Load();
 		}
 	}
-
+	ChangeIngredientPos();
 }
+
+void Cook::Unload()
+{
+	for (int i = 0; i < seven_ingredients.size(); ++i)
+	{
+		for (int j = 0; j < seven_ingredients[i].size(); ++j)
+		{
+			delete seven_ingredients[i][j];
+		}
+	}
+}
+
 void Cook::Set_Variables()
 {
 	Width_raito = Engine::GetWindow().GetSize().x / 1400.0;
@@ -186,12 +199,22 @@ void Cook::Update(double dt)
 	tool.ChangeTool(operation.Return());
 	SetIngredientsWhere();
 	PutBowl();
+	CreateUsingIngredient();
+	if (tool.GetTool() == ToolName::HAND)
+	{
+		FollowMouseIngredient();
+	}
+	else if (tool.GetTool() == ToolName::KNIFE)
+	{
+		Cutting();
+	}
 }
 
 void Cook::Draw()
 {
 	DrawIngredients();
 	tool.Draw();
+	plating.Draw_Slot();
 
 	//얘가 항상 제일 위에 그려져야함.
 	operation.Draw();
@@ -205,7 +228,6 @@ void Cook::DrawIngredients()
 		{
 			if (seven_ingredients[i].size() != 0)
 			{
-				std::cout << seven_ingredients[i].size();
 				for (int j = 0; j < seven_ingredients[i].size(); ++j)
 				{
 					seven_ingredients[i][j]->Draw();
@@ -378,8 +400,6 @@ void Cook::FollowMouseIngredient()
 	{
 		using_ingredients[WhatIndexMouseClick()]->ChangePos(WhereISMouse());
 	}
-
-
 }
 
 void Cook::PutBowl()
@@ -398,6 +418,18 @@ void Cook::PutBowl()
 					break;
 				}
 			}
+		}
+	}
+}
+
+void Cook::ChangeIngredientPos()
+{
+	for (int i = 0; i < seven_ingredients.size(); ++i)
+	{
+		for (int j = 0; j < seven_ingredients[i].size(); ++j)
+		{
+			seven_ingredients[i][j]->ChangePos(Math::vec2(first_X + width * i, first_Y));
+			std::cout << seven_ingredients[i][j]->GetPos().x << " : " << seven_ingredients[i][j]->GetPos().y << '\n';
 		}
 	}
 }

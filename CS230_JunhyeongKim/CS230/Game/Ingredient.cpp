@@ -32,6 +32,7 @@ void Lemon::Update(double dt)
 }
 void Lemon::Draw()
 {
+	std::cout << position.x << " : " << position.y << '\n';
 	if (cutNum <= 0)
 	{
 		texture[texture.size()-1]->Draw(Math::TranslationMatrix(position));
@@ -47,7 +48,8 @@ void Lemon::Draw()
 
 Lettuce::Lettuce(IngredientName id, Math::vec2 pos, int cuttingNumber, KitchenPosition place)
 	:Ingredient(id, pos, cuttingNumber, place)
-{}
+{
+}
 void Lettuce::Load()
 {
 	texture.push_back(Engine::GetTextureManager().Load("Assets/Lettuce1.png"));
@@ -102,7 +104,9 @@ void Ant::Draw()
 
 Leaf::Leaf(IngredientName id, Math::vec2 pos, int cuttingNumber, KitchenPosition place)
 	:Ingredient(id, pos, cuttingNumber, place)
-{}
+{
+	
+}
 void Leaf::Load()
 {
 	texture.push_back(Engine::GetTextureManager().Load("Assets/Leaf.png"));
@@ -128,7 +132,9 @@ void Leaf::Draw()
 
 Salt::Salt(IngredientName id, Math::vec2 pos, int cuttingNumber, KitchenPosition place)
 	:Ingredient(id, pos, cuttingNumber, place)
-{}
+{
+	
+}
 void Salt::Load()
 {
 	texture.push_back(Engine::GetTextureManager().Load("Assets/Salt1.png"));
@@ -156,7 +162,9 @@ void Salt::Draw()
 
 DragonFruit::DragonFruit(IngredientName id, Math::vec2 pos, int cuttingNumber, KitchenPosition place)
 	:Ingredient(id, pos, cuttingNumber, place)
-{}
+{
+	
+}
 void DragonFruit::Load()
 {
 	texture.push_back(Engine::GetTextureManager().Load("Assets/DragonFruit1.png"));
@@ -184,7 +192,9 @@ void DragonFruit::Draw()
 
 MermaidScales::MermaidScales(IngredientName id, Math::vec2 pos, int cuttingNumber, KitchenPosition place)
 	:Ingredient(id, pos, cuttingNumber, place)
-{}
+{
+	
+}
 void MermaidScales::Load()
 {
 	texture.push_back(Engine::GetTextureManager().Load("Assets/MermaidScales1.png"));
@@ -208,7 +218,9 @@ void MermaidScales::Draw()
 
 Water::Water(IngredientName id, Math::vec2 pos, int cuttingNumber, KitchenPosition place)
 	:Ingredient(id, pos, cuttingNumber, place)
-{}
+{
+	
+}
 void Water::Load()
 {
 	texture.push_back(Engine::GetTextureManager().Load("Assets/Ingredient_Water.png"));

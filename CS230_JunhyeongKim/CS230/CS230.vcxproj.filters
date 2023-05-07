@@ -85,6 +85,9 @@
     <ClCompile Include="Game\RecipeBook.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Plating.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Logger.h">
@@ -190,6 +193,9 @@
       <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="Game\KitchenPosition.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Plating.h">
       <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>

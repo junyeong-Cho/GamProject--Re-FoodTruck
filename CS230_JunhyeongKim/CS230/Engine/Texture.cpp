@@ -9,6 +9,7 @@ Created:    March 8, 2023
 */
 #include <doodle/drawing.hpp>
 #include "Texture.h"
+#include <iostream>
 
 
 CS230::Texture::Texture(const std::filesystem::path& file_path) 
@@ -20,7 +21,8 @@ CS230::Texture::Texture(const std::filesystem::path& file_path)
 
 
 
-void CS230::Texture::Draw(Math::TransformationMatrix display_matrix) {
+void CS230::Texture::Draw(Math::TransformationMatrix display_matrix) 
+{
     doodle::push_settings();
     doodle::apply_matrix(
         display_matrix[0][0],

@@ -4,6 +4,7 @@
 #include "Tool.h"
 #include "Operation.h"
 #include "KitchenPosition.h"
+#include "Plating.h"
 
 class Cook
 {
@@ -12,6 +13,7 @@ public:
     void Load();
 	void Update(double dt);
     void Draw();
+	void Unload();
     
 
 	double Width_raito = 0;
@@ -116,6 +118,7 @@ private:
     int WhatIndexMouseClick();
     void PutBowl();
     void DrawIngredients();
+	void ChangeIngredientPos();
 
     //using_ingredients 벡터 중 몇번째 인덱스를 가리키고 있는지.
     int whatMouseclickIndex = -1;
@@ -127,5 +130,6 @@ private:
 
     Tool tool;
     Operation operation;
+	Plating plating;
 
 };

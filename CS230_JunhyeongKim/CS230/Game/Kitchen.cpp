@@ -17,17 +17,20 @@ void Kitchen::Update(double dt)
 {
 	cook.Update(dt);
 	cook.Set_Variables();
+	recipeBook.Update();
 }
 void Kitchen::Draw()
 {
 	Engine::GetWindow().Clear(0xFFFFFFFF);
 	Draw_UI();
-	recipeBook.Draw();
+	
 	cook.Draw();
+	recipeBook.Draw();
 }
 void Kitchen::Unload()
 {
 	recipeBook.Unload();
+	cook.Unload();
 }
 
 void Kitchen::Draw_UI()
