@@ -7,6 +7,9 @@
     <Filter Include="Engine">
       <UniqueIdentifier>{c2ed2bfc-6c34-4561-81dc-264d0e973757}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Customer">
+      <UniqueIdentifier>{529b11cf-2cca-43c8-8207-67a68ab37721}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -87,6 +90,18 @@
     </ClCompile>
     <ClCompile Include="Game\Plating.cpp">
       <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Pet.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Customer.cpp">
+      <Filter>Game\Customer</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Elf.cpp">
+      <Filter>Game\Customer</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Giraffe.cpp">
+      <Filter>Game\Customer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -197,6 +212,18 @@
     </ClInclude>
     <ClInclude Include="Game\Plating.h">
       <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Pet.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Customer.h">
+      <Filter>Game\Customer</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Elf.h">
+      <Filter>Game\Customer</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Giraffe.h">
+      <Filter>Game\Customer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

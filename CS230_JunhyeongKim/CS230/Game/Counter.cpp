@@ -9,32 +9,54 @@ Created:    April 30, 2023
 */
 
 #include "..\Engine\Engine.h"
-#include "doodle/drawing.hpp"
-#include "doodle/input.hpp"
+#include "doodle/drawing.hpp" //Draw
+#include "doodle/input.hpp" //Mouse
 #include "States.h"
 #include "Counter.h"
+#include "Customer.h"
+#include "Giraffe.h"
+#include "Elf.h"
 
 Counter::Counter()
-	:yes_button(1400.0 / 3.0, 800.0 / 3.0, 1400.0 / 10.0, 800.0 / 10.0),guest_position({-300.0,200.0})
+    :yes_button(1400.0 / 13.0, 800.0 / 3.0, 1400.0 / 10.0, 800.0 / 10.0)
 {
 }
 
 void Counter::Load()
 {
-	guest_image = Engine::GetTextureManager().Load("Assets/giraffe.png");
+    front_customor = new Giraffe(nullptr);
+    gameobjectmanager.Add(front_customor);
+
+
+
+
+    for (int i = 0; i < customors; i++)
+    {
+        int customer_num = (static_cast<double>(rand()) / (RAND_MAX / 2));
+
+        switch (customer_num)
+        {
+        case 0:
+            front_customor = new Giraffe(front_customor);
+            break;
+        case 1:
+            front_customor = new Elf(front_customor);
+            break;
+        case 2:
+            front_customor = new Giraffe(front_customor);
+            break;
+        default:
+            break;
+        }
+        gameobjectmanager.Add(front_customor);
+    }
+
 }
 
 void Counter::Update(double dt)
 {
-	yes_button.update(doodle::get_mouse_x(), doodle::get_mouse_y(), States::Kitchen);
-    if (guest_position.x < 133.0 * Engine::GetWindow().GetSize().x / 1400.0)
-    {
-        guest_position.x += 500 * dt;
-    }
-    else if (guest_position.x >= 133 * Engine::GetWindow().GetSize().x / 1400.0)
-    {
-        guest_position.x = 133 * Engine::GetWindow().GetSize().x / 1400.0;
-    }
+    yes_button.update(doodle::get_mouse_x(), doodle::get_mouse_y(), States::Kitchen);
+    gameobjectmanager.UpdateAll(dt);
 }
 
 void Counter::Draw_UI()
@@ -61,32 +83,14 @@ void Counter::Draw_UI()
     doodle::set_font_fade_out_interval(0.5, 0.0);
     doodle::set_font_size(Engine::GetWindow().GetSize().x / 60.0);
     doodle::set_fill_color(0, 0, 0);
-    doodle::draw_text("Money", Engine::GetWindow().GetSize().x / 2.75 + Engine::GetWindow().GetSize().x * 0.025, Engine::GetWindow().GetSize().y / 8.0 * 7.35);
-    doodle::pop_settings();
-    //밖에 손님 확인용
-    doodle::draw_rectangle(Engine::GetWindow().GetSize().x * 4.0 / 5.0, Engine::GetWindow().GetSize().y / 8.0 * 5.0, Engine::GetWindow().GetSize().x * 0.15, Engine::GetWindow().GetSize().y * 0.35);
-}
-
-void Counter::Draw_text(std::string text)
-{
-    doodle::push_settings();
-    doodle::set_frame_of_reference(doodle::FrameOfReference::RightHanded_OriginBottomLeft);
-    doodle::set_fill_color(255, 255, 255);
-    doodle::draw_rectangle(Engine::GetWindow().GetSize().x / 4.0, Engine::GetWindow().GetSize().y / 2.0, Engine::GetWindow().GetSize().x / 2.3, Engine::GetWindow().GetSize().y / 4.0);
-    doodle::pop_settings();
-
-    doodle::push_settings();
-    doodle::set_frame_of_reference(doodle::FrameOfReference::RightHanded_OriginBottomLeft);
-    doodle::set_font_fade_out_interval(0.5, 0.0);
-    doodle::set_font_size(Engine::GetWindow().GetSize().x / 60.0);
-    doodle::set_fill_color(0, 0, 0);
-    doodle::draw_text(text, Engine::GetWindow().GetSize().x / 4.0 + Engine::GetWindow().GetSize().x / 30.0, Engine::GetWindow().GetSize().y / 2.0 + Engine::GetWindow().GetSize().y / 10.0);
+    //doodle::draw_text(std::to_string(money.Get_money()), Engine::GetWindow().GetSize().x / 2.75 + Engine::GetWindow().GetSize().x * 0.025, Engine::GetWindow().GetSize().y / 8.0 * 7.35);
     doodle::pop_settings();
 }
+
 
 void Counter::Draw()
 {
-	Engine::GetWindow().Clear(0xEBE3C0FF);
+    Engine::GetWindow().Clear(0xEBE3C0FF);
     //Draw_background
     doodle::push_settings();
     doodle::set_fill_color(128, 128, 0);
@@ -94,8 +98,8 @@ void Counter::Draw()
     doodle::pop_settings();
 
     //Draw guest
-	guest_image->Draw(Math::TranslationMatrix(guest_position));
-    
+    gameobjectmanager.DrawAll(Math::TransformationMatrix());
+
     //draw
     doodle::push_settings();
     doodle::set_fill_color(doodle::HexColor{ 0xEBE3C0FF });
@@ -105,7 +109,6 @@ void Counter::Draw()
 
     //Draw UI,text,
     Draw_UI();
-    Draw_text("I'd like a pretty salad, please.");
     //Draw_stand
     doodle::push_settings();
     doodle::set_fill_color(255, 255, 0);
@@ -119,11 +122,10 @@ void Counter::Draw()
 
 void Counter::Clear()
 {
-	Engine::GetWindow().Clear(0xEBE3C0FF);
+    Engine::GetWindow().Clear(0xEBE3C0FF);
 }
 
 void Counter::Unload()
 {
-	guest_position.x = -300.0;
+    gameobjectmanager.Unload();
 }
-

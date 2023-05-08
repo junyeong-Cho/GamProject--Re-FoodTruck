@@ -3,12 +3,12 @@ enum class PetPropertyName
 {
 	FIRE,
 	WATER,
-	NORMAL
+	IDLE
 };
 
 inline PetPropertyName& operator+=(PetPropertyName& name, int value)
 {
-	if (name == PetPropertyName::NORMAL)
+	if (name == PetPropertyName::IDLE)
 	{
 		return name;
 	}

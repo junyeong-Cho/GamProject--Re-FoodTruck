@@ -40,6 +40,7 @@ namespace CS230 {
         void UpdateRotation(double delta);
 
         Sprite sprite;
+        
 
         //State
         class State
@@ -50,7 +51,7 @@ namespace CS230 {
             virtual void CheckExit(GameObject* object) = 0;
             virtual std::string GetName() = 0;
         };
-
+        State* prev_state = &state_none;
 
         //State_None
         class State_None : public State {

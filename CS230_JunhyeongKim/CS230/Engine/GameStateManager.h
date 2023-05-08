@@ -23,6 +23,7 @@ namespace CS230 {
         void ClearNextGameState();
         void ReloadGameState();
         bool HasGameEnded() { return status == Status::EXIT; }
+        GameState* GetCurrentGameState() { return current_gamestate; }
     private:
         enum class Status {
             STARTING,
