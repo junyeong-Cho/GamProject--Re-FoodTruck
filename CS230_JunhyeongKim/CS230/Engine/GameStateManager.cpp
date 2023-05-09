@@ -25,7 +25,6 @@ void CS230::GameStateManager::Update(double dt)
         {
             SetNextGameState(0);
             status = Status::LOADING;
-          
         }
         else
         {
@@ -54,8 +53,20 @@ void CS230::GameStateManager::Update(double dt)
         break;
     case Status::UNLOADING:
         Engine::GetLogger().LogEvent("Unload " + current_gamestate->GetName());
-        current_gamestate->Unload();
-        Engine::GetTextureManager().Unload();
+        //current_gamestate->Unload();
+        if (current_gamestate->GetName() != "Counter")
+        {
+            if (current_gamestate->GetName() != "Kitchen")
+            {
+                current_gamestate->Unload();
+                Engine::GetUnloadManager().GetCounterObjectManager().Unload();
+                Engine::GetUnloadManager().Set_money(100);
+                Engine::GetUnloadManager().Set_timer(100);
+                Engine::GetUnloadManager().Set_rate(100);
+                Engine::GetUnloadManager().first_load = true;
+                Engine::GetTextureManager().Unload();
+            }
+        }
         Engine::GetLogger().LogEvent("Unload Complete");
         if (next_gamestate == nullptr)
         {

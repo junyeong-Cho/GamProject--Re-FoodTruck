@@ -217,6 +217,8 @@ void Customor::State_Evaluate::CheckExit(GameObject* object)
     {
         if (customor->grade == 0)
         {
+            Engine::GetUnloadManager().Update_money(5);
+            Engine::GetUnloadManager().Update_rate(-5);
         }
         customor->number_ticket -= 1;
         customor->change_state(&customor->state_leaving);

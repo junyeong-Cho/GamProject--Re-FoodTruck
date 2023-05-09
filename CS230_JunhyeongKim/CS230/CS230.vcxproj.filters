@@ -100,6 +100,10 @@
     <ClCompile Include="Game\Giraffe.cpp">
       <Filter>Game\Customer</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\Unload_manager.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Ending.cpp">
     <ClCompile Include="Game\Slot.cpp">
       <Filter>Game</Filter>
     </ClCompile>
@@ -222,6 +226,10 @@
     <ClInclude Include="Game\Giraffe.h">
       <Filter>Game\Customer</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Unload_manager.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Ending.h">
     <ClInclude Include="Game\Slot.h">
       <Filter>Game</Filter>
     </ClInclude>

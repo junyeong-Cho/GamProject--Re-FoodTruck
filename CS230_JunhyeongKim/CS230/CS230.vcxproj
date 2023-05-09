@@ -172,6 +172,7 @@ xcopy /d /y Assets\* "$(OutputPath)Assets"
     <ClCompile Include="Engine\Sprite.cpp" />
     <ClCompile Include="Engine\Texture.cpp" />
     <ClCompile Include="Engine\TextureManager.cpp" />
+    <ClCompile Include="Engine\Unload_manager.cpp" />
     <ClCompile Include="Engine\Vec2.cpp" />
     <ClCompile Include="Engine\Window.cpp" />
     <ClCompile Include="Game\Button.cpp" />
@@ -179,6 +180,7 @@ xcopy /d /y Assets\* "$(OutputPath)Assets"
     <ClCompile Include="Game\Counter.cpp" />
     <ClCompile Include="Game\Customer.cpp" />
     <ClCompile Include="Game\Elf.cpp" />
+    <ClCompile Include="Game\Ending.cpp" />
     <ClCompile Include="Game\Giraffe.cpp" />
     <ClCompile Include="Game\Ingredient.cpp" />
     <ClCompile Include="Game\Kitchen.cpp" />
@@ -207,6 +209,7 @@ xcopy /d /y Assets\* "$(OutputPath)Assets"
     <ClInclude Include="Engine\Sprite.h" />
     <ClInclude Include="Engine\Texture.h" />
     <ClInclude Include="Engine\TextureManager.h" />
+    <ClInclude Include="Engine\Unload_manager.h" />
     <ClInclude Include="Engine\Vec2.h" />
     <ClInclude Include="Engine\Window.h" />
     <ClInclude Include="Game\Button.h" />
@@ -214,6 +217,7 @@ xcopy /d /y Assets\* "$(OutputPath)Assets"
     <ClInclude Include="Game\Counter.h" />
     <ClInclude Include="Game\Customer.h" />
     <ClInclude Include="Game\Elf.h" />
+    <ClInclude Include="Game\Ending.h" />
     <ClInclude Include="Game\Giraffe.h" />
     <ClInclude Include="Game\Ingredient.h" />
     <ClInclude Include="Game\IngredientName.h" />

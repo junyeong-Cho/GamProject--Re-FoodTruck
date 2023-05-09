@@ -24,31 +24,32 @@ Counter::Counter()
 
 void Counter::Load()
 {
-    front_customor = new Giraffe(nullptr);
-    gameobjectmanager.Add(front_customor);
-
-
-
-
-    for (int i = 0; i < customors; i++)
+    if (Engine::GetUnloadManager().first_load == true)
     {
-        int customer_num = (static_cast<double>(rand()) / (RAND_MAX / 2));
 
-        switch (customer_num)
+        front_customor = new Giraffe(nullptr);
+        Engine::GetUnloadManager().GetCounterObjectManager().Add(front_customor);
+        for (int i = 1; i < customors; i++)
         {
-        case 0:
-            front_customor = new Giraffe(front_customor);
-            break;
-        case 1:
-            front_customor = new Elf(front_customor);
-            break;
-        case 2:
-            front_customor = new Giraffe(front_customor);
-            break;
-        default:
-            break;
+            int customer_num = (static_cast<double>(rand()) / (RAND_MAX / 2));
+
+            switch (customer_num)
+            {
+            case 0:
+                front_customor = new Giraffe(front_customor);
+                break;
+            case 1:
+                front_customor = new Elf(front_customor);
+                break;
+            case 2:
+                front_customor = new Giraffe(front_customor);
+                break;
+            default:
+                break;
+            }
+            Engine::GetUnloadManager().GetCounterObjectManager().Add(front_customor);
         }
-        gameobjectmanager.Add(front_customor);
+        Engine::GetUnloadManager().first_load = false;
     }
 
 }
@@ -56,7 +57,13 @@ void Counter::Load()
 void Counter::Update(double dt)
 {
     yes_button.update(doodle::get_mouse_x(), doodle::get_mouse_y(), States::Kitchen);
-    gameobjectmanager.UpdateAll(dt);
+    Engine::GetUnloadManager().GetCounterObjectManager().UpdateAll(dt);
+    Engine::GetUnloadManager().Update_timer(dt);
+
+    if (Engine::GetUnloadManager().GetTimer() <= 80.0)
+    {
+        Engine::GetGameStateManager().SetNextGameState(static_cast<int>(States::Ending));
+    }
 }
 
 void Counter::Draw_UI()
@@ -67,7 +74,7 @@ void Counter::Draw_UI()
     doodle::set_font_fade_out_interval(0.5, 0.0);
     doodle::set_font_size(Engine::GetWindow().GetSize().x / 60.0);
     doodle::set_fill_color(0, 0, 0);
-    doodle::draw_text("Time", Engine::GetWindow().GetSize().x / 12.0 + Engine::GetWindow().GetSize().x * 0.025, Engine::GetWindow().GetSize().y / 8.0 * 7.35);
+    doodle::draw_text("Tm : " + std::to_string(static_cast<int>(Engine::GetUnloadManager().GetTimer())), Engine::GetWindow().GetSize().x / 12.0 - 20+ Engine::GetWindow().GetSize().x * 0.025, Engine::GetWindow().GetSize().y / 8.0 * 7.35);
     doodle::pop_settings();
     //¸í¼º
     doodle::draw_rectangle(Engine::GetWindow().GetSize().x / 5.0, Engine::GetWindow().GetSize().y / 8.0 * 7.3, Engine::GetWindow().GetSize().x * 0.15, Engine::GetWindow().GetSize().y * 0.07);
@@ -75,7 +82,7 @@ void Counter::Draw_UI()
     doodle::set_font_fade_out_interval(0.5, 0.0);
     doodle::set_font_size(Engine::GetWindow().GetSize().x / 60.0);
     doodle::set_fill_color(0, 0, 0);
-    doodle::draw_text("Rate : " + std::to_string(100), Engine::GetWindow().GetSize().x / 5.0 + Engine::GetWindow().GetSize().x * 0.025, Engine::GetWindow().GetSize().y / 8.0 * 7.35);
+    doodle::draw_text("Rate : " + std::to_string(Engine::GetUnloadManager().GetRate()), Engine::GetWindow().GetSize().x / 5.0 + Engine::GetWindow().GetSize().x * 0.025, Engine::GetWindow().GetSize().y / 8.0 * 7.35);
     doodle::pop_settings();
     //µ·
     doodle::draw_rectangle(Engine::GetWindow().GetSize().x / 2.75, Engine::GetWindow().GetSize().y / 8.0 * 7.3, Engine::GetWindow().GetSize().x * 0.10, Engine::GetWindow().GetSize().y * 0.07);
@@ -83,7 +90,7 @@ void Counter::Draw_UI()
     doodle::set_font_fade_out_interval(0.5, 0.0);
     doodle::set_font_size(Engine::GetWindow().GetSize().x / 60.0);
     doodle::set_fill_color(0, 0, 0);
-    //doodle::draw_text(std::to_string(money.Get_money()), Engine::GetWindow().GetSize().x / 2.75 + Engine::GetWindow().GetSize().x * 0.025, Engine::GetWindow().GetSize().y / 8.0 * 7.35);
+    doodle::draw_text(std::to_string(Engine::GetUnloadManager().GetMoney()), Engine::GetWindow().GetSize().x / 2.75 + Engine::GetWindow().GetSize().x * 0.025, Engine::GetWindow().GetSize().y / 8.0 * 7.35);
     doodle::pop_settings();
 }
 
@@ -98,7 +105,7 @@ void Counter::Draw()
     doodle::pop_settings();
 
     //Draw guest
-    gameobjectmanager.DrawAll(Math::TransformationMatrix());
+    Engine::GetUnloadManager().GetCounterObjectManager().DrawAll(Math::TransformationMatrix());
 
     //draw
     doodle::push_settings();
@@ -127,5 +134,6 @@ void Counter::Clear()
 
 void Counter::Unload()
 {
-    gameobjectmanager.Unload();
+    //Engine::GetUnloadManager().Save_Counter_object(gameobjectmanager);
+    //gameobjectmanager.Unload();
 }
