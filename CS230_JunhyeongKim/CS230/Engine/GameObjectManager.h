@@ -25,7 +25,7 @@ namespace CS230 {
         void DrawAll(Math::TransformationMatrix camera_matrix);
 
         GameObject* get_object(int i) { return objects[i]; }
-        int GetSize() { return objects.size(); }
+        int GetSize() { return static_cast<int>(objects.size()); }
     private:
         std::vector<GameObject*> objects;
     };

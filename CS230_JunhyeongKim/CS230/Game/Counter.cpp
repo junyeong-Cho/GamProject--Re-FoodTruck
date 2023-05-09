@@ -59,11 +59,8 @@ void Counter::Update(double dt)
     yes_button.update(doodle::get_mouse_x(), doodle::get_mouse_y(), States::Kitchen);
     Engine::GetUnloadManager().GetCounterObjectManager().UpdateAll(dt);
     Engine::GetUnloadManager().Update_timer(dt);
-    if (static_cast<int>(Engine::GetUnloadManager().GetTimer()) < last_timer) {
-        last_timer = static_cast<int>(Engine::GetUnloadManager().GetTimer());
-    }
 
-    if (Engine::GetUnloadManager().GetTimer() <= 80)
+    if (Engine::GetUnloadManager().GetTimer() <= 80.0)
     {
         Engine::GetGameStateManager().SetNextGameState(static_cast<int>(States::Ending));
     }
@@ -77,8 +74,7 @@ void Counter::Draw_UI()
     doodle::set_font_fade_out_interval(0.5, 0.0);
     doodle::set_font_size(Engine::GetWindow().GetSize().x / 60.0);
     doodle::set_fill_color(0, 0, 0);
-    doodle::draw_text("Tm : " + std::to_string(last_timer), Engine::GetWindow().GetSize().x / 12.0 - 20+ Engine::GetWindow().GetSize().x * 0.025, Engine::GetWindow().GetSize().y / 8.0 * 7.35);
-    //doodle::draw_text("Tm : " + std::to_string(static_cast<int>(Engine::GetUnloadManager().GetTimer())), Engine::GetWindow().GetSize().x / 12.0 - 20+ Engine::GetWindow().GetSize().x * 0.025, Engine::GetWindow().GetSize().y / 8.0 * 7.35);
+    doodle::draw_text("Tm : " + std::to_string(static_cast<int>(Engine::GetUnloadManager().GetTimer())), Engine::GetWindow().GetSize().x / 12.0 - 20+ Engine::GetWindow().GetSize().x * 0.025, Engine::GetWindow().GetSize().y / 8.0 * 7.35);
     doodle::pop_settings();
     //¸í¼º
     doodle::draw_rectangle(Engine::GetWindow().GetSize().x / 5.0, Engine::GetWindow().GetSize().y / 8.0 * 7.3, Engine::GetWindow().GetSize().x * 0.15, Engine::GetWindow().GetSize().y * 0.07);

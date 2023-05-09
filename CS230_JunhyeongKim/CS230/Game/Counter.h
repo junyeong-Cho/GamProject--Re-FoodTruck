@@ -40,6 +40,5 @@ private:
     Customor* front_customor = nullptr;
     Button yes_button;
     int customors = 5;
-    int last_timer = 100;
 
 };
