@@ -30,7 +30,6 @@ public:
     void Draw_IngredientBowl();
     void Draw_CuttingBoard();
 	void Draw_PaltingSpot();
-	void Draw_Pot();
 
 
 private:

@@ -4,70 +4,26 @@
 
 extern bool leftClick;
 
-Cook::Cook()
+Cook::Cook() : plate(Plate(Math::vec2{650.0, 80.0})), pot(Pot(Math::vec2{1000.0,80.0}))
 {
 	Set_Variables();
 	for (int i = 0; i < ingredient_number; ++i)
 	{
 		seven_ingredients.push_back(std::vector<Ingredient*>());
 	}
-	Lemon* lemon1 = new Lemon(IngredientName::Lemon, Math::vec2{ first_X + width, first_Y }, 3, KitchenPosition::COUNTER1);
-	Lemon* lemon2 = new Lemon(IngredientName::Lemon, Math::vec2{ first_X + width, first_Y }, 3, KitchenPosition::COUNTER1);
-	Lemon* lemon3 = new Lemon(IngredientName::Lemon, Math::vec2{ first_X + width, first_Y }, 3, KitchenPosition::COUNTER1);
-
-	Lettuce* lettuce1 = new Lettuce(IngredientName::Lettuce, Math::vec2{ first_X, first_Y }, 4, KitchenPosition::COUNTER2);
-	Lettuce* lettuce2 = new Lettuce(IngredientName::Lettuce, Math::vec2{ first_X, first_Y }, 4, KitchenPosition::COUNTER2);
-	Lettuce* lettuce3 = new Lettuce(IngredientName::Lettuce, Math::vec2{ first_X, first_Y }, 4, KitchenPosition::COUNTER2);
-
-	Ant* ant1 = new Ant(IngredientName::Ant, Math::vec2{ first_X, first_Y }, 1, KitchenPosition::COUNTER3);
-	Ant* ant2 = new Ant(IngredientName::Ant, Math::vec2{ first_X, first_Y }, 1, KitchenPosition::COUNTER3);
-	Ant* ant3 = new Ant(IngredientName::Ant, Math::vec2{ first_X, first_Y }, 1, KitchenPosition::COUNTER3);
-
-	Leaf* leaf1 = new Leaf(IngredientName::Leaf, Math::vec2{ first_X, first_Y }, 1, KitchenPosition::COUNTER4);
-	Leaf* leaf2 = new Leaf(IngredientName::Leaf, Math::vec2{ first_X, first_Y }, 1, KitchenPosition::COUNTER4);
-	Leaf* leaf3 = new Leaf(IngredientName::Leaf, Math::vec2{ first_X, first_Y }, 1, KitchenPosition::COUNTER4);
-
-	Salt* salt1 = new Salt(IngredientName::Salt, Math::vec2{ first_X, first_Y }, 3, KitchenPosition::COUNTER5);
-	Salt* salt2 = new Salt(IngredientName::Salt, Math::vec2{ first_X, first_Y }, 3, KitchenPosition::COUNTER5);
-	Salt* salt3 = new Salt(IngredientName::Salt, Math::vec2{ first_X, first_Y }, 3, KitchenPosition::COUNTER5);
-
-	DragonFruit* dragonFruit1 = new DragonFruit(IngredientName::DragonFruit, Math::vec2{ first_X, first_Y }, 3, KitchenPosition::COUNTER6);
-	DragonFruit* dragonFruit2 = new DragonFruit(IngredientName::DragonFruit, Math::vec2{ first_X, first_Y }, 3, KitchenPosition::COUNTER6);
-	DragonFruit* dragonFruit3 = new DragonFruit(IngredientName::DragonFruit, Math::vec2{ first_X, first_Y }, 3, KitchenPosition::COUNTER6);
-
-	MermaidScales* mermaidScales1 = new MermaidScales(IngredientName::MermaidScales, Math::vec2{ first_X, first_Y }, 2, KitchenPosition::COUNTER6);
-	MermaidScales* mermaidScales2 = new MermaidScales(IngredientName::MermaidScales, Math::vec2{ first_X, first_Y }, 2, KitchenPosition::COUNTER6);
-	MermaidScales* mermaidScales3 = new MermaidScales(IngredientName::MermaidScales, Math::vec2{ first_X, first_Y }, 2, KitchenPosition::COUNTER6);
 
 	if (seven_ingredients.size() == ingredient_number)
 	{
-		seven_ingredients[0].push_back(lemon1);
-		seven_ingredients[0].push_back(lemon2);
-		seven_ingredients[0].push_back(lemon3);
-
-		seven_ingredients[1].push_back(lettuce1);
-		seven_ingredients[1].push_back(lettuce2);
-		seven_ingredients[1].push_back(lettuce3);
-
-		seven_ingredients[2].push_back(ant1);
-		seven_ingredients[2].push_back(ant2);
-		seven_ingredients[2].push_back(ant3);
-
-		seven_ingredients[3].push_back(leaf1);
-		seven_ingredients[3].push_back(leaf2);
-		seven_ingredients[3].push_back(leaf3);
-
-		seven_ingredients[4].push_back(salt1);
-		seven_ingredients[4].push_back(salt2);
-		seven_ingredients[4].push_back(salt3);
-
-		seven_ingredients[5].push_back(dragonFruit1);
-		seven_ingredients[5].push_back(dragonFruit2);
-		seven_ingredients[5].push_back(dragonFruit3);
-
-		seven_ingredients[6].push_back(mermaidScales1);
-		seven_ingredients[6].push_back(mermaidScales2);
-		seven_ingredients[6].push_back(mermaidScales3);
+		for (int i = 0; i < 20; ++i)
+		{
+			seven_ingredients[0].push_back(new Lemon(IngredientName::Lemon, Math::vec2{ first_X + width, first_Y }, 3, KitchenPosition::COUNTER1));
+			seven_ingredients[1].push_back(new Lettuce(IngredientName::Lettuce, Math::vec2{ first_X, first_Y }, 4, KitchenPosition::COUNTER2));
+			seven_ingredients[2].push_back(new Ant(IngredientName::Ant, Math::vec2{ first_X, first_Y }, 1, KitchenPosition::COUNTER3));
+			seven_ingredients[3].push_back(new Leaf(IngredientName::Leaf, Math::vec2{ first_X, first_Y }, 1, KitchenPosition::COUNTER4));
+			seven_ingredients[4].push_back(new Salt(IngredientName::Salt, Math::vec2{ first_X, first_Y }, 3, KitchenPosition::COUNTER5));
+			seven_ingredients[5].push_back(new DragonFruit(IngredientName::DragonFruit, Math::vec2{ first_X, first_Y }, 3, KitchenPosition::COUNTER6));
+			seven_ingredients[6].push_back(new MermaidScales(IngredientName::MermaidScales, Math::vec2{ first_X, first_Y }, 2, KitchenPosition::COUNTER7));
+		}
 	}
 }
 
@@ -75,6 +31,8 @@ void Cook::Load()
 {
 	operation.Load();
 	tool.Load();
+	plate.Load();
+	pot.Load();
 
 	for (int i = 0; i < ingredient_number; ++i)
 	{
@@ -88,6 +46,8 @@ void Cook::Load()
 
 void Cook::Unload()
 {
+	plate.Unload();
+	pot.Unload();
 	for (int i = 0; i < seven_ingredients.size(); ++i)
 	{
 		for (int j = 0; j < seven_ingredients[i].size(); ++j)
@@ -194,12 +154,22 @@ void Cook::Set_Variables()
 
 void Cook::Update(double dt)
 {
+	SetStoveOn();
+	if (stoveOn == true)
+	{
+		time += dt;
+	}
 	Set_Variables();
 	operation.Update();
 	tool.ChangeTool(operation.Return());
 	SetIngredientsWhere();
-	PutBowl();
+	PutSlot();
 	CreateUsingIngredient();
+	plate.Update(dt);
+	pot.Update(dt);
+
+	GetWhere(WhereISMouse());
+
 	if (tool.GetTool() == ToolName::HAND)
 	{
 		FollowMouseIngredient();
@@ -208,14 +178,21 @@ void Cook::Update(double dt)
 	{
 		Cutting();
 	}
+	else if (tool.GetTool() == ToolName::LADLE)
+	{
+		SpotToPlate();
+	}
 }
 
 void Cook::Draw()
 {
+	SlotDraw();
 	DrawIngredients();
 	tool.Draw();
-	plating.Draw_Slot();
-
+	plate.ButtonDraw();
+	pot.ButtonDraw();
+	DrawGage();
+	DrawTempSoup();
 	//얘가 항상 제일 위에 그려져야함.
 	operation.Draw();
 }
@@ -294,12 +271,11 @@ KitchenPosition Cook::GetWhere(Math::vec2 pos)
 	{
 		return KitchenPosition::CUTTING_BOARD;
 	}
-	else if (std::sqrt((std::pow((pos.x - bowl_X), 2) + (std::pow((pos.y - bowl_Y), 2)))) <= bowl_width / 2.0)
+	else if (std::sqrt((std::pow((pos.x - 800), 2) + (std::pow((pos.y - 230), 2)))) <= 150.0)
 	{
 		return KitchenPosition::BOWL;
 	}
-	else if (pos.x > stove_X && pos.x <= stove_X + stove_width
-		&& pos.y > stove_Y && pos.y < stove_Y + stove_height)
+	else if (std::sqrt((std::pow((pos.x - 1150), 2) + (std::pow((pos.y - 230), 2)))) <= 150.0)
 	{
 		return KitchenPosition::STOVE;
 	}
@@ -402,7 +378,7 @@ void Cook::FollowMouseIngredient()
 	}
 }
 
-void Cook::PutBowl()
+void Cook::PutSlot()
 {
 	if (using_ingredients.size() != 0)
 	{
@@ -412,9 +388,23 @@ void Cook::PutBowl()
 			{
 				if (using_ingredients[i]->GetPlace() == KitchenPosition::BOWL)
 				{
-					inPlate.push_back(using_ingredients[i]);
-					using_ingredients.erase(using_ingredients.begin() + i);
-					whatMouseclickIndex = -1;
+					if (canCook == true)
+					{
+						if (plate.PutIngredient(using_ingredients[i]))
+						{
+							using_ingredients.erase(using_ingredients.begin() + i);
+							whatMouseclickIndex = -1;
+						}
+						break;
+					}
+				}
+				else if (using_ingredients[i]->GetPlace() == KitchenPosition::STOVE)
+				{
+					if (pot.PutIngredient(using_ingredients[i]))
+					{
+						using_ingredients.erase(using_ingredients.begin() + i);
+						whatMouseclickIndex = -1;
+					}
 					break;
 				}
 			}
@@ -429,7 +419,146 @@ void Cook::ChangeIngredientPos()
 		for (int j = 0; j < seven_ingredients[i].size(); ++j)
 		{
 			seven_ingredients[i][j]->ChangePos(Math::vec2(first_X + width * i, first_Y));
-			std::cout << seven_ingredients[i][j]->GetPos().x << " : " << seven_ingredients[i][j]->GetPos().y << '\n';
 		}
 	}
 }
+
+void Cook::SlotDraw()
+{
+	plate.Draw(plateDrawIndex);
+	pot.Draw(potDrawIndex);
+
+	if (checkDrawSoup == false)
+	{
+		pot.DrawIngredient();
+	}
+	plate.DrawIngredient();
+}
+
+void Cook::DrawScore(RecipeName order)
+{
+	score = recipeBook.GetRecipeBook()[static_cast<int>(order)]->CheckComplete(plate.vector);
+	if (plate.ButtonClick(WhereISMouse()) == true)
+	{
+		if (score >= 0 && score < 50)
+		{
+			plateDrawIndex = static_cast<int>(order) * 3 + 3;
+		}
+		else if (score >= 50 && score < 95)
+		{
+			plateDrawIndex = static_cast<int>(order) * 3 + 2;
+		}
+		else if (score >= 95 && score < 100)
+		{
+			plateDrawIndex = static_cast<int>(order) * 3 + 1;
+		}
+		canCook = false; // 카운터로 가져다주는 벨 누르면 true가 되어야함.
+		plate.vector.clear();
+	}
+	doodle::draw_text( std::to_string(score) + "%", 700, -10);
+}
+
+void Cook::SetStoveOn()
+{
+	if (stoveOn == false)
+	{
+		if (pot.ButtonClick(WhereISMouse()) == true)
+		{
+			stoveOn = true;
+			
+		}
+		potDrawIndex = 0;
+	}
+	else
+	{
+		if (pot.ButtonClick(WhereISMouse()) == true)
+		{
+			stoveOn = false;
+			if (text == "Now")
+			{
+				text = "Good";
+				for (Ingredient* i : pot.vector)
+				{
+					i->Boil();
+				}
+			}
+			else
+			{
+				text = "Bad";
+			}
+			time = 0;
+			
+		}
+		potDrawIndex = 1;
+	}
+	
+}
+
+void Cook::DrawGage()
+{
+	if (time > 0 && time < 2)
+	{
+		text = "Yet";
+	}
+	else if (time >= 2 && time < 4)
+	{
+		text = "Ready";
+		
+	}
+	else if (time >= 4 && time < 6)
+	{
+		text = "Now";
+		
+	}
+	else if (time >= 6)
+	{
+		text = "Fail";
+		
+	}
+
+	doodle::draw_text(text, 1100, -10);
+}
+
+void Cook::SpotToPlate()
+{
+	if (checkDrawSoup == true)
+	{
+		if (GetWhere(WhereISMouse()) == KitchenPosition::STOVE && leftClick == true)
+		{
+			leftClick = false;
+			checkDrawSoup = false;
+		}
+	}
+	else
+	{
+		if (pot.vector.size() != 0)
+		{
+			if (GetWhere(WhereISMouse()) == KitchenPosition::STOVE && leftClick == true)
+			{
+				leftClick = false;
+				checkDrawSoup = true;
+			}
+		}
+	}
+	if (GetWhere(WhereISMouse()) == KitchenPosition::BOWL && leftClick == true)
+	{
+		if (canCook == true)
+		{
+			for (int i = 0; i < pot.vector.size() && plate.vector.size() <= 16; ++i)
+			{
+				plate.PutIngredient(pot.vector[i]);
+			}
+			pot.vector.clear();
+			checkDrawSoup = false;
+		}
+	}
+}
+
+void Cook::DrawTempSoup()
+{
+	if (checkDrawSoup == true)
+	{
+		doodle::draw_ellipse(WhereISMouse().x, WhereISMouse().y, 30);
+	}
+}
+

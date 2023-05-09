@@ -35,6 +35,7 @@ Recipe::Recipe(RecipeName name, int TotalNum) : recippeName(name), totalNum(Tota
 int Recipe::CheckComplete(std::vector<Ingredient*>& plating)
 {
 	int checkTotal = 0;
+	score = 0;
 	size_t size = (plating.size() > recipe.size()) ? recipe.size() : plating.size();
 
 	for (size_t i = 0; i < size; ++i)

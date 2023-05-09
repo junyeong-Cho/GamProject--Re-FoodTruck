@@ -4,7 +4,10 @@
 #include "Tool.h"
 #include "Operation.h"
 #include "KitchenPosition.h"
-#include "Plating.h"
+#include "Slot.h"
+
+#include "RecipeBook.h"
+#include "RecipeName.h"
 
 class Cook
 {
@@ -14,14 +17,11 @@ public:
 	void Update(double dt);
     void Draw();
 	void Unload();
-    
+	void DrawScore(RecipeName order);
+	void DrawGage();
 
 	double Width_raito = 0;
 	double Height_raito = 0;
-
-
-
-
 
 	double first_X{ 0.0 };
 	double first_Y{ 0.0 };
@@ -103,7 +103,6 @@ public:
 	double toolExplain_width{ 0.0 };
 	double toolExplain_height{ 0.0 };
 
-
 	int ingredient_number{ 7 };
 	void Set_Variables();
 
@@ -116,9 +115,15 @@ private:
     void CreateUsingIngredient();
     void FollowMouseIngredient();
     int WhatIndexMouseClick();
-    void PutBowl();
+    void PutSlot();
     void DrawIngredients();
 	void ChangeIngredientPos();
+	void SlotDraw();
+	void SetStoveOn();
+	void SpotToPlate();
+	void DrawTempSoup();
+	int ReturnScore() { return score; }
+
 
     //using_ingredients 벡터 중 몇번째 인덱스를 가리키고 있는지.
     int whatMouseclickIndex = -1;
@@ -130,6 +135,15 @@ private:
 
     Tool tool;
     Operation operation;
-	Plating plating;
-
+	Plate plate;
+	Pot pot;
+	int score = 0;
+	RecipeBook recipeBook;
+	double time = 0;
+	bool stoveOn = false;
+	std::string text = "Off";
+	int potDrawIndex = 0;
+	int plateDrawIndex = 0;
+	bool checkDrawSoup = false;
+	bool canCook = true;
 };

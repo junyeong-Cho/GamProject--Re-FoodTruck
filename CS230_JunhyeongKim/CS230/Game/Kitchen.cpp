@@ -25,6 +25,7 @@ void Kitchen::Draw()
 	Draw_UI();
 	
 	cook.Draw();
+	cook.DrawScore(RecipeName::LemonSalad);
 	recipeBook.Draw();
 }
 void Kitchen::Unload()
@@ -45,7 +46,6 @@ void Kitchen::Draw_UI()
 	Draw_IngredientBowl();
 	Draw_CuttingBoard();
 	Draw_PaltingSpot();
-	Draw_Pot();
 }
 
 void Kitchen::Draw_Background()
@@ -176,12 +176,3 @@ void Kitchen::Draw_PaltingSpot()
 	doodle::pop_settings();
 }
 
-void Kitchen::Draw_Pot()
-{
-	doodle::push_settings();
-
-	doodle::set_outline_color(doodle::HexColor{ 0xFF7171FF });
-	doodle::draw_rectangle(cook.stove_X, cook.stove_Y, cook.stove_width, cook.stove_height);
-
-	doodle::pop_settings();
-}

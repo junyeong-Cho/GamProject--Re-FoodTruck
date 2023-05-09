@@ -103,6 +103,9 @@
     <ClCompile Include="Game\Giraffe.cpp">
       <Filter>Game\Customer</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Slot.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Logger.h">
@@ -224,6 +227,9 @@
     </ClInclude>
     <ClInclude Include="Game\Giraffe.h">
       <Filter>Game\Customer</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Slot.h">
+      <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

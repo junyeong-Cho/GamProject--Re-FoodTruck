@@ -7,6 +7,19 @@ Ingredient::Ingredient(IngredientName id, Math::vec2 pos, int cuttingNumber, Kit
 
 }
 
+void Ingredient::SlotDraw(Math::vec2 pos)
+{
+	Math::TransformationMatrix matrix = Math::TranslationMatrix(pos) * Math::RotationMatrix(0) * Math::ScaleMatrix(0.5);
+	if (cutNum <= 0)
+	{
+		texture[texture.size() - 1]->Draw(matrix);
+	}
+	else
+	{
+		texture[texture.size() - cutNum]->Draw(matrix);
+	}
+}
+
 bool Ingredient::IsMouseOn(Math::vec2 mousePos)
 {
 	if (position.x - 50 < mousePos.x && position.x + 50 > mousePos.x
@@ -32,7 +45,6 @@ void Lemon::Update(double dt)
 }
 void Lemon::Draw()
 {
-	std::cout << position.x << " : " << position.y << '\n';
 	if (cutNum <= 0)
 	{
 		texture[texture.size()-1]->Draw(Math::TranslationMatrix(position));
