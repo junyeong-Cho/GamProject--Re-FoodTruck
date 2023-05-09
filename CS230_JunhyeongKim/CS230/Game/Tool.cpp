@@ -12,7 +12,8 @@ void Tool::Load()
 
 void Tool::Draw()
 {
-	texture[static_cast<int>(tool)]->Draw(Math::TranslationMatrix(Math::vec2(doodle::get_mouse_x(), doodle::get_mouse_y())));
+	Math::TransformationMatrix matrix = Math::TranslationMatrix(Math::vec2(doodle::get_mouse_x(), doodle::get_mouse_y())) * Math::RotationMatrix(0) * Math::ScaleMatrix(0.2);
+	texture[static_cast<int>(tool)]->Draw(matrix);
 }
 
 void Tool::ChangeTool(InventoryTexture toolName)

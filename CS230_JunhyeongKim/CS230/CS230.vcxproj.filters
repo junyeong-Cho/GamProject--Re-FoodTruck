@@ -88,9 +88,6 @@
     <ClCompile Include="Game\RecipeBook.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Plating.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
     <ClCompile Include="Game\Pet.cpp">
       <Filter>Game</Filter>
     </ClCompile>
@@ -107,6 +104,7 @@
       <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="Game\Ending.cpp">
+    <ClCompile Include="Game\Slot.cpp">
       <Filter>Game</Filter>
     </ClCompile>
   </ItemGroup>
@@ -216,9 +214,6 @@
     <ClInclude Include="Game\KitchenPosition.h">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Plating.h">
-      <Filter>Game</Filter>
-    </ClInclude>
     <ClInclude Include="Game\Pet.h">
       <Filter>Game</Filter>
     </ClInclude>
@@ -235,6 +230,7 @@
       <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="Game\Ending.h">
+    <ClInclude Include="Game\Slot.h">
       <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>

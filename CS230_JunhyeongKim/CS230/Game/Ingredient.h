@@ -13,6 +13,7 @@ public:
     virtual void Load() = 0;
     virtual void Update(double dt) = 0;
     virtual void Draw() = 0;
+    void SlotDraw(Math::vec2 pos);
 
     void Cut() { --cutNum; }
     int GetCutNum() { return cutNum; }

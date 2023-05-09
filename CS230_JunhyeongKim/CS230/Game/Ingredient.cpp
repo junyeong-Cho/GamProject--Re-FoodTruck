@@ -7,6 +7,19 @@ Ingredient::Ingredient(IngredientName id, Math::vec2 pos, int cuttingNumber, Kit
 
 }
 
+void Ingredient::SlotDraw(Math::vec2 pos)
+{
+	Math::TransformationMatrix matrix = Math::TranslationMatrix(pos) * Math::RotationMatrix(0) * Math::ScaleMatrix(0.1);
+	if (cutNum <= 0)
+	{
+		texture[texture.size() - 1]->Draw(matrix);
+	}
+	else
+	{
+		texture[texture.size() - cutNum]->Draw(matrix);
+	}
+}
+
 bool Ingredient::IsMouseOn(Math::vec2 mousePos)
 {
 	if (position.x - 50 < mousePos.x && position.x + 50 > mousePos.x
@@ -32,14 +45,14 @@ void Lemon::Update(double dt)
 }
 void Lemon::Draw()
 {
-	std::cout << position.x << " : " << position.y << '\n';
+	Math::TransformationMatrix matrix = Math::TranslationMatrix(position) * Math::RotationMatrix(0) * Math::ScaleMatrix(0.1);
 	if (cutNum <= 0)
 	{
-		texture[texture.size()-1]->Draw(Math::TranslationMatrix(position));
+		texture[texture.size()-1]->Draw(matrix);
 	}
 	else
 	{
-		texture[texture.size() - cutNum]->Draw(Math::TranslationMatrix(position));
+		texture[texture.size() - cutNum]->Draw(matrix);
 	}
 }
 
@@ -63,13 +76,14 @@ void Lettuce::Update(double dt)
 }
 void Lettuce::Draw()
 {
+	Math::TransformationMatrix matrix = Math::TranslationMatrix(position) * Math::RotationMatrix(0) * Math::ScaleMatrix(0.1);
 	if (cutNum <= 0)
 	{
-		texture[texture.size() - 1]->Draw(Math::TranslationMatrix(position));
+		texture[texture.size() - 1]->Draw(matrix);
 	}
 	else
 	{
-		texture[texture.size() - cutNum]->Draw(Math::TranslationMatrix(position));
+		texture[texture.size() - cutNum]->Draw(matrix);
 	}
 }
 
@@ -89,13 +103,14 @@ void Ant::Update(double dt)
 }
 void Ant::Draw()
 {
+	Math::TransformationMatrix matrix = Math::TranslationMatrix(position) * Math::RotationMatrix(0) * Math::ScaleMatrix(0.1);
 	if (cutNum <= 0)
 	{
-		texture[texture.size() - 1]->Draw(Math::TranslationMatrix(position));
+		texture[texture.size() - 1]->Draw(matrix);
 	}
 	else
 	{
-		texture[texture.size() - cutNum]->Draw(Math::TranslationMatrix(position));
+		texture[texture.size() - cutNum]->Draw(matrix);
 	}
 }
 
@@ -117,13 +132,14 @@ void Leaf::Update(double dt)
 }
 void Leaf::Draw()
 {
+	Math::TransformationMatrix matrix = Math::TranslationMatrix(position) * Math::RotationMatrix(0) * Math::ScaleMatrix(0.1);
 	if (cutNum <= 0)
 	{
-		texture[texture.size() - 1]->Draw(Math::TranslationMatrix(position));
+		texture[texture.size() - 1]->Draw(matrix);
 	}
 	else
 	{
-		texture[texture.size() - cutNum]->Draw(Math::TranslationMatrix(position));
+		texture[texture.size() - cutNum]->Draw(matrix);
 	}
 }
 
@@ -147,13 +163,14 @@ void Salt::Update(double dt)
 }
 void Salt::Draw()
 {
+	Math::TransformationMatrix matrix = Math::TranslationMatrix(position) * Math::RotationMatrix(0) * Math::ScaleMatrix(0.1);
 	if (cutNum <= 0)
 	{
-		texture[texture.size() - 1]->Draw(Math::TranslationMatrix(position));
+		texture[texture.size() - 1]->Draw(matrix);
 	}
 	else
 	{
-		texture[texture.size() - cutNum]->Draw(Math::TranslationMatrix(position));
+		texture[texture.size() - cutNum]->Draw(matrix);
 	}
 }
 
@@ -177,13 +194,14 @@ void DragonFruit::Update(double dt)
 }
 void DragonFruit::Draw()
 {
+	Math::TransformationMatrix matrix = Math::TranslationMatrix(position) * Math::RotationMatrix(0) * Math::ScaleMatrix(0.1);
 	if (cutNum <= 0)
 	{
-		texture[texture.size() - 1]->Draw(Math::TranslationMatrix(position));
+		texture[texture.size() - 1]->Draw(matrix);
 	}
 	else
 	{
-		texture[texture.size() - cutNum]->Draw(Math::TranslationMatrix(position));
+		texture[texture.size() - cutNum]->Draw(matrix);
 	}
 }
 
@@ -199,6 +217,7 @@ void MermaidScales::Load()
 {
 	texture.push_back(Engine::GetTextureManager().Load("Assets/MermaidScales1.png"));
 	texture.push_back(Engine::GetTextureManager().Load("Assets/MermaidScales2.png"));
+	texture.push_back(Engine::GetTextureManager().Load("Assets/MermaidScales3.png"));
 }
 void MermaidScales::Update(double dt)
 {
@@ -206,13 +225,14 @@ void MermaidScales::Update(double dt)
 }
 void MermaidScales::Draw()
 {
+	Math::TransformationMatrix matrix = Math::TranslationMatrix(position) * Math::RotationMatrix(0) * Math::ScaleMatrix(0.1);
 	if (cutNum <= 0)
 	{
-		texture[texture.size() - 1]->Draw(Math::TranslationMatrix(position));
+		texture[texture.size() - 1]->Draw(matrix);
 	}
 	else
 	{
-		texture[texture.size() - cutNum]->Draw(Math::TranslationMatrix(position));
+		texture[texture.size() - cutNum]->Draw(matrix);
 	}
 }
 
@@ -231,12 +251,13 @@ void Water::Update(double dt)
 }
 void Water::Draw()
 {
+	Math::TransformationMatrix matrix = Math::TranslationMatrix(position) * Math::RotationMatrix(0) * Math::ScaleMatrix(0.1);
 	if (cutNum <= 0)
 	{
-		texture[texture.size() - 1]->Draw(Math::TranslationMatrix(position));
+		texture[texture.size() - 1]->Draw(matrix);
 	}
 	else
 	{
-		texture[texture.size() - cutNum]->Draw(Math::TranslationMatrix(position));
+		texture[texture.size() - cutNum]->Draw(matrix);
 	}
 }

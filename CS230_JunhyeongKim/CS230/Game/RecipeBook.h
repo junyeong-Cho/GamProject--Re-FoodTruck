@@ -9,6 +9,8 @@ public:
 	void Update();
 	void Draw();
 	void Unload();
+	std::vector<Recipe*> GetRecipeBook() { return recipeBook; }
+
 private:
 	std::vector<Recipe*> recipeBook;
 	RecipeName page = RecipeName::LemonSalad;
