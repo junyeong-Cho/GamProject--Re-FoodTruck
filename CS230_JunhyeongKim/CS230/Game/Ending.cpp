@@ -32,7 +32,8 @@ void Ending::Update(double dt)
 {
 	if (Engine::GetInput().KeyJustReleased(CS230::Input::Keys::Enter))
 	{
-		Engine::GetGameStateManager().SetNextGameState(static_cast<int>(States::Main_menu));
+		//Engine::GetGameStateManager().SetNextGameState(static_cast<int>(States::Main_menu));
+		Engine::GetGameStateManager().ClearNextGameState();
 	}
 }
 

@@ -189,6 +189,11 @@ void Customor::State_Fwaiting::CheckExit(GameObject* object)
     {
         customor->change_state(&customor->state_evaluate);
     }
+
+    if (customor->number_ticket == 1 && customor->GetPosition().x == Engine::GetWindow().GetSize().x / 1.4 && Engine::GetInput().KeyDown(CS230::Input::Keys::A))
+    {
+        customor->change_state(&customor->state_evaluate);
+    }
 }
 
 

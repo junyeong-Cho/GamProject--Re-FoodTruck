@@ -59,8 +59,7 @@ void Counter::Update(double dt)
     yes_button.update(doodle::get_mouse_x(), doodle::get_mouse_y(), States::Kitchen);
     Engine::GetUnloadManager().GetCounterObjectManager().UpdateAll(dt);
     Engine::GetUnloadManager().Update_timer(dt);
-
-    if (Engine::GetUnloadManager().GetTimer() <= 80.0)
+    if (Engine::GetUnloadManager().GetTimer() <= 0)
     {
         Engine::GetGameStateManager().SetNextGameState(static_cast<int>(States::Ending));
     }
@@ -124,7 +123,7 @@ void Counter::Draw()
     doodle::pop_settings();
 
 
-    yes_button.draw("Yes!");
+    yes_button.draw("Kitchen");
 }
 
 void Counter::Clear()

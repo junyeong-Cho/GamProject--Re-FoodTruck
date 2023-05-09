@@ -29,11 +29,20 @@ namespace CS230
 		void Set_money(int i) { money = i; }
 		void Set_rate(int i) { rate = i; }
 		void Set_timer(double dt) { timer = dt; }
+		void Set_food_grad(double i)
+		{
+			food_grad = i; 
+			food_complete = true;
+		}
+
 		bool first_load = true;
+		bool food_complete = false;
 	private:
 		GameObjectManager counter_ObjectManager;
 		int money = 100;
 		int rate = 100;
 		double timer = 100;
+
+		double food_grad = 0;
 	};
 }

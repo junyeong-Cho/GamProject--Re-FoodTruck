@@ -1,6 +1,7 @@
 #include "Kitchen.h"
 #include "doodle/drawing.hpp"
 #include <iostream>
+#include "..\Engine\Engine.h"
 
 Kitchen::Kitchen()
 	:go_counter(100,100,100,100)
@@ -20,6 +21,11 @@ void Kitchen::Update(double dt)
 	cook.Set_Variables();
 	recipeBook.Update();
 	go_counter.update(doodle::get_mouse_x(), doodle::get_mouse_y(), States::Counter);
+	Engine::GetUnloadManager().Update_timer(dt);
+	if (Engine::GetUnloadManager().GetTimer() <= 0)
+	{
+		Engine::GetGameStateManager().SetNextGameState(static_cast<int>(States::Ending));
+	}
 }
 void Kitchen::Draw()
 {
@@ -31,6 +37,7 @@ void Kitchen::Draw()
 	recipeBook.Draw();
 	go_counter.draw();
 }
+
 void Kitchen::Unload()
 {
 	recipeBook.Unload();

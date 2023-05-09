@@ -11,7 +11,7 @@ Updated:    March 17, 2023
 
 #include "GameStateManager.h"
 #include "Engine.h"
-
+#include <iostream>
 
 CS230::GameStateManager::GameStateManager() { }
 
@@ -34,6 +34,7 @@ void CS230::GameStateManager::Update(double dt)
     case Status::LOADING:
         current_gamestate = next_gamestate;
         Engine::GetLogger().LogEvent("Load " + current_gamestate->GetName());
+
         current_gamestate->Load();
         Engine::GetLogger().LogEvent("Load Complete");
         status = Status::UPDATING;
@@ -54,6 +55,12 @@ void CS230::GameStateManager::Update(double dt)
     case Status::UNLOADING:
         Engine::GetLogger().LogEvent("Unload " + current_gamestate->GetName());
         //current_gamestate->Unload();
+        if (Engine::GetUnloadManager().GetTimer() <= 0 && current_gamestate->GetName() == "Ending")
+        {
+            std::cout << "kitchen_Unload";
+             Kitchen->Unload();
+        }
+
         if (current_gamestate->GetName() != "Counter")
         {
             if (current_gamestate->GetName() != "Kitchen")
@@ -91,6 +98,10 @@ void CS230::GameStateManager::Update(double dt)
 void CS230::GameStateManager::AddGameState(GameState& gamestate)
 {
     gamestates.push_back(&gamestate);
+    if (gamestate.GetName() == "Kitchen")
+    {
+        Kitchen = &gamestate;
+    }
 }
 
 void CS230::GameStateManager::SetNextGameState(int index)

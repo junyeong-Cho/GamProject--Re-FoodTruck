@@ -1,12 +1,24 @@
 #include "Cook.h"
 #include <doodle/drawing.hpp>
 #include <iostream>
+#include "..\Engine\Engine.h"
+#include "States.h"
 
 extern bool leftClick;
 
 Cook::Cook() : plate(Plate(Math::vec2{650.0, 80.0})), pot(Pot(Math::vec2{1000.0,-10.0}))
 {
 	Set_Variables();
+
+}
+
+void Cook::Load()
+{
+	operation.Load();
+	tool.Load();
+	plate.Load();
+	pot.Load();
+
 	for (int i = 0; i < ingredient_number; ++i)
 	{
 		seven_ingredients.push_back(std::vector<Ingredient*>());
@@ -25,14 +37,6 @@ Cook::Cook() : plate(Plate(Math::vec2{650.0, 80.0})), pot(Pot(Math::vec2{1000.0,
 			seven_ingredients[6].push_back(new MermaidScales(IngredientName::MermaidScales, Math::vec2{ first_X, first_Y }, 3, KitchenPosition::COUNTER7));
 		}
 	}
-}
-
-void Cook::Load()
-{
-	operation.Load();
-	tool.Load();
-	plate.Load();
-	pot.Load();
 
 	for (int i = 0; i < ingredient_number; ++i)
 	{
@@ -182,6 +186,7 @@ void Cook::Update(double dt)
 	{
 		SpotToPlate();
 	}
+	a();
 }
 
 void Cook::Draw()
@@ -281,6 +286,21 @@ KitchenPosition Cook::GetWhere(Math::vec2 pos)
 	}
 	doodle::pop_settings();
 	return KitchenPosition::ELSE;
+}
+
+void Cook::a()
+{
+	if (leftClick == true && GetWhere(WhereISMouse()) == KitchenPosition::BELL)
+	{
+		Engine::GetGameStateManager().SetNextGameState(static_cast<int>(States::Counter));
+		if (plateDrawIndex != 0)
+		{
+			canCook = true;
+			plate.vector.clear();
+			plateDrawIndex = 0;
+			Engine::GetUnloadManager().Set_food_grad(score);
+		}
+	}
 }
 
 void Cook::SetIngredientsWhere()

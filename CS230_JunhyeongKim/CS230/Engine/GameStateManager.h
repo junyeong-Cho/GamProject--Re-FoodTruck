@@ -38,5 +38,7 @@ namespace CS230 {
         std::vector<GameState*> gamestates;
         GameState* current_gamestate = nullptr;
         GameState* next_gamestate = nullptr;
+
+        GameState* Kitchen = nullptr;
     };
 }
