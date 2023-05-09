@@ -25,6 +25,7 @@ void Ending::Load()
 void Ending::Draw()
 {
 	Engine::GetWindow().Clear(0xFFFFFFF);
+	doodle::draw_text("Your Money: " + std::to_string(Engine::GetUnloadManager().GetMoney()), (Engine::GetWindow().GetSize().x / 1400.0) * 350, (Engine::GetWindow().GetSize().y / 800.0) * 450);
 	doodle::draw_text("Thank you for playing \n play test!", (Engine::GetWindow().GetSize().x / 1400.0) * 350, (Engine::GetWindow().GetSize().y / 800.0) * 350);
 }
 

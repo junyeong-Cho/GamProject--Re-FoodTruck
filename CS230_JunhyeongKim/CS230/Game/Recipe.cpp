@@ -42,8 +42,7 @@ int Recipe::CheckComplete(std::vector<Ingredient*>& plating)
 	{
 		if (plating[i]->GetName() == recipe[i]->GetName())
 		{
-			score += 100 / totalNum;
-			checkTotal += 1;
+			score += 100 / (totalNum-1);
 			if (plating[i]->GetCutNum() == recipe[i]->GetCutNum())
 			{
 				score += 100 / totalNum;

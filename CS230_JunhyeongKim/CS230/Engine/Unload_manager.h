@@ -21,6 +21,7 @@ namespace CS230
 		const int GetMoney() { return money; }
 		const int GetRate() { return rate; }
 		const double GetTimer() { return timer; }
+		const double Getfood_grad() { return food_grad; }
 
 		void Update_money(int i) { money += i; }
 		void Update_rate(int i) { rate += i; }

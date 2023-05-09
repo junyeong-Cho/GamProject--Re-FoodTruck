@@ -185,8 +185,9 @@ void Customor::State_Fwaiting::CheckExit(GameObject* object)
         customor->change_state(&customor->state_evaluate);
     }
 
-    if (customor->number_ticket == 1 && customor->GetPosition().x == Engine::GetWindow().GetSize().x / 1.4 && Engine::GetInput().KeyDown(CS230::Input::Keys::A))
+    if (customor->number_ticket == 1 && customor->GetPosition().x == Engine::GetWindow().GetSize().x / 1.4 && Engine::GetUnloadManager().food_complete == true)
     {
+        
         customor->change_state(&customor->state_evaluate);
     }
 
@@ -208,10 +209,17 @@ void Customor::State_Evaluate::Update(GameObject* object, double dt)
     Customor* customor = static_cast<Customor*>(object);
 
     //
-    if (customor->get_food == false)
+    //if (customor->get_food == false)
+    //{
+    //    customor->grade = 0;
+    //}
+
+    if (Engine::GetUnloadManager().Getfood_grad() < 30)
     {
         customor->grade = 0;
     }
+
+
     customor->evalue.update(doodle::get_mouse_x(), doodle::get_mouse_y());
 }
 
@@ -226,6 +234,7 @@ void Customor::State_Evaluate::CheckExit(GameObject* object)
             Engine::GetUnloadManager().Update_rate(-5);
         }
         customor->number_ticket -= 1;
+        Engine::GetUnloadManager().food_complete = false;
         customor->change_state(&customor->state_leaving);
     }
 }
