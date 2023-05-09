@@ -36,5 +36,5 @@ public:
 private:
     Cook cook;
     RecipeBook recipeBook;
-
+    Button go_counter;
 };

@@ -103,6 +103,12 @@
     <ClCompile Include="Game\Giraffe.cpp">
       <Filter>Game\Customer</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\Unload_manager.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Ending.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Logger.h">
@@ -224,6 +230,12 @@
     </ClInclude>
     <ClInclude Include="Game\Giraffe.h">
       <Filter>Game\Customer</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Unload_manager.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Ending.h">
+      <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

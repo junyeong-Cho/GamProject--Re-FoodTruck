@@ -15,6 +15,7 @@ Updated:    April 27, 2023
 #include "GameStateManager.h"
 #include "TextureManager.h"
 #include "Input.h"
+#include "Unload_manager.h"
 
 class Engine {
 public:
@@ -37,7 +38,9 @@ public:
     static CS230::Input& GetInput() {
         return Instance().input;
     }
-
+    static CS230::Unload_manager& GetUnloadManager() {
+        return Instance().unload_manager;
+    }
 
     void Start(std::string window_title);
     void Stop();
@@ -61,4 +64,5 @@ private:
     CS230::Logger logger;
     CS230::Window window;
     CS230::Input input;
+    CS230::Unload_manager unload_manager;
 };

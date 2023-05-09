@@ -15,6 +15,7 @@ Created:    March 8, 2023
 #include "Game/Main_menu.h"
 #include "Game/Counter.h"
 #include "Game/Kitchen.h"
+#include "Game/Ending.h"
 
 int main() {
     try {
@@ -29,6 +30,8 @@ int main() {
         engine.GetGameStateManager().AddGameState(counter);
         Kitchen kitchen;
         engine.GetGameStateManager().AddGameState(kitchen);
+        Ending ending;
+        engine.GetGameStateManager().AddGameState(ending);
 
         while (engine.HasGameEnded() == false) 
         {

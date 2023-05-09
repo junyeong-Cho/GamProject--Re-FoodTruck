@@ -14,5 +14,7 @@ enum class States {
     Splash,
     Main_menu,
     Counter,
-    Kitchen
+    Kitchen,
+    Ending,
+    Exit
 };

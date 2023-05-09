@@ -3,6 +3,7 @@
 #include <iostream>
 
 Kitchen::Kitchen()
+	:go_counter(100,100,100,100)
 {
 	
 }
@@ -18,6 +19,7 @@ void Kitchen::Update(double dt)
 	cook.Update(dt);
 	cook.Set_Variables();
 	recipeBook.Update();
+	go_counter.update(doodle::get_mouse_x(), doodle::get_mouse_y(), States::Counter);
 }
 void Kitchen::Draw()
 {
@@ -26,6 +28,7 @@ void Kitchen::Draw()
 	
 	cook.Draw();
 	recipeBook.Draw();
+	go_counter.draw();
 }
 void Kitchen::Unload()
 {
