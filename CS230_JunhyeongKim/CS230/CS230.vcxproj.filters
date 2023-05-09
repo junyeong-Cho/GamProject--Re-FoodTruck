@@ -88,9 +88,6 @@
     <ClCompile Include="Game\RecipeBook.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Plating.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
     <ClCompile Include="Game\Pet.cpp">
       <Filter>Game</Filter>
     </ClCompile>
@@ -211,9 +208,6 @@
       <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="Game\KitchenPosition.h">
-      <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Plating.h">
       <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="Game\Pet.h">

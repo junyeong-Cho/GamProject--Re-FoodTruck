@@ -4,7 +4,7 @@
 
 extern bool leftClick;
 
-Cook::Cook() : plate(Plate(Math::vec2{650.0, 80.0})), pot(Pot(Math::vec2{1000.0,80.0}))
+Cook::Cook() : plate(Plate(Math::vec2{650.0, 80.0})), pot(Pot(Math::vec2{1000.0,-10.0}))
 {
 	Set_Variables();
 	for (int i = 0; i < ingredient_number; ++i)
@@ -22,7 +22,7 @@ Cook::Cook() : plate(Plate(Math::vec2{650.0, 80.0})), pot(Pot(Math::vec2{1000.0,
 			seven_ingredients[3].push_back(new Leaf(IngredientName::Leaf, Math::vec2{ first_X, first_Y }, 1, KitchenPosition::COUNTER4));
 			seven_ingredients[4].push_back(new Salt(IngredientName::Salt, Math::vec2{ first_X, first_Y }, 3, KitchenPosition::COUNTER5));
 			seven_ingredients[5].push_back(new DragonFruit(IngredientName::DragonFruit, Math::vec2{ first_X, first_Y }, 3, KitchenPosition::COUNTER6));
-			seven_ingredients[6].push_back(new MermaidScales(IngredientName::MermaidScales, Math::vec2{ first_X, first_Y }, 2, KitchenPosition::COUNTER7));
+			seven_ingredients[6].push_back(new MermaidScales(IngredientName::MermaidScales, Math::vec2{ first_X, first_Y }, 3, KitchenPosition::COUNTER7));
 		}
 	}
 }

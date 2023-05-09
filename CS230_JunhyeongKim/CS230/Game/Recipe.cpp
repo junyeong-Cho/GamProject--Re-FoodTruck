@@ -110,7 +110,8 @@ void LemonSalad::Load()
 }
 void LemonSalad::Draw()
 {
-	texture->Draw(Math::TranslationMatrix(texturePos));
+	Math::TransformationMatrix matrix = Math::TranslationMatrix(texturePos) * Math::RotationMatrix(0) * Math::ScaleMatrix(0.2);
+	texture->Draw(matrix);
 }
 
 
@@ -130,7 +131,8 @@ void SaltSalad::Load()
 }
 void SaltSalad::Draw()
 {
-	texture->Draw(Math::TranslationMatrix(texturePos));
+	Math::TransformationMatrix matrix = Math::TranslationMatrix(texturePos) * Math::RotationMatrix(0) * Math::ScaleMatrix(0.2);
+	texture->Draw(matrix);
 }
 
 
@@ -151,7 +153,8 @@ void LeafSalad::Load()
 }
 void LeafSalad::Draw()
 {
-	texture->Draw(Math::TranslationMatrix(texturePos));
+	Math::TransformationMatrix matrix = Math::TranslationMatrix(texturePos) * Math::RotationMatrix(0) * Math::ScaleMatrix(0.2);
+	texture->Draw(matrix);
 }
 
 
@@ -176,7 +179,8 @@ void AntSalad::Load()
 }
 void AntSalad::Draw()
 {
-	texture->Draw(Math::TranslationMatrix(texturePos));
+	Math::TransformationMatrix matrix = Math::TranslationMatrix(texturePos) * Math::RotationMatrix(0) * Math::ScaleMatrix(0.2);
+	texture->Draw(matrix);
 }
 
 
@@ -197,7 +201,8 @@ void DragonFruitSalad::Load()
 }
 void DragonFruitSalad::Draw()
 {
-	texture->Draw(Math::TranslationMatrix(texturePos));
+	Math::TransformationMatrix matrix = Math::TranslationMatrix(texturePos) * Math::RotationMatrix(0) * Math::ScaleMatrix(0.2);
+	texture->Draw(matrix);
 }
 
 
@@ -221,7 +226,8 @@ void MermaidScalesSalad::Load()
 }
 void MermaidScalesSalad::Draw()
 {
-	texture->Draw(Math::TranslationMatrix(texturePos));
+	Math::TransformationMatrix matrix = Math::TranslationMatrix(texturePos) * Math::RotationMatrix(0) * Math::ScaleMatrix(0.2);
+	texture->Draw(matrix);
 }
 
 
@@ -241,7 +247,8 @@ void WaterSoup::Load()
 }
 void WaterSoup::Draw()
 {
-	texture->Draw(Math::TranslationMatrix(texturePos));
+	Math::TransformationMatrix matrix = Math::TranslationMatrix(texturePos) * Math::RotationMatrix(0) * Math::ScaleMatrix(0.2);
+	texture->Draw(matrix);
 }
 
 
@@ -265,7 +272,8 @@ void AntSoup::Load()
 }
 void AntSoup::Draw()
 {
-	texture->Draw(Math::TranslationMatrix(texturePos));
+	Math::TransformationMatrix matrix = Math::TranslationMatrix(texturePos) * Math::RotationMatrix(0) * Math::ScaleMatrix(0.2);
+	texture->Draw(matrix);
 }
 
 
@@ -297,6 +305,7 @@ void StrongSoup::Load()
 }
 void StrongSoup::Draw()
 {
-	texture->Draw(Math::TranslationMatrix(texturePos));
+	Math::TransformationMatrix matrix = Math::TranslationMatrix(texturePos) * Math::RotationMatrix(0) * Math::ScaleMatrix(0.2);
+	texture->Draw(matrix);
 }
 

@@ -10,7 +10,7 @@ class Slot
 public:
 	Slot(Math::vec2 pos);
 	virtual void Load() = 0;
-	void Draw(int index);
+	virtual void Draw(int index) = 0;
 	void DrawIngredient();
 	void Update(double dt);
 	void Unload();
@@ -36,6 +36,7 @@ public:
 	void Load() override;
 	bool ButtonClick(Math::vec2 pos);
 	void ButtonDraw() override;
+	void Draw(int index)override;
 
 private:
 
@@ -48,6 +49,7 @@ public:
 	void Load() override; 
 	void ButtonDraw() override;
 	bool ButtonClick(Math::vec2 pos);
+	void Draw(int index)override;
 
 private:
 	

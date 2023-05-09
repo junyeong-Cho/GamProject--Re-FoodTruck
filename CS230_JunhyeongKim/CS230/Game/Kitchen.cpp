@@ -151,13 +151,9 @@ void Kitchen::Draw_IngredientBowl()
 void Kitchen::Draw_CuttingBoard()
 {
 	doodle::push_settings();
-
-	doodle::set_outline_color(doodle::HexColor{ 0xE7C0ABFF });
-	doodle::set_outline_width(5.0);
-	doodle::smooth_drawing();
-	doodle::draw_rectangle(cook.cuttingBoard_X, cook.cuttingBoard_Y, cook.cuttingBoard_width, cook.cuttingBoard_height);
-	doodle::set_font_size(cook.cuttingBoard_width / 10.0);
-	doodle::draw_text("Cutting Board", cook.cuttingBoard_X + cook.cuttingBoard_width / 15.0, cook.cuttingBoard_Y + cook.cuttingBoard_height / 3.0);
+	Math::TransformationMatrix matrix = Math::TranslationMatrix(Math::vec2(cook.cuttingBoard_X, cook.cuttingBoard_Y)) * Math::RotationMatrix(0) * Math::ScaleMatrix(0.35);
+	CS230::Texture* texture = Engine::GetTextureManager().Load("Assets/Cutting_board.png");
+	texture->Draw(matrix);
 
 	doodle::pop_settings();
 }
@@ -165,13 +161,6 @@ void Kitchen::Draw_CuttingBoard()
 void Kitchen::Draw_PaltingSpot()
 {
 	doodle::push_settings();
-
-	doodle::set_outline_color(doodle::HexColor{ 0xE7C0ABFF });
-	doodle::set_outline_width(5.0);
-	doodle::smooth_drawing();
-	doodle::draw_ellipse(cook.bowl_X, cook.bowl_Y, cook.bowl_width);
-	doodle::set_font_size(cook.bowl_width / 5.0);
-	doodle::draw_text("Bowl", cook.bowl_X - cook.bowl_width / 3.7, cook.bowl_Y - cook.bowl_width / 5.0);
 
 	doodle::pop_settings();
 }

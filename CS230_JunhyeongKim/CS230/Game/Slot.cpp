@@ -1,5 +1,6 @@
 #include "Slot.h"
 #include "doodle/drawing.hpp"
+#include <math.h>
 
 extern bool leftClick;
 
@@ -76,9 +77,17 @@ void Pot::Load()
 	texture.push_back(Engine::GetTextureManager().Load("Assets/FullPot.png"));
 }
 
-void Slot::Draw(int index)
+void Plate::Draw(int index)
 {
-	texture[index]->Draw(Math::TranslationMatrix(position));
+	Math::TransformationMatrix matrix = Math::TranslationMatrix(position) * Math::RotationMatrix(0) * Math::ScaleMatrix(0.5);
+
+	texture[index]->Draw(matrix);
+}
+void Pot::Draw(int index)
+{
+	Math::TransformationMatrix matrix = Math::TranslationMatrix(position) * Math::RotationMatrix(0) * Math::ScaleMatrix(0.3);
+	
+	texture[index]->Draw(matrix);
 }
 
 void Slot::DrawIngredient()
