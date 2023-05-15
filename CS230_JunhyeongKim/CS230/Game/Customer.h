@@ -87,7 +87,6 @@ private:
 
 
     Customor* front_customor = nullptr;
-    Customor* first_ticket = nullptr;
 
     //Button
     Button Yes;
@@ -97,8 +96,7 @@ private:
     double button_timer{ 0 };
     //앞으로 왔을 때
     bool can_order = false;
-    //number ticket
-    unsigned int number_ticket = 1;
+
     //음식 받음
     bool get_food = false;
     //evaluating

@@ -56,7 +56,13 @@ void Counter::Load()
 
 void Counter::Update(double dt)
 {
-    yes_button.update(doodle::get_mouse_x(), doodle::get_mouse_y(), States::Kitchen);
+    if (Engine::GetUnloadManager().current_customor != nullptr)
+    {
+        if (Engine::GetUnloadManager().current_customor->Get_State_Name() == "Fwaiting")
+        {
+            yes_button.update(doodle::get_mouse_x(), doodle::get_mouse_y(), States::Kitchen);
+        }
+    }
     Engine::GetUnloadManager().GetCounterObjectManager().UpdateAll(dt);
     Engine::GetUnloadManager().Update_timer(dt);
     if (Engine::GetUnloadManager().GetTimer() <= 0)
@@ -122,8 +128,14 @@ void Counter::Draw()
     doodle::draw_triangle(Engine::GetWindow().GetSize().x / 6.0 * 5.0, Engine::GetWindow().GetSize().y / 4.0, Engine::GetWindow().GetSize().x / 6.0 * 5.0 + 100.0, 0.0, Engine::GetWindow().GetSize().x / 6.0 * 5.0, 0.0);
     doodle::pop_settings();
 
-
-    yes_button.draw("Kitchen");
+    if (Engine::GetUnloadManager().current_customor != nullptr)
+    {
+        if (Engine::GetUnloadManager().current_customor->Get_State_Name() == "Fwaiting")
+        {
+            yes_button.draw("Kitchen");
+        }
+    }
+    
 }
 
 void Counter::Clear()

@@ -58,7 +58,7 @@ void CS230::GameStateManager::Update(double dt)
         if (Engine::GetUnloadManager().GetTimer() <= 0 && current_gamestate->GetName() == "Ending")
         {
             std::cout << "kitchen_Unload";
-             Kitchen->Unload();
+            Kitchen->Unload();
         }
 
         if (current_gamestate->GetName() != "Counter")
@@ -68,7 +68,7 @@ void CS230::GameStateManager::Update(double dt)
                 current_gamestate->Unload();
                 Engine::GetUnloadManager().GetCounterObjectManager().Unload();
                 Engine::GetUnloadManager().Set_money(100);
-                Engine::GetUnloadManager().Set_timer(100);
+                Engine::GetUnloadManager().Set_timer(300);
                 Engine::GetUnloadManager().Set_rate(100);
                 Engine::GetUnloadManager().first_load = true;
                 Engine::GetTextureManager().Unload();

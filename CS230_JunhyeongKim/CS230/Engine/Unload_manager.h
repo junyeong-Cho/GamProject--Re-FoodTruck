@@ -11,8 +11,11 @@ Created:    March 8, 2023
 #pragma once
 #include "GameObjectManager.h"
 
+class Customor;
+
 namespace CS230
 {
+
 	class Unload_manager
 	{
 	public:
@@ -36,13 +39,20 @@ namespace CS230
 			food_complete = true;
 		}
 
+
+		void Unload();
 		bool first_load = true;
 		bool food_complete = false;
+
+		Customor* current_customor = nullptr;
+
 	private:
 		GameObjectManager counter_ObjectManager;
 		int money = 100;
 		int rate = 100;
-		double timer = 100;
+		double timer = 300;
+
+
 
 		double food_grad = 0;
 	};

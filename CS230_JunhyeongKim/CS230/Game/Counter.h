@@ -39,6 +39,6 @@ private:
 
     Customor* front_customor = nullptr;
     Button yes_button;
-    int customors = 5;
+    int customors = 10;
 
 };

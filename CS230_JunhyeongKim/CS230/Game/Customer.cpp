@@ -59,7 +59,7 @@ void Customor::State_Waiting::CheckExit(GameObject* object)
 {
     Customor* customor = static_cast<Customor*>(object);
 
-    if (customor->front_customor == nullptr || customor->front_customor->current_state->GetName() == "Fwaiting" || customor->front_customor->current_state->GetName() == "Leaving")
+    if (customor->front_customor == nullptr ||  customor->front_customor->current_state->GetName() == "Leaving")
     {
         customor->change_state(&customor->state_order);
     }
@@ -71,12 +71,13 @@ void Customor::State_Order::Enter(GameObject* object)
 {
     Customor* customor = static_cast<Customor*>(object);
     customor->SetVelocity({ 0,0 });
+    Engine::GetUnloadManager().current_customor = customor;
 }
 
 void Customor::State_Order::Update(GameObject* object, double dt)
 {
     Customor* customor = static_cast<Customor*>(object);
-    if (customor->front_customor == nullptr || customor->front_customor->number_ticket < 3)
+    if (customor->front_customor == nullptr)
     {
         customor->update_x_velocity(dt);
     }
@@ -108,73 +109,12 @@ void Customor::State_Order::CheckExit(GameObject* object)
 void Customor::State_Fwaiting::Enter(GameObject* object)
 {
     Customor* customor = static_cast<Customor*>(object);
-    customor->SetVelocity({ 500,0 });
 }
 
 void Customor::State_Fwaiting::Update(GameObject* object, double dt)
 {
     Customor* customor = static_cast<Customor*>(object);
 
-    if (customor->front_customor != nullptr)
-    {
-        customor->number_ticket = customor->front_customor->number_ticket + 1;
-    }
-
-    if (customor->number_ticket == 1)
-    {
-        if (customor->GetVelocity().x > 0 && (customor->GetPosition().x > Engine::GetWindow().GetSize().x / 1.4))
-        {
-            customor->SetVelocity({ 0,0 });
-            customor->SetPosition({ Engine::GetWindow().GetSize().x / 1.4 , customor->GetPosition().y });
-        }
-
-        if (customor->GetVelocity().x < 0 && (customor->GetPosition().x < Engine::GetWindow().GetSize().x / 1.4))
-        {
-            customor->SetVelocity({ 0,0 });
-            customor->SetPosition({ Engine::GetWindow().GetSize().x / 1.4 , customor->GetPosition().y });
-        }
-
-
-        if (customor->GetPosition().x == Engine::GetWindow().GetSize().x / 1.25)
-        {
-            customor->SetVelocity({ -500,0 });
-        }
-
-    }
-    else if (customor->number_ticket == 2)
-    {
-        if (customor->GetVelocity().x > 0 && (customor->GetPosition().x > Engine::GetWindow().GetSize().x / 1.25))
-        {
-            customor->SetVelocity({ 0,0 });
-            customor->SetPosition({ Engine::GetWindow().GetSize().x / 1.25 , customor->GetPosition().y });
-        }
-
-        if (customor->GetVelocity().x < 0 && (customor->GetPosition().x < Engine::GetWindow().GetSize().x / 1.25))
-        {
-            customor->SetVelocity({ 0,0 });
-            customor->SetPosition({ Engine::GetWindow().GetSize().x / 1.25 , customor->GetPosition().y });
-        }
-
-        if (customor->GetPosition().x == (Engine::GetWindow().GetSize().x / 1400.0) * 1240.0)
-        {
-            customor->SetVelocity({ -500,0 });
-        }
-    }
-    else if (customor->number_ticket == 3)
-    {
-        if (customor->GetVelocity().x > 0 && (customor->GetPosition().x > (Engine::GetWindow().GetSize().x / 1400.0) * 1240.0))
-        {
-            customor->SetVelocity({ 0,0 });
-            customor->SetPosition({ (Engine::GetWindow().GetSize().x / 1400.0) * 1240.0 , customor->GetPosition().y });
-        }
-
-        if (customor->GetVelocity().x < 0 && (customor->GetPosition().x < (Engine::GetWindow().GetSize().x / 1400.0) * 1240.0))
-        {
-            customor->SetVelocity({ 0,0 });
-            customor->SetPosition({ (Engine::GetWindow().GetSize().x / 1400.0) * 1240.0 , customor->GetPosition().y });
-        }
-
-    }
 }
 
 void Customor::State_Fwaiting::CheckExit(GameObject* object)
@@ -185,16 +125,13 @@ void Customor::State_Fwaiting::CheckExit(GameObject* object)
         customor->change_state(&customor->state_evaluate);
     }
 
-    if (customor->number_ticket == 1 && customor->GetPosition().x == Engine::GetWindow().GetSize().x / 1.4 && Engine::GetUnloadManager().food_complete == true)
+    if (Engine::GetUnloadManager().food_complete == true)
     {
         
         customor->change_state(&customor->state_evaluate);
     }
 
-    if (customor->number_ticket == 1 && customor->GetPosition().x == Engine::GetWindow().GetSize().x / 1.4 && Engine::GetInput().KeyDown(CS230::Input::Keys::A))
-    {
-        customor->change_state(&customor->state_evaluate);
-    }
+
 }
 
 
@@ -233,7 +170,6 @@ void Customor::State_Evaluate::CheckExit(GameObject* object)
             Engine::GetUnloadManager().Update_money(5);
             Engine::GetUnloadManager().Update_rate(-5);
         }
-        customor->number_ticket -= 1;
         Engine::GetUnloadManager().food_complete = false;
         customor->change_state(&customor->state_leaving);
     }
@@ -269,36 +205,6 @@ void Customor::Update(double dt)
     if (front_customor != nullptr && front_customor->current_state->GetName() == "Leaving")
     {
         front_customor = front_customor->front_customor;
-    }
-
-    if (first_ticket == nullptr && front_customor != nullptr && front_customor->current_state->GetName() == "Fwaiting")
-    {
-        if (front_customor->number_ticket == 1)
-        {
-            first_ticket = front_customor;
-        }
-        else if (front_customor->number_ticket == 2)
-        {
-            first_ticket = front_customor->front_customor;
-        }
-        else if (front_customor->number_ticket == 3)
-        {
-            first_ticket = front_customor->front_customor->front_customor;
-        }
-    }
-
-    if (first_ticket != nullptr && first_ticket->current_state->GetName() == "Evaluate")
-    {
-        evaluating = true;
-    }
-    else if (first_ticket != nullptr && first_ticket->current_state->GetName() != "Evaluate")
-    {
-        evaluating = false;
-    }
-
-    if (first_ticket != nullptr && first_ticket->number_ticket != 1)
-    {
-        first_ticket = nullptr;
     }
 }
 

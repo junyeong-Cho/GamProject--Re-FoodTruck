@@ -19,4 +19,9 @@ namespace CS230
 			counter_ObjectManager.Add(object_manager.get_object(i));
 		}
 	}
+
+	void Unload_manager::Unload()
+	{
+		current_customor = nullptr;
+	}
 }

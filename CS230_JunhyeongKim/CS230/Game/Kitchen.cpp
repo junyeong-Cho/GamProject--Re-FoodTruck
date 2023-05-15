@@ -26,6 +26,7 @@ void Kitchen::Update(double dt)
 	{
 		Engine::GetGameStateManager().SetNextGameState(static_cast<int>(States::Ending));
 	}
+
 }
 void Kitchen::Draw()
 {

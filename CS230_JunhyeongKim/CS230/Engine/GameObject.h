@@ -28,7 +28,10 @@ namespace CS230 {
         const Math::vec2& GetScale() const;
         double GetRotation() const;
 
-
+        std::string Get_State_Name()
+        {
+            return current_state->GetName();
+        }
     protected:
         void SetPosition(Math::vec2 new_position);
         void UpdatePosition(Math::vec2 delta);
