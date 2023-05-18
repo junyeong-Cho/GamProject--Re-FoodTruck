@@ -1,0 +1,13 @@
+Assets/Assets/Cat.png
+FrameSize 128 128
+HotSpot 65 15
+Frame 0 0
+Frame 109 0
+Frame 218 0 
+Frame 436 0
+Frame 0 109 
+Frame 218 218 
+Frame 256 128 
+Frame 436 436 
+Anim Assets/ClockIdle.anm
+Anim Assets/ClockMoving.anm
