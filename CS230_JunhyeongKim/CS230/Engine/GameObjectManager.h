@@ -22,7 +22,7 @@ namespace CS230 {
         void Unload();
 
         void UpdateAll(double dt);
-        void DrawAll(Math::TransformationMatrix camera_matrix);
+        void DrawAll([[maybe_unused]]Math::TransformationMatrix camera_matrix);
 
         GameObject* get_object(int i) { return objects[i]; }
         int GetSize() { return static_cast<int>(objects.size()); }

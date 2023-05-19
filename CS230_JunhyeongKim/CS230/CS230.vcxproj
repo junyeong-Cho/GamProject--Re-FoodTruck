@@ -160,7 +160,6 @@ xcopy /d /y Assets\* "$(OutputPath)Assets"
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Assets\Clock.cpp" />
     <ClCompile Include="Assets\Clock.spt" />
     <ClCompile Include="Engine\Animation.cpp" />
     <ClCompile Include="Engine\Camera.cpp" />
@@ -178,6 +177,7 @@ xcopy /d /y Assets\* "$(OutputPath)Assets"
     <ClCompile Include="Engine\Vec2.cpp" />
     <ClCompile Include="Engine\Window.cpp" />
     <ClCompile Include="Game\Button.cpp" />
+    <ClCompile Include="Game\Clock.cpp" />
     <ClCompile Include="Game\Cook.cpp" />
     <ClCompile Include="Game\Counter.cpp" />
     <ClCompile Include="Game\Customer.cpp" />
@@ -197,7 +197,6 @@ xcopy /d /y Assets\* "$(OutputPath)Assets"
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Assets\Clock.h" />
     <ClInclude Include="Engine\Animation.h" />
     <ClInclude Include="Engine\Camera.h" />
     <ClInclude Include="Engine\Engine.h" />
@@ -216,6 +215,7 @@ xcopy /d /y Assets\* "$(OutputPath)Assets"
     <ClInclude Include="Engine\Vec2.h" />
     <ClInclude Include="Engine\Window.h" />
     <ClInclude Include="Game\Button.h" />
+    <ClInclude Include="Game\Clock.h" />
     <ClInclude Include="Game\Cook.h" />
     <ClInclude Include="Game\Counter.h" />
     <ClInclude Include="Game\Customer.h" />

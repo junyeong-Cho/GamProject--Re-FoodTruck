@@ -25,7 +25,7 @@ void CS230::GameObjectManager::UpdateAll(double dt)
     }
 }
 
-void CS230::GameObjectManager::DrawAll(Math::TransformationMatrix camera_matrix)
+void CS230::GameObjectManager::DrawAll([[maybe_unused]]Math::TransformationMatrix camera_matrix)
 {
     for (int i = 0; i < objects.size(); i++)
     {

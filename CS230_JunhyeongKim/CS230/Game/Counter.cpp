@@ -7,7 +7,7 @@ Project:    CS230 Engine
 Author:     Junhyeong Kim
 Created:    April 30, 2023
 */
-
+#include "../Engine/GameObject.h"
 #include "..\Engine\Engine.h"
 #include "doodle/drawing.hpp" //Draw
 #include "doodle/input.hpp" //Mouse
@@ -20,10 +20,12 @@ Created:    April 30, 2023
 Counter::Counter()
     :yes_button(1400.0 / 13.0, 800.0 / 3.0, 1400.0 / 10.0, 800.0 / 10.0)
 {
+    
 }
 
 void Counter::Load()
 {
+    clock_ptr = new Clock({300, 300});
     if (Engine::GetUnloadManager().first_load == true)
     {
 
@@ -56,6 +58,8 @@ void Counter::Load()
 
 void Counter::Update(double dt)
 {
+    gameobjectmanager.UpdateAll(dt);
+
     if (Engine::GetUnloadManager().current_customor != nullptr)
     {
         if (Engine::GetUnloadManager().current_customor->Get_State_Name() == "Fwaiting")
@@ -135,7 +139,10 @@ void Counter::Draw()
             yes_button.draw("Kitchen");
         }
     }
+
     
+    gameobjectmanager.DrawAll();
+
 }
 
 void Counter::Clear()
@@ -146,5 +153,5 @@ void Counter::Clear()
 void Counter::Unload()
 {
     //Engine::GetUnloadManager().Save_Counter_object(gameobjectmanager);
-    //gameobjectmanager.Unload();
+    gameobjectmanager.Unload();
 }

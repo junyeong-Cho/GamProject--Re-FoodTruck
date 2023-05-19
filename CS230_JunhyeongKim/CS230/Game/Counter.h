@@ -8,6 +8,9 @@ Author:     Junhyeong Kim
 Created:    April 30, 2023
 */
 
+
+#include "../Game/Clock.h"
+
 #include "../Engine/GameState.h"
 #include "../Engine/Texture.h"
 #include "../Engine/Sprite.h"
@@ -34,6 +37,8 @@ private:
     //CS230::Texture* guest_image;
     //Math::vec2 guest_position;
 
+
+    Clock* clock_ptr;
 
     CS230::GameObjectManager gameobjectmanager;
 

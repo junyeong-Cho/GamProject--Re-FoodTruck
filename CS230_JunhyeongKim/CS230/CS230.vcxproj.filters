@@ -99,7 +99,7 @@
       <Filter>Game\Customer</Filter>
     </ClCompile>
     <ClCompile Include="Assets\Clock.spt" />
-    <ClCompile Include="Assets\Clock.cpp">
+    <ClCompile Include="Game\Clock.cpp">
       <Filter>Game</Filter>
     </ClCompile>
   </ItemGroup>
@@ -230,7 +230,7 @@
     <ClInclude Include="Game\Customer.h">
       <Filter>Game\Customer</Filter>
     </ClInclude>
-    <ClInclude Include="Assets\Clock.h">
+    <ClInclude Include="Game\Clock.h">
       <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>
