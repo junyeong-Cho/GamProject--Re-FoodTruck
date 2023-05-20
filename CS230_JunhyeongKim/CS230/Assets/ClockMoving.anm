@@ -1,10 +1,9 @@
-PlayFrame 0 .33
-PlayFrame 1 .33
-PlayFrame 2 .33
-PlayFrame 3 .33
-PlayFrame 4 .33
-PlayFrame 5 .33
-PlayFrame 6 .33
-PlayFrame 7 .33
-PlayFrame 0 .33
-End
+PlayFrame 0 33
+PlayFrame 1 33
+PlayFrame 2 33
+PlayFrame 3 33
+PlayFrame 4 33
+PlayFrame 5 33
+PlayFrame 6 33
+PlayFrame 7 33
+Loop 0

@@ -2,7 +2,7 @@
 
 Clock::Clock(Math::vec2 start_position) : GameObject(start_position)
 {
-	sprite.Load("Assets/Clock.png");
+	sprite.Load("Assets/Clock.spt");
     SetPosition(start_position);
 	current_state = &state_moving;
 	current_state->Enter(this);

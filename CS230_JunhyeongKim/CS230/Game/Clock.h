@@ -27,14 +27,6 @@ private:
 
 
     //Finite State Machines
-    class State_Idle : public State
-    {
-    public:
-        virtual void Enter(GameObject* object) override;
-        virtual void Update(GameObject* object, double dt) override;
-        virtual void CheckExit(GameObject* object) override;
-        std::string GetName() override { return "Idle"; }
-    };
 
     class State_Moving : public State
     {
@@ -46,7 +38,6 @@ private:
     };
 
 
-    State_Idle state_idle;
 
     State_Moving state_moving;
 

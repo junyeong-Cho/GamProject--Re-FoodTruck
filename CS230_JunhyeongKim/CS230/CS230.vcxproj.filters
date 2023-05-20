@@ -98,7 +98,6 @@
     <ClCompile Include="Game\Customer.cpp">
       <Filter>Game\Customer</Filter>
     </ClCompile>
-    <ClCompile Include="Assets\Clock.spt" />
     <ClCompile Include="Game\Clock.cpp">
       <Filter>Game</Filter>
     </ClCompile>
@@ -250,9 +249,5 @@
     <Filter Include="Game\Kitchen">
       <UniqueIdentifier>{5ce8a602-4bed-4d89-b048-539c61b46730}</UniqueIdentifier>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Assets\ClockIdle.anm" />
-    <None Include="Assets\ClockMoving.anm" />
   </ItemGroup>
 </Project>

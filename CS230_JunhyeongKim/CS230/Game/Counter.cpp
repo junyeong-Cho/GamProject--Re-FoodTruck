@@ -20,12 +20,15 @@ Created:    April 30, 2023
 Counter::Counter()
     :yes_button(1400.0 / 13.0, 800.0 / 3.0, 1400.0 / 10.0, 800.0 / 10.0)
 {
-    
+
 }
 
 void Counter::Load()
 {
-    clock_ptr = new Clock({300, 300});
+    clock_ptr = new Clock({60, 690});
+    gameobjectmanager.Add(clock_ptr);
+
+
     if (Engine::GetUnloadManager().first_load == true)
     {
 
@@ -141,7 +144,7 @@ void Counter::Draw()
     }
 
     
-    gameobjectmanager.DrawAll();
+    gameobjectmanager.DrawAll(Math::TransformationMatrix());
 
 }
 

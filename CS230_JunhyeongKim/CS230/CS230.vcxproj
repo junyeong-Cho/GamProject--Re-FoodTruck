@@ -160,7 +160,6 @@ xcopy /d /y Assets\* "$(OutputPath)Assets"
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Assets\Clock.spt" />
     <ClCompile Include="Engine\Animation.cpp" />
     <ClCompile Include="Engine\Camera.cpp" />
     <ClCompile Include="Engine\Engine.cpp" />
@@ -240,10 +239,6 @@ xcopy /d /y Assets\* "$(OutputPath)Assets"
     <ClInclude Include="Game\States.h" />
     <ClInclude Include="Game\Tool.h" />
     <ClInclude Include="Game\ToolName.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Assets\ClockIdle.anm" />
-    <None Include="Assets\ClockMoving.anm" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
