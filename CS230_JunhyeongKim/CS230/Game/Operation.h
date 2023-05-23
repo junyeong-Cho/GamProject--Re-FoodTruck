@@ -11,6 +11,7 @@
 class Operation
 {
 public:
+	Operation();
 	void Load();
 	void Update();
 	void Draw();

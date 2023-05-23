@@ -12,8 +12,8 @@ Created:    March 8, 2023
 #include "States.h"
 #include "Splash.h"
 
-Splash::Splash() {
-}
+Splash::Splash() 
+{}
 
 void Splash::Load() {
     counter = 0;

@@ -3,46 +3,74 @@
 #include <iostream>
 #include "..\Engine\Engine.h"
 
+extern bool leftClick;
+
 Kitchen::Kitchen()
 	:go_counter(100,100,100,100)
 {
-	
+	cuttingBoardTexture = Engine::GetTextureManager().Load("Assets/Cutting_board.png");
+	kitchenBackgroundTexture = Engine::GetTextureManager().Load("Assets/kitchenBackground.png");
+
 }
 
 void Kitchen::Load()
 {
-	cook.Load();
-	recipeBook.Load();
+	if (canLoad == true)
+	{
+		cook.Load();
+		recipeBook.Load();
+		canLoad = false;
+
+		for (int i = 0; i < cook.ingredient_number; ++i)
+		{
+			sideBowl.push_back(SideBowl(Math::vec2{ cook.first_X + cook.width * i, cook.first_Y }, "100"));
+		}
+	}
 }
 
 void Kitchen::Update(double dt)
 {
 	cook.Update(dt);
-	cook.Set_Variables();
 	recipeBook.Update();
 	go_counter.update(doodle::get_mouse_x(), doodle::get_mouse_y(), States::Counter);
 	Engine::GetUnloadManager().Update_timer(dt);
 	if (Engine::GetUnloadManager().GetTimer() <= 0)
 	{
 		Engine::GetGameStateManager().SetNextGameState(static_cast<int>(States::Ending));
+		canLoad = true;
+		canUnload = true;
+	}
+	for (int i = 0; i < cook.ingredient_number; ++i)
+	{
+		if (sideBowl[i].MouseOn(cook.WhereISMouse()) && leftClick == true)
+		{
+			//sideBowl[i].ReduceNum();
+		}
+		
 	}
 
 }
 void Kitchen::Draw()
 {
-	Engine::GetWindow().Clear(0xFFFFFFFF);
 	Draw_UI();
-	
+	for (int i = 0; i < cook.ingredient_number; ++i)
+	{
+		sideBowl[i].Draw();
+	}
 	cook.Draw();
-	cook.DrawScore(RecipeName::LemonSalad);
+	cook.DrawScore(recipeBook.GetRecipeBook(), RecipeName::LemonSalad);
 	recipeBook.Draw();
 	go_counter.draw();
 }
 
 void Kitchen::Unload()
 {
-	recipeBook.Unload();
-	cook.Unload();
+	if (canUnload == true)
+	{
+		cook.Unload();
+		recipeBook.Unload();
+		canUnload = false;
+	}
 }
 
 void Kitchen::Draw_UI()
@@ -61,25 +89,8 @@ void Kitchen::Draw_UI()
 
 void Kitchen::Draw_Background()
 {
-	doodle::push_settings();
-
-	doodle::set_outline_color(doodle::HexColor{ 0xAD4A3BFF });
-	doodle::set_fill_color(doodle::HexColor{ 0xEBE3C0FF });
-	doodle::set_outline_width(3.0);
-
-	doodle::draw_quad(
-		cook.topBackground_X1, cook.topBackground_Y1,
-		cook.topBackground_X2, cook.topBackground_Y2,
-		cook.topBackground_X3, cook.topBackground_Y3,
-		cook.topBackground_X4, cook.topBackground_Y4);
-
-	doodle::draw_quad(
-		cook.bottomBackground_X1, cook.bottomBackground_Y1,
-		cook.bottomBackground_X2, cook.bottomBackground_Y2,
-		cook.bottomBackground_X3, cook.bottomBackground_Y3,
-		cook.bottomBackground_X4, cook.bottomBackground_Y4);
-
-	doodle::pop_settings();
+	//Math::ScaleMatrix matrix{ Math::vec2{kitchenBackgroundTexture->GetSize()} };
+	kitchenBackgroundTexture->Draw(Math::TransformationMatrix());
 }
 
 
@@ -163,8 +174,8 @@ void Kitchen::Draw_CuttingBoard()
 {
 	doodle::push_settings();
 	Math::TransformationMatrix matrix = Math::TranslationMatrix(Math::vec2(cook.cuttingBoard_X, cook.cuttingBoard_Y)) * Math::RotationMatrix(0) * Math::ScaleMatrix(0.35);
-	CS230::Texture* texture = Engine::GetTextureManager().Load("Assets/Cutting_board.png");
-	texture->Draw(matrix);
+	
+	cuttingBoardTexture->Draw(matrix);
 
 	doodle::pop_settings();
 }

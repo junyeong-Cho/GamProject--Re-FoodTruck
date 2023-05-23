@@ -39,6 +39,7 @@ void CS230::GameStateManager::Update(double dt)
         Engine::GetLogger().LogEvent("Load Complete");
         status = Status::UPDATING;
         break;
+
     case Status::UPDATING:
         if (current_gamestate != next_gamestate)
         {
@@ -52,26 +53,23 @@ void CS230::GameStateManager::Update(double dt)
         }
 
         break;
+
     case Status::UNLOADING:
         Engine::GetLogger().LogEvent("Unload " + current_gamestate->GetName());
-        //current_gamestate->Unload();
-        if (Engine::GetUnloadManager().GetTimer() <= 0 && current_gamestate->GetName() == "Ending")
-        {
-            std::cout << "kitchen_Unload";
-            Kitchen->Unload();
-        }
-
+        
+        current_gamestate->Unload();
+        
         if (current_gamestate->GetName() != "Counter")
         {
             if (current_gamestate->GetName() != "Kitchen")
             {
-                current_gamestate->Unload();
                 Engine::GetUnloadManager().GetCounterObjectManager().Unload();
                 Engine::GetUnloadManager().Set_money(100);
-                Engine::GetUnloadManager().Set_timer(300);
+                Engine::GetUnloadManager().Set_timer(15);
                 Engine::GetUnloadManager().Set_rate(100);
                 Engine::GetUnloadManager().first_load = true;
-                Engine::GetTextureManager().Unload();
+                
+                /*Engine::GetTextureManager().Unload();*/
             }
         }
         Engine::GetLogger().LogEvent("Unload Complete");
@@ -89,6 +87,7 @@ void CS230::GameStateManager::Update(double dt)
         status = Status::EXIT;
         break;
     case Status::EXIT:
+        Engine::GetTextureManager().Unload();
         break;
     }
 }

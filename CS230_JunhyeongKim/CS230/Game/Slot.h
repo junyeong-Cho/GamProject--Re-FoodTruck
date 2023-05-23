@@ -11,18 +11,19 @@ public:
 	Slot(Math::vec2 pos);
 	virtual void Load() = 0;
 	virtual void Draw(int index) = 0;
-	void DrawIngredient();
+	void DrawIngredient(const std::vector<std::vector<CS230::Texture*>>& texture);
 	void Update(double dt);
 	void Unload();
 	virtual void ButtonDraw() = 0;
 	void ChangePos(Math::vec2 pos) { position = pos; }
 	bool PutIngredient(Ingredient* ingredient);
-	std::vector<Ingredient*> vector;
+	std::vector<Ingredient*>& GetIngredientVec();
 
 protected:
 	std::vector<CS230::Texture*> texture;
 	Math::vec2 position;
 	std::map<int, Math::vec2> slotPos;
+	std::vector<Ingredient*> vector;
 
 private:
 

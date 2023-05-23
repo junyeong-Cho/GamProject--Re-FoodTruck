@@ -1,263 +1,207 @@
 #include "Ingredient.h"
 #include <iostream>
 
-Ingredient::Ingredient(IngredientName id, Math::vec2 pos, int cuttingNumber, KitchenPosition place)
-	:name(id), position(pos), cutNum(cuttingNumber), place(place)
-{
+Ingredient::Ingredient(Math::vec2 pos)
+	:position(pos)
+{}
 
-}
-
-void Ingredient::SlotDraw(Math::vec2 pos)
+void Ingredient::SlotDraw(Math::vec2 pos, const std::vector<std::vector<CS230::Texture*>>& texture)
 {
-	Math::TransformationMatrix matrix = Math::TranslationMatrix(pos) * Math::RotationMatrix(0) * Math::ScaleMatrix(0.1);
+	double slotScale = 0.7;
+	Math::TransformationMatrix matrix = Math::TranslationMatrix(pos) * Math::RotationMatrix(0) * Math::ScaleMatrix(scale * slotScale);
 	if (cutNum <= 0)
 	{
-		texture[texture.size() - 1]->Draw(matrix);
+		texture[static_cast<int>(name)][texture[static_cast<int>(name)].size() - 1]->Draw(matrix);
 	}
 	else
 	{
-		texture[texture.size() - cutNum]->Draw(matrix);
+		texture[static_cast<int>(name)][texture[static_cast<int>(name)].size() - cutNum]->Draw(matrix);
 	}
 }
 
-bool Ingredient::IsMouseOn(Math::vec2 mousePos)
+void Ingredient::Draw(const std::vector<std::vector<CS230::Texture*>>& texture)
 {
-	if (position.x - 50 < mousePos.x && position.x + 50 > mousePos.x
-		&& position.y - 50 < mousePos.y && position.y + 50 > mousePos.y)
+	Math::TransformationMatrix matrix = Math::TranslationMatrix(position) * Math::RotationMatrix(0) * Math::ScaleMatrix(scale);
+
+	if (cutNum <= 0)
+	{
+		texture[static_cast<int>(name)][texture[static_cast<int>(name)].size() - 1]->Draw(matrix);
+	}
+	else
+	{
+		texture[static_cast<int>(name)][texture[static_cast<int>(name)].size() - cutNum]->Draw(matrix);
+	}
+}
+
+bool Ingredient::IsMouseOn(Math::vec2 mousePos, const std::vector<std::vector<CS230::Texture*>>& texture)
+{
+	Math::vec2 size{};
+
+	if (cutNum <= 0)
+	{
+		size = Math::vec2{ (double)texture[static_cast<int>(name)][texture[static_cast<int>(name)].size() - 1]->GetSize().x,
+				(double)texture[static_cast<int>(name)][texture[static_cast<int>(name)].size() - 1]->GetSize().y } *scale;
+	}
+	else
+	{
+		size = Math::vec2{ (double)texture[static_cast<int>(name)][texture[static_cast<int>(name)].size() - cutNum]->GetSize().x,
+				(double)texture[static_cast<int>(name)][texture[static_cast<int>(name)].size() - cutNum]->GetSize().y } *scale;
+	}
+
+	if (mousePos.x >= position.x && mousePos.x <= position.x + size.x &&
+		mousePos.y >= position.y && mousePos.y <= position.y + size.y)
 	{
 		return true;
 	}
 	return false;
 }
 
-Lemon::Lemon(IngredientName id, Math::vec2 pos, int cuttingNumber, KitchenPosition place)
-	:Ingredient(id, pos, cuttingNumber, place)
-{}
-void Lemon::Load()
+
+Lemon::Lemon(Math::vec2 pos) : Ingredient(pos)
 {
-	texture.push_back(Engine::GetTextureManager().Load("Assets/Lemon1.png"));
-	texture.push_back(Engine::GetTextureManager().Load("Assets/Lemon2.png"));
-	texture.push_back(Engine::GetTextureManager().Load("Assets/Lemon3.png"));
-}
-void Lemon::Update(double dt)
-{
-
-}
-void Lemon::Draw()
-{
-	Math::TransformationMatrix matrix = Math::TranslationMatrix(position) * Math::RotationMatrix(0) * Math::ScaleMatrix(0.1);
-	if (cutNum <= 0)
-	{
-		texture[texture.size()-1]->Draw(matrix);
-	}
-	else
-	{
-		texture[texture.size() - cutNum]->Draw(matrix);
-	}
-}
-
-
-
-
-Lettuce::Lettuce(IngredientName id, Math::vec2 pos, int cuttingNumber, KitchenPosition place)
-	:Ingredient(id, pos, cuttingNumber, place)
-{
-}
-void Lettuce::Load()
-{
-	texture.push_back(Engine::GetTextureManager().Load("Assets/Lettuce1.png"));
-	texture.push_back(Engine::GetTextureManager().Load("Assets/Lettuce2.png"));
-	texture.push_back(Engine::GetTextureManager().Load("Assets/Lettuce3.png"));
-	texture.push_back(Engine::GetTextureManager().Load("Assets/Lettuce4.png"));
-}
-void Lettuce::Update(double dt)
-{
-
-}
-void Lettuce::Draw()
-{
-	Math::TransformationMatrix matrix = Math::TranslationMatrix(position) * Math::RotationMatrix(0) * Math::ScaleMatrix(0.1);
-	if (cutNum <= 0)
-	{
-		texture[texture.size() - 1]->Draw(matrix);
-	}
-	else
-	{
-		texture[texture.size() - cutNum]->Draw(matrix);
-	}
-}
-
-
-
-
-Ant::Ant(IngredientName id, Math::vec2 pos, int cuttingNumber, KitchenPosition place)
-	:Ingredient(id, pos, cuttingNumber, place)
-{}
-void Ant::Load()
-{
-	texture.push_back(Engine::GetTextureManager().Load("Assets/Ant.png"));
-}
-void Ant::Update(double dt)
-{
-
-}
-void Ant::Draw()
-{
-	Math::TransformationMatrix matrix = Math::TranslationMatrix(position) * Math::RotationMatrix(0) * Math::ScaleMatrix(0.1);
-	if (cutNum <= 0)
-	{
-		texture[texture.size() - 1]->Draw(matrix);
-	}
-	else
-	{
-		texture[texture.size() - cutNum]->Draw(matrix);
-	}
-}
-
-
-
-
-Leaf::Leaf(IngredientName id, Math::vec2 pos, int cuttingNumber, KitchenPosition place)
-	:Ingredient(id, pos, cuttingNumber, place)
-{
+	name = IngredientName::Lemon;
+	cutNum = 3;
+	place = KitchenPosition::COUNTER1;
 	
 }
-void Leaf::Load()
+void Lemon::SetScale(Math::vec2 raito)
 {
-	texture.push_back(Engine::GetTextureManager().Load("Assets/Leaf.png"));
-}
-void Leaf::Update(double dt)
-{
-
-}
-void Leaf::Draw()
-{
-	Math::TransformationMatrix matrix = Math::TranslationMatrix(position) * Math::RotationMatrix(0) * Math::ScaleMatrix(0.1);
-	if (cutNum <= 0)
+	if (cutNum == 3)
 	{
-		texture[texture.size() - 1]->Draw(matrix);
+		scale = 0.1 * raito.x;
 	}
-	else
+	else if (cutNum == 2)
 	{
-		texture[texture.size() - cutNum]->Draw(matrix);
+		scale = 0.1 * raito.x;
+	}
+	else if (cutNum <= 1)
+	{
+		scale = 0.1 * raito.x;
 	}
 }
 
-
-
-
-Salt::Salt(IngredientName id, Math::vec2 pos, int cuttingNumber, KitchenPosition place)
-	:Ingredient(id, pos, cuttingNumber, place)
+Lettuce::Lettuce(Math::vec2 pos) : Ingredient(pos)
 {
-	
-}
-void Salt::Load()
-{
-	texture.push_back(Engine::GetTextureManager().Load("Assets/Salt1.png"));
-	texture.push_back(Engine::GetTextureManager().Load("Assets/Salt2.png"));
-	texture.push_back(Engine::GetTextureManager().Load("Assets/Salt3.png"));
-}
-void Salt::Update(double dt)
-{
+	name = IngredientName::Lettuce;
+	cutNum = 4;
+	place = KitchenPosition::COUNTER2;
 
 }
-void Salt::Draw()
+void Lettuce::SetScale(Math::vec2 raito)
 {
-	Math::TransformationMatrix matrix = Math::TranslationMatrix(position) * Math::RotationMatrix(0) * Math::ScaleMatrix(0.1);
-	if (cutNum <= 0)
+	if (cutNum == 4)
 	{
-		texture[texture.size() - 1]->Draw(matrix);
+		scale = 0.1 * raito.x;
 	}
-	else
+	else if (cutNum == 3)
 	{
-		texture[texture.size() - cutNum]->Draw(matrix);
+		scale = 0.1 * raito.x;
+	}
+	else if (cutNum == 2)
+	{
+		scale = 0.1 * raito.x;
+	}
+	else if (cutNum <= 1)
+	{
+		scale = 0.1 * raito.x;
 	}
 }
 
-
-
-
-DragonFruit::DragonFruit(IngredientName id, Math::vec2 pos, int cuttingNumber, KitchenPosition place)
-	:Ingredient(id, pos, cuttingNumber, place)
+Ant::Ant(Math::vec2 pos) : Ingredient(pos)
 {
-	
-}
-void DragonFruit::Load()
-{
-	texture.push_back(Engine::GetTextureManager().Load("Assets/DragonFruit1.png"));
-	texture.push_back(Engine::GetTextureManager().Load("Assets/DragonFruit2.png"));
-	texture.push_back(Engine::GetTextureManager().Load("Assets/DragonFruit3.png"));
-}
-void DragonFruit::Update(double dt)
-{
+	name = IngredientName::Ant;
+	cutNum = 1;
+	place = KitchenPosition::COUNTER3;
 
 }
-void DragonFruit::Draw()
+void Ant::SetScale(Math::vec2 raito)
 {
-	Math::TransformationMatrix matrix = Math::TranslationMatrix(position) * Math::RotationMatrix(0) * Math::ScaleMatrix(0.1);
-	if (cutNum <= 0)
+	if (cutNum <= 1)
 	{
-		texture[texture.size() - 1]->Draw(matrix);
-	}
-	else
-	{
-		texture[texture.size() - cutNum]->Draw(matrix);
+		scale = 0.1 * raito.x;
 	}
 }
 
-
-
-
-MermaidScales::MermaidScales(IngredientName id, Math::vec2 pos, int cuttingNumber, KitchenPosition place)
-	:Ingredient(id, pos, cuttingNumber, place)
+Leaf::Leaf(Math::vec2 pos) : Ingredient(pos)
 {
-	
-}
-void MermaidScales::Load()
-{
-	texture.push_back(Engine::GetTextureManager().Load("Assets/MermaidScales1.png"));
-	texture.push_back(Engine::GetTextureManager().Load("Assets/MermaidScales2.png"));
-	texture.push_back(Engine::GetTextureManager().Load("Assets/MermaidScales3.png"));
-}
-void MermaidScales::Update(double dt)
-{
+	name = IngredientName::Leaf;
+	cutNum = 1;
+	place = KitchenPosition::COUNTER4;
 
 }
-void MermaidScales::Draw()
+void Leaf::SetScale(Math::vec2 raito)
 {
-	Math::TransformationMatrix matrix = Math::TranslationMatrix(position) * Math::RotationMatrix(0) * Math::ScaleMatrix(0.1);
-	if (cutNum <= 0)
+	if (cutNum <= 1)
 	{
-		texture[texture.size() - 1]->Draw(matrix);
-	}
-	else
-	{
-		texture[texture.size() - cutNum]->Draw(matrix);
+		scale = 0.1 * raito.x;
 	}
 }
 
-Water::Water(IngredientName id, Math::vec2 pos, int cuttingNumber, KitchenPosition place)
-	:Ingredient(id, pos, cuttingNumber, place)
+Salt::Salt(Math::vec2 pos) : Ingredient(pos)
 {
-	
-}
-void Water::Load()
-{
-	texture.push_back(Engine::GetTextureManager().Load("Assets/Ingredient_Water.png"));
-}
-void Water::Update(double dt)
-{
+	name = IngredientName::Salt;
+	cutNum = 3;
+	place = KitchenPosition::COUNTER5;
 
 }
-void Water::Draw()
+void Salt::SetScale(Math::vec2 raito)
 {
-	Math::TransformationMatrix matrix = Math::TranslationMatrix(position) * Math::RotationMatrix(0) * Math::ScaleMatrix(0.1);
-	if (cutNum <= 0)
+	if (cutNum == 3)
 	{
-		texture[texture.size() - 1]->Draw(matrix);
+		scale = 0.1 * raito.x;
 	}
-	else
+	else if (cutNum == 2)
 	{
-		texture[texture.size() - cutNum]->Draw(matrix);
+		scale = 0.1 * raito.x;
+	}
+	else if (cutNum <= 1)
+	{
+		scale = 0.1 * raito.x;
+	}
+}
+
+DragonFruit::DragonFruit(Math::vec2 pos) : Ingredient(pos)
+{
+	name = IngredientName::DragonFruit;
+	cutNum = 3;
+	place = KitchenPosition::COUNTER6;
+
+}
+void DragonFruit::SetScale(Math::vec2 raito)
+{
+	if (cutNum == 3)
+	{
+		scale = 0.1 * raito.x;
+	}
+	else if (cutNum == 2)
+	{
+		scale = 0.1 * raito.x;
+	}
+	else if (cutNum <= 1)
+	{
+		scale = 0.1 * raito.x;
+	}
+}
+
+MermaidScales::MermaidScales(Math::vec2 pos) : Ingredient(pos)
+{
+	name = IngredientName::MermaidScales;
+	cutNum = 3;
+	place = KitchenPosition::COUNTER7;
+
+}
+void MermaidScales::SetScale(Math::vec2 raito)
+{
+	if (cutNum == 3)
+	{
+		scale = 0.1 * raito.x;
+	}
+	else if (cutNum == 2)
+	{
+		scale = 0.1 * raito.x;
+	}
+	else if (cutNum <= 1)
+	{
+		scale = 0.1 * raito.x;
 	}
 }

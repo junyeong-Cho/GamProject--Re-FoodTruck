@@ -8,9 +8,10 @@
 class Tool 
 {
 public:
+    Tool();
     void Load();
     void Draw();
-    void ChangeTool(InventoryTexture toolName);
+    void Update(InventoryTexture toolName);
     ToolName GetTool() { return tool; }
     
 private:

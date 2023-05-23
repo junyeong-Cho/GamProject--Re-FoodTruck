@@ -22,8 +22,8 @@ CS230::Texture* CS230::TextureManager::Load(const std::filesystem::path& file_pa
 	}
 	else
 	{
-		return textures[file_path];
 		Engine::GetLogger().LogEvent("Loadead Texture: " + (file_path.generic_string()));
+		return textures[file_path];
 
 	}
 }
