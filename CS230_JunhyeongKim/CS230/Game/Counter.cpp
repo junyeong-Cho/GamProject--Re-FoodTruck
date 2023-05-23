@@ -23,6 +23,7 @@ Created:    April 30, 2023
 #include "Giraffe.h"
 #include "Molu.h"
 #include "Elf.h"
+#include "Anteater.h"
 
 
 #include <ctime>
@@ -70,13 +71,13 @@ void Counter::Load()
             switch (((int)ranCustomerNum % maxRanCustomerNum))
             {
             case 0:
-                front_customor = new Giraffe(front_customor);
+                front_customor = new Anteater(front_customor);
                 break;
             case 1:
                 front_customor = new Molu(front_customor);
                 break;
             case 2:
-                front_customor = new Giraffe(front_customor);
+                front_customor = new Anteater(front_customor);
                 break;
             case 3:
                 front_customor = new Anteater(front_customor);
