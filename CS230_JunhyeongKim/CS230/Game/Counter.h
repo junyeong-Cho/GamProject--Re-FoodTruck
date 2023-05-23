@@ -46,4 +46,9 @@ private:
     Button yes_button;
     int customors = 10;
 
+    int maxRanCustomerNum = 5;
+
+    int ranCustomerNum;
+    
+
 };

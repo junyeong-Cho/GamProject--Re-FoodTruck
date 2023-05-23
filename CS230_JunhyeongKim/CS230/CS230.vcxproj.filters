@@ -11,7 +11,7 @@
     <ClCompile Include="Engine\Camera.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Elf.cpp">
+    <ClCompile Include="Game\Molu.cpp">
       <Filter>Game\Customer</Filter>
     </ClCompile>
     <ClCompile Include="Game\Giraffe.cpp">
@@ -101,6 +101,15 @@
     <ClCompile Include="Game\Clock.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Anteater.cpp">
+      <Filter>Game\Customer</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\MainMenu.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Elf.cpp">
+      <Filter>Game\Customer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Animation.h">
@@ -112,7 +121,7 @@
     <ClInclude Include="Engine\Camera.h">
       <Filter>Engine</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Elf.h">
+    <ClInclude Include="Game\Molu.h">
       <Filter>Game\Customer</Filter>
     </ClInclude>
     <ClInclude Include="Game\Giraffe.h">
@@ -231,6 +240,15 @@
     </ClInclude>
     <ClInclude Include="Game\Clock.h">
       <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Anteater.h">
+      <Filter>Game\Customer</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\MainMenu.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Elf.h">
+      <Filter>Game\Customer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

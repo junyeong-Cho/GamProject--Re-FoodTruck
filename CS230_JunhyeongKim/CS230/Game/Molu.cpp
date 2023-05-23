@@ -4,14 +4,14 @@ Reproduction or distribution of this file or its contents without
 prior written consent is prohibited
 File Name:  Elf.cpp
 Project:    CS230 Engine
-Author:     Junyeong Cho
-Created:    May 24, 2023
+Author:     Junhyeong Kim
+Created:    March 3, 2023
 */
 
-#include "Elf.h"
+#include "Molu.h"
 
-Elf::Elf(Customor* front)
+Molu::Molu(Customor* front)
 	:Customor(front)
 {
-	sprite.Load("Assets/Elf.spt");
+	sprite.Load("Assets/Molu.spt");
 }
