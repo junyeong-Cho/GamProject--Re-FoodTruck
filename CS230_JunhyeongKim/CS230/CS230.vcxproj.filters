@@ -101,6 +101,9 @@
     <ClCompile Include="Game\Clock.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Anteater.cpp">
+      <Filter>Game\Customer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Animation.h">
@@ -232,6 +235,7 @@
     <ClInclude Include="Game\Clock.h">
       <Filter>Game</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Anteater.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game">

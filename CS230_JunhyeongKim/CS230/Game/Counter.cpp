@@ -16,6 +16,7 @@ Created:    April 30, 2023
 #include "Customer.h"
 #include "Giraffe.h"
 #include "Elf.h"
+#include "Anteater.h"
 
 Counter::Counter()
     :yes_button(1400.0 / 13.0, 800.0 / 3.0, 1400.0 / 10.0, 800.0 / 10.0)
@@ -41,13 +42,13 @@ void Counter::Load()
             switch (customer_num)
             {
             case 0:
-                front_customor = new Giraffe(front_customor);
+                front_customor = new Anteater(front_customor);
                 break;
             case 1:
                 front_customor = new Elf(front_customor);
                 break;
             case 2:
-                front_customor = new Giraffe(front_customor);
+                front_customor = new Anteater(front_customor);
                 break;
             default:
                 break;
