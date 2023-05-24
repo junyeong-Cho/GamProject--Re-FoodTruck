@@ -32,6 +32,9 @@ int main() {
         engine.GetGameStateManager().AddGameState(kitchen);
         Ending ending;
         engine.GetGameStateManager().AddGameState(ending);
+        
+
+        //여기에다가 새로운 state 추가
 
         while (engine.HasGameEnded() == false) 
         {
