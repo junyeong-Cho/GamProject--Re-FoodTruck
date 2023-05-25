@@ -12,7 +12,8 @@ Created:    March 8, 2023
 
 #include "Engine/Engine.h"
 #include "Game/Splash.h"
-#include "Game/Main_menu.h"
+//#include "Game/Main_menu.h"
+#include "Game/MainMenu.h"
 #include "Game/Counter.h"
 #include "Game/Kitchen.h"
 #include "Game/Ending.h"
@@ -24,7 +25,7 @@ int main() {
 
         Splash splash;
         engine.GetGameStateManager().AddGameState(splash);
-        Main_menu main_menu;
+        MainMenu main_menu;
         engine.GetGameStateManager().AddGameState(main_menu);
         Counter counter;
         engine.GetGameStateManager().AddGameState(counter);

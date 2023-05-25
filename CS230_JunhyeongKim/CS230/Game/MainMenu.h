@@ -9,47 +9,48 @@ Created:    March 8,  2023
 Updated:    May  17, 2023
 */
 
-/*
+
 #pragma once
 
 #include "../Game/States.h"
-#include "../Game/Background.h"
+//#include "../Game/Background.h"
 
 #include "../Engine/GameObjectManager.h"
 #include "../Engine/TextureManager.h"
 
 #include "../Engine/Texture.h"
-#include "../Engine/Font.h"
+//#include "../Engine/Font.h"
 
 #include "../Engine/GameState.h"
 #include "../Engine/Sprite.h"
 
-class Main_menu : public CS230::GameState
+class MainMenu : public CS230::GameState
 {
 public:
-	Main_menu();
+	MainMenu();
 
 	void Load()				override;
 	void Update(double dt)  override;
 	void Unload()	        override;
 	void Draw()				override;
+	void Clear();
+	void DrawText();
 
 
 
-	std::string GetName() override { return "Main_menu"; }
+	std::string GetName() override { return "MainMenu"; }
 
 	void UpdateMenuTextColors();
 
 private:
-	Background background;
+	//Background background;
 
-	CS230::Texture main_title;
-	CS230::Texture side_scroller;
-	CS230::Texture Space_shotter;
-	CS230::Texture exit;
+	std::string main_title;
+	std::string side_scroller;
+	std::string Space_shotter;
+	std::string exit;
 
 	int counter = 0;
 
 };
 
-*/
