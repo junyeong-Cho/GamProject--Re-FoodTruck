@@ -110,6 +110,9 @@
     <ClCompile Include="Game\Elf.cpp">
       <Filter>Game\Customer</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Credit.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Animation.h">
@@ -250,6 +253,7 @@
     <ClInclude Include="Game\Elf.h">
       <Filter>Game\Customer</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Credit.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game">

@@ -17,6 +17,7 @@ Created:    March 8, 2023
 #include "Game/Counter.h"
 #include "Game/Kitchen.h"
 #include "Game/Ending.h"
+#include "Game/Credit.h"
 
 int main() {
     try {
@@ -33,6 +34,8 @@ int main() {
         engine.GetGameStateManager().AddGameState(kitchen);
         Ending ending;
         engine.GetGameStateManager().AddGameState(ending);
+        Credit credit;
+        engine.GetGameStateManager().AddGameState(credit);
         
 
         //여기에다가 새로운 state 추가
