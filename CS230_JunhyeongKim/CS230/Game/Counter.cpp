@@ -17,6 +17,7 @@ Created:    April 30, 2023
 #include "Giraffe.h"
 #include "Elf.h"
 
+
 Counter::Counter()
     :yes_button(1400.0 / 13.0, 800.0 / 3.0, 1400.0 / 10.0, 800.0 / 10.0)
 {
@@ -31,7 +32,7 @@ void Counter::Load()
         Engine::GetUnloadManager().GetCounterObjectManager().Add(front_customor);
         for (int i = 1; i < customors; i++)
         {
-            int customer_num = (static_cast<double>(rand()) / (RAND_MAX / 2));
+            int customer_num = rand() / (RAND_MAX / 2);
 
             switch (customer_num)
             {
@@ -49,7 +50,29 @@ void Counter::Load()
             }
             Engine::GetUnloadManager().GetCounterObjectManager().Add(front_customor);
         }
+        counter_Screen.Add("Assets/Counter_Screen.png");
+
+        int background_num = rand() / (RAND_MAX / 2);
+
+        switch (background_num)
+        {
+        case 0:
+            background.Add("Assets/Counter_Background_1.png");
+            break;
+        case 1:
+            background.Add("Assets/Counter_Background_2.png");
+            break;
+        case 2:
+            background.Add("Assets/Counter_Background_3.png");
+            break;
+        default:
+            break;
+        }
+
+        
         Engine::GetUnloadManager().first_load = false;
+
+
     }
 
 }
@@ -79,7 +102,7 @@ void Counter::Draw_UI()
     doodle::set_font_fade_out_interval(0.5, 0.0);
     doodle::set_font_size(Engine::GetWindow().GetSize().x / 60.0);
     doodle::set_fill_color(0, 0, 0);
-    doodle::draw_text("Tm : " + std::to_string(static_cast<int>(Engine::GetUnloadManager().GetTimer())), Engine::GetWindow().GetSize().x / 12.0 - 20+ Engine::GetWindow().GetSize().x * 0.025, Engine::GetWindow().GetSize().y / 8.0 * 7.35);
+    doodle::draw_text("Tm : " + std::to_string(static_cast<int>(Engine::GetUnloadManager().GetTimer())), Engine::GetWindow().GetSize().x / 12.0 - 20 + Engine::GetWindow().GetSize().x * 0.025, Engine::GetWindow().GetSize().y / 8.0 * 7.35);
     doodle::pop_settings();
     //¸í¼º
     doodle::draw_rectangle(Engine::GetWindow().GetSize().x / 5.0, Engine::GetWindow().GetSize().y / 8.0 * 7.3, Engine::GetWindow().GetSize().x * 0.15, Engine::GetWindow().GetSize().y * 0.07);
@@ -103,30 +126,16 @@ void Counter::Draw_UI()
 void Counter::Draw()
 {
     Engine::GetWindow().Clear(0xEBE3C0FF);
-    //Draw_background
-    doodle::push_settings();
-    doodle::set_fill_color(128, 128, 0);
-    doodle::draw_rectangle(Engine::GetWindow().GetSize().x / 12.0, Engine::GetWindow().GetSize().y / 4.0, Engine::GetWindow().GetSize().x / 3.0 * 2.0, Engine::GetWindow().GetSize().y / 7.0 * 4.4);
-    doodle::pop_settings();
 
+    //Draw Background
+    background.Draw();
     //Draw guest
     Engine::GetUnloadManager().GetCounterObjectManager().DrawAll(Math::TransformationMatrix());
 
-    //draw
-    doodle::push_settings();
-    doodle::set_fill_color(doodle::HexColor{ 0xEBE3C0FF });
-    doodle::no_outline();
-    doodle::draw_rectangle(0, 0, Engine::GetWindow().GetSize().x / 12.0, Engine::GetWindow().GetSize().y);
-    doodle::pop_settings();
 
-    //Draw UI,text,
+    counter_Screen.Draw();
+
     Draw_UI();
-    //Draw_stand
-    doodle::push_settings();
-    doodle::set_fill_color(255, 255, 0);
-    doodle::draw_rectangle(0.0, 0.0, Engine::GetWindow().GetSize().x / 6.0 * 5.0, Engine::GetWindow().GetSize().y / 4.0);
-    doodle::draw_triangle(Engine::GetWindow().GetSize().x / 6.0 * 5.0, Engine::GetWindow().GetSize().y / 4.0, Engine::GetWindow().GetSize().x / 6.0 * 5.0 + 100.0, 0.0, Engine::GetWindow().GetSize().x / 6.0 * 5.0, 0.0);
-    doodle::pop_settings();
 
     if (Engine::GetUnloadManager().current_customor != nullptr)
     {
@@ -135,7 +144,7 @@ void Counter::Draw()
             yes_button.draw("Kitchen");
         }
     }
-    
+
 }
 
 void Counter::Clear()
@@ -147,4 +156,6 @@ void Counter::Unload()
 {
     //Engine::GetUnloadManager().Save_Counter_object(gameobjectmanager);
     //gameobjectmanager.Unload();
+    counter_Screen.Unload();
+    background.Unload();
 }

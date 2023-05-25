@@ -12,6 +12,7 @@ Created:    April 30, 2023
 #include "../Engine/Texture.h"
 #include "../Engine/Sprite.h"
 #include "../Engine/GameObjectManager.h"
+#include "Counter_Background.h"
 #include "Button.h"
 
 class Customor;
@@ -39,6 +40,8 @@ private:
 
     Customor* front_customor = nullptr;
     Button yes_button;
+    Counter_Background counter_Screen;
+    Counter_Background background;
     int customors = 10;
 
 };

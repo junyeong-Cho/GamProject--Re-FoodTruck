@@ -25,6 +25,8 @@ public:
     virtual std::string Grade_soso_text() { return "hello!"; }
     virtual std::string Grade_good_text() { return "hello!"; }
 
+    static constexpr double timer_max = 30;
+    double random_timer;
 private:
     void update_x_velocity(double dt);
 
@@ -38,6 +40,17 @@ private:
         std::string GetName() override { return "Waiting"; }
     };
     State_Waiting state_waiting;
+
+    //state In_Counter
+    class State_In_Counter : public State
+    {
+    public:
+        virtual void Enter(GameObject*) override;
+        virtual void Update(GameObject*, double dt) override;
+        virtual void CheckExit(GameObject*) override;
+        std::string GetName() override { return "In_Counter"; }
+    };
+    State_In_Counter state_in_counter;
 
     //state Order
     class State_Order : public State
@@ -102,5 +115,9 @@ private:
     //evaluating
     bool evaluating = false;
     unsigned int grade = 0;
+
+    //timer
+    double timer{ 0 };
+    int last_timer{ 0 };
 
 };
