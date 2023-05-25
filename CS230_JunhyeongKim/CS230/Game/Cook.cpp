@@ -9,42 +9,44 @@ extern bool leftClick;
 Cook::Cook() : plate(Plate(Math::vec2{650.0, 80.0})), pot(Pot(Math::vec2{1000.0,-10.0}))
 {
 	Set_Variables();
+}
 
+void Cook::SetIngredient()
+{
+	for (int i = 0; i < ingredient_number; ++i)
+	{
+		seven_ingredients.push_back(std::vector<Ingredient*>());
+	}
+	if (seven_ingredients.size() == ingredient_number)
+	{
+		for (int i = 0; i < 3; ++i)
+		{
+			seven_ingredients[0].push_back(new Lemon(Math::vec2{ first_X + width, first_Y }));
+			seven_ingredients[1].push_back(new Lettuce(Math::vec2{ first_X, first_Y }));
+			seven_ingredients[2].push_back(new Ant(Math::vec2{ first_X, first_Y }));
+			seven_ingredients[3].push_back(new Leaf(Math::vec2{ first_X, first_Y }));
+			seven_ingredients[4].push_back(new Salt(Math::vec2{ first_X, first_Y }));
+			seven_ingredients[5].push_back(new DragonFruit(Math::vec2{ first_X, first_Y }));
+			seven_ingredients[6].push_back(new MermaidScales(Math::vec2{ first_X, first_Y }));
+		}
+		for (int i = 0; i < ingredient_number; ++i)
+		{
+			for (int j = 0; j < seven_ingredients[i].size(); ++j)
+			{
+				seven_ingredients[i][j]->SetScale(Math::vec2{ Width_raito ,Height_raito });
+			}
+		}
+	}
 }
 
 void Cook::Load()
 {
+	SetIngredient();
 	operation.Load();
 	tool.Load();
 	plate.Load();
 	pot.Load();
 
-	for (int i = 0; i < ingredient_number; ++i)
-	{
-		seven_ingredients.push_back(std::vector<Ingredient*>());
-	}
-
-	if (seven_ingredients.size() == ingredient_number)
-	{
-		for (int i = 0; i < 20; ++i)
-		{
-			seven_ingredients[0].push_back(new Lemon(IngredientName::Lemon, Math::vec2{ first_X + width, first_Y }, 3, KitchenPosition::COUNTER1));
-			seven_ingredients[1].push_back(new Lettuce(IngredientName::Lettuce, Math::vec2{ first_X, first_Y }, 4, KitchenPosition::COUNTER2));
-			seven_ingredients[2].push_back(new Ant(IngredientName::Ant, Math::vec2{ first_X, first_Y }, 1, KitchenPosition::COUNTER3));
-			seven_ingredients[3].push_back(new Leaf(IngredientName::Leaf, Math::vec2{ first_X, first_Y }, 1, KitchenPosition::COUNTER4));
-			seven_ingredients[4].push_back(new Salt(IngredientName::Salt, Math::vec2{ first_X, first_Y }, 3, KitchenPosition::COUNTER5));
-			seven_ingredients[5].push_back(new DragonFruit(IngredientName::DragonFruit, Math::vec2{ first_X, first_Y }, 3, KitchenPosition::COUNTER6));
-			seven_ingredients[6].push_back(new MermaidScales(IngredientName::MermaidScales, Math::vec2{ first_X, first_Y }, 3, KitchenPosition::COUNTER7));
-		}
-	}
-
-	for (int i = 0; i < ingredient_number; ++i)
-	{
-		for (int j = 0; j < seven_ingredients[i].size(); ++j)
-		{
-			seven_ingredients[i][j]->Load();
-		}
-	}
 	ChangeIngredientPos();
 }
 
@@ -58,7 +60,26 @@ void Cook::Unload()
 		{
 			delete seven_ingredients[i][j];
 		}
+		seven_ingredients[i].clear();
 	}
+	seven_ingredients.clear();
+
+	for (int i = 0; i < using_ingredients.size(); ++i)
+	{
+		delete using_ingredients[i];
+	}
+	using_ingredients.clear();
+	
+
+	score = 0;
+	time = 0;
+	stoveOn = false;
+	text = "Off";
+	potDrawIndex = 0;
+	plateDrawIndex = 0;
+	checkDrawSoup = false;
+	canCook = true;
+	whatMouseclickIndex = -1;
 }
 
 void Cook::Set_Variables()
@@ -165,7 +186,7 @@ void Cook::Update(double dt)
 	}
 	Set_Variables();
 	operation.Update();
-	tool.ChangeTool(operation.Return());
+	tool.Update(operation.Return());
 	SetIngredientsWhere();
 	PutSlot();
 	CreateUsingIngredient();
@@ -193,6 +214,7 @@ void Cook::Draw()
 {
 	SlotDraw();
 	DrawIngredients();
+
 	tool.Draw();
 	plate.ButtonDraw();
 	pot.ButtonDraw();
@@ -208,12 +230,10 @@ void Cook::DrawIngredients()
 	{
 		for (int i = 0; i < seven_ingredients.size(); ++i)
 		{
-			if (seven_ingredients[i].size() != 0)
+			for (int j = 0; j < seven_ingredients[i].size(); ++j)
 			{
-				for (int j = 0; j < seven_ingredients[i].size(); ++j)
-				{
-					seven_ingredients[i][j]->Draw();
-				}
+				seven_ingredients[i][j]->SetScale(Math::vec2{ Width_raito ,Height_raito });
+				seven_ingredients[i][j]->Draw(ingredientTextureManager.GetTexture());
 			}
 		}
 	}
@@ -221,7 +241,8 @@ void Cook::DrawIngredients()
 	{
 		for (int i = 0; i < using_ingredients.size(); ++i)
 		{
-			using_ingredients[i]->Draw();
+			using_ingredients[i]->SetScale(Math::vec2{ Width_raito ,Height_raito });
+			using_ingredients[i]->Draw(ingredientTextureManager.GetTexture());
 		}
 
 	}
@@ -296,7 +317,7 @@ void Cook::a()
 		if (plateDrawIndex != 0)
 		{
 			canCook = true;
-			plate.vector.clear();
+			plate.GetIngredientVec().clear();
 			plateDrawIndex = 0;
 			Engine::GetUnloadManager().Set_food_grad(score);
 		}
@@ -320,7 +341,7 @@ void Cook::Cutting()
 	{
 		for (int i = 0; i < using_ingredients.size(); ++i)
 		{
-			if (using_ingredients[i]->IsMouseOn(WhereISMouse()) == true && leftClick == true && GetWhere(WhereISMouse()) == KitchenPosition::CUTTING_BOARD)
+			if (using_ingredients[i]->IsMouseOn(WhereISMouse(), ingredientTextureManager.GetTexture()) == true && leftClick == true && GetWhere(WhereISMouse()) == KitchenPosition::CUTTING_BOARD)
 			{
 				if (using_ingredients[i]->GetCutNum() > 0)
 				{
@@ -375,7 +396,7 @@ int Cook::WhatIndexMouseClick()
 			{
 				for (int i = 0; i < using_ingredients.size(); ++i)
 				{
-					if (using_ingredients[i]->IsMouseOn(WhereISMouse()) == true)
+					if (using_ingredients[i]->IsMouseOn(WhereISMouse(), ingredientTextureManager.GetTexture()) == true)
 					{
 						whatMouseclickIndex = i;
 						leftClick = false;
@@ -450,14 +471,14 @@ void Cook::SlotDraw()
 
 	if (checkDrawSoup == false)
 	{
-		pot.DrawIngredient();
+		pot.DrawIngredient(ingredientTextureManager.GetTexture());
 	}
-	plate.DrawIngredient();
+	plate.DrawIngredient(ingredientTextureManager.GetTexture());
 }
 
-void Cook::DrawScore(RecipeName order)
+void Cook::DrawScore(std::vector<Recipe*>& recipeBook, RecipeName order)
 {
-	score = recipeBook.GetRecipeBook()[static_cast<int>(order)]->CheckComplete(plate.vector);
+	score = recipeBook[static_cast<int>(order)]->CheckComplete(plate.GetIngredientVec());
 	if (plate.ButtonClick(WhereISMouse()) == true)
 	{
 		if (score >= 0 && score < 50)
@@ -473,7 +494,7 @@ void Cook::DrawScore(RecipeName order)
 			plateDrawIndex = static_cast<int>(order) * 3 + 1;
 		}
 		canCook = false; // 카운터로 가져다주는 벨 누르면 true가 되어야함.
-		plate.vector.clear();
+		plate.GetIngredientVec().clear();
 	}
 	doodle::draw_text( std::to_string(score) + "%", 700, -10);
 }
@@ -497,7 +518,7 @@ void Cook::SetStoveOn()
 			if (text == "Now")
 			{
 				text = "Good";
-				for (Ingredient* i : pot.vector)
+				for (Ingredient* i : pot.GetIngredientVec())
 				{
 					i->Boil();
 				}
@@ -511,7 +532,6 @@ void Cook::SetStoveOn()
 		}
 		potDrawIndex = 1;
 	}
-	
 }
 
 void Cook::DrawGage()
@@ -551,7 +571,7 @@ void Cook::SpotToPlate()
 	}
 	else
 	{
-		if (pot.vector.size() != 0)
+		if (pot.GetIngredientVec().size() != 0)
 		{
 			if (GetWhere(WhereISMouse()) == KitchenPosition::STOVE && leftClick == true)
 			{
@@ -564,11 +584,13 @@ void Cook::SpotToPlate()
 	{
 		if (canCook == true)
 		{
-			for (int i = 0; i < pot.vector.size() && plate.vector.size() <= 16; ++i)
+			for (int i = 0; i < pot.GetIngredientVec().size() && plate.GetIngredientVec().size() <= 16; ++i)
 			{
-				plate.PutIngredient(pot.vector[i]);
+				if (plate.PutIngredient(pot.GetIngredientVec()[i]) == true)
+				{
+					pot.GetIngredientVec().erase(pot.GetIngredientVec().begin() + i);
+				}
 			}
-			pot.vector.clear();
 			checkDrawSoup = false;
 		}
 	}

@@ -9,6 +9,8 @@
 #include "RecipeBook.h"
 #include "RecipeName.h"
 
+#include "IngredientTextureManager.h"
+
 class Cook
 {
 public:
@@ -17,8 +19,9 @@ public:
 	void Update(double dt);
     void Draw();
 	void Unload();
-	void DrawScore(RecipeName order);
+	void DrawScore(std::vector<Recipe*>& recipeBook, RecipeName order);
 	void DrawGage();
+	Math::vec2 WhereISMouse();
 
 	double Width_raito = 0;
 	double Height_raito = 0;
@@ -109,7 +112,7 @@ public:
 
 private:
 
-    Math::vec2 WhereISMouse();
+    
     KitchenPosition GetWhere(Math::vec2 pos);
     void SetIngredientsWhere();
     void Cutting();
@@ -124,6 +127,7 @@ private:
 	void SpotToPlate();
 	void DrawTempSoup();
 	int ReturnScore() { return score; }
+	void SetIngredient();
 
 
     //using_ingredients 벡터 중 몇번째 인덱스를 가리키고 있는지.
@@ -131,15 +135,13 @@ private:
 
     std::vector<std::vector<Ingredient*>> seven_ingredients;
     std::vector<Ingredient*> using_ingredients;
-    std::vector<Ingredient*> inPlate;
-    std::vector<Ingredient*> inPot;
 
+	IngredientTextureManager ingredientTextureManager;
     Tool tool;
     Operation operation;
 	Plate plate;
 	Pot pot;
 	int score = 0;
-	RecipeBook recipeBook;
 	double time = 0;
 	bool stoveOn = false;
 	std::string text = "Off";

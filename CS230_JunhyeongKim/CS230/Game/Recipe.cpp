@@ -1,35 +1,32 @@
 #include "Recipe.h"
 
-Recipe::Recipe(RecipeName name, int TotalNum) : recippeName(name), totalNum(TotalNum)
+Recipe::Recipe()
 {
-	lemon = new Lemon(IngredientName::Lemon, { 0,0 }, 0, KitchenPosition::COUNTER1);
-	boiledLemon = new Lemon(IngredientName::Lemon, { 0,0 }, 0, KitchenPosition::COUNTER1);
+	lemon = new Lemon({ 0,0 });
+	boiledLemon = new Lemon({ 0,0 });
 	boiledLemon->Boil();
 
-	lettuce = new Lettuce(IngredientName::Lettuce, { 0,0 }, 0, KitchenPosition::COUNTER1);
+	lettuce = new Lettuce({ 0,0 });
 
-	ant = new Ant(IngredientName::Ant, { 0,0 }, 0, KitchenPosition::COUNTER1);
-	boiledAnt = new Ant(IngredientName::Ant, { 0,0 }, 0, KitchenPosition::COUNTER1);
+	ant = new Ant({ 0,0 });
+	boiledAnt = new Ant({ 0,0 });
 	boiledAnt->Boil();
 
-	leaf = new Leaf(IngredientName::Leaf, { 0,0 }, 0, KitchenPosition::COUNTER1);
-	boiledLeaf = new Leaf(IngredientName::Leaf, { 0,0 }, 0, KitchenPosition::COUNTER1);
+	leaf = new Leaf({ 0,0 });
+	boiledLeaf = new Leaf({ 0,0 });
 	boiledLeaf->Boil();
 
-	salt = new Salt(IngredientName::Salt, { 0,0 }, 0, KitchenPosition::COUNTER1);
-	boiledSalt = new Salt(IngredientName::Salt, { 0,0 }, 0, KitchenPosition::COUNTER1);
+	salt = new Salt({ 0,0 });
+	boiledSalt = new Salt({ 0,0 });
 	boiledSalt->Boil();
 
-	dragonFruit = new DragonFruit(IngredientName::DragonFruit, { 0,0 }, 0, KitchenPosition::COUNTER1);
-	boiledDragonFruit = new DragonFruit(IngredientName::DragonFruit, { 0,0 }, 0, KitchenPosition::COUNTER1);
+	dragonFruit = new DragonFruit({ 0,0 });
+	boiledDragonFruit = new DragonFruit({ 0,0 });
 	boiledDragonFruit->Boil();
 
-	mermaidScales = new MermaidScales(IngredientName::MermaidScales, { 0,0 }, 0, KitchenPosition::COUNTER1);
-	boiledMermaidScales = new MermaidScales(IngredientName::MermaidScales, { 0,0 }, 0, KitchenPosition::COUNTER1);
+	mermaidScales = new MermaidScales({ 0,0 });
+	boiledMermaidScales = new MermaidScales({ 0,0 });
 	boiledMermaidScales->Boil();
-
-	boiledwater = new Water(IngredientName::Water, { 0,0 }, 0, KitchenPosition::COUNTER1);
-	boiledwater->Boil();
 }
 
 int Recipe::CheckComplete(std::vector<Ingredient*>& plating)
@@ -61,11 +58,13 @@ int Recipe::CheckComplete(std::vector<Ingredient*>& plating)
 	}
 	return score;
 }
+
 void Recipe::Update()
 {
 	texturePos = Math::vec2((double)Engine::GetWindow().GetSize().x / 4,
 		(double)Engine::GetWindow().GetSize().y / 7);
 }
+
 void Recipe::Unload()
 {
 	delete lemon;
@@ -88,13 +87,14 @@ void Recipe::Unload()
 	delete mermaidScales;
 	delete boiledMermaidScales;
 
-	delete boiledwater;
+	recipe.clear();
 }
 
 
 
-LemonSalad::LemonSalad(RecipeName name, int TotalNum) : Recipe(name, TotalNum)
+LemonSalad::LemonSalad() : Recipe()
 {
+	recippeName = RecipeName::LemonSalad;
 	recipe.push_back(lettuce); //1
 	recipe.push_back(lettuce); //2
 	recipe.push_back(lettuce); //3
@@ -102,11 +102,13 @@ LemonSalad::LemonSalad(RecipeName name, int TotalNum) : Recipe(name, TotalNum)
 	recipe.push_back(lemon); //1
 	recipe.push_back(lemon); //2
 	recipe.push_back(lemon); //3
-}
-void LemonSalad::Load()
-{
+
+	totalNum = recipe.size();
+
 	texture = Engine::GetTextureManager().Load("Assets/Recipe_LemonSalad.png");
 }
+void LemonSalad::Load()
+{}
 void LemonSalad::Draw()
 {
 	Math::TransformationMatrix matrix = Math::TranslationMatrix(texturePos) * Math::RotationMatrix(0) * Math::ScaleMatrix(0.2);
@@ -116,18 +118,22 @@ void LemonSalad::Draw()
 
 
 
-SaltSalad::SaltSalad(RecipeName name, int TotalNum) : Recipe(name, TotalNum)
+SaltSalad::SaltSalad() : Recipe()
 {
+	recippeName = RecipeName::SaltSalad;
 	recipe.push_back(lettuce); //1
 	recipe.push_back(lettuce); //2
 	recipe.push_back(lettuce); //3
 
 	recipe.push_back(salt); //1
-}
-void SaltSalad::Load()
-{
+
+	totalNum = recipe.size();
+
 	texture = Engine::GetTextureManager().Load("Assets/Recipe_SaltSalad.png");
 }
+void SaltSalad::Load()
+{}
+
 void SaltSalad::Draw()
 {
 	Math::TransformationMatrix matrix = Math::TranslationMatrix(texturePos) * Math::RotationMatrix(0) * Math::ScaleMatrix(0.2);
@@ -136,8 +142,9 @@ void SaltSalad::Draw()
 
 
 
-LeafSalad::LeafSalad(RecipeName name, int TotalNum) : Recipe(name, TotalNum)
+LeafSalad::LeafSalad() : Recipe()
 {
+	recippeName = RecipeName::LeafSalad;
 	recipe.push_back(lettuce); //1
 	recipe.push_back(lettuce); //2
 	recipe.push_back(lettuce); //3
@@ -145,11 +152,14 @@ LeafSalad::LeafSalad(RecipeName name, int TotalNum) : Recipe(name, TotalNum)
 	recipe.push_back(leaf); //1
 
 	recipe.push_back(salt); //1
-}
-void LeafSalad::Load()
-{
+
+	totalNum = recipe.size();
+	
 	texture = Engine::GetTextureManager().Load("Assets/Recipe_LeafSalad.png");
 }
+void LeafSalad::Load()
+{}
+
 void LeafSalad::Draw()
 {
 	Math::TransformationMatrix matrix = Math::TranslationMatrix(texturePos) * Math::RotationMatrix(0) * Math::ScaleMatrix(0.2);
@@ -158,8 +168,9 @@ void LeafSalad::Draw()
 
 
 
-AntSalad::AntSalad(RecipeName name, int TotalNum) : Recipe(name, TotalNum)
+AntSalad::AntSalad() : Recipe()
 {
+	recippeName = RecipeName::AntSalad;
 	recipe.push_back(lettuce); //1
 	recipe.push_back(lettuce); //2
 	recipe.push_back(lettuce); //3
@@ -171,11 +182,14 @@ AntSalad::AntSalad(RecipeName name, int TotalNum) : Recipe(name, TotalNum)
 	recipe.push_back(ant); //5
 	recipe.push_back(ant); //6
 	recipe.push_back(ant); //7
-}
-void AntSalad::Load()
-{
+
+	totalNum = recipe.size();
+
 	texture = Engine::GetTextureManager().Load("Assets/Recipe_AntSalad.png");
 }
+void AntSalad::Load()
+{}
+
 void AntSalad::Draw()
 {
 	Math::TransformationMatrix matrix = Math::TranslationMatrix(texturePos) * Math::RotationMatrix(0) * Math::ScaleMatrix(0.2);
@@ -183,8 +197,9 @@ void AntSalad::Draw()
 }
 
 
-DragonFruitSalad::DragonFruitSalad(RecipeName name, int TotalNum) : Recipe(name, TotalNum)
+DragonFruitSalad::DragonFruitSalad() : Recipe()
 {
+	recippeName = RecipeName::DragonFruitSalad;
 	recipe.push_back(lettuce); //1
 	recipe.push_back(lettuce); //2
 	recipe.push_back(lettuce); //3
@@ -193,11 +208,14 @@ DragonFruitSalad::DragonFruitSalad(RecipeName name, int TotalNum) : Recipe(name,
 	recipe.push_back(dragonFruit); //2
 	recipe.push_back(dragonFruit); //3
 	recipe.push_back(dragonFruit); //4
-}
-void DragonFruitSalad::Load()
-{
+
+	totalNum = recipe.size();
+
 	texture = Engine::GetTextureManager().Load("Assets/Recipe_DragonFruitSalad.png");
 }
+void DragonFruitSalad::Load()
+{}
+
 void DragonFruitSalad::Draw()
 {
 	Math::TransformationMatrix matrix = Math::TranslationMatrix(texturePos) * Math::RotationMatrix(0) * Math::ScaleMatrix(0.2);
@@ -206,8 +224,9 @@ void DragonFruitSalad::Draw()
 
 
 
-MermaidScalesSalad::MermaidScalesSalad(RecipeName name, int TotalNum) : Recipe(name, TotalNum)
+MermaidScalesSalad::MermaidScalesSalad() : Recipe()
 {
+	recippeName = RecipeName::MermaidScalesSalad;
 	recipe.push_back(lettuce); //1
 	recipe.push_back(lettuce); //2
 	recipe.push_back(lettuce); //3
@@ -218,11 +237,13 @@ MermaidScalesSalad::MermaidScalesSalad(RecipeName name, int TotalNum) : Recipe(n
 	recipe.push_back(mermaidScales); //4
 	recipe.push_back(mermaidScales); //5
 
-}
-void MermaidScalesSalad::Load()
-{
+	totalNum = recipe.size();
+
 	texture = Engine::GetTextureManager().Load("Assets/Recipe_MermaidScalesSalad.png");
 }
+void MermaidScalesSalad::Load()
+{}
+
 void MermaidScalesSalad::Draw()
 {
 	Math::TransformationMatrix matrix = Math::TranslationMatrix(texturePos) * Math::RotationMatrix(0) * Math::ScaleMatrix(0.2);
@@ -232,18 +253,19 @@ void MermaidScalesSalad::Draw()
 
 
 
-WaterSoup::WaterSoup(RecipeName name, int TotalNum) : Recipe(name, TotalNum)
+WaterSoup::WaterSoup() : Recipe()
 {
-	recipe.push_back(boiledwater); //1
-	recipe.push_back(boiledwater); //2
-	recipe.push_back(boiledwater); //3
+	recippeName = RecipeName::WaterSoup;
 
 	recipe.push_back(boiledSalt); //1
-}
-void WaterSoup::Load()
-{
+
+	totalNum = recipe.size();
+
 	texture = Engine::GetTextureManager().Load("Assets/Recipe_WaterSoup.png");
 }
+void WaterSoup::Load()
+{}
+
 void WaterSoup::Draw()
 {
 	Math::TransformationMatrix matrix = Math::TranslationMatrix(texturePos) * Math::RotationMatrix(0) * Math::ScaleMatrix(0.2);
@@ -253,22 +275,23 @@ void WaterSoup::Draw()
 
 
 
-AntSoup::AntSoup(RecipeName name, int TotalNum) : Recipe(name, TotalNum)
+AntSoup::AntSoup() : Recipe()
 {
-	recipe.push_back(boiledwater); //1
-	recipe.push_back(boiledwater); //2
-	recipe.push_back(boiledwater); //3
+	recippeName = RecipeName::AntSoup;
 
 	recipe.push_back(boiledAnt); //1
 	recipe.push_back(boiledAnt); //2
 	recipe.push_back(boiledAnt); //3
 
 	recipe.push_back(boiledSalt); //1
-}
-void AntSoup::Load()
-{
+
+	totalNum = recipe.size();
+
 	texture = Engine::GetTextureManager().Load("Assets/Recipe_AntSoup.png");
 }
+void AntSoup::Load()
+{}
+
 void AntSoup::Draw()
 {
 	Math::TransformationMatrix matrix = Math::TranslationMatrix(texturePos) * Math::RotationMatrix(0) * Math::ScaleMatrix(0.2);
@@ -277,11 +300,9 @@ void AntSoup::Draw()
 
 
 
-StrongSoup::StrongSoup(RecipeName name, int TotalNum) : Recipe(name, TotalNum)
+StrongSoup::StrongSoup() : Recipe()
 {
-	recipe.push_back(boiledwater); //1
-	recipe.push_back(boiledwater); //2
-	recipe.push_back(boiledwater); //3
+	recippeName = RecipeName::StrongSoup;
 
 	recipe.push_back(lemon); //1
 	recipe.push_back(lemon); //2
@@ -297,11 +318,14 @@ StrongSoup::StrongSoup(RecipeName name, int TotalNum) : Recipe(name, TotalNum)
 
 	recipe.push_back(ant); //1
 	recipe.push_back(ant); //2
-}
-void StrongSoup::Load()
-{
+
+	totalNum = recipe.size();
+
 	texture = Engine::GetTextureManager().Load("Assets/Recipe_StrongSoup.png");
 }
+void StrongSoup::Load()
+{}
+
 void StrongSoup::Draw()
 {
 	Math::TransformationMatrix matrix = Math::TranslationMatrix(texturePos) * Math::RotationMatrix(0) * Math::ScaleMatrix(0.2);

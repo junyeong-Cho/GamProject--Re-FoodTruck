@@ -1,14 +1,17 @@
 #include "Tool.h"
 #include "doodle/input.hpp"
 
-
-void Tool::Load()
+Tool::Tool()
 {
 	texture.push_back(Engine::GetTextureManager().Load("Assets/Tool_Hand.png"));
 	texture.push_back(Engine::GetTextureManager().Load("Assets/Tool_Knife.png"));
 	texture.push_back(Engine::GetTextureManager().Load("Assets/Tool_Ladle.png"));
 	texture.push_back(Engine::GetTextureManager().Load("Assets/Tool_Scoop.png"));
 	texture.push_back(Engine::GetTextureManager().Load("Assets/Tool_TrashCan.png"));
+}
+
+void Tool::Load()
+{
 }
 
 void Tool::Draw()
@@ -18,7 +21,7 @@ void Tool::Draw()
 	
 }
 
-void Tool::ChangeTool(InventoryTexture toolName)
+void Tool::Update(InventoryTexture toolName)
 {
 	switch (toolName)
 	{

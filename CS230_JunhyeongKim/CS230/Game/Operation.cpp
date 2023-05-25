@@ -6,8 +6,9 @@ int wheel = 0;
 bool leftClick = false;
 bool rightClick = false;
 
-void Operation::Load()
+Operation::Operation()
 {
+	std::cout << "Operation Constructor";
 	operationTexture.push_back(Engine::GetTextureManager().Load("Assets/Toolbox.png"));
 	operationTexture.push_back(Engine::GetTextureManager().Load("Assets/PetProperty.png"));
 	operationTexture.push_back(Engine::GetTextureManager().Load("Assets/Refrigerator.png"));
@@ -18,6 +19,11 @@ void Operation::Load()
 	operationTexture.push_back(Engine::GetTextureManager().Load("Assets/TrashCan.png"));
 	operationTexture.push_back(Engine::GetTextureManager().Load("Assets/Fire.png"));
 	operationTexture.push_back(Engine::GetTextureManager().Load("Assets/Water.png"));
+}
+
+void Operation::Load()
+{
+
 }
 
 void on_mouse_wheel(int scroll_amount)

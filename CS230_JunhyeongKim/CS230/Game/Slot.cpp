@@ -2,6 +2,8 @@
 #include "doodle/drawing.hpp"
 #include <math.h>
 
+#include <iostream>
+
 extern bool leftClick;
 
 Slot::Slot(Math::vec2 pos) : position(pos)
@@ -22,15 +24,6 @@ Slot::Slot(Math::vec2 pos) : position(pos)
 }
 
 Plate::Plate(Math::vec2 pos) : Slot(pos)
-{
-
-}
-
-Pot::Pot(Math::vec2 pos) : Slot(pos)
-{
-
-}
-void Plate::Load()
 {
 	texture.push_back(Engine::GetTextureManager().Load("Assets/EmptyPlate.png")); // 0
 
@@ -71,10 +64,17 @@ void Plate::Load()
 	texture.push_back(Engine::GetTextureManager().Load("Assets/StrongSoup_Bad.png")); //27
 }
 
-void Pot::Load()
+Pot::Pot(Math::vec2 pos) : Slot(pos)
 {
 	texture.push_back(Engine::GetTextureManager().Load("Assets/EmptyPot.png"));
 	texture.push_back(Engine::GetTextureManager().Load("Assets/FullPot.png"));
+}
+void Plate::Load()
+{
+}
+
+void Pot::Load()
+{
 }
 
 void Plate::Draw(int index)
@@ -90,11 +90,11 @@ void Pot::Draw(int index)
 	texture[index]->Draw(matrix);
 }
 
-void Slot::DrawIngredient()
+void Slot::DrawIngredient(const std::vector<std::vector<CS230::Texture*>>& texture)
 {
 	for (int i = 0; i < vector.size(); ++i)
 	{
-		vector[i]->SlotDraw(slotPos[i]);
+		vector[i]->SlotDraw(slotPos[i], texture);
 	}
 }
 
@@ -156,4 +156,9 @@ bool Pot::ButtonClick(Math::vec2 pos)
 		}
 	}
 	return false;
+}
+
+std::vector<Ingredient*>& Slot::GetIngredientVec()
+{
+	return vector;
 }

@@ -98,8 +98,16 @@
     <ClCompile Include="Game\Customer.cpp">
       <Filter>Game\Customer</Filter>
     </ClCompile>
+
     <ClCompile Include="Game\Counter_Background.cpp">
       <Filter>Game\Counter</Filter>
+
+    <ClCompile Include="Game\IngredientTextureManager.cpp">
+      <Filter>Game\Kitchen</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\SideBowl.cpp">
+      <Filter>Game\Kitchen</Filter>
+
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -229,8 +237,16 @@
     <ClInclude Include="Game\Customer.h">
       <Filter>Game\Customer</Filter>
     </ClInclude>
+
     <ClInclude Include="Game\Counter_Background.h">
       <Filter>Game\Counter</Filter>
+
+    <ClInclude Include="Game\IngredientTextureManager.h">
+      <Filter>Game\Kitchen</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\SideBowl.h">
+      <Filter>Game\Kitchen</Filter>
+
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

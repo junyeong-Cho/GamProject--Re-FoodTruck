@@ -7,7 +7,7 @@
 class Recipe
 {
 public:
-	Recipe(RecipeName name, int TotalNum);
+	Recipe();
 	virtual void Load() = 0;
 	virtual void Draw() = 0;
 	int CheckComplete(std::vector<Ingredient*>& plating);
@@ -39,8 +39,6 @@ protected:
 	MermaidScales* mermaidScales;
 	MermaidScales* boiledMermaidScales;
 	
-	Water* boiledwater;
-
 	int score = 0;
 	int totalNum = 0;
 };
@@ -48,7 +46,7 @@ protected:
 class LemonSalad : public Recipe
 {
 public:
-	LemonSalad(RecipeName name, int TotalNum);
+	LemonSalad();
 	void Load() override;
 	void Draw() override;
 private:
@@ -57,7 +55,7 @@ private:
 class SaltSalad : public Recipe
 {
 public:
-	SaltSalad(RecipeName name, int TotalNum);
+	SaltSalad();
 	void Load() override;
 	void Draw() override;
 private:
@@ -67,7 +65,7 @@ private:
 class LeafSalad : public Recipe
 {
 public:
-	LeafSalad(RecipeName name, int TotalNum);
+	LeafSalad();
 	void Load() override;
 	void Draw() override;
 private:
@@ -77,7 +75,7 @@ private:
 class AntSalad : public Recipe
 {
 public:
-	AntSalad(RecipeName name, int TotalNum);
+	AntSalad();
 	void Load() override;
 	void Draw() override;
 private:
@@ -87,7 +85,7 @@ private:
 class DragonFruitSalad : public Recipe
 {
 public:
-	DragonFruitSalad(RecipeName name, int TotalNum);
+	DragonFruitSalad();
 	void Load() override;
 	void Draw() override;
 private:
@@ -97,7 +95,7 @@ private:
 class MermaidScalesSalad : public Recipe
 {
 public:
-	MermaidScalesSalad(RecipeName name, int TotalNum);
+	MermaidScalesSalad();
 	void Load() override;
 	void Draw() override;
 private:
@@ -107,7 +105,7 @@ private:
 class WaterSoup : public Recipe
 {
 public:
-	WaterSoup(RecipeName name, int TotalNum);
+	WaterSoup();
 	void Load() override;
 	void Draw() override;
 private:
@@ -117,7 +115,7 @@ private:
 class AntSoup : public Recipe
 {
 public:
-	AntSoup(RecipeName name, int TotalNum);
+	AntSoup();
 	void Load() override;
 	void Draw() override;
 private:
@@ -127,7 +125,7 @@ private:
 class StrongSoup : public Recipe
 {
 public:
-	StrongSoup(RecipeName name, int TotalNum);
+	StrongSoup();
 	void Load() override;
 	void Draw() override;
 private:

@@ -8,25 +8,20 @@ extern bool leftClick;
 extern bool rightClick;
 
 RecipeBook::RecipeBook()
-{
-	recipeBook.push_back(new LemonSalad(RecipeName::LemonSalad, 18));
-	recipeBook.push_back(new SaltSalad(RecipeName::SaltSalad, 12));
-	recipeBook.push_back(new LeafSalad(RecipeName::LeafSalad, 15));
-	recipeBook.push_back(new AntSalad(RecipeName::AntSalad, 30));
-	recipeBook.push_back(new DragonFruitSalad(RecipeName::DragonFruitSalad, 21));
-	recipeBook.push_back(new MermaidScalesSalad(RecipeName::MermaidScalesSalad, 24));
-	recipeBook.push_back(new WaterSoup(RecipeName::WaterSoup, 12));
-	recipeBook.push_back(new AntSoup(RecipeName::AntSoup, 21));
-	recipeBook.push_back(new StrongSoup(RecipeName::StrongSoup, 36));
-
-}
+{}
 
 void RecipeBook::Load()
 {
-	for (Recipe* recipe : recipeBook)
-	{
-		recipe->Load();
-	}
+	recipeBook.push_back(new LemonSalad());
+	recipeBook.push_back(new SaltSalad());
+	recipeBook.push_back(new LeafSalad());
+	recipeBook.push_back(new AntSalad());
+	recipeBook.push_back(new DragonFruitSalad());
+	recipeBook.push_back(new MermaidScalesSalad());
+	recipeBook.push_back(new WaterSoup());
+	recipeBook.push_back(new AntSoup());
+	recipeBook.push_back(new StrongSoup());
+
 }
 
 void RecipeBook::Update()
@@ -72,6 +67,7 @@ void RecipeBook::Draw()
 	}
 	doodle::draw_rectangle(x, y, width, height);
 	doodle::draw_rectangle(closeX, closeY, closeWidth, closewHeight);
+
 }
 
 void RecipeBook::Unload()
@@ -81,4 +77,12 @@ void RecipeBook::Unload()
 		recipe->Unload();
 		delete recipe;
 	}
+	recipeBook.clear();
+
+}
+
+std::vector<Recipe*>& RecipeBook::GetRecipeBook()
+{
+
+	return recipeBook;
 }

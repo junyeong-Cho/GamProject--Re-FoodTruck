@@ -8,6 +8,7 @@
 #include "Button.h"
 #include "Cook.h"
 #include "RecipeBook.h"
+#include "SideBowl.h"
 
 class Kitchen : public CS230::GameState
 {
@@ -33,7 +34,13 @@ public:
 
 
 private:
+    bool canLoad = true;
+    bool canUnload = false;
     Cook cook;
     RecipeBook recipeBook;
     Button go_counter;
+    std::vector<SideBowl> sideBowl;
+    CS230::Texture* cuttingBoardTexture;
+    CS230::Texture* kitchenBackgroundTexture;
+
 };

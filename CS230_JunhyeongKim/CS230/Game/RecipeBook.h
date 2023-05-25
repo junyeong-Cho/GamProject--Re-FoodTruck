@@ -9,7 +9,7 @@ public:
 	void Update();
 	void Draw();
 	void Unload();
-	std::vector<Recipe*> GetRecipeBook() { return recipeBook; }
+	std::vector<Recipe*>& GetRecipeBook();
 
 private:
 	std::vector<Recipe*> recipeBook;
