@@ -13,16 +13,20 @@ Created:    March 2, 2023
 #include "doodle/drawing.hpp"
 #include "doodle/input.hpp"
 #include "Counter.h"
-
+#include <iostream>
 Customor::Customor(Customor* front) :
-    GameObject({ -300.0,200.0 }), front_customor(front),
+    GameObject({ -300.0,138.0 }), front_customor(front),
     Yes(400.0, 800.0 / 3.0, 1400.0 / 10.0, 800.0 / 10.0),
     No(750.0, 800.0 / 3.0, 1400.0 / 10.0, 800.0 / 10.0),
     evalue(1400.0 / 2.5, 800.0 / 3.0, 1400.0 / 10.0, 800 / 10.0)
 {
     current_state = &state_waiting;
-    SetScale({ 0.98,0.98 });
+    //SetScale({ 0.98,0.98 });
+    random_timer = static_cast<double>(rand()) / (RAND_MAX / 5) + 10;
+    std::cout << random_timer << "\n";
     current_state->Enter(this);
+    timer = random_timer;
+    last_timer = static_cast<int>(random_timer);
 }
 
 void Customor::update_x_velocity(double dt)
@@ -59,12 +63,67 @@ void Customor::State_Waiting::CheckExit(GameObject* object)
 {
     Customor* customor = static_cast<Customor*>(object);
 
-    if (customor->front_customor == nullptr ||  customor->front_customor->current_state->GetName() == "Leaving")
+    if (customor->front_customor == nullptr || customor->front_customor->current_state->GetName() == "Fwaiting" || customor->front_customor->current_state->GetName() == "Leaving")
     {
-        customor->change_state(&customor->state_order);
+        customor->change_state(&customor->state_in_counter);
     }
 
 }
+
+//In_counter
+
+void Customor::State_In_Counter::Enter(GameObject* object)
+{
+    Customor* customor = static_cast<Customor*>(object);
+
+}
+
+void Customor::State_In_Counter::Update(GameObject* object, double dt)
+{
+    Customor* customor = static_cast<Customor*>(object);
+    
+    if (customor->random_timer <= 0)
+    {
+        if (customor->GetPosition().x < 60.0 * Engine::GetWindow().GetSize().x / 1400.0)
+        {
+            customor->UpdatePosition({ 200 * dt,0 });
+        }
+        else
+        {
+            customor->SetPosition({ 60.0 * Engine::GetWindow().GetSize().x / 1400.0 ,customor->GetPosition().y });
+        }
+
+        customor->timer -= dt;
+        if (static_cast<int>(customor->timer) < customor->last_timer)
+        {
+            customor->last_timer = static_cast<int>(customor->timer);
+        }
+
+    }
+    else 
+    {
+        customor->random_timer -= dt;
+    }
+
+
+
+}
+
+void Customor::State_In_Counter::CheckExit(GameObject* object)
+{
+    Customor* customor = static_cast<Customor*>(object);
+    if (customor->last_timer == 0)
+    {
+        customor->change_state(&customor->state_leaving);
+    }
+
+    if (customor->front_customor == nullptr || customor->front_customor->current_state->GetName() == "Leaving")
+    {
+        customor->change_state(&customor->state_order);
+    }
+}
+
+
 
 //Order
 void Customor::State_Order::Enter(GameObject* object)
