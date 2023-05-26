@@ -14,7 +14,7 @@ public:
     void SlotDraw(Math::vec2 pos, const std::vector<std::vector<CS230::Texture*>>& texture);
     virtual void SetScale(Math::vec2 raito) = 0; // 재료가 그려지는 곳 마다 이게 업데이트 되어야함.
 
-    void Cut() { --cutNum; }
+    void Cut();
     int GetCutNum() const { return cutNum; }
     void Boil() { boiled = true; }
     bool GetBoiled() const { return boiled; }

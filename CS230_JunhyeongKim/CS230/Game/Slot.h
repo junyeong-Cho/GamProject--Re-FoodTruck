@@ -12,12 +12,13 @@ public:
 	virtual void Load() = 0;
 	virtual void Draw(int index) = 0;
 	void DrawIngredient(const std::vector<std::vector<CS230::Texture*>>& texture);
-	void Update(double dt);
+	void Update(double dt, int size);
 	void Unload();
 	virtual void ButtonDraw() = 0;
 	void ChangePos(Math::vec2 pos) { position = pos; }
 	bool PutIngredient(Ingredient* ingredient);
 	std::vector<Ingredient*>& GetIngredientVec();
+	void DrawSlotRect();
 
 protected:
 	std::vector<CS230::Texture*> texture;
@@ -26,7 +27,7 @@ protected:
 	std::vector<Ingredient*> vector;
 
 private:
-
+	int putSize = 0;
 
 };
 

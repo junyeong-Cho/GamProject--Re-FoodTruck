@@ -1,4 +1,5 @@
 #include "Recipe.h"
+#include <iostream>
 
 Recipe::Recipe()
 {
@@ -31,32 +32,47 @@ Recipe::Recipe()
 
 int Recipe::CheckComplete(std::vector<Ingredient*>& plating)
 {
-	int checkTotal = 0;
-	score = 0;
-	size_t size = (plating.size() > recipe.size()) ? recipe.size() : plating.size();
+	double totalScore = 0;
 
-	for (size_t i = 0; i < size; ++i)
+	double perfectOneScore = 100.0 / totalNum;
+
+	double putSomething = perfectOneScore * 0.2;
+	double sameIngredient = perfectOneScore * 0.3;
+	double sameCut = perfectOneScore * 0.3;
+	double sameBoil = perfectOneScore * 0.2;
+
+	for (size_t i = 0; i < plating.size(); ++i)
 	{
+		double differCutScore = sameCut / (recipe[i]->GetCutNum() - 1);
+		std::cout << "differCutScore : " << differCutScore << std::endl;
+		
+		//재료가 들어오기만 하면 일단 점수+
+		totalScore += putSomething;
+
+		//같은 재료이면 점수+
 		if (plating[i]->GetName() == recipe[i]->GetName())
 		{
-			score += 100 / (totalNum-1);
-			if (plating[i]->GetCutNum() == recipe[i]->GetCutNum())
+			totalScore += sameIngredient;
+
+			//같은 재료 중, 자른 횟수에 따라 점수+
+			if (recipe[i]->GetCutNum() != 1)
 			{
-				score += 100 / totalNum;
-				checkTotal += 1;
+				sameCut -= differCutScore * (plating[i]->GetCutNum() - 1);
 			}
-			if (plating[i]->GetBoiled() == recipe[i]->GetBoiled())
-			{
-				score += 100 / totalNum;
-				checkTotal += 1;
-			}
+			totalScore += sameCut;
+		}
+
+		//같은 boiled이면 점수+
+		if (plating[i]->GetBoiled() == recipe[i]->GetBoiled())
+		{
+			totalScore += sameBoil;
 		}
 	}
-	if (totalNum == checkTotal)
+	if (totalScore > 99)
 	{
-		score = 100;
+		totalScore = 100;
 	}
-	return score;
+	return (int)totalScore;
 }
 
 void Recipe::Update()

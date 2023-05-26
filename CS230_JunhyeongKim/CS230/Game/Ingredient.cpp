@@ -5,6 +5,14 @@ Ingredient::Ingredient(Math::vec2 pos)
 	:position(pos)
 {}
 
+void Ingredient::Cut()
+{
+	if (cutNum > 1)
+	{
+		--cutNum;
+	}
+}
+
 void Ingredient::SlotDraw(Math::vec2 pos, const std::vector<std::vector<CS230::Texture*>>& texture)
 {
 	double slotScale = 0.7;

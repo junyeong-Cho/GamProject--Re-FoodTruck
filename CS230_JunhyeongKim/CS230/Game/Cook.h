@@ -19,9 +19,11 @@ public:
 	void Update(double dt);
     void Draw();
 	void Unload();
-	void DrawScore(std::vector<Recipe*>& recipeBook, RecipeName order);
+	void DrawScore();
+	void SetScore(std::vector<Recipe*>& recipeBook);
 	void DrawGage();
 	Math::vec2 WhereISMouse();
+	void GetOrder(RecipeName orderRecipe, std::vector<Recipe*>& recipeBook);
 
 	double Width_raito = 0;
 	double Height_raito = 0;
@@ -125,7 +127,6 @@ private:
 	void SlotDraw();
 	void SetStoveOn();
 	void SpotToPlate();
-	void DrawTempSoup();
 	int ReturnScore() { return score; }
 	void SetIngredient();
 
@@ -149,4 +150,7 @@ private:
 	int plateDrawIndex = 0;
 	bool checkDrawSoup = false;
 	bool canCook = true;
+
+	RecipeName order;
+	int orderSize = 0;
 };

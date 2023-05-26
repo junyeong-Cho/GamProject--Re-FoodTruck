@@ -48,6 +48,7 @@ void Kitchen::Update(double dt)
 		}
 		
 	}
+	cook.GetOrder(RecipeName::AntSalad, recipeBook.GetRecipeBook());
 
 }
 void Kitchen::Draw()
@@ -60,7 +61,7 @@ void Kitchen::Draw()
 		sideBowl[i].Draw();
 	}
 	cook.Draw();
-	cook.DrawScore(recipeBook.GetRecipeBook(), RecipeName::LemonSalad);
+	cook.SetScore(recipeBook.GetRecipeBook());
 	recipeBook.Draw();
 	go_counter.draw();
 }
