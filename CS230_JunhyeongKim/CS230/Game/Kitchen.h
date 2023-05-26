@@ -43,4 +43,6 @@ private:
     CS230::Texture* cuttingBoardTexture;
     CS230::Texture* kitchenBackgroundTexture;
 
+    void SetSideBowl();
+    void SetSideBowlRefill();
 };

@@ -19,7 +19,7 @@ void Cook::SetIngredient()
 	}
 	if (seven_ingredients.size() == ingredient_number)
 	{
-		for (int i = 0; i < 7; ++i)
+		for (int i = 0; i < firstIngredientNum; ++i)
 		{
 			seven_ingredients[0].push_back(new Lemon(Math::vec2{ first_X + width, first_Y }));
 			seven_ingredients[1].push_back(new Lettuce(Math::vec2{ first_X, first_Y }));
@@ -614,3 +614,47 @@ void Cook::SpotToPlate()
 	}
 }
 
+void Cook::Refill(int index)
+{
+	std::cout << "index : " << index << std::endl;
+	for (int i = 0; i < refillNum; ++i)
+	{
+		seven_ingredients[index].push_back(CreateIngredient(index));
+	}
+}
+
+Ingredient* Cook::CreateIngredient(int index)
+{
+	Ingredient* newOne = nullptr;
+	switch (index)
+	{
+	case 0:
+		newOne = new Lemon(Math::vec2{ first_X + width, first_Y });
+		break;
+	case 1:
+		newOne = new Lettuce(Math::vec2{ first_X, first_Y });
+		break;
+	case 2:
+		newOne = new Ant(Math::vec2{ first_X, first_Y });
+		break;
+	case 3:
+		newOne = new Leaf(Math::vec2{ first_X, first_Y });
+		break;
+	case 4:
+		newOne = new Salt(Math::vec2{ first_X, first_Y });
+		break;
+	case5:
+		newOne = new DragonFruit(Math::vec2{ first_X, first_Y });
+		break;
+	case 6:
+		newOne = new MermaidScales(Math::vec2{ first_X, first_Y });
+		break;
+	}
+
+	if (newOne != nullptr)
+	{
+		newOne->SetScale(Math::vec2{ Width_raito ,Height_raito });
+		newOne->ChangePos(Math::vec2(first_X + width * index, first_Y));
+	}
+	return newOne;
+}

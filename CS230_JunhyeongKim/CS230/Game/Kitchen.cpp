@@ -33,20 +33,16 @@ void Kitchen::Update(double dt)
 	cook.Update(dt);
 	recipeBook.Update();
 	go_counter.update(doodle::get_mouse_x(), doodle::get_mouse_y(), States::Counter);
+
+	SetSideBowl();
+	SetSideBowlRefill();
+
 	Engine::GetUnloadManager().Update_timer(dt);
 	if (Engine::GetUnloadManager().GetTimer() <= 0)
 	{
 		Engine::GetGameStateManager().SetNextGameState(static_cast<int>(States::Ending));
 		canLoad = true;
 		canUnload = true;
-	}
-	for (int i = 0; i < cook.ingredient_number; ++i)
-	{
-		if (sideBowl[i].MouseOn(cook.WhereISMouse()) && leftClick == true)
-		{
-			//sideBowl[i].ReduceNum();
-		}
-		
 	}
 	cook.GetOrder(RecipeName::AntSalad, recipeBook.GetRecipeBook());
 
@@ -73,6 +69,28 @@ void Kitchen::Unload()
 		cook.Unload();
 		recipeBook.Unload();
 		canUnload = false;
+	}
+}
+
+void Kitchen::SetSideBowl()
+{
+	for (int i = 0; i < cook.ingredient_number; ++i)
+	{
+		sideBowl[i].SetBowlNum(cook.GetSideBwolSize(i));
+		sideBowl[i].Refill();
+	}
+
+}
+
+void Kitchen::SetSideBowlRefill()
+{
+	for (int i = 0; i < cook.ingredient_number; ++i)
+	{
+		if (sideBowl[i].Refill() == true && sideBowl[i].MouseOn(cook.WhereISMouse()) && leftClick == true)
+		{
+			leftClick = false;
+			cook.Refill(i);
+		}
 	}
 }
 

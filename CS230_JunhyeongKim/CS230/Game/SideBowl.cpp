@@ -1,6 +1,8 @@
 #include "SideBowl.h"
 #include "../Engine/Engine.h"
 #include "doodle/drawing.hpp"
+#include <iostream>
+
 
 extern bool leftClick;
 
@@ -13,26 +15,17 @@ void SideBowl::Draw()
 {
 	texture->Draw(Math::TranslationMatrix(position));
 	DrawCost();
-	DrawCost();
+	DrawButton();
 }
 
 bool SideBowl::MouseOn(Math::vec2 mouse)
 {
-	//doodle::draw_rectangle(position.x, position.y, texture->GetSize().x, texture->GetSize().y);
 	if (position.x <= mouse.x && position.x + texture->GetSize().x >= mouse.x &&
 		position.y <= mouse.y && position.y + texture->GetSize().y >= mouse.y)
 	{
 		return true;
 	}
 	return false;
-}
-
-void SideBowl::ReduceNum(int num)
-{
-	if (number > 0)
-	{
-		--number;
-	}
 }
 
 bool SideBowl::Refill()
@@ -50,13 +43,10 @@ void SideBowl::DrawCost()
 	{
 		doodle::push_settings();
 		doodle::set_font_size(20);
-		doodle::draw_text(cost, position.x+ 10, position.y);
+		doodle::draw_text(cost, position.x+ texture->GetSize().x / 2.5, position.y + texture->GetSize().y / 3.0);
 		doodle::pop_settings();
 	}
-	else
-	{
-		//doodle::draw_text(std::to_string(number), position.x + 10, position.y);
-	}
+	
 }
 
 void SideBowl::DrawButton()
@@ -64,11 +54,7 @@ void SideBowl::DrawButton()
 	if (Refill())
 	{
 		doodle::push_settings();
-		doodle::draw_ellipse(position.x + texture->GetSize().x / 2, position.y + texture->GetSize().y / 1.2, texture->GetSize().x / 0.7, texture->GetSize().y / 0.2);
+		doodle::draw_ellipse(position.x + texture->GetSize().x / 2, position.y + texture->GetSize().y / 1.7, texture->GetSize().x * 0.7, texture->GetSize().y * 0.2);
 		doodle::pop_settings();
-	}
-	else
-	{
-		doodle::draw_text(std::to_string(number), position.x + 10, position.y);
 	}
 }

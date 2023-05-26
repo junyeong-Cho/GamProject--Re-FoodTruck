@@ -24,6 +24,9 @@ public:
 	void DrawGage();
 	Math::vec2 WhereISMouse();
 	void GetOrder(RecipeName orderRecipe, std::vector<Recipe*>& recipeBook);
+	int GetSideBwolSize(int index) { return seven_ingredients[index].size(); }
+	void Refill(int index);
+	
 
 	double Width_raito = 0;
 	double Height_raito = 0;
@@ -129,6 +132,8 @@ private:
 	void SpotToPlate();
 	int ReturnScore() { return score; }
 	void SetIngredient();
+	Ingredient* CreateIngredient(int index);
+
 
 
     //using_ingredients 벡터 중 몇번째 인덱스를 가리키고 있는지.
@@ -153,4 +158,7 @@ private:
 
 	RecipeName order;
 	int orderSize = 0;
+
+	int refillNum = 3;
+	int firstIngredientNum = 3;
 };
