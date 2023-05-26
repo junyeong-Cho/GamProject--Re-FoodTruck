@@ -156,6 +156,6 @@ void Counter::Unload()
 {
     //Engine::GetUnloadManager().Save_Counter_object(gameobjectmanager);
     //gameobjectmanager.Unload();
-    counter_Screen.Unload();
-    background.Unload();
+    //counter_Screen.Unload();
+    //background.Unload();
 }

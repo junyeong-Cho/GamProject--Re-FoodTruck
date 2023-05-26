@@ -65,7 +65,7 @@ void CS230::GameStateManager::Update(double dt)
             {
                 Engine::GetUnloadManager().GetCounterObjectManager().Unload();
                 Engine::GetUnloadManager().Set_money(100);
-                Engine::GetUnloadManager().Set_timer(15);
+                Engine::GetUnloadManager().Set_timer(300);
                 Engine::GetUnloadManager().Set_rate(100);
                 Engine::GetUnloadManager().first_load = true;
                 

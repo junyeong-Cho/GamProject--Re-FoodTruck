@@ -52,6 +52,8 @@ void Kitchen::Update(double dt)
 }
 void Kitchen::Draw()
 {
+	Engine::GetWindow().Clear(0xEBE3C0FF);
+
 	Draw_UI();
 	for (int i = 0; i < cook.ingredient_number; ++i)
 	{
@@ -90,7 +92,9 @@ void Kitchen::Draw_UI()
 void Kitchen::Draw_Background()
 {
 	//Math::ScaleMatrix matrix{ Math::vec2{kitchenBackgroundTexture->GetSize()} };
-	kitchenBackgroundTexture->Draw(Math::TransformationMatrix());
+	double scale_x = Engine::GetWindow().GetSize().x / static_cast<double>(kitchenBackgroundTexture->GetSize().x);
+	double scale_y = Engine::GetWindow().GetSize().y / static_cast<double>(kitchenBackgroundTexture->GetSize().y);
+	kitchenBackgroundTexture->Draw(Math::TransformationMatrix() * Math::ScaleMatrix({ scale_x, scale_y }));;
 }
 
 
