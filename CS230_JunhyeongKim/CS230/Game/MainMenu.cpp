@@ -30,20 +30,27 @@ void MainMenu::Load()
 void MainMenu::UpdateMenuTextColors()
 {
 
-	uint32_t colors[3] = { 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF };
+	//uint32_t colors[3] = { 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF };
 	colors[counter] = 0x7EFACBFF;
+	for (int i = 0; i < 3; ++i)
+	{
+		if (counter != i)
+		{
+			colors[i] = 0xFFFFFFFF;
+		}
+	}
+	shouldUpdateColors = false;
+
+	//doodle::set_outline_color(doodle::HexColor{ colors[counter] });
 
 
-	doodle::set_outline_color(doodle::HexColor{ colors[counter] });
 
 
-
-
-	/*
-	side_scroller = Engine::GetFont(static_cast<int>(Fonts::Simple)).PrintToTexture("Side Scroller", colors[0]);
+	
+	/*side_scroller = Engine::GetFont(static_cast<int>(Fonts::Simple)).PrintToTexture("Side Scroller", colors[0]);
 	Space_shotter = Engine::GetFont(static_cast<int>(Fonts::Simple)).PrintToTexture("Space Shotter", colors[1]);
-	exit		  = Engine::GetFont(static_cast<int>(Fonts::Simple)).PrintToTexture("Exit", colors[2]);
-	*/
+	exit		  = Engine::GetFont(static_cast<int>(Fonts::Simple)).PrintToTexture("Exit", colors[2]);*/
+	
 }
 
 
@@ -51,23 +58,25 @@ void MainMenu::DrawText()
 {
 	doodle::push_settings();
 
-	UpdateMenuTextColors();
+	//UpdateMenuTextColors();
 
-	doodle::set_outline_color(0, 102, 153);
+	//doodle::set_outline_color(0, 102, 153);
 	doodle::draw_text("Re:Truck", (Engine::GetWindow().GetSize().x / 2 - 200), (Engine::GetWindow().GetSize().y - 100));
 
 	doodle::pop_settings();
 
 	doodle::push_settings();
 
-	doodle::set_outline_color(0, 102, 153);
+	//doodle::set_outline_color(0, 102, 153);
+	doodle::set_outline_color(doodle::HexColor(colors[0]));
 	doodle::draw_text("Start", (Engine::GetWindow().GetSize().x / 2 - 200), (Engine::GetWindow().GetSize().y - 300));
 
 	doodle::pop_settings();
 
 	doodle::push_settings();
 
-	doodle::set_outline_color(0, 102, 153);
+	//doodle::set_outline_color(0, 102, 153);
+	doodle::set_outline_color(doodle::HexColor(colors[1]));
 	doodle::draw_text("Exit", (Engine::GetWindow().GetSize().x / 2 - 200), (Engine::GetWindow().GetSize().y - 400));
 
 	doodle::pop_settings();
@@ -75,7 +84,8 @@ void MainMenu::DrawText()
 	doodle::push_settings();
 
 
-	doodle::set_outline_color(0, 102, 153);
+	//doodle::set_outline_color(0, 102, 153);
+	doodle::set_outline_color(doodle::HexColor(colors[2]));
 	doodle::draw_text("Credit", (Engine::GetWindow().GetSize().x / 2 - 200), (Engine::GetWindow().GetSize().y - 500));
 
 	doodle::pop_settings();
@@ -84,7 +94,7 @@ void MainMenu::DrawText()
 
 void MainMenu::Update(double dt)
 {
-	bool shouldUpdateColors = false;
+	/*bool shouldUpdateColors = false;*/
 
 	if (Engine::GetInput().KeyJustReleased(CS230::Input::Keys::Down))
 	{
@@ -101,6 +111,7 @@ void MainMenu::Update(double dt)
 	if (shouldUpdateColors)
 	{
 		UpdateMenuTextColors();
+		//colors[counter] = 0xFFFFFFFF;
 	}
 	
 
@@ -131,7 +142,7 @@ void MainMenu::Unload()
 void MainMenu::Draw()
 {
 	//Make a title that is in a third color with a nice background color or texture. 
-	Engine::GetWindow().Clear(0xFFFFFFFF);
+	Engine::GetWindow().Clear(0x000000FF);
 
 	DrawText();
 }

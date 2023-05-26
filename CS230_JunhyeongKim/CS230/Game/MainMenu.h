@@ -52,5 +52,7 @@ private:
 
 	int counter = 0;
 
+	uint32_t colors[3] = { 0x7EFACBFF, 0xFFFFFFFF, 0xFFFFFFFF };
+	bool shouldUpdateColors = false;
 };
 

@@ -48,14 +48,24 @@ void Credit::Update(double dt)
 
 void Credit::Draw()
 {
-	if ((creditNum < 4) && (state == true))
+	if ((creditNum < 4))
 	{
 		credits[creditNum]->Draw(Math::TranslationMatrix({ (Engine::GetWindow().GetSize() - credits[creditNum]->GetSize()) / 2.0 }));
 	}
 	
+
+	/*
+	doodle::push_settings();
+
+	doodle::set_outline_color(255);
+	doodle::set_fill_color(0);
+	doodle::draw_text("Press Enter for the next credit!", Engine::GetWindow().GetSize().x / 2.0 - Engine::GetWindow().GetSize().x / 4.0, Engine::GetWindow().GetSize().y / 2.0 - Engine::GetWindow().GetSize().y / 1.9);
+
+	doodle::pop_settings();
+	*/
 }
 
 void Credit::Unload()
 {
-	credits;
+	credits.clear();
 }
