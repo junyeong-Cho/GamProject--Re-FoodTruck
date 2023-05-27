@@ -8,20 +8,20 @@ Author:     Junhyeong Kim
 Created:    April 30, 2023
 */
 
+#include "../Engine/GameObjectManager.h"
 #include "../Engine/GameState.h"
 #include "../Engine/Texture.h"
 #include "../Engine/Sprite.h"
-#include "../Engine/GameObjectManager.h"
+
 #include "Counter_Background.h"
 #include "Button.h"
+#include "Frame.h"
 
 class Customor;
 
 class Counter : public CS230::GameState
 {
 public:
-
-
     Counter();
     void Load() override;
     void Update(double dt) override;
@@ -31,15 +31,17 @@ public:
     void Draw_UI();
 
     std::string GetName() override { return "Counter"; }
+
 private:
-    //CS230::Texture* guest_image;
-    //Math::vec2 guest_position;
+    Button yes_button;
 
-
+    //Draw frames
     CS230::GameObjectManager gameobjectmanager;
 
+    //Using for refutation faces
+    CS230::Texture* refutationFace;
+
     Customor* front_customor = nullptr;
-    Button yes_button;
     Counter_Background counter_Screen;
     Counter_Background background;
     int customors = 10;
