@@ -32,6 +32,13 @@ private:
     //Check the state
     bool state;
 
+    //Check the button clicked
+    bool buttonCheck;
+
     //Contain the images which is allocated with creid
     std::vector< CS230::Texture*> credits;
+
+    //Button for the next scene
+    Button nextButton;
+
 };

@@ -14,7 +14,7 @@ Created:    May 26, 2023
 #include "States.h"
 #include "Credit.h"
 
-Credit::Credit() : creditNum(0), state(true)
+Credit::Credit() : creditNum(0), state(true), buttonCheck(true), nextButton(600, 200, 250, 100)
 {
 
 }
@@ -29,13 +29,17 @@ void Credit::Load()
 
 void Credit::Update(double dt)
 {
+	buttonCheck = false;
+
 	Engine::GetWindow().Clear(0x000000FF);
+	nextButton.update(doodle::get_mouse_x(), doodle::get_mouse_y());
 
 	//state = true;
 
-	if (Engine::GetInput().KeyJustReleased(CS230::Input::Keys::Enter))
+	if ((nextButton.checkMouse) && (buttonCheck == false))
 	{
 		creditNum += 1;
+		buttonCheck = true;
 	}
 
 	if (creditNum == 4)
@@ -52,17 +56,8 @@ void Credit::Draw()
 	{
 		credits[creditNum]->Draw(Math::TranslationMatrix({ (Engine::GetWindow().GetSize() - credits[creditNum]->GetSize()) / 2.0 }));
 	}
-	
 
-	/*
-	doodle::push_settings();
-
-	doodle::set_outline_color(255);
-	doodle::set_fill_color(0);
-	doodle::draw_text("Press Enter for the next credit!", Engine::GetWindow().GetSize().x / 2.0 - Engine::GetWindow().GetSize().x / 4.0, Engine::GetWindow().GetSize().y / 2.0 - Engine::GetWindow().GetSize().y / 1.9);
-
-	doodle::pop_settings();
-	*/
+	nextButton.draw("Next");
 }
 
 void Credit::Unload()
