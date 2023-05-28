@@ -34,7 +34,7 @@ private:
         virtual void Enter(GameObject* object) override;
         virtual void Update(GameObject* object, double dt) override;
         virtual void CheckExit(GameObject* object) override;
-        std::string GetName() override { return "Idle"; }
+        std::string GetName() override { return "Moving"; }
     };
 
 
