@@ -177,9 +177,11 @@ xcopy /d /y Assets\* "$(OutputPath)Assets"
     <ClCompile Include="Engine\Window.cpp" />
     <ClCompile Include="Game\Anteater.cpp" />
     <ClCompile Include="Game\Button.cpp" />
+    <ClCompile Include="Game\Clock.cpp" />
     <ClCompile Include="Game\Cook.cpp" />
     <ClCompile Include="Game\Counter.cpp" />
     <ClCompile Include="Game\Counter_Background.cpp" />
+    <ClCompile Include="Game\Credit.cpp" />
     <ClCompile Include="Game\Customer.cpp" />
     <ClCompile Include="Game\Elf.cpp" />
     <ClCompile Include="Game\Ending.cpp" />
@@ -188,6 +190,7 @@ xcopy /d /y Assets\* "$(OutputPath)Assets"
     <ClCompile Include="Game\Ingredient.cpp" />
     <ClCompile Include="Game\IngredientTextureManager.cpp" />
     <ClCompile Include="Game\Kitchen.cpp" />
+    <ClCompile Include="Game\MainMenu.cpp" />
     <ClCompile Include="Game\Main_menu.cpp" />
     <ClCompile Include="Game\Molu.cpp" />
     <ClCompile Include="Game\Operation.cpp" />
@@ -221,9 +224,11 @@ xcopy /d /y Assets\* "$(OutputPath)Assets"
     <ClInclude Include="Engine\Window.h" />
     <ClInclude Include="Game\Anteater.h" />
     <ClInclude Include="Game\Button.h" />
+    <ClInclude Include="Game\Clock.h" />
     <ClInclude Include="Game\Cook.h" />
     <ClInclude Include="Game\Counter.h" />
     <ClInclude Include="Game\Counter_Background.h" />
+    <ClInclude Include="Game\Credit.h" />
     <ClInclude Include="Game\Customer.h" />
     <ClInclude Include="Game\Elf.h" />
     <ClInclude Include="Game\Ending.h" />
@@ -236,6 +241,7 @@ xcopy /d /y Assets\* "$(OutputPath)Assets"
     <ClInclude Include="Game\InventoryTexture.h" />
     <ClInclude Include="Game\Kitchen.h" />
     <ClInclude Include="Game\KitchenPosition.h" />
+    <ClInclude Include="Game\MainMenu.h" />
     <ClInclude Include="Game\Main_menu.h" />
     <ClInclude Include="Game\Molu.h" />
     <ClInclude Include="Game\Operation.h" />

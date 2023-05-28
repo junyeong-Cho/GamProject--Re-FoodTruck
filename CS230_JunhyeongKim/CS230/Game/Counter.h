@@ -18,6 +18,8 @@ Created:    April 30, 2023
 #include "Button.h"
 #include "Frame.h"
 
+
+
 class Customor;
 
 class Counter : public CS230::GameState
@@ -46,5 +48,8 @@ private:
     Counter_Background counter_Screen;
     Counter_Background background;
     int customors = 10;
+
+    int ranCustomerNum;
+    int maxRanCustomerNum = 5;
 
 };
