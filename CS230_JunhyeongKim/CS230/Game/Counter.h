@@ -14,6 +14,7 @@ Created:    April 30, 2023
 #include "../Engine/Sprite.h"
 
 #include "Counter_Background.h"
+#include "Refutation.h"
 #include "Button.h"
 #include "Frame.h"
 
@@ -38,8 +39,8 @@ private:
     //Draw frames
     CS230::GameObjectManager gameobjectmanager;
 
-    //Using for refutation faces
-    CS230::Texture* refutationFace;
+
+    Refutation* refutation;
 
     Customor* front_customor = nullptr;
     Counter_Background counter_Screen;

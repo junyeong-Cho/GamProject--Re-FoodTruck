@@ -50,7 +50,7 @@ namespace CS230
 		GameObjectManager counter_ObjectManager;
 		int money = 100;
 		int rate = 100;
-		double timer = 300;
+		double timer = 120;
 
 
 
