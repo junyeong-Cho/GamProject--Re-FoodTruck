@@ -14,7 +14,7 @@ Created:    May 26, 2023
 #include "States.h"
 #include "Credit.h"
 
-Credit::Credit() : creditNum(0), state(true), buttonCheck(true), nextButton(600, 200, 250, 100)
+Credit::Credit() : creditNum(0)
 {
 
 }
@@ -29,22 +29,20 @@ void Credit::Load()
 
 void Credit::Update(double dt)
 {
-	buttonCheck = false;
-
 	Engine::GetWindow().Clear(0x000000FF);
-	nextButton.update(doodle::get_mouse_x(), doodle::get_mouse_y());
+	
 
 	//state = true;
 
-	if ((nextButton.checkMouse) && (buttonCheck == false))
+	if (Engine::GetInput().KeyJustReleased(CS230::Input::Keys::Enter))
 	{
 		creditNum += 1;
-		buttonCheck = true;
+
 	}
 
 	if (creditNum == 4)
 	{
-		state = false;
+
 		creditNum = 0;
 		Engine::GetGameStateManager().SetNextGameState(static_cast<int>(States::Splash));
 	}
@@ -57,7 +55,6 @@ void Credit::Draw()
 		credits[creditNum]->Draw(Math::TranslationMatrix({ (Engine::GetWindow().GetSize() - credits[creditNum]->GetSize()) / 2.0 }));
 	}
 
-	nextButton.draw("Next");
 }
 
 void Credit::Unload()

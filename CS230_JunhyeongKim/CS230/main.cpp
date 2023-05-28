@@ -11,11 +11,13 @@ Created:    March 8, 2023
 #include <iostream>
 
 #include "Engine/Engine.h"
+
 #include "Game/Splash.h"
 #include "Game/MainMenu.h"
 #include "Game/Counter.h"
 #include "Game/Kitchen.h"
 #include "Game/Ending.h"
+#include "Game/Credit.h"
 
 int main() {
     try {
@@ -32,6 +34,8 @@ int main() {
         engine.GetGameStateManager().AddGameState(kitchen);
         Ending ending;
         engine.GetGameStateManager().AddGameState(ending);
+        Credit credit;
+        engine.GetGameStateManager().AddGameState(credit);
 
         while (engine.HasGameEnded() == false) 
         {
