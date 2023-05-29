@@ -22,13 +22,10 @@ public:
 
     void Draw_UI();
     void Draw_Background();
-    void Draw_Clock();
-    void Draw_Money();
     void Draw_RecipeBook();
     void Draw_Order();
     void Draw_CounterButton();
     void Draw_Bell();
-    void Draw_IngredientBowl();
     void Draw_CuttingBoard();
 	void Draw_PaltingSpot();
 
@@ -42,6 +39,7 @@ private:
     std::vector<SideBowl> sideBowl;
     CS230::Texture* cuttingBoardTexture;
     CS230::Texture* kitchenBackgroundTexture;
+    CS230::Texture* bellTexture;
 
     void SetSideBowl();
     void SetSideBowlRefill();
