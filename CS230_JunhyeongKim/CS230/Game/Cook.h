@@ -133,6 +133,8 @@ private:
 	int ReturnScore() { return score; }
 	void SetIngredient();
 	Ingredient* CreateIngredient(int index);
+	void TrashCan();
+	void ToolTask();
 
 
 

@@ -194,19 +194,8 @@ void Cook::Update(double dt)
 	pot.Update(dt, orderSize);
 
 	GetWhere(WhereISMouse());
-
-	if (tool.GetTool() == ToolName::HAND)
-	{
-		FollowMouseIngredient();
-	}
-	else if (tool.GetTool() == ToolName::KNIFE)
-	{
-		Cutting();
-	}
-	else if (tool.GetTool() == ToolName::LADLE)
-	{
-		SpotToPlate();
-	}
+	ToolTask();
+	
 	a();
 }
 
@@ -250,6 +239,26 @@ void Cook::DrawIngredients()
 			using_ingredients[i]->Draw(ingredientTextureManager.GetTexture());
 		}
 
+	}
+}
+
+void Cook::ToolTask()
+{
+	if (tool.GetTool() == ToolName::HAND)
+	{
+		FollowMouseIngredient();
+	}
+	else if (tool.GetTool() == ToolName::KNIFE)
+	{
+		Cutting();
+	}
+	else if (tool.GetTool() == ToolName::LADLE)
+	{
+		SpotToPlate();
+	}
+	else if (tool.GetTool() == ToolName::TRASHCAN)
+	{
+		TrashCan();
 	}
 }
 
@@ -616,7 +625,6 @@ void Cook::SpotToPlate()
 
 void Cook::Refill(int index)
 {
-	std::cout << "index : " << index << std::endl;
 	for (int i = 0; i < refillNum; ++i)
 	{
 		seven_ingredients[index].push_back(CreateIngredient(index));
@@ -643,7 +651,7 @@ Ingredient* Cook::CreateIngredient(int index)
 	case 4:
 		newOne = new Salt(Math::vec2{ first_X, first_Y });
 		break;
-	case5:
+	case 5:
 		newOne = new DragonFruit(Math::vec2{ first_X, first_Y });
 		break;
 	case 6:
@@ -657,4 +665,30 @@ Ingredient* Cook::CreateIngredient(int index)
 		newOne->ChangePos(Math::vec2(first_X + width * index, first_Y));
 	}
 	return newOne;
+}
+
+void Cook::TrashCan()
+{
+	for (int i = using_ingredients.size() - 1; i >= 0; --i)
+	{
+		if (using_ingredients[i]->IsMouseOn(WhereISMouse(), ingredientTextureManager.GetTexture()) == true && leftClick == true)
+		{
+			leftClick = false;
+			delete using_ingredients[i];
+			using_ingredients.erase(using_ingredients.begin() + i);
+			break;
+		}
+	}
+
+	if (GetWhere(WhereISMouse()) == KitchenPosition::BOWL && leftClick == true)
+	{
+		leftClick = false;
+		plate.Unload();
+	}
+
+	if (GetWhere(WhereISMouse()) == KitchenPosition::STOVE && leftClick == true)
+	{
+		leftClick = false;
+		pot.Unload();
+	}
 }
