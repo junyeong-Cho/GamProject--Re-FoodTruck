@@ -185,8 +185,10 @@ xcopy /d /y Assets\* "$(OutputPath)Assets"
     <ClCompile Include="Game\Customer.cpp" />
     <ClCompile Include="Game\Elf.cpp" />
     <ClCompile Include="Game\Ending.cpp" />
+    <ClCompile Include="Game\Fireman.cpp" />
     <ClCompile Include="Game\Frame.cpp" />
     <ClCompile Include="Game\Giraffe.cpp" />
+    <ClCompile Include="Game\Greendragon.cpp" />
     <ClCompile Include="Game\Ingredient.cpp" />
     <ClCompile Include="Game\IngredientTextureManager.cpp" />
     <ClCompile Include="Game\Kitchen.cpp" />
@@ -202,6 +204,7 @@ xcopy /d /y Assets\* "$(OutputPath)Assets"
     <ClCompile Include="Game\Slot.cpp" />
     <ClCompile Include="Game\Splash.cpp" />
     <ClCompile Include="Game\Tool.cpp" />
+    <ClCompile Include="Game\Zilien.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -232,8 +235,10 @@ xcopy /d /y Assets\* "$(OutputPath)Assets"
     <ClInclude Include="Game\Customer.h" />
     <ClInclude Include="Game\Elf.h" />
     <ClInclude Include="Game\Ending.h" />
+    <ClInclude Include="Game\Fireman.h" />
     <ClInclude Include="Game\Frame.h" />
     <ClInclude Include="Game\Giraffe.h" />
+    <ClInclude Include="Game\Greendragon.h" />
     <ClInclude Include="Game\Ingredient.h" />
     <ClInclude Include="Game\IngredientName.h" />
     <ClInclude Include="Game\IngredientTextureManager.h" />
@@ -257,6 +262,7 @@ xcopy /d /y Assets\* "$(OutputPath)Assets"
     <ClInclude Include="Game\States.h" />
     <ClInclude Include="Game\Tool.h" />
     <ClInclude Include="Game\ToolName.h" />
+    <ClInclude Include="Game\Zilien.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

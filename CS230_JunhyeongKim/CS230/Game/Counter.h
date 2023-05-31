@@ -50,6 +50,6 @@ private:
     int customors = 10;
 
     int ranCustomerNum;
-    int maxRanCustomerNum = 5;
+    int maxRanCustomerNum = 7;
 
 };

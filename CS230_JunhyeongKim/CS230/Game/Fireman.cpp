@@ -2,16 +2,16 @@
 Copyright (C) 2023 DigiPen Institute of Technology
 Reproduction or distribution of this file or its contents without
 prior written consent is prohibited
-File Name:  Anteater.cpp
+File Name:  Fireman.cpp
 Project:    CS230 Engine
 Author:     Junyeong Cho
 Created:    May 24, 2023
 */
 
-#include "Anteater.h"
+#include "Fireman.h"
 
-Anteater::Anteater(Customor* front)
+Fireman::Fireman(Customor* front)
 	:Customor(front)
 {
-	sprite.Load("Assets/Characters/Anteater.spt");
+	sprite.Load("Assets/Characters/FireMan.spt");
 }
