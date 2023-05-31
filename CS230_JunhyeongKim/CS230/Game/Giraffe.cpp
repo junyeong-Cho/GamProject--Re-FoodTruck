@@ -13,5 +13,5 @@ Created:    March 3, 2023
 Giraffe::Giraffe(Customor* front)
 	:Customor(front)
 {
-	sprite.Load("Assets/Characters/giraffe.spt");
+	sprite.Load("Assets/giraffe.spt");
 }

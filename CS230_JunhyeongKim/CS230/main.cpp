@@ -8,7 +8,6 @@ Author:     Jonathan Holmes
 Created:    March 8, 2023
 */
 
-
 #include <iostream>
 
 #include "Engine/Engine.h"
@@ -20,12 +19,8 @@ Created:    March 8, 2023
 #include "Game/Ending.h"
 #include "Game/Credit.h"
 
-
-
 int main() {
     try {
-
-
         Engine& engine = Engine::Instance();
         engine.Start("Re : Truck");
 

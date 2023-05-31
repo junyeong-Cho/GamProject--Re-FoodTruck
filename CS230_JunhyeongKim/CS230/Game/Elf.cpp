@@ -13,5 +13,5 @@ Created:    May 24, 2023
 Elf::Elf(Customor* front)
 	:Customor(front)
 {
-	sprite.Load("Assets/Characters/Elf.spt");
+	sprite.Load("Assets/Elf.spt");
 }
