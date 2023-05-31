@@ -21,6 +21,9 @@ Created:    April 30, 2023
 #include "Elf.h"
 #include "Molu.h"
 #include "Anteater.h"
+#include "Fireman.h"
+#include "Greendragon.h"
+#include "Zilien.h"
 
 Counter::Counter()
     :yes_button(1400.0 / 13.0, 800.0 / 3.0, 1400.0 / 10.0, 800.0 / 10.0)
@@ -80,14 +83,21 @@ void Counter::Load()
                 front_customor = new Molu(front_customor);
                 break;
             case 2:
-                front_customor = new Giraffe(front_customor);
-                break;
-            case 3:
                 front_customor = new Anteater(front_customor);
                 break;
-            case 4:
+            case 3:
                 front_customor = new Elf(front_customor);
                 break;
+            case 4:
+                front_customor = new Fireman(front_customor);
+				break;
+            case 5:
+                front_customor = new Greendragon(front_customor);
+                break;
+            case 6:
+                front_customor = new Zilien(front_customor);
+				break;
+
 
             default:
                 break;

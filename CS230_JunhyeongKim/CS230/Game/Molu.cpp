@@ -13,5 +13,5 @@ Created:    March 3, 2023
 Molu::Molu(Customor* front)
 	:Customor(front)
 {
-	sprite.Load("Assets/Molu.spt");
+	sprite.Load("Assets/Characters/Molu.spt");
 }

@@ -13,5 +13,5 @@ Created:    May 24, 2023
 Anteater::Anteater(Customor* front)
 	:Customor(front)
 {
-	sprite.Load("Assets/Anteater.spt");
+	sprite.Load("Assets/Characters/Anteater.spt");
 }

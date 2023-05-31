@@ -37,6 +37,16 @@
     <ClCompile Include="Game\Splash.cpp" />
     <ClCompile Include="Game\Tool.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Game\Anteater.cpp" />
+    <ClCompile Include="Game\Clock.cpp" />
+    <ClCompile Include="Game\Credit.cpp" />
+    <ClCompile Include="Game\Frame.cpp" />
+    <ClCompile Include="Game\MainMenu.cpp" />
+    <ClCompile Include="Game\Molu.cpp" />
+    <ClCompile Include="Game\Refutation.cpp" />
+    <ClCompile Include="Game\Fireman.cpp" />
+    <ClCompile Include="Game\Greendragon.cpp" />
+    <ClCompile Include="Game\Zilien.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Animation.h" />
@@ -84,5 +94,15 @@
     <ClInclude Include="Game\States.h" />
     <ClInclude Include="Game\Tool.h" />
     <ClInclude Include="Game\ToolName.h" />
+    <ClInclude Include="Game\Anteater.h" />
+    <ClInclude Include="Game\Clock.h" />
+    <ClInclude Include="Game\Credit.h" />
+    <ClInclude Include="Game\Frame.h" />
+    <ClInclude Include="Game\MainMenu.h" />
+    <ClInclude Include="Game\Molu.h" />
+    <ClInclude Include="Game\Refutation.h" />
+    <ClInclude Include="Game\Fireman.h" />
+    <ClInclude Include="Game\Greendragon.h" />
+    <ClInclude Include="Game\Zilien.h" />
   </ItemGroup>
 </Project>
