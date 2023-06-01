@@ -13,14 +13,11 @@ Updated:    May  17, 2023
 #pragma once
 
 #include "../Game/States.h"
-//#include "../Game/Background.h"
 
+#include "../Engine/SoundComponentManager.h"
 #include "../Engine/GameObjectManager.h"
 #include "../Engine/TextureManager.h"
-
 #include "../Engine/Texture.h"
-//#include "../Engine/Font.h"
-
 #include "../Engine/GameState.h"
 #include "../Engine/Sprite.h"
 
@@ -49,6 +46,9 @@ private:
 	std::string side_scroller;
 	std::string Space_shotter;
 	std::string exit;
+
+	CS230::MusicEffect music_effect_main = CS230::MusicEffect("Assets/Sound/Theme/main_theme_pirot.ogg");
+
 
 	int counter = 0;
 

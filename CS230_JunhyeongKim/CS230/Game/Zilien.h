@@ -15,8 +15,8 @@ class Zilien : public Customor
 {
 public:
 	Zilien(Customor* front);
-	std::string Order_text() { return "Ah, I'd kindly ask for just one Leaf Salad,\n if you please"; };
-	std::string Grade_bad_text() { return "I've already seen your demise. It was a painful end indeed"; }
+	std::string Order_text()      { return "Ah, I'd kindly ask for \njust one Leaf Salad, if you please"; };
+	std::string Grade_bad_text()  { return "I've already seen your demise. It was a painful end indeed"; }
 	std::string Grade_soso_text() { return "Oho not bad"; }
 	std::string Grade_good_text() { return "Well, this is downright delicious!"; }
 };

@@ -8,6 +8,7 @@ Author:     Jonathan Holmes, Junhyeong Kim
 Created:    March 8, 2023
 Updated:    April 27, 2023
 */
+
 #pragma once
 #include <chrono>
 #include "Window.h"

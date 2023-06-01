@@ -8,8 +8,12 @@ Author:     Jonathan Holmes
 Created:    March 8, 2023
 */
 
+//#include <SFML/Audio.hpp>
+
+
 #include <iostream>
 
+#include "Engine/SoundComponentManager.h"
 #include "Engine/Engine.h"
 
 #include "Game/Splash.h"
@@ -19,8 +23,30 @@ Created:    March 8, 2023
 #include "Game/Ending.h"
 #include "Game/Credit.h"
 
+
+//int music_checker = 0;
+
+//sf::Music music;
+
+
 int main() {
     try {
+
+        /*
+        if (!music.openFromFile("Assets/Sound/Theme/main_theme_1.ogg")) 
+        {
+            std::cout << "Failed to load the music file: Assets/Sound/Theme/main_theme_2.ogg" << std::endl;
+        }
+        */
+
+        /*
+        music.setLoop(true);
+        music.setVolume(60);
+        */
+
+
+
+
         Engine& engine = Engine::Instance();
         engine.Start("Re : Truck");
 
@@ -39,6 +65,7 @@ int main() {
 
         while (engine.HasGameEnded() == false) 
         {
+            
             engine.Update();
         }
 

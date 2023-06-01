@@ -8,6 +8,7 @@ Author:     Junhyeong Kim
 Created:    April 30, 2023
 */
 
+#include "../Engine/SoundComponentManager.h"
 #include "../Engine/GameObjectManager.h"
 #include "../Engine/GameState.h"
 #include "../Engine/Texture.h"
@@ -40,6 +41,10 @@ private:
 
     //Draw frames
     CS230::GameObjectManager gameobjectmanager;
+
+    //Loading musics
+    CS230::MusicEffect music_effect_counter = CS230::MusicEffect("Assets/Sound/Theme/kitchen_theme.ogg");
+
 
 
     Refutation* refutation;

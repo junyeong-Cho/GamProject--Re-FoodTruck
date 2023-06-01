@@ -1,9 +1,12 @@
 #pragma once
 
+//New one!
+#include "../Engine/SoundComponentManager.h"
 #include "../Engine/GameState.h"
 #include "../Engine/Texture.h"
 #include "../Engine/Sprite.h"
 #include "../Engine/Engine.h"
+
 #include "States.h"
 #include "Button.h"
 #include "Cook.h"
@@ -42,5 +45,6 @@ private:
     std::vector<SideBowl> sideBowl;
     CS230::Texture* cuttingBoardTexture;
     CS230::Texture* kitchenBackgroundTexture;
+
 
 };

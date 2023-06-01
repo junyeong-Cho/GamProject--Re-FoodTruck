@@ -34,6 +34,8 @@ Counter::Counter()
 void Counter::Load()
 {
 
+    music_effect_counter;
+
     //Frame for Clock
     gameobjectmanager.Add(new Frame({ Engine::GetWindow().GetSize().x / 12.5, Engine::GetWindow().GetSize().y / 8.0 * 7.18 }, 1));
 
@@ -136,6 +138,9 @@ void Counter::Update(double dt)
 {
     gameobjectmanager.UpdateAll(dt);
 
+    music_effect_counter.Play();
+
+
     if (Engine::GetUnloadManager().current_customor != nullptr)
     {
         if (Engine::GetUnloadManager().current_customor->Get_State_Name() == "Fwaiting")
@@ -147,6 +152,7 @@ void Counter::Update(double dt)
     Engine::GetUnloadManager().Update_timer(dt);
     if (Engine::GetUnloadManager().GetTimer() <= 0)
     {
+        music_effect_counter.Stop();
         Engine::GetGameStateManager().SetNextGameState(static_cast<int>(States::Ending));
     }
 }
