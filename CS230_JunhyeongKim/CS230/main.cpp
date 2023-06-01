@@ -8,6 +8,9 @@ Author:     Jonathan Holmes
 Created:    March 8, 2023
 */
 
+#include <SFML/Audio.hpp>
+
+
 #include <iostream>
 
 #include "Engine/Engine.h"
@@ -19,10 +22,20 @@ Created:    March 8, 2023
 #include "Game/Ending.h"
 #include "Game/Credit.h"
 
+
+
+
 int main() {
     try {
         Engine& engine = Engine::Instance();
         engine.Start("Re : Truck");
+
+
+        sf::Music background_music_credit;
+
+
+        background_music_credit.setLoop(true);
+        background_music_credit.setVolume(9);
 
         Splash splash;
         engine.GetGameStateManager().AddGameState(splash);

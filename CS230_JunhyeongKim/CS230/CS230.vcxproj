@@ -89,10 +89,15 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)external\SFML\include;$(SolutionDir)external\doodle\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)external\doodle\bin\$(Configuration)\$(Platform);$(SolutionDir)external\SFML\$(Platform)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>doodle.lib;Opengl32.lib;Gdi32.lib;User32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
     </Link>
     <PostBuildEvent>
       <Command>if not exist "$(OutputPath)Assets" mkdir "$(OutputPath)Assets"
@@ -108,12 +113,17 @@ xcopy /d /y Assets\* "$(OutputPath)Assets"
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)external\SFML\include;$(SolutionDir)external\doodle\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)external\doodle\bin\$(Configuration)\$(Platform);$(SolutionDir)external\SFML\$(Platform)\lib;doodle.lib;Opengl32.lib;Gdi32.lib;User32.lib;sfml-main.lib;sfml-graphics.lib;sfml-window.lib;sfml-system.lib;sfml-audio.lib;sfml-network.lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>doodle.lib;Opengl32.lib;Gdi32.lib;User32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
     </Link>
     <PostBuildEvent>
       <Command>if not exist "$(OutputPath)Assets" mkdir "$(OutputPath)Assets"
@@ -127,10 +137,15 @@ xcopy /d /y Assets\* "$(OutputPath)Assets"
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)external\SFML\include;$(SolutionDir)external\doodle\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)external\doodle\bin\$(Configuration)\$(Platform);$(SolutionDir)external\SFML\$(Platform)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>doodle.lib;Opengl32.lib;Gdi32.lib;User32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
     </Link>
     <PostBuildEvent>
       <Command>if not exist "$(OutputPath)Assets" mkdir "$(OutputPath)Assets"
@@ -146,12 +161,17 @@ xcopy /d /y Assets\* "$(OutputPath)Assets"
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)external\SFML\include;$(SolutionDir)external\doodle\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)external\doodle\bin\$(Configuration)\$(Platform);$(SolutionDir)external\SFML\$(Platform)\lib;doodle.lib;Opengl32.lib;Gdi32.lib;User32.lib;sfml-main.lib;sfml-graphics.lib;sfml-window.lib;sfml-system.lib;sfml-audio.lib;sfml-network.lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>doodle.lib;Opengl32.lib;Gdi32.lib;User32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
     </Link>
     <PostBuildEvent>
       <Command>if not exist "$(OutputPath)Assets" mkdir "$(OutputPath)Assets"
