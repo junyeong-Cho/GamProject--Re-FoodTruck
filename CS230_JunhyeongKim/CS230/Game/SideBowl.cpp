@@ -1,6 +1,7 @@
 #include "SideBowl.h"
 #include "../Engine/Engine.h"
 #include "doodle/drawing.hpp"
+#include "doodle/environment.hpp"
 #include <iostream>
 
 
@@ -43,18 +44,53 @@ void SideBowl::DrawCost()
 	{
 		doodle::push_settings();
 		doodle::set_font_size(20);
-		doodle::draw_text(cost, position.x+ texture->GetSize().x / 2.5, position.y + texture->GetSize().y / 3.0);
+		doodle::draw_text(cost + "$", position.x + texture->GetSize().x / 2.7, position.y + texture->GetSize().y / 4.0);
 		doodle::pop_settings();
 	}
 	
+}
+void SideBowl::Update(double dt)
+{
+	timer += dt;
+	if (timer < 0.5)
+	{
+		changeColor = false;
+	}
+	else if(timer >= 0.5 && timer < 1)
+	{
+		changeColor = true;
+	}
+	else if(timer >= 1)
+	{
+		timer = 0;
+	}
+
 }
 
 void SideBowl::DrawButton()
 {
 	if (Refill())
 	{
+		doodle::Color red = doodle::Color(255, 0, 0);
+		doodle::Color white = doodle::Color(255, 255, 255);
+		doodle::Color now = red;
 		doodle::push_settings();
-		doodle::draw_ellipse(position.x + texture->GetSize().x / 2, position.y + texture->GetSize().y / 1.7, texture->GetSize().x * 0.7, texture->GetSize().y * 0.2);
+		if (changeColor == true)
+		{
+			now = red;
+		}
+		else
+		{
+			now = white;
+		}
+		doodle::set_fill_color(now);
+		doodle::draw_ellipse(position.x + texture->GetSize().x / 2, position.y + texture->GetSize().y / 1.6, texture->GetSize().x * 0.7, texture->GetSize().y * 0.2);
+		doodle::pop_settings();
+
+		doodle::push_settings();
+		doodle::set_font_size(13);
+		doodle::set_fill_color(doodle::Color(0, 0, 0));
+		doodle::draw_text("Click!", position.x + texture->GetSize().x / 3, position.y + texture->GetSize().y / 1.8);
 		doodle::pop_settings();
 	}
 }
