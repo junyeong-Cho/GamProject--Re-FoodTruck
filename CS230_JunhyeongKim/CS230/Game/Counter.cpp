@@ -16,7 +16,11 @@ Created:    April 30, 2023
 #include "Customer.h"
 #include "Giraffe.h"
 #include "Elf.h"
-
+#include "Molu.h"
+#include "Fireman.h"
+#include "Zilien.h"
+#include "Anteater.h"
+#include "Greendragon.h"
 
 Counter::Counter()
     :yes_button(1400.0 / 13.0, 800.0 / 3.0, 1400.0 / 10.0, 800.0 / 10.0)
@@ -25,26 +29,56 @@ Counter::Counter()
 
 void Counter::Load()
 {
+
+    srand((unsigned int)time(NULL));
+
+
     if (Engine::GetUnloadManager().first_load == true)
     {
 
         front_customor = new Giraffe(nullptr);
         Engine::GetUnloadManager().GetCounterObjectManager().Add(front_customor);
+
         for (int i = 1; i < customors; i++)
         {
-            int customer_num = rand() / (RAND_MAX / 2);
+            //int customer_num = rand() / (RAND_MAX / 2);
 
-            switch (customer_num)
+            //new logic
+            //Get the random value with using rand() and get the value between 0 ~ 3 value with using rand() % 4
+            /*
+            For example
+            : 4214142140 % 4 -> 0
+            : 4214142141 % 4 -> 1
+            : 4214142142 % 4 -> 2
+            : 4214142143 % 4 -> 3
+            /*________________________*/
+            ranCustomerNum = rand();
+
+
+            switch (((int)ranCustomerNum % maxRanCustomerNum))
             {
             case 0:
                 front_customor = new Giraffe(front_customor);
                 break;
             case 1:
-                front_customor = new Elf(front_customor);
+                front_customor = new Molu(front_customor);
                 break;
             case 2:
-                front_customor = new Giraffe(front_customor);
+                front_customor = new Anteater(front_customor);
                 break;
+            case 3:
+                front_customor = new Elf(front_customor);
+                break;
+            case 4:
+                front_customor = new Fireman(front_customor);
+                break;
+            case 5:
+                front_customor = new Greendragon(front_customor);
+                break;
+            case 6:
+                front_customor = new Zilien(front_customor);
+                break;
+
             default:
                 break;
             }

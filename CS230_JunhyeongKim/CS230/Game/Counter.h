@@ -44,4 +44,8 @@ private:
     Counter_Background background;
     int customors = 10;
 
+    int ranCustomerNum;
+    int maxRanCustomerNum = 7;
+
+
 };

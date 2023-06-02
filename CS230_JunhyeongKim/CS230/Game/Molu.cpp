@@ -2,18 +2,16 @@
 Copyright (C) 2023 DigiPen Institute of Technology
 Reproduction or distribution of this file or its contents without
 prior written consent is prohibited
-File Name:  Elf.cpp
+File Name:  Molu.cpp
 Project:    CS230 Engine
-Author:     Junyeong Cho
+Author:     Junhyeong Kim
 Created:    March 3, 2023
 */
 
-#include "Elf.h"
-#include "RecipeName.h"
+#include "Molu.h"
 
-Elf::Elf(Customor* front)
+Molu::Molu(Customor* front)
 	:Customor(front)
 {
-	sprite.Load("Assets/Characters/Elf.spt");
-	Set_Oreder_recipe(RecipeName::LeafSalad);
+	sprite.Load("Assets/Characters/Molu.spt");
 }

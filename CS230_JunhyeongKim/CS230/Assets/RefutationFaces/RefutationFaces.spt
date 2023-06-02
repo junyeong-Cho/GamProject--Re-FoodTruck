@@ -1,0 +1,9 @@
+Assets/RefutationFaces/RefutationFaces.png
+HotSpot 0 0
+FrameSize 64 64
+NumFrames 5
+Anim Assets/None.anm
+Anim Assets/RefutationFaces/HappyFace.anm
+Anim Assets/RefutationFaces/NormalFace.anm
+Anim Assets/RefutationFaces/BadFace.anm
+Anim Assets/RefutationFaces/AngryFace.anm
