@@ -13,6 +13,7 @@ public:
 	int CheckComplete(std::vector<Ingredient*>& plating);
 	void Update();
 	void Unload();
+	int GetTotalNum() { return totalNum; }
 protected:
 	CS230::Texture* texture;
 	Math::vec2 texturePos;
@@ -39,8 +40,8 @@ protected:
 	MermaidScales* mermaidScales;
 	MermaidScales* boiledMermaidScales;
 	
-	int score = 0;
-	int totalNum = 0;
+	double score = 100;
+	double totalNum = 0;
 };
 
 class LemonSalad : public Recipe

@@ -98,9 +98,20 @@ void Slot::DrawIngredient(const std::vector<std::vector<CS230::Texture*>>& textu
 	}
 }
 
-void Slot::Update(double dt)
+void Slot::DrawSlotRect()
 {
-	
+	for (int i = 0; i < putSize; ++i)
+	{
+		if (vector.size() <= i)
+		{
+			doodle::draw_rectangle(slotPos[i].x, slotPos[i].y, 50, 50);
+		}
+	}
+}
+
+void Slot::Update(double dt, int size)
+{
+	putSize = size;
 }
 
 void Slot::Unload()
@@ -114,7 +125,7 @@ void Slot::Unload()
 
 bool Slot::PutIngredient(Ingredient* ingredient)
 {
-	if (vector.size() <= 16)
+	if (vector.size() < putSize)
 	{
 		vector.push_back(ingredient);
 		return true;

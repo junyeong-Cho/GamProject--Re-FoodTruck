@@ -19,9 +19,14 @@ public:
 	void Update(double dt);
     void Draw();
 	void Unload();
-	void DrawScore(std::vector<Recipe*>& recipeBook, RecipeName order);
+	void DrawScore();
+	void SetScore(std::vector<Recipe*>& recipeBook);
 	void DrawGage();
 	Math::vec2 WhereISMouse();
+	void GetOrder(RecipeName orderRecipe, std::vector<Recipe*>& recipeBook);
+	int GetSideBwolSize(int index) { return seven_ingredients[index].size(); }
+	void Refill(int index);
+	
 
 	double Width_raito = 0;
 	double Height_raito = 0;
@@ -125,9 +130,12 @@ private:
 	void SlotDraw();
 	void SetStoveOn();
 	void SpotToPlate();
-	void DrawTempSoup();
 	int ReturnScore() { return score; }
 	void SetIngredient();
+	Ingredient* CreateIngredient(int index);
+	void TrashCan();
+	void ToolTask();
+
 
 
     //using_ingredients 벡터 중 몇번째 인덱스를 가리키고 있는지.
@@ -149,4 +157,10 @@ private:
 	int plateDrawIndex = 0;
 	bool checkDrawSoup = false;
 	bool canCook = true;
+
+	RecipeName order;
+	int orderSize = 0;
+
+	int refillNum = 3;
+	int firstIngredientNum = 3;
 };

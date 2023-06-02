@@ -19,7 +19,7 @@ void Cook::SetIngredient()
 	}
 	if (seven_ingredients.size() == ingredient_number)
 	{
-		for (int i = 0; i < 3; ++i)
+		for (int i = 0; i < firstIngredientNum; ++i)
 		{
 			seven_ingredients[0].push_back(new Lemon(Math::vec2{ first_X + width, first_Y }));
 			seven_ingredients[1].push_back(new Lettuce(Math::vec2{ first_X, first_Y }));
@@ -190,36 +190,30 @@ void Cook::Update(double dt)
 	SetIngredientsWhere();
 	PutSlot();
 	CreateUsingIngredient();
-	plate.Update(dt);
-	pot.Update(dt);
+	plate.Update(dt, orderSize);
+	pot.Update(dt, orderSize);
 
 	GetWhere(WhereISMouse());
-
-	if (tool.GetTool() == ToolName::HAND)
-	{
-		FollowMouseIngredient();
-	}
-	else if (tool.GetTool() == ToolName::KNIFE)
-	{
-		Cutting();
-	}
-	else if (tool.GetTool() == ToolName::LADLE)
-	{
-		SpotToPlate();
-	}
+	ToolTask();
+	
 	a();
 }
 
 void Cook::Draw()
 {
 	SlotDraw();
+	if (canCook == true)
+	{
+		plate.DrawSlotRect();
+		pot.DrawSlotRect();
+	}
 	DrawIngredients();
 
 	tool.Draw();
 	plate.ButtonDraw();
 	pot.ButtonDraw();
 	DrawGage();
-	DrawTempSoup();
+	DrawScore();
 	//얘가 항상 제일 위에 그려져야함.
 	operation.Draw();
 }
@@ -245,6 +239,26 @@ void Cook::DrawIngredients()
 			using_ingredients[i]->Draw(ingredientTextureManager.GetTexture());
 		}
 
+	}
+}
+
+void Cook::ToolTask()
+{
+	if (tool.GetTool() == ToolName::HAND)
+	{
+		FollowMouseIngredient();
+	}
+	else if (tool.GetTool() == ToolName::KNIFE)
+	{
+		Cutting();
+	}
+	else if (tool.GetTool() == ToolName::LADLE)
+	{
+		SpotToPlate();
+	}
+	else if (tool.GetTool() == ToolName::TRASHCAN)
+	{
+		TrashCan();
 	}
 }
 
@@ -476,20 +490,33 @@ void Cook::SlotDraw()
 	plate.DrawIngredient(ingredientTextureManager.GetTexture());
 }
 
-void Cook::DrawScore(std::vector<Recipe*>& recipeBook, RecipeName order)
+void Cook::GetOrder(RecipeName orderRecipe, std::vector<Recipe*>& recipeBook)
 {
-	score = recipeBook[static_cast<int>(order)]->CheckComplete(plate.GetIngredientVec());
+	order = orderRecipe;
+	orderSize = recipeBook[static_cast<int>(order)]->GetTotalNum();
+}
+
+void Cook::SetScore(std::vector<Recipe*>& recipeBook)
+{
+	if (canCook == true)
+	{
+		score = recipeBook[static_cast<int>(order)]->CheckComplete(plate.GetIngredientVec());
+	}
+}
+
+void Cook::DrawScore()
+{
 	if (plate.ButtonClick(WhereISMouse()) == true)
 	{
-		if (score >= 0 && score < 50)
+		if (score >= 0 && score < 40)
 		{
 			plateDrawIndex = static_cast<int>(order) * 3 + 3;
 		}
-		else if (score >= 50 && score < 95)
+		else if (score >= 40 && score < 90)
 		{
 			plateDrawIndex = static_cast<int>(order) * 3 + 2;
 		}
-		else if (score >= 95 && score < 100)
+		else if (score >= 90 && score <= 100)
 		{
 			plateDrawIndex = static_cast<int>(order) * 3 + 1;
 		}
@@ -596,11 +623,72 @@ void Cook::SpotToPlate()
 	}
 }
 
-void Cook::DrawTempSoup()
+void Cook::Refill(int index)
 {
-	if (checkDrawSoup == true)
+	for (int i = 0; i < refillNum; ++i)
 	{
-		doodle::draw_ellipse(WhereISMouse().x, WhereISMouse().y, 30);
+		seven_ingredients[index].push_back(CreateIngredient(index));
 	}
 }
 
+Ingredient* Cook::CreateIngredient(int index)
+{
+	Ingredient* newOne = nullptr;
+	switch (index)
+	{
+	case 0:
+		newOne = new Lemon(Math::vec2{ first_X + width, first_Y });
+		break;
+	case 1:
+		newOne = new Lettuce(Math::vec2{ first_X, first_Y });
+		break;
+	case 2:
+		newOne = new Ant(Math::vec2{ first_X, first_Y });
+		break;
+	case 3:
+		newOne = new Leaf(Math::vec2{ first_X, first_Y });
+		break;
+	case 4:
+		newOne = new Salt(Math::vec2{ first_X, first_Y });
+		break;
+	case 5:
+		newOne = new DragonFruit(Math::vec2{ first_X, first_Y });
+		break;
+	case 6:
+		newOne = new MermaidScales(Math::vec2{ first_X, first_Y });
+		break;
+	}
+
+	if (newOne != nullptr)
+	{
+		newOne->SetScale(Math::vec2{ Width_raito ,Height_raito });
+		newOne->ChangePos(Math::vec2(first_X + width * index, first_Y));
+	}
+	return newOne;
+}
+
+void Cook::TrashCan()
+{
+	for (int i = using_ingredients.size() - 1; i >= 0; --i)
+	{
+		if (using_ingredients[i]->IsMouseOn(WhereISMouse(), ingredientTextureManager.GetTexture()) == true && leftClick == true)
+		{
+			leftClick = false;
+			delete using_ingredients[i];
+			using_ingredients.erase(using_ingredients.begin() + i);
+			break;
+		}
+	}
+
+	if (GetWhere(WhereISMouse()) == KitchenPosition::BOWL && leftClick == true)
+	{
+		leftClick = false;
+		plate.Unload();
+	}
+
+	if (GetWhere(WhereISMouse()) == KitchenPosition::STOVE && leftClick == true)
+	{
+		leftClick = false;
+		pot.Unload();
+	}
+}

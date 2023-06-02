@@ -10,7 +10,7 @@ public:
 	bool Refill();
 	void DrawCost();
 	void DrawButton();
-	void ReduceNum(int num);
+	void SetBowlNum(int num) { number = num; }
 
 private:
 	Math::vec2 position;
