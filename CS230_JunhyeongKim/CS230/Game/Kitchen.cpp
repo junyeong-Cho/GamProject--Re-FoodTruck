@@ -47,6 +47,11 @@ void Kitchen::Update(double dt)
 	}
 	cook.GetOrder(RecipeName::AntSalad, recipeBook.GetRecipeBook());
 
+	for (int i = 0; i < sideBowl.size(); ++i)
+	{
+		sideBowl[i].Update(dt);
+	}
+
 }
 void Kitchen::Draw()
 {

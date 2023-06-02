@@ -6,6 +6,7 @@ class SideBowl
 public:
 	SideBowl(Math::vec2 pos, std::string cost);
 	void Draw();
+	void Update(double dt);
 	bool MouseOn(Math::vec2 mouse);
 	bool Refill();
 	void DrawCost();
@@ -17,4 +18,6 @@ private:
 	CS230::Texture* texture;
 	std::string cost;
 	int number = 3;
+	bool changeColor = true;
+	double timer = 0;
 };
