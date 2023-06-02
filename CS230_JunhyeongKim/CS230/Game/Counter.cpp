@@ -29,6 +29,7 @@ Counter::Counter()
 
 void Counter::Load()
 {
+    music_effect_counter;
 
     //Frame for Clock
     gameobjectmanager.Add(new Frame({ Engine::GetWindow().GetSize().x / 12.5, Engine::GetWindow().GetSize().y / 8.0 * 7.18 }, 1));
@@ -131,6 +132,8 @@ void Counter::Load()
 void Counter::Update(double dt)
 {
     gameobjectmanager.UpdateAll(dt);
+
+    music_effect_counter.Play();
 
     if (Engine::GetUnloadManager().current_customor != nullptr)
     {
