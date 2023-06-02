@@ -1,4 +1,3 @@
-
 /*
 Copyright (C) 2023 DigiPen Institute of Technology
 Reproduction or distribution of this file or its contents without
@@ -25,7 +24,7 @@ MainMenu::MainMenu()
 void MainMenu::Load()
 {
 	//UpdateMenuTextColors();
-	music_effect_main;
+	//music_effect_main;
 }
 
 
@@ -71,7 +70,7 @@ void MainMenu::DrawText()
 
 void MainMenu::Update(double dt)
 {
-	music_effect_main.Play();
+	//music_effect_main.Play();
 
 	if (Engine::GetInput().KeyJustReleased(CS230::Input::Keys::Down))
 	{
@@ -97,7 +96,7 @@ void MainMenu::Update(double dt)
 		{
 		case 0:
 			Engine::GetGameStateManager().SetNextGameState(static_cast<int>(States::Counter));
-			music_effect_main.Stop();
+			//music_effect_main.Stop();
 			break;
 		case 1:
 			Engine::GetGameStateManager().ClearNextGameState();

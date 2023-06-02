@@ -14,7 +14,7 @@ Updated:    May  17, 2023
 
 #include "../Game/States.h"
 
-#include "../Engine/SoundComponentManager.h"
+//#include "../Engine/SoundComponentManager.h"
 #include "../Engine/GameObjectManager.h"
 #include "../Engine/TextureManager.h"
 #include "../Engine/Texture.h"
@@ -47,7 +47,7 @@ private:
 	std::string Space_shotter;
 	std::string exit;
 
-	CS230::MusicEffect music_effect_main = CS230::MusicEffect("Assets/Sound/Theme/main_theme_pirot.ogg");
+	//CS230::MusicEffect music_effect_main = CS230::MusicEffect("Assets/Sound/Theme/main_theme_pirot.ogg");
 
 
 	int counter = 0;
