@@ -10,6 +10,7 @@ Created:    April 25, 2023
 
 #include "GameObjectManager.h"
 
+
 //like load
 void CS230::GameObjectManager::Add(GameObject* object)
 {

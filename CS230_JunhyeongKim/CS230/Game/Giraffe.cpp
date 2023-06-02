@@ -9,9 +9,12 @@ Created:    March 3, 2023
 */
 
 #include "Giraffe.h"
+#include "RecipeName.h"
 
 Giraffe::Giraffe(Customor* front)
 	:Customor(front)
 {
 	sprite.Load("Assets/giraffe.spt");
+	Set_Oreder_recipe(RecipeName::LemonSalad);
+
 }

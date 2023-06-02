@@ -16,5 +16,6 @@ enum class States {
     Counter,
     Kitchen,
     Ending,
+    Day_end,
     Exit
 };

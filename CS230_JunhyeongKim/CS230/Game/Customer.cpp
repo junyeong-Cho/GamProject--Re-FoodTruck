@@ -13,7 +13,9 @@ Created:    March 2, 2023
 #include "doodle/drawing.hpp"
 #include "doodle/input.hpp"
 #include "Counter.h"
+
 #include <iostream>
+
 Customor::Customor(Customor* front) :
     GameObject({ -300.0,138.0 }), front_customor(front),
     Yes(400.0, 800.0 / 3.0, 1400.0 / 10.0, 800.0 / 10.0),
@@ -22,7 +24,7 @@ Customor::Customor(Customor* front) :
 {
     current_state = &state_waiting;
     //SetScale({ 0.98,0.98 });
-    random_timer = static_cast<double>(rand()) / (RAND_MAX / 5) + 10;
+    random_timer = static_cast<double>(rand()) / (RAND_MAX / 5) + 10/Engine::GetUnloadManager().GetDay();
     std::cout << random_timer << "\n";
     current_state->Enter(this);
     timer = random_timer;
@@ -160,6 +162,7 @@ void Customor::State_Order::CheckExit(GameObject* object)
     if (customor->Get_can_order() == true && customor->No.checkClick == true)
     {
         customor->can_order = false;
+        customor->grade = static_cast<int>(Grade::NO_FOOD);
         customor->change_state(&customor->state_evaluate);
     }
 }
@@ -179,10 +182,7 @@ void Customor::State_Fwaiting::Update(GameObject* object, double dt)
 void Customor::State_Fwaiting::CheckExit(GameObject* object)
 {
     Customor* customor = static_cast<Customor*>(object);
-    if (customor->get_food == true)
-    {
-        customor->change_state(&customor->state_evaluate);
-    }
+
 
     if (Engine::GetUnloadManager().food_complete == true)
     {
@@ -198,23 +198,24 @@ void Customor::State_Fwaiting::CheckExit(GameObject* object)
 void Customor::State_Evaluate::Enter(GameObject* object)
 {
     Customor* customor = static_cast<Customor*>(object);
+
+    if (Engine::GetUnloadManager().Getfood_grad() < 40)
+    {
+        customor->grade = static_cast<int>(Grade::BAD);
+    }
+    else if (Engine::GetUnloadManager().Getfood_grad() < 95)
+    {
+        customor->grade = static_cast<int>(Grade::SOSO);
+    }
+    else
+    {
+        customor->grade = static_cast<int>(Grade::GOOD);
+    }
 }
 
 void Customor::State_Evaluate::Update(GameObject* object, double dt)
 {
     Customor* customor = static_cast<Customor*>(object);
-
-    //
-    //if (customor->get_food == false)
-    //{
-    //    customor->grade = 0;
-    //}
-
-    if (Engine::GetUnloadManager().Getfood_grad() < 30)
-    {
-        customor->grade = 0;
-    }
-
 
     customor->evalue.update(doodle::get_mouse_x(), doodle::get_mouse_y());
 }
@@ -224,11 +225,28 @@ void Customor::State_Evaluate::CheckExit(GameObject* object)
     Customor* customor = static_cast<Customor*>(object);
     if (customor->evalue.checkClick == true)
     {
-        if (customor->grade == 0)
+
+        switch (customor->grade)
         {
+        case static_cast<int>(Grade::NO_FOOD):
+            Engine::GetUnloadManager().Update_rate(-10);
+            break;
+        case static_cast<int>(Grade::BAD):
             Engine::GetUnloadManager().Update_money(5);
             Engine::GetUnloadManager().Update_rate(-5);
+            break;
+        case static_cast<int>(Grade::SOSO):
+            Engine::GetUnloadManager().Update_money(5);
+            Engine::GetUnloadManager().Update_rate(-5);
+            break;
+        case static_cast<int>(Grade::GOOD):
+            Engine::GetUnloadManager().Update_money(5);
+            Engine::GetUnloadManager().Update_rate(-5);
+            break;
+        default:
+            break;
         }
+
         Engine::GetUnloadManager().food_complete = false;
         customor->change_state(&customor->state_leaving);
     }
@@ -240,6 +258,7 @@ void Customor::State_Evaluate::CheckExit(GameObject* object)
 void Customor::State_Leaving::Enter(GameObject* object)
 {
     Customor* customor = static_cast<Customor*>(object);
+    customor->sprite.texture->Set_tint_color(0, 255, 0);
     customor->SetVelocity({ 500,0 });
 }
 
@@ -255,6 +274,7 @@ void Customor::State_Leaving::Update(GameObject* object, double dt)
 void Customor::State_Leaving::CheckExit(GameObject* object)
 {
     Customor* customor = static_cast<Customor*>(object);
+    std::cout <<  static_cast<int>(customor->oreder_recipe);
 }
 
 
@@ -270,7 +290,9 @@ void Customor::Update(double dt)
 
 void Customor::Draw(Math::TransformationMatrix camera_matrix)
 {
+
     sprite.Draw(camera_matrix * GetMatrix());
+
 
     if (can_order == true && evaluating == false)
     {
@@ -301,12 +323,28 @@ void Customor::Draw(Math::TransformationMatrix camera_matrix)
         doodle::set_fill_color(0, 0, 0);
 
         //Order
-        if (grade == 0)
+        if (grade == static_cast<int>(Grade::NO_FOOD))
         {
             doodle::draw_text(Grade_bad_text(), Engine::GetWindow().GetSize().x / 4.0 + Engine::GetWindow().GetSize().x / 30.0, Engine::GetWindow().GetSize().y / 2.0 + Engine::GetWindow().GetSize().y / 10.0);
         }
+        else if (grade == static_cast<int>(Grade::BAD))
+        {
+            doodle::draw_text(Grade_bad_text(), Engine::GetWindow().GetSize().x / 4.0 + Engine::GetWindow().GetSize().x / 30.0, Engine::GetWindow().GetSize().y / 2.0 + Engine::GetWindow().GetSize().y / 10.0);
+        }
+        else if (grade == static_cast<int>(Grade::SOSO))
+        {
+            doodle::draw_text(Grade_soso_text(), Engine::GetWindow().GetSize().x / 4.0 + Engine::GetWindow().GetSize().x / 30.0, Engine::GetWindow().GetSize().y / 2.0 + Engine::GetWindow().GetSize().y / 10.0);
+        }
+        else
+        {
+            doodle::draw_text(Grade_good_text(), Engine::GetWindow().GetSize().x / 4.0 + Engine::GetWindow().GetSize().x / 30.0, Engine::GetWindow().GetSize().y / 2.0 + Engine::GetWindow().GetSize().y / 10.0);
+        }
         doodle::pop_settings();
         evalue.draw("OK");
+    }
+    else if (current_state->GetName() == "In_Counter")
+    {
+      doodle::draw_text(std::to_string(last_timer),  sprite.GetFrameSize().x, GetPosition().y + 400);
     }
 
     if (button_timer > 0.3 && current_state->GetName() == "Order" && evaluating == false)

@@ -11,6 +11,7 @@ Created:    March 2, 2023
 #pragma once
 #include "..\Engine\GameObject.h"
 #include "Button.h"
+#include "RecipeName.h"
 
 class Customor : public CS230::GameObject
 {
@@ -24,6 +25,13 @@ public:
     virtual std::string Grade_bad_text() { return "hello!"; }
     virtual std::string Grade_soso_text() { return "hello!"; }
     virtual std::string Grade_good_text() { return "hello!"; }
+
+    RecipeName Get_Oreder_recipe() { return oreder_recipe; }
+
+    void Set_Oreder_recipe(RecipeName recipename)
+    {
+        oreder_recipe = recipename;
+    }
 
     static constexpr double timer_max = 30;
     double random_timer;
@@ -98,6 +106,14 @@ private:
     };
     State_Leaving state_leaving;
 
+    enum class Grade
+    {
+        NO_FOOD,
+        BAD,
+        SOSO,
+        GOOD
+    };
+
 
     Customor* front_customor = nullptr;
 
@@ -110,8 +126,6 @@ private:
     //앞으로 왔을 때
     bool can_order = false;
 
-    //음식 받음
-    bool get_food = false;
     //evaluating
     bool evaluating = false;
     unsigned int grade = 0;
@@ -120,4 +134,6 @@ private:
     double timer{ 0 };
     int last_timer{ 0 };
 
+    //want food
+    RecipeName oreder_recipe = RecipeName::AntSalad;
 };

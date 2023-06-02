@@ -30,15 +30,25 @@ void Kitchen::Load()
 
 void Kitchen::Update(double dt)
 {
+	Engine::GetUnloadManager().GetCounterObjectManager().UpdateAll(dt);
 	cook.Update(dt);
 	recipeBook.Update();
 	go_counter.update(doodle::get_mouse_x(), doodle::get_mouse_y(), States::Counter);
 	Engine::GetUnloadManager().Update_timer(dt);
+
 	if (Engine::GetUnloadManager().GetTimer() <= 0)
 	{
-		Engine::GetGameStateManager().SetNextGameState(static_cast<int>(States::Ending));
-		canLoad = true;
-		canUnload = true;
+		Engine::GetUnloadManager().Update_Day();
+		if (Engine::GetUnloadManager().GetDay() >= 4)
+		{
+			Engine::GetGameStateManager().SetNextGameState(static_cast<int>(States::Ending));
+		}
+		else
+		{
+			Engine::GetGameStateManager().SetNextGameState(static_cast<int>(States::Day_end));
+			canLoad = true;
+			canUnload = true;
+		}
 	}
 	for (int i = 0; i < cook.ingredient_number; ++i)
 	{

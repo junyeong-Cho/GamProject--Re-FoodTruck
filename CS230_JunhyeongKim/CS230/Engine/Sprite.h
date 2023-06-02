@@ -26,14 +26,16 @@ namespace CS230 {
         Math::ivec2 GetHotSpot(int index);
         Math::ivec2 GetFrameSize();
 
+        Texture* GetTexture() { return texture; }
+
         void PlayAnimation(int animation);
         bool AnimationEnded();
+        Texture* texture;
     private:
 
         Math::ivec2 GetFrameTexel(int index) const;
         std::vector<Math::ivec2> hotspots;
 
-        Texture* texture;
         int current_animation;
         Math::ivec2 frame_size;
         std::vector<Math::ivec2> frame_texels;

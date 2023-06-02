@@ -10,7 +10,7 @@ Created:    March 8, 2023
 
 #pragma once
 #include "GameObjectManager.h"
-
+#include "..\Game\RecipeName.h"
 class Customor;
 
 namespace CS230
@@ -25,10 +25,13 @@ namespace CS230
 		const int GetRate() { return rate; }
 		const double GetTimer() { return timer; }
 		const double Getfood_grad() { return food_grad; }
+		const int GetDay() { return day; }
 
 		void Update_money(int i) { money += i; }
 		void Update_rate(int i) { rate += i; }
 		void Update_timer(double dt) { timer -= dt; }
+		void Update_Day() { day++; }
+
 
 		void Set_money(int i) { money = i; }
 		void Set_rate(int i) { rate = i; }
@@ -39,6 +42,13 @@ namespace CS230
 			food_complete = true;
 		}
 
+		void Set_food_grad(double i,RecipeName recipename)
+		{
+			food_grad = i;
+			food_complete = true;
+		}
+
+		void Reset();
 
 		void Unload();
 		bool first_load = true;
@@ -52,6 +62,7 @@ namespace CS230
 		int rate = 100;
 		double timer = 300;
 
+		unsigned int day = 1;
 
 
 		double food_grad = 0;

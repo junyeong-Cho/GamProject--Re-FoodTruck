@@ -22,6 +22,7 @@ void Ingredient::SlotDraw(Math::vec2 pos, const std::vector<std::vector<CS230::T
 void Ingredient::Draw(const std::vector<std::vector<CS230::Texture*>>& texture)
 {
 	Math::TransformationMatrix matrix = Math::TranslationMatrix(position) * Math::RotationMatrix(0) * Math::ScaleMatrix(scale);
+	texture[static_cast<int>(name)][texture[static_cast<int>(name)].size() - 1]->Set_tint_color(0, 0, 255);
 
 	if (cutNum <= 0)
 	{

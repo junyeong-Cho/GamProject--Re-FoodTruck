@@ -9,9 +9,11 @@ Created:    March 3, 2023
 */
 
 #include "Elf.h"
+#include "RecipeName.h"
 
 Elf::Elf(Customor* front)
 	:Customor(front)
 {
 	sprite.Load("Assets/Elf.spt");
+	Set_Oreder_recipe(RecipeName::LeafSalad);
 }

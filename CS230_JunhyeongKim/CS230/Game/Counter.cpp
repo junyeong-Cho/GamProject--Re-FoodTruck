@@ -88,9 +88,18 @@ void Counter::Update(double dt)
     }
     Engine::GetUnloadManager().GetCounterObjectManager().UpdateAll(dt);
     Engine::GetUnloadManager().Update_timer(dt);
+
     if (Engine::GetUnloadManager().GetTimer() <= 0)
     {
-        Engine::GetGameStateManager().SetNextGameState(static_cast<int>(States::Ending));
+        Engine::GetUnloadManager().Update_Day();
+        if (Engine::GetUnloadManager().GetDay() >= 4)
+        {
+            Engine::GetGameStateManager().SetNextGameState(static_cast<int>(States::Ending));
+        }
+        else
+        {
+            Engine::GetGameStateManager().SetNextGameState(static_cast<int>(States::Day_end));
+        }
     }
 }
 

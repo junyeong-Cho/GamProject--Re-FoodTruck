@@ -23,5 +23,16 @@ namespace CS230
 	void Unload_manager::Unload()
 	{
 		current_customor = nullptr;
+		food_grad = 0;
+	}
+
+	void Unload_manager::Reset()
+	{
+		first_load = true;
+		food_complete = false;
+		money = 100;
+		rate = 100;
+		day = 1;
+
 	}
 }

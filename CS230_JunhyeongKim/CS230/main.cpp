@@ -16,6 +16,7 @@ Created:    March 8, 2023
 #include "Game/Counter.h"
 #include "Game/Kitchen.h"
 #include "Game/Ending.h"
+#include "Game/Day_end.h"
 
 int main() {
     try {
@@ -32,6 +33,8 @@ int main() {
         engine.GetGameStateManager().AddGameState(kitchen);
         Ending ending;
         engine.GetGameStateManager().AddGameState(ending);
+        Day_end day_end;
+        engine.GetGameStateManager().AddGameState(day_end);
 
         while (engine.HasGameEnded() == false) 
         {

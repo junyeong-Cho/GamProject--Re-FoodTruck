@@ -1,269 +1,90 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
+    <ClCompile Include="Engine\Animation.cpp" />
+    <ClCompile Include="Engine\Camera.cpp" />
+    <ClCompile Include="Engine\Engine.cpp" />
+    <ClCompile Include="Engine\GameObject.cpp" />
+    <ClCompile Include="Engine\GameObjectManager.cpp" />
+    <ClCompile Include="Engine\GameStateManager.cpp" />
+    <ClCompile Include="Engine\Input.cpp" />
+    <ClCompile Include="Engine\Logger.cpp" />
+    <ClCompile Include="Engine\Matrix.cpp" />
+    <ClCompile Include="Engine\Sprite.cpp" />
+    <ClCompile Include="Engine\Texture.cpp" />
+    <ClCompile Include="Engine\TextureManager.cpp" />
+    <ClCompile Include="Engine\Unload_manager.cpp" />
+    <ClCompile Include="Engine\Vec2.cpp" />
+    <ClCompile Include="Engine\Window.cpp" />
+    <ClCompile Include="Game\Button.cpp" />
+    <ClCompile Include="Game\Cook.cpp" />
+    <ClCompile Include="Game\Counter.cpp" />
+    <ClCompile Include="Game\Counter_Background.cpp" />
+    <ClCompile Include="Game\Customer.cpp" />
+    <ClCompile Include="Game\Elf.cpp" />
+    <ClCompile Include="Game\Ending.cpp" />
+    <ClCompile Include="Game\Giraffe.cpp" />
+    <ClCompile Include="Game\Ingredient.cpp" />
+    <ClCompile Include="Game\IngredientTextureManager.cpp" />
+    <ClCompile Include="Game\Kitchen.cpp" />
+    <ClCompile Include="Game\Main_menu.cpp" />
+    <ClCompile Include="Game\Operation.cpp" />
+    <ClCompile Include="Game\Pet.cpp" />
+    <ClCompile Include="Game\Recipe.cpp" />
+    <ClCompile Include="Game\RecipeBook.cpp" />
+    <ClCompile Include="Game\SideBowl.cpp" />
+    <ClCompile Include="Game\Slot.cpp" />
+    <ClCompile Include="Game\Splash.cpp" />
+    <ClCompile Include="Game\Tool.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Engine\Animation.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Button.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Camera.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Elf.cpp">
-      <Filter>Game\Customer</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Giraffe.cpp">
-      <Filter>Game\Customer</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Ending.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Engine.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\GameObject.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\GameObjectManager.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\GameStateManager.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Input.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Logger.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Matrix.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\TextureManager.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Texture.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Sprite.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Vec2.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Window.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Main_menu.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Operation.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Pet.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Splash.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Unload_manager.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Tool.cpp">
-      <Filter>Game\Kitchen</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Slot.cpp">
-      <Filter>Game\Kitchen</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\RecipeBook.cpp">
-      <Filter>Game\Kitchen</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Recipe.cpp">
-      <Filter>Game\Kitchen</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Kitchen.cpp">
-      <Filter>Game\Kitchen</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Ingredient.cpp">
-      <Filter>Game\Kitchen</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Cook.cpp">
-      <Filter>Game\Kitchen</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Counter.cpp">
-      <Filter>Game\Counter</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Customer.cpp">
-      <Filter>Game\Customer</Filter>
-    </ClCompile>
-
-    <ClCompile Include="Game\Counter_Background.cpp">
-      <Filter>Game\Counter</Filter>
-
-    <ClCompile Include="Game\IngredientTextureManager.cpp">
-      <Filter>Game\Kitchen</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\SideBowl.cpp">
-      <Filter>Game\Kitchen</Filter>
-
-    </ClCompile>
+    <ClCompile Include="Game\Day_end.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Engine\Animation.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Button.h">
-      <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Camera.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Elf.h">
-      <Filter>Game\Customer</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Giraffe.h">
-      <Filter>Game\Customer</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Ending.h">
-      <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Engine.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\GameObject.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\GameObjectManager.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\GameState.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\GameStateManager.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Input.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Logger.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Matrix.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\TextureManager.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Texture.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Sprite.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Vec2.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Window.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Main_menu.h">
-      <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Operation.h">
-      <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Pet.h">
-      <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\PetPropertyName.h">
-      <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Splash.h">
-      <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\States.h">
-      <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Unload_manager.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Rect.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\ToolName.h">
-      <Filter>Game\Kitchen</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Tool.h">
-      <Filter>Game\Kitchen</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Slot.h">
-      <Filter>Game\Kitchen</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\RecipeName.h">
-      <Filter>Game\Kitchen</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\RecipeBook.h">
-      <Filter>Game\Kitchen</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Recipe.h">
-      <Filter>Game\Kitchen</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Kitchen.h">
-      <Filter>Game\Kitchen</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\KitchenPosition.h">
-      <Filter>Game\Kitchen</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\InventoryTexture.h">
-      <Filter>Game\Kitchen</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\InventoryName.h">
-      <Filter>Game\Kitchen</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\IngredientName.h">
-      <Filter>Game\Kitchen</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Ingredient.h">
-      <Filter>Game\Kitchen</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Cook.h">
-      <Filter>Game\Kitchen</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Counter.h">
-      <Filter>Game\Counter</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Customer.h">
-      <Filter>Game\Customer</Filter>
-    </ClInclude>
-
-    <ClInclude Include="Game\Counter_Background.h">
-      <Filter>Game\Counter</Filter>
-
-    <ClInclude Include="Game\IngredientTextureManager.h">
-      <Filter>Game\Kitchen</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\SideBowl.h">
-      <Filter>Game\Kitchen</Filter>
-
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Filter Include="Game">
-      <UniqueIdentifier>{62ad7f5e-41cd-40bd-8195-74ac971a8d07}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine">
-      <UniqueIdentifier>{bf392042-4170-4670-978b-cfa5ece13432}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Customer">
-      <UniqueIdentifier>{6c89d8f9-5bf2-4ae8-a010-5288e7ee6d5c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Counter">
-      <UniqueIdentifier>{cd1dd236-2db2-4cf5-8589-a5d5917ec6f1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Kitchen">
-      <UniqueIdentifier>{5ce8a602-4bed-4d89-b048-539c61b46730}</UniqueIdentifier>
-    </Filter>
+    <ClInclude Include="Engine\Animation.h" />
+    <ClInclude Include="Engine\Camera.h" />
+    <ClInclude Include="Engine\Engine.h" />
+    <ClInclude Include="Engine\GameObject.h" />
+    <ClInclude Include="Engine\GameObjectManager.h" />
+    <ClInclude Include="Engine\GameState.h" />
+    <ClInclude Include="Engine\GameStateManager.h" />
+    <ClInclude Include="Engine\Input.h" />
+    <ClInclude Include="Engine\Logger.h" />
+    <ClInclude Include="Engine\Matrix.h" />
+    <ClInclude Include="Engine\Rect.h" />
+    <ClInclude Include="Engine\Sprite.h" />
+    <ClInclude Include="Engine\Texture.h" />
+    <ClInclude Include="Engine\TextureManager.h" />
+    <ClInclude Include="Engine\Unload_manager.h" />
+    <ClInclude Include="Engine\Vec2.h" />
+    <ClInclude Include="Engine\Window.h" />
+    <ClInclude Include="Game\Button.h" />
+    <ClInclude Include="Game\Cook.h" />
+    <ClInclude Include="Game\Counter.h" />
+    <ClInclude Include="Game\Counter_Background.h" />
+    <ClInclude Include="Game\Customer.h" />
+    <ClInclude Include="Game\Elf.h" />
+    <ClInclude Include="Game\Ending.h" />
+    <ClInclude Include="Game\Giraffe.h" />
+    <ClInclude Include="Game\Ingredient.h" />
+    <ClInclude Include="Game\IngredientName.h" />
+    <ClInclude Include="Game\IngredientTextureManager.h" />
+    <ClInclude Include="Game\InventoryName.h" />
+    <ClInclude Include="Game\InventoryTexture.h" />
+    <ClInclude Include="Game\Kitchen.h" />
+    <ClInclude Include="Game\KitchenPosition.h" />
+    <ClInclude Include="Game\Main_menu.h" />
+    <ClInclude Include="Game\Operation.h" />
+    <ClInclude Include="Game\Pet.h" />
+    <ClInclude Include="Game\PetPropertyName.h" />
+    <ClInclude Include="Game\Recipe.h" />
+    <ClInclude Include="Game\RecipeBook.h" />
+    <ClInclude Include="Game\RecipeName.h" />
+    <ClInclude Include="Game\SideBowl.h" />
+    <ClInclude Include="Game\Slot.h" />
+    <ClInclude Include="Game\Splash.h" />
+    <ClInclude Include="Game\States.h" />
+    <ClInclude Include="Game\Tool.h" />
+    <ClInclude Include="Game\ToolName.h" />
+    <ClInclude Include="Game\Day_end.h" />
   </ItemGroup>
 </Project>
