@@ -8,8 +8,6 @@ Author:     Jonathan Holmes
 Created:    March 8, 2023
 */
 
-#include <SFML/Audio.hpp>
-
 #include <iostream>
 
 #include "Engine/Engine.h"
@@ -25,16 +23,6 @@ Created:    March 8, 2023
 
 int main() {
     try {
-
-        sf::Music music;
-
-
-        if (!music.openFromFile("assets/Credit.ogg"))
-        {
-            std::cout << "Failed to load the music file: Assets/Sound/Theme/main_theme_pirot.ogg" << std::endl;
-        }
-
-
         Engine& engine = Engine::Instance();
         engine.Start("Re : Truck");
 
