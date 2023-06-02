@@ -8,6 +8,8 @@ Author:     Jonathan Holmes
 Created:    March 8, 2023
 */
 
+#include <SFML/Audio.hpp>
+
 #include <iostream>
 
 #include "Engine/Engine.h"
@@ -23,6 +25,10 @@ Created:    March 8, 2023
 
 int main() {
     try {
+
+        sf::Music new_music;
+
+
         Engine& engine = Engine::Instance();
         engine.Start("Re : Truck");
 
@@ -41,6 +47,15 @@ int main() {
 
         while (engine.HasGameEnded() == false) 
         {
+            int music_count = 0;
+
+            music_count++;
+
+            if (music_count == 11)
+            {
+
+            }
+            
             engine.Update();
         }
 
