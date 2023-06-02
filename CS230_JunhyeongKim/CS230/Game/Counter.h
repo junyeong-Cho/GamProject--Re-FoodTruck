@@ -18,7 +18,6 @@ Created:    April 30, 2023
 #include "Counter_Background.h"
 #include "Button.h"
 #include "Frame.h"
-#include "../Engine/SoundComponentManager.h"
 
 class Customor;
 
@@ -42,11 +41,6 @@ private:
 
     //Draw frames
     CS230::GameObjectManager gameobjectmanager;
-
-
-    CS230::MusicEffect music_effect_counter = CS230::MusicEffect("Assets/Sound/Theme/kitchen_theme.ogg");
-
-
 
     Refutation* refutation;
 
