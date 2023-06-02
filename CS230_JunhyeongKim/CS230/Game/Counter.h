@@ -12,8 +12,11 @@ Created:    April 30, 2023
 #include "../Engine/Texture.h"
 #include "../Engine/Sprite.h"
 #include "../Engine/GameObjectManager.h"
+#include "../Engine/GameObject.h"
+
 #include "Counter_Background.h"
 #include "Button.h"
+#include "Frame.h"
 
 class Customor;
 
@@ -35,8 +38,9 @@ private:
     //CS230::Texture* guest_image;
     //Math::vec2 guest_position;
 
-
+    //Draw frames
     CS230::GameObjectManager gameobjectmanager;
+
 
     Customor* front_customor = nullptr;
     Button yes_button;

@@ -30,6 +30,23 @@ Counter::Counter()
 void Counter::Load()
 {
 
+    //Frame for Clock
+    gameobjectmanager.Add(new Frame({ Engine::GetWindow().GetSize().x / 12.5, Engine::GetWindow().GetSize().y / 8.0 * 7.18 }, 1));
+
+    //Face test
+    /*
+    refutation = new Refutation({ Engine::GetWindow().GetSize().x / 4.0, Engine::GetWindow().GetSize().y / 8.0 * 7.25 });
+    gameobjectmanager.Add(refutation);
+    */
+
+    //Frame for Refutation
+    gameobjectmanager.Add(new Frame({ Engine::GetWindow().GetSize().x / 4.0, Engine::GetWindow().GetSize().y / 8.0 * 7.18 }, 1));
+
+
+    //Frame for Money
+    gameobjectmanager.Add(new Frame({ Engine::GetWindow().GetSize().x / 1.3, Engine::GetWindow().GetSize().y / 8.0 * 7.18 }, 2));
+
+
     srand((unsigned int)time(NULL));
 
 
@@ -113,6 +130,8 @@ void Counter::Load()
 
 void Counter::Update(double dt)
 {
+    gameobjectmanager.UpdateAll(dt);
+
     if (Engine::GetUnloadManager().current_customor != nullptr)
     {
         if (Engine::GetUnloadManager().current_customor->Get_State_Name() == "Fwaiting")
@@ -139,29 +158,33 @@ void Counter::Update(double dt)
 
 void Counter::Draw_UI()
 {
-    //½Ã°£
-    doodle::draw_rectangle(Engine::GetWindow().GetSize().x / 12.0, Engine::GetWindow().GetSize().y / 8.0 * 7.3, Engine::GetWindow().GetSize().x * 0.10, Engine::GetWindow().GetSize().y * 0.07);
+    //Timer - frame addapted
     doodle::push_settings();
     doodle::set_font_fade_out_interval(0.5, 0.0);
-    doodle::set_font_size(Engine::GetWindow().GetSize().x / 60.0);
-    doodle::set_fill_color(0, 0, 0);
-    doodle::draw_text("Tm : " + std::to_string(static_cast<int>(Engine::GetUnloadManager().GetTimer())), Engine::GetWindow().GetSize().x / 12.0 - 20 + Engine::GetWindow().GetSize().x * 0.025, Engine::GetWindow().GetSize().y / 8.0 * 7.35);
+    doodle::set_font_size(Engine::GetWindow().GetSize().x / 50.0);
+    doodle::set_outline_width(12);
+    doodle::set_outline_color(255, 255, 255);
+    doodle::set_fill_color(255, 161, 74);
+    doodle::draw_text("Time\n " + std::to_string(static_cast<int>(Engine::GetUnloadManager().GetTimer())), Engine::GetWindow().GetSize().x / 12.0 + 10 + Engine::GetWindow().GetSize().x * 0.025, Engine::GetWindow().GetSize().y / 8.0 * 7.55);
     doodle::pop_settings();
-    //¸í¼º
-    doodle::draw_rectangle(Engine::GetWindow().GetSize().x / 5.0, Engine::GetWindow().GetSize().y / 8.0 * 7.3, Engine::GetWindow().GetSize().x * 0.15, Engine::GetWindow().GetSize().y * 0.07);
+
+    //Refutation - frame addapted
     doodle::push_settings();
     doodle::set_font_fade_out_interval(0.5, 0.0);
-    doodle::set_font_size(Engine::GetWindow().GetSize().x / 60.0);
-    doodle::set_fill_color(0, 0, 0);
-    doodle::draw_text("Rate : " + std::to_string(Engine::GetUnloadManager().GetRate()), Engine::GetWindow().GetSize().x / 5.0 + Engine::GetWindow().GetSize().x * 0.025, Engine::GetWindow().GetSize().y / 8.0 * 7.35);
+    doodle::set_font_size(Engine::GetWindow().GetSize().x / 50.0);
+    doodle::set_outline_width(12);
+    doodle::set_outline_color(255, 255, 255);
+    doodle::set_fill_color(255, 161, 74);
+    doodle::draw_text(" Rate\n  " + std::to_string(Engine::GetUnloadManager().GetRate()), Engine::GetWindow().GetSize().x / 5.0 + Engine::GetWindow().GetSize().x * 0.095, Engine::GetWindow().GetSize().y / 8.0 * 7.5);
     doodle::pop_settings();
-    //µ·
-    doodle::draw_rectangle(Engine::GetWindow().GetSize().x / 2.75, Engine::GetWindow().GetSize().y / 8.0 * 7.3, Engine::GetWindow().GetSize().x * 0.10, Engine::GetWindow().GetSize().y * 0.07);
+
+    //Money - frame addapted
     doodle::push_settings();
     doodle::set_font_fade_out_interval(0.5, 0.0);
-    doodle::set_font_size(Engine::GetWindow().GetSize().x / 60.0);
+    doodle::set_font_size(Engine::GetWindow().GetSize().x / 50.0);
+    doodle::set_outline_width(12);
     doodle::set_fill_color(0, 0, 0);
-    doodle::draw_text(std::to_string(Engine::GetUnloadManager().GetMoney()), Engine::GetWindow().GetSize().x / 2.75 + Engine::GetWindow().GetSize().x * 0.025, Engine::GetWindow().GetSize().y / 8.0 * 7.35);
+    doodle::draw_text(std::to_string(Engine::GetUnloadManager().GetMoney()), Engine::GetWindow().GetSize().x / 1.3 + Engine::GetWindow().GetSize().x * 0.1, Engine::GetWindow().GetSize().y / 8.0 * 7.35);
     doodle::pop_settings();
 }
 
@@ -188,6 +211,7 @@ void Counter::Draw()
         }
     }
 
+    gameobjectmanager.DrawAll(Math::TransformationMatrix());
 }
 
 void Counter::Clear()
