@@ -8,6 +8,8 @@ Author:     Jonathan Holmes
 Created:    March 8, 2023
 */
 
+
+
 #include <iostream>
 
 #include "Engine/Engine.h"
@@ -21,8 +23,10 @@ Created:    March 8, 2023
 #include "Game/Day_end.h"
 
 
+
 int main() {
     try {
+
         Engine& engine = Engine::Instance();
         engine.Start("Re : Truck");
 
@@ -38,6 +42,9 @@ int main() {
         engine.GetGameStateManager().AddGameState(ending);
         Day_end day_end;
         engine.GetGameStateManager().AddGameState(day_end);
+
+
+
 
         while (engine.HasGameEnded() == false) 
         {
