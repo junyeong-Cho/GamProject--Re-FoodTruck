@@ -14,6 +14,7 @@ Created:    April 30, 2023
 #include "../Engine/GameObjectManager.h"
 #include "../Engine/GameObject.h"
 
+#include "Refutation.h"
 #include "Counter_Background.h"
 #include "Button.h"
 #include "Frame.h"
@@ -41,6 +42,7 @@ private:
     //Draw frames
     CS230::GameObjectManager gameobjectmanager;
 
+    Refutation* refutation;
 
     Customor* front_customor = nullptr;
     Button yes_button;

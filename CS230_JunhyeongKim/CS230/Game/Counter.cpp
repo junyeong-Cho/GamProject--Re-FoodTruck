@@ -34,10 +34,10 @@ void Counter::Load()
     gameobjectmanager.Add(new Frame({ Engine::GetWindow().GetSize().x / 12.5, Engine::GetWindow().GetSize().y / 8.0 * 7.18 }, 1));
 
     //Face test
-    /*
+    
     refutation = new Refutation({ Engine::GetWindow().GetSize().x / 4.0, Engine::GetWindow().GetSize().y / 8.0 * 7.25 });
     gameobjectmanager.Add(refutation);
-    */
+    
 
     //Frame for Refutation
     gameobjectmanager.Add(new Frame({ Engine::GetWindow().GetSize().x / 4.0, Engine::GetWindow().GetSize().y / 8.0 * 7.18 }, 1));
