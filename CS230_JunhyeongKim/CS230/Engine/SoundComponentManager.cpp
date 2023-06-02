@@ -25,7 +25,9 @@ namespace CS230
 	{
 		if (!music.openFromFile(filename))
 		{
-			std::cout << "Failed to load music file: " << filename << std::endl;
+			//std::cout << "Failed to load music file: " << filename << std::endl;
+			Engine::GetLogger().LogError("Failed to load music file: " + filename);
+
 		}
 	}
 	
@@ -43,9 +45,6 @@ namespace CS230
 
 			isMusicPlaying = true;
 		}
-		
-
-		
 	}
 
 
@@ -71,7 +70,7 @@ namespace CS230
 	{
 		if (!buffer.loadFromFile(filename))
 		{
-			std::cout << "Failed to load sound file: " << filename << std::endl;
+			Engine::GetLogger().LogError("Failed to load music file: " + filename);
 		}
 		else
 		{
