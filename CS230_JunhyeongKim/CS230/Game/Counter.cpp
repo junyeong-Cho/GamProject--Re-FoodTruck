@@ -201,7 +201,7 @@ void Counter::Draw()
 
     counter_Screen.Draw();
 
-    Draw_UI();
+
 
     if (Engine::GetUnloadManager().current_customor != nullptr)
     {
@@ -212,6 +212,8 @@ void Counter::Draw()
     }
 
     gameobjectmanager.DrawAll(Math::TransformationMatrix());
+
+    Draw_UI();
 }
 
 void Counter::Clear()
@@ -222,7 +224,7 @@ void Counter::Clear()
 void Counter::Unload()
 {
     //Engine::GetUnloadManager().Save_Counter_object(gameobjectmanager);
-    //gameobjectmanager.Unload();
+    gameobjectmanager.Unload();
     //counter_Screen.Unload();
     //background.Unload();
 }
