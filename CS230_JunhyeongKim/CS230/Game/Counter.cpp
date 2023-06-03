@@ -151,7 +151,7 @@ void Counter::Update(double dt)
     {
         if (Engine::GetUnloadManager().current_customor->Get_State_Name() == "Fwaiting")
         {
-            GetGSComponent<CS230::MusicEffect>()->Stop();
+            
             yes_button.update(doodle::get_mouse_x(), doodle::get_mouse_y(), States::Kitchen);
         }
     }
