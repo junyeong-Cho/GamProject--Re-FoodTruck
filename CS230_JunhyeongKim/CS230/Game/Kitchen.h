@@ -1,5 +1,6 @@
 #pragma once
 
+
 #include "../Engine/GameState.h"
 #include "../Engine/Texture.h"
 #include "../Engine/Sprite.h"
@@ -9,6 +10,10 @@
 #include "Cook.h"
 #include "RecipeBook.h"
 #include "SideBowl.h"
+
+#include "Refutation.h"
+#include "Customer.h"
+#include "Frame.h"
 
 class Kitchen : public CS230::GameState
 {
@@ -28,6 +33,7 @@ public:
     void Draw_Bell();
     void Draw_CuttingBoard();
 	void Draw_PaltingSpot();
+    void Draw_Frame_Text();
 
 
 private:
@@ -43,4 +49,10 @@ private:
 
     void SetSideBowl();
     void SetSideBowlRefill();
+
+    //Draw frames
+    CS230::GameObjectManager gameobjectmanager;
+
+    //Draw refutation
+    Refutation* refutation;
 };

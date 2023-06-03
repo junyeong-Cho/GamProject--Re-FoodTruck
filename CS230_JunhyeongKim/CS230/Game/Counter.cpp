@@ -25,6 +25,9 @@ Created:    April 30, 2023
 #include "Zilien.h"
 #include "Anteater.h"
 #include "Greendragon.h"
+#include "SunMan.h"
+#include "Theif.h"
+#include "Amy.h"
 
 
 
@@ -100,6 +103,15 @@ void Counter::Load()
             case 6:
                 front_customor = new Zilien(front_customor);
                 break;
+            case 7:
+                front_customor = new SunMan(front_customor);
+				break;
+            case 8:
+                front_customor = new Theif(front_customor);
+                break;
+            case 9:
+                front_customor = new Amy(front_customor);
+				break;
 
             default:
                 break;

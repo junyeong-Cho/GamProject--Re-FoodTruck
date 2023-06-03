@@ -31,7 +31,7 @@ namespace CS230
 		if (index >= 0 && index < musicList.size())
 		{
 			musicList[index]->setLoop(true);
-			musicList[index]->setVolume(60);
+			musicList[index]->setVolume(0);
 			if (!isMusicPlaying)
 			{
 				musicList[index]->play();

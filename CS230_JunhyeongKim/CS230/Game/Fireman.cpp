@@ -14,4 +14,5 @@ Fireman::Fireman(Customor* front)
 	:Customor(front)
 {
 	sprite.Load("Assets/Characters/FireMan.spt");
+	Set_Oreder_recipe(RecipeName::MermaidScalesSalad);
 }
