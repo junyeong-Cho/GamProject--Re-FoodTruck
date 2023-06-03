@@ -9,11 +9,26 @@ Created:    March 8, 2023
 */
 
 #pragma once
+
+#include "ComponentManager.h"
 #include "Sprite.h"
+
+
 namespace Math { class TransformationMatrix; }
 
-namespace CS230 {
-    class GameObject {
+
+
+enum class GameObjectTypes;
+
+
+namespace CS230 
+{
+    
+    class Component;
+    
+
+    class GameObject 
+    {
     public:
         GameObject(Math::vec2 position);
         GameObject(Math::vec2 position, double rotation, Math::vec2 scale);
@@ -32,19 +47,54 @@ namespace CS230 {
         {
             return current_state->GetName();
         }
-    protected:
+
+
         void SetPosition(Math::vec2 new_position);
+
+        template<typename T>
+        T* GetGOComponent() {
+            return componentmanagers.GetComponent<T>();
+        }
+
+
+
+    protected:
+        //void SetPosition(Math::vec2 new_position);
         void UpdatePosition(Math::vec2 delta);
+
         void SetVelocity(Math::vec2 new_position);
         void UpdateVelocity(Math::vec2 delta);
+
         void SetScale(Math::vec2 new_scale);
         void UpdateScale(Math::vec2 delta);
+
         void SetRotation(double new_rotation);
         void UpdateRotation(double delta);
 
+
+        void AddGOComponent(Component* component)
+        {
+            componentmanagers.AddComponent(component);
+        }
+
+        template<typename T>
+        void RemoveGOComponent()
+        {
+            componentmanagers.RemoveComponent<T>();
+        }
+        void ClearGOComponents()
+        {
+            componentmanagers.Clear();
+        }
+        void UpdateGOComponents(double dt)
+        {
+            componentmanagers.UpdateAll(dt);
+        }
+
+
+
         Sprite sprite;
         
-
         //State
         class State
         {
@@ -68,6 +118,8 @@ namespace CS230 {
         State* current_state = &state_none;
 
         void change_state(State* new_state);
+
+
     private:
         Math::TransformationMatrix object_matrix;
 
@@ -78,5 +130,8 @@ namespace CS230 {
         Math::vec2 scale;
         Math::vec2 position;
         Math::vec2 velocity;
+
+
+        ComponentManager componentmanagers;
     };
 }

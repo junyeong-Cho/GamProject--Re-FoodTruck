@@ -4,7 +4,7 @@ Reproduction or distribution of this file or its contents without
 prior written consent is prohibited
 File Name:  GameStateManager.h
 Project:    CS230 Engine
-Author:     Jonathan Holmes
+Author:     Jonathan Holmes, Junyeong Cho
 Created:    March 8, 2023
 */
 #pragma once
@@ -23,9 +23,19 @@ namespace CS230 {
         void ClearNextGameState();
         void ReloadGameState();
         bool HasGameEnded() { return status == Status::EXIT; }
+
         GameState* GetCurrentGameState() { return current_gamestate; }
+
+        template<typename T>
+        T* GetGSComponent()
+        {
+            return current_gamestate->GetGSComponent<T>();
+        }
+
+
     private:
-        enum class Status {
+        enum class Status 
+        {
             STARTING,
             LOADING,
             UPDATING,

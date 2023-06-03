@@ -9,11 +9,15 @@ Created:    March 8,  2023
 Updated:    May  17, 2023
 */
 
+
+
 #include "doodle/drawing.hpp"
 
-#include "..\Engine\Engine.h"
+#include "../Game/Sound.h"
 
 #include "MainMenu.h"
+
+
 
 
 MainMenu::MainMenu()
@@ -25,6 +29,11 @@ void MainMenu::Load()
 {
 	//UpdateMenuTextColors();
 	//music_effect_main;
+
+	AddGSComponent(new CS230::MusicEffect());
+
+	GetGSComponent<CS230::MusicEffect>()->LoadFile("Assets/Sound/Theme/main_theme_pirot.ogg");
+	GetGSComponent<CS230::MusicEffect>()->LoadFile("Assets/Sound/Theme/kitchen_theme.ogg");
 }
 
 
@@ -70,7 +79,7 @@ void MainMenu::DrawText()
 
 void MainMenu::Update(double dt)
 {
-	//music_effect_main.Play();
+	GetGSComponent<CS230::MusicEffect>()->Play(0);
 
 	if (Engine::GetInput().KeyJustReleased(CS230::Input::Keys::Down))
 	{
@@ -96,7 +105,7 @@ void MainMenu::Update(double dt)
 		{
 		case 0:
 			Engine::GetGameStateManager().SetNextGameState(static_cast<int>(States::Counter));
-			//music_effect_main.Stop();
+			GetGSComponent<CS230::MusicEffect>()->Stop();
 			break;
 		case 1:
 			Engine::GetGameStateManager().ClearNextGameState();

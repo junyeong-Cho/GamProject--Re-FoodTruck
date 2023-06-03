@@ -8,11 +8,15 @@ Author:     Junhyeong Kim
 Created:    April 30, 2023
 */
 
+
+#include "../Engine/GameObjectManager.h"
+#include "../Engine/ComponentManager.h"
+#include "../Engine/GameObject.h"
 #include "../Engine/GameState.h"
 #include "../Engine/Texture.h"
 #include "../Engine/Sprite.h"
-#include "../Engine/GameObjectManager.h"
-#include "../Engine/GameObject.h"
+
+
 
 #include "Refutation.h"
 #include "Counter_Background.h"
@@ -52,6 +56,8 @@ private:
 
     int ranCustomerNum;
     int maxRanCustomerNum = 7;
+
+
 
 
 };

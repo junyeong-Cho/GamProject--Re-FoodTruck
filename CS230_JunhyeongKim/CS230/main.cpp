@@ -28,17 +28,8 @@ int main() {
         Engine& engine = Engine::Instance();
         engine.Start("Re : Truck");
 
-        sf::Music new_music;
 
-        if (!new_music.openFromFile("Assets/Sound/Theme/main_theme_pirot.ogg"))
-        {
-            std::cout << "Failed to load the music file: Assets/Sound/Theme/main_theme_pirot.ogg" << std::endl;
-        }
 
-        new_music.setLoop(true);
-        new_music.setVolume(70);
-
-        new_music.play();
 
         Splash splash;
         engine.GetGameStateManager().AddGameState(splash);

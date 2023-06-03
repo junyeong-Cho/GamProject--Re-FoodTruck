@@ -29,7 +29,8 @@ public:
     static CS230::Window& GetWindow() {
         return Instance().window;
     }
-    static CS230::GameStateManager& GetGameStateManager(){
+    static CS230::GameStateManager& GetGameStateManager()
+    {
         return Instance().gamestatemanager;
     }
     static CS230::TextureManager& GetTextureManager() {

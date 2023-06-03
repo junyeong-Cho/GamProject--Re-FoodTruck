@@ -21,6 +21,12 @@ Updated:    May  17, 2023
 #include "../Engine/GameState.h"
 #include "../Engine/Sprite.h"
 
+#include "../Engine/ComponentManager.h"
+#include "../Engine/GameObject.h"
+#include "..\Engine\Engine.h"
+
+
+
 class MainMenu : public CS230::GameState
 {
 public:

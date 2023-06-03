@@ -9,12 +9,16 @@ Created:    April 25, 2023
 */
 
 #include "GameObject.h"
+
 #include "../Engine/Vec2.h"
 #include "../Engine/Matrix.h"
+#include "../Engine/ComponentManager.h"
+
 
 CS230::GameObject::GameObject(Math::vec2 position) :
     GameObject(position, 0, { 1, 1 })
 {}
+
 
 CS230::GameObject::GameObject(Math::vec2 position, double rotation, Math::vec2 scale) :
     velocity({ 0,0 }),
@@ -23,14 +27,22 @@ CS230::GameObject::GameObject(Math::vec2 position, double rotation, Math::vec2 s
     rotation(rotation)
 {}
 
-void CS230::GameObject::Update(double dt) {
+
+void CS230::GameObject::Update(double dt) 
+{
     current_state->Update(this, dt);
     sprite.Update(dt);
-    if (velocity.x != 0 || velocity.y != 0) {
+    
+    if (velocity.x != 0 || velocity.y != 0) 
+    {
         UpdatePosition(velocity * dt);
     }
+
+    UpdateGOComponents(dt);
+    
     current_state->CheckExit(this);
 }
+
 
 void CS230::GameObject::change_state(State* new_state) {
     current_state = new_state;
@@ -43,6 +55,7 @@ void CS230::GameObject::Draw(Math::TransformationMatrix camera_matrix)
     sprite.Draw(camera_matrix * GetMatrix());
 }
 
+
 const Math::TransformationMatrix& CS230::GameObject::GetMatrix() 
 {
     if (matrix_outdated == true)
@@ -53,20 +66,24 @@ const Math::TransformationMatrix& CS230::GameObject::GetMatrix()
     return object_matrix;
 }
 
+
 const Math::vec2& CS230::GameObject::GetPosition() const
 {
     return position;
 }
+
 
 const Math::vec2& CS230::GameObject::GetVelocity() const
 {
     return velocity;
 }
 
+
 const Math::vec2& CS230::GameObject::GetScale() const
 {
     return scale;
 }
+
 
 double CS230::GameObject::GetRotation() const
 {

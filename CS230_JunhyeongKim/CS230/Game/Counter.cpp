@@ -9,9 +9,13 @@ Created:    April 30, 2023
 */
 
 #include "..\Engine\Engine.h"
+
 #include "doodle/drawing.hpp" //Draw
 #include "doodle/input.hpp" //Mouse
+
 #include "States.h"
+#include "Sound.h"
+
 #include "Counter.h"
 #include "Customer.h"
 #include "Giraffe.h"
@@ -22,6 +26,8 @@ Created:    April 30, 2023
 #include "Anteater.h"
 #include "Greendragon.h"
 
+
+
 Counter::Counter()
     :yes_button(1400.0 / 13.0, 800.0 / 3.0, 1400.0 / 10.0, 800.0 / 10.0)
 {
@@ -29,7 +35,6 @@ Counter::Counter()
 
 void Counter::Load()
 {
-
     //Frame for Clock
     gameobjectmanager.Add(new Frame({ Engine::GetWindow().GetSize().x / 12.5, Engine::GetWindow().GetSize().y / 8.0 * 7.18 }, 1));
 
@@ -126,16 +131,27 @@ void Counter::Load()
 
     }
 
+
+    //Test version
+    AddGSComponent(new CS230::MusicEffect());
+
+    GetGSComponent<CS230::MusicEffect>()->LoadFile("Assets/Sound/Theme/main_theme_pirot.ogg");
+    GetGSComponent<CS230::MusicEffect>()->LoadFile("Assets/Sound/Theme/kitchen_theme.ogg");
+
+
 }
 
 void Counter::Update(double dt)
 {
     gameobjectmanager.UpdateAll(dt);
 
+    GetGSComponent<CS230::MusicEffect>()->Play(1);
+
     if (Engine::GetUnloadManager().current_customor != nullptr)
     {
         if (Engine::GetUnloadManager().current_customor->Get_State_Name() == "Fwaiting")
         {
+            GetGSComponent<CS230::MusicEffect>()->Stop();
             yes_button.update(doodle::get_mouse_x(), doodle::get_mouse_y(), States::Kitchen);
         }
     }
@@ -154,6 +170,7 @@ void Counter::Update(double dt)
             Engine::GetGameStateManager().SetNextGameState(static_cast<int>(States::Day_end));
         }
     }
+
 }
 
 void Counter::Draw_UI()
