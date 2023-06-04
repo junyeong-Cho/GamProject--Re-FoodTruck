@@ -116,7 +116,7 @@ void Customor::State_In_Counter::CheckExit(GameObject* object)
     if (customor->last_timer == 0)
     {
         CS230::SoundEffect* soundEffect = new CS230::SoundEffect();
-        soundEffect->LoadFile("Assets/Sound/SFX/Cutting.wav");
+        soundEffect->LoadFile("Assets/Sound/SFX/EnteringBell.wav");
         soundEffect->Play(0);
 
         customor->change_state(&customor->state_leaving);
@@ -125,7 +125,7 @@ void Customor::State_In_Counter::CheckExit(GameObject* object)
     if (customor->front_customor == nullptr || customor->front_customor->current_state->GetName() == "Leaving")
     {
         CS230::SoundEffect* soundEffect = new CS230::SoundEffect();
-        soundEffect->LoadFile("Assets/Sound/SFX/Cutting.wav");
+        soundEffect->LoadFile("Assets/Sound/SFX/EnteringBell.wav");
         soundEffect->Play(0);
 
         customor->change_state(&customor->state_order);
