@@ -330,6 +330,10 @@ void Cook::a()
 		Engine::GetGameStateManager().SetNextGameState(static_cast<int>(States::Counter));
 		if (plateDrawIndex != 0)
 		{
+			CS230::SoundEffect* soundEffect = new CS230::SoundEffect();
+			soundEffect->LoadFile("Assets/Sound/SFX/Bell.wav");
+			soundEffect->Play(0);
+
 			canCook = true;
 			plate.GetIngredientVec().clear();
 			plateDrawIndex = 0;
@@ -357,6 +361,10 @@ void Cook::Cutting()
 		{
 			if (using_ingredients[i]->IsMouseOn(WhereISMouse(), ingredientTextureManager.GetTexture()) == true && leftClick == true && GetWhere(WhereISMouse()) == KitchenPosition::CUTTING_BOARD)
 			{
+				CS230::SoundEffect* soundEffect = new CS230::SoundEffect();
+				soundEffect->LoadFile("Assets/Sound/SFX/Cutting.wav");
+				soundEffect->Play(0);
+
 				if (using_ingredients[i]->GetCutNum() > 0)
 				{
 					using_ingredients[i]->Cut();
@@ -391,8 +399,6 @@ void Cook::CreateUsingIngredient()
 			}
 		}
 	}
-
-
 }
 
 int Cook::WhatIndexMouseClick()
@@ -673,6 +679,10 @@ void Cook::TrashCan()
 	{
 		if (using_ingredients[i]->IsMouseOn(WhereISMouse(), ingredientTextureManager.GetTexture()) == true && leftClick == true)
 		{
+			CS230::SoundEffect* soundEffect = new CS230::SoundEffect();
+			soundEffect->LoadFile("Assets/Sound/SFX/TrashcanSound.wav");
+			soundEffect->Play(0);
+
 			leftClick = false;
 			delete using_ingredients[i];
 			using_ingredients.erase(using_ingredients.begin() + i);

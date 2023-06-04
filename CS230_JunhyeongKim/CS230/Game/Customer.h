@@ -10,8 +10,12 @@ Created:    March 2, 2023
 
 #pragma once
 #include "..\Engine\GameObject.h"
-#include "Button.h"
+
+
 #include "RecipeName.h"
+#include "Button.h"
+#include "Sound.h"
+
 
 class Customor : public CS230::GameObject
 {
@@ -37,6 +41,8 @@ public:
     double random_timer;
 private:
     void update_x_velocity(double dt);
+
+    bool customer_moved = true;
 
     //state Waiting
     class State_Waiting : public State

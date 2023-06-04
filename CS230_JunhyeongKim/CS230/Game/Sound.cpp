@@ -93,6 +93,7 @@ namespace CS230
 		{
 			sounds[index].setBuffer(buffers[index]);
 			sounds[index].setVolume(35);
+
 			sounds[index].play();
 			
 			Engine::GetLogger().LogEvent("Soundeffect played: " + std::to_string(index));

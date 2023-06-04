@@ -77,6 +77,7 @@ void Kitchen::Update(double dt)
 	}
 
 }
+
 void Kitchen::Draw()
 {
 	Engine::GetWindow().Clear(0xEBE3C0FF);

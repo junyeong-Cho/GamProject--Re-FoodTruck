@@ -6,6 +6,8 @@
 #include "KitchenPosition.h"
 #include "Slot.h"
 
+#include "Sound.h"
+
 #include "RecipeBook.h"
 #include "RecipeName.h"
 
