@@ -28,6 +28,11 @@ Recipe::Recipe()
 	mermaidScales = new MermaidScales({ 0,0 });
 	boiledMermaidScales = new MermaidScales({ 0,0 });
 	boiledMermaidScales->Boil();
+
+	double recipePagePosX = static_cast<double>(Engine::GetWindow().GetSize().x / 5);
+	double recipePagePosY = static_cast<double>(Engine::GetWindow().GetSize().y / 7);
+
+	texturePos = Math::vec2(recipePagePosX, recipePagePosY);
 }
 
 int Recipe::CheckComplete(std::vector<Ingredient*>& plating)
@@ -77,8 +82,16 @@ int Recipe::CheckComplete(std::vector<Ingredient*>& plating)
 
 void Recipe::Update()
 {
-	texturePos = Math::vec2((double)Engine::GetWindow().GetSize().x / 4,
-		(double)Engine::GetWindow().GetSize().y / 7);
+	/*texturePos = Math::vec2((double)Engine::GetWindow().GetSize().x / 4,
+		(double)Engine::GetWindow().GetSize().y / 7);*/
+
+	//empty
+}
+
+void Recipe::Draw()
+{
+	Math::TransformationMatrix matrix = Math::TranslationMatrix(texturePos) * Math::RotationMatrix(0) * Math::ScaleMatrix(1.0);
+	texture->Draw(matrix);
 }
 
 void Recipe::Unload()
@@ -125,11 +138,6 @@ LemonSalad::LemonSalad() : Recipe()
 }
 void LemonSalad::Load()
 {}
-void LemonSalad::Draw()
-{
-	Math::TransformationMatrix matrix = Math::TranslationMatrix(texturePos) * Math::RotationMatrix(0) * Math::ScaleMatrix(0.2);
-	texture->Draw(matrix);
-}
 
 
 
@@ -149,12 +157,6 @@ SaltSalad::SaltSalad() : Recipe()
 }
 void SaltSalad::Load()
 {}
-
-void SaltSalad::Draw()
-{
-	Math::TransformationMatrix matrix = Math::TranslationMatrix(texturePos) * Math::RotationMatrix(0) * Math::ScaleMatrix(0.2);
-	texture->Draw(matrix);
-}
 
 
 
@@ -176,11 +178,7 @@ LeafSalad::LeafSalad() : Recipe()
 void LeafSalad::Load()
 {}
 
-void LeafSalad::Draw()
-{
-	Math::TransformationMatrix matrix = Math::TranslationMatrix(texturePos) * Math::RotationMatrix(0) * Math::ScaleMatrix(0.2);
-	texture->Draw(matrix);
-}
+
 
 
 
@@ -206,11 +204,7 @@ AntSalad::AntSalad() : Recipe()
 void AntSalad::Load()
 {}
 
-void AntSalad::Draw()
-{
-	Math::TransformationMatrix matrix = Math::TranslationMatrix(texturePos) * Math::RotationMatrix(0) * Math::ScaleMatrix(0.2);
-	texture->Draw(matrix);
-}
+
 
 
 DragonFruitSalad::DragonFruitSalad() : Recipe()
@@ -232,11 +226,6 @@ DragonFruitSalad::DragonFruitSalad() : Recipe()
 void DragonFruitSalad::Load()
 {}
 
-void DragonFruitSalad::Draw()
-{
-	Math::TransformationMatrix matrix = Math::TranslationMatrix(texturePos) * Math::RotationMatrix(0) * Math::ScaleMatrix(0.2);
-	texture->Draw(matrix);
-}
 
 
 
@@ -260,11 +249,6 @@ MermaidScalesSalad::MermaidScalesSalad() : Recipe()
 void MermaidScalesSalad::Load()
 {}
 
-void MermaidScalesSalad::Draw()
-{
-	Math::TransformationMatrix matrix = Math::TranslationMatrix(texturePos) * Math::RotationMatrix(0) * Math::ScaleMatrix(0.2);
-	texture->Draw(matrix);
-}
 
 
 
@@ -274,6 +258,9 @@ WaterSoup::WaterSoup() : Recipe()
 	recippeName = RecipeName::WaterSoup;
 
 	recipe.push_back(boiledSalt); //1
+	recipe.push_back(boiledSalt); //2
+	recipe.push_back(boiledSalt); //3
+
 
 	totalNum = recipe.size();
 
@@ -282,11 +269,6 @@ WaterSoup::WaterSoup() : Recipe()
 void WaterSoup::Load()
 {}
 
-void WaterSoup::Draw()
-{
-	Math::TransformationMatrix matrix = Math::TranslationMatrix(texturePos) * Math::RotationMatrix(0) * Math::ScaleMatrix(0.2);
-	texture->Draw(matrix);
-}
 
 
 
@@ -308,11 +290,6 @@ AntSoup::AntSoup() : Recipe()
 void AntSoup::Load()
 {}
 
-void AntSoup::Draw()
-{
-	Math::TransformationMatrix matrix = Math::TranslationMatrix(texturePos) * Math::RotationMatrix(0) * Math::ScaleMatrix(0.2);
-	texture->Draw(matrix);
-}
 
 
 
@@ -341,10 +318,4 @@ StrongSoup::StrongSoup() : Recipe()
 }
 void StrongSoup::Load()
 {}
-
-void StrongSoup::Draw()
-{
-	Math::TransformationMatrix matrix = Math::TranslationMatrix(texturePos) * Math::RotationMatrix(0) * Math::ScaleMatrix(0.2);
-	texture->Draw(matrix);
-}
 

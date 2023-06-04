@@ -183,6 +183,10 @@ void Cook::Update(double dt)
 	if (stoveOn == true)
 	{
 		time += dt;
+		if (time > 10)
+		{
+			time = 10;
+		}
 	}
 	Set_Variables();
 	operation.Update();
@@ -196,7 +200,7 @@ void Cook::Update(double dt)
 	GetWhere(WhereISMouse());
 	ToolTask();
 	
-	a();
+	ClickBell();
 }
 
 void Cook::Draw()
@@ -323,7 +327,7 @@ KitchenPosition Cook::GetWhere(Math::vec2 pos)
 	return KitchenPosition::ELSE;
 }
 
-void Cook::a()
+void Cook::ClickBell()
 {
 	if (leftClick == true && GetWhere(WhereISMouse()) == KitchenPosition::BELL)
 	{
@@ -584,6 +588,19 @@ void Cook::DrawGage()
 	}
 
 	doodle::draw_text(text, 1100, -10);
+
+	//Draw gage bar
+	const Math::vec2 gageBarPos(1000, 0);
+	const Math::vec2 gageBarSize{ 250, 50 };
+
+	doodle::push_settings();
+	doodle::set_fill_color(0, 100);
+	doodle::draw_rectangle(gageBarPos.x, gageBarPos.y, gageBarSize.x, gageBarSize.y);
+	doodle::set_fill_color(255, 0, 0);
+	doodle::draw_rectangle(gageBarPos.x, gageBarPos.y, time / 10.0 * gageBarSize.x, gageBarSize.y);
+	doodle::set_fill_color(0, 255, 0, 200);
+	doodle::draw_rectangle(gageBarPos.x + (0.6 * gageBarSize.x), gageBarPos.y, 0.2 * gageBarSize.x, gageBarSize.y);
+	doodle::pop_settings();
 }
 
 void Cook::SpotToPlate()

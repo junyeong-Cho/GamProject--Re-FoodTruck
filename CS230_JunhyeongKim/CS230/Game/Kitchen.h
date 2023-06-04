@@ -22,7 +22,6 @@ public:
 
     void Draw_UI();
     void Draw_Background();
-    void Draw_RecipeBook();
     void Draw_Order();
     void Draw_CounterButton();
     void Draw_Bell();

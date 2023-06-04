@@ -12,16 +12,14 @@ public:
 	std::vector<Recipe*>& GetRecipeBook();
 
 private:
+	CS230::Texture* recipeBookIconTexture;
+
 	std::vector<Recipe*> recipeBook;
 	RecipeName page = RecipeName::LemonSalad;
 	bool bookOpen = false;
-	int x = 50;
-	int y = 50;
-	int width = 50;
-	int height = 50;
 
-	int closeX = 100;
-	int closeY = 50;
-	int closeWidth = 50;
-	int closewHeight = 50;
+	Math::vec2 recipeBookIconPos;
+
+	CS230::Texture* exitButtonTexture;
+	Math::vec2 exitButtonPos;
 };

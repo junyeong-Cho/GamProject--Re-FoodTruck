@@ -113,7 +113,7 @@ public:
 
 	int ingredient_number{ 7 };
 	void Set_Variables();
-	void a();
+	void ClickBell();
 
 private:
 

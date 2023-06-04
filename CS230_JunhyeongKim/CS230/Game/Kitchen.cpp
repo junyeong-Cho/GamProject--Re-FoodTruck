@@ -113,7 +113,6 @@ void Kitchen::SetSideBowlRefill()
 void Kitchen::Draw_UI()
 {
 	Draw_Background();
-	Draw_RecipeBook();
 	Draw_Order();
 	Draw_CounterButton();
 	Draw_Bell();
@@ -128,11 +127,6 @@ void Kitchen::Draw_Background()
 	kitchenBackgroundTexture->Draw(Math::TransformationMatrix() * Math::ScaleMatrix({ scale_x, scale_y }));;
 }
 
-
-void Kitchen::Draw_RecipeBook()
-{
-	
-}
 
 void Kitchen::Draw_Order()
 {
@@ -156,20 +150,6 @@ void Kitchen::Draw_CounterButton()
 
 void Kitchen::Draw_Bell()
 {
-	//카운터 버튼이랑 이 버튼이랑 눌렀을 때 초기화 해주는게 다름.
-	/*doodle::push_settings();
-
-	doodle::set_outline_color(doodle::HexColor{ 0xFF7171FF });
-	doodle::set_fill_color(doodle::HexColor{ 0xEBE3C0FF });
-	doodle::set_outline_width(5.0);
-	doodle::smooth_drawing();
-	doodle::draw_ellipse(cook.bell_X, cook.bell_Y, cook.bell_width);
-	doodle::set_fill_color(doodle::Color(0, 0, 0));
-	doodle::set_font_size(cook.bell_width / 3.0);
-	doodle::draw_text(" bell", cook.bell_X - cook.bell_width / 2.0, cook.bell_Y - cook.bell_width / 3.0);
-
-	doodle::pop_settings();*/
-
 	Math::TransformationMatrix matrix = Math::TranslationMatrix(Math::vec2(cook.bell_X - cook.bell_width/1.2, cook.bell_Y - cook.bell_width/1.2)) * Math::RotationMatrix(0) * Math::ScaleMatrix( (cook.bell_width * 1.3)/bellTexture->GetSize().x);
 
 	bellTexture->Draw(matrix);
