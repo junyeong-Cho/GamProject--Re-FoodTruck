@@ -10,7 +10,6 @@ Created:    April 30, 2023
 
 #include "..\Engine\Engine.h"
 #include "Ending.h"
-#include "doodle/drawing.hpp"
 #include "States.h"
 
 Ending::Ending()
@@ -20,13 +19,26 @@ Ending::Ending()
 
 void Ending::Load()
 {
+	if (Engine::GetUnloadManager().GetRate() >= 300 || Engine::GetUnloadManager().GetMoney() >= 300)//good
+	{
+		background.Add("Assets/good.png");
+
+	}
+	else if(Engine::GetUnloadManager().GetRate() >= 100 && Engine::GetUnloadManager().GetMoney() >= 100)//soso
+	{
+		background.Add("Assets/soso.png");
+	}
+	else // bad
+	{
+		background.Add("Assets/bad.png");
+	}
 }
 
 void Ending::Draw()
 {
-	Engine::GetWindow().Clear(0xFFFFFFF);
-	doodle::draw_text("Your Money: " + std::to_string(Engine::GetUnloadManager().GetMoney()), (Engine::GetWindow().GetSize().x / 1400.0) * 350, (Engine::GetWindow().GetSize().y / 800.0) * 450);
-	doodle::draw_text("Thank you for playing \n play test!", (Engine::GetWindow().GetSize().x / 1400.0) * 350, (Engine::GetWindow().GetSize().y / 800.0) * 350);
+	Clear();
+	background.Draw();
+
 }
 
 void Ending::Update(double dt)
@@ -34,11 +46,17 @@ void Ending::Update(double dt)
 	if (Engine::GetInput().KeyJustReleased(CS230::Input::Keys::Enter))
 	{
 		Engine::GetGameStateManager().SetNextGameState(static_cast<int>(States::Main_menu));
-		//Engine::GetGameStateManager().ClearNextGameState();
 	}
 }
 
 void Ending::Unload()
 {
 	Engine::GetUnloadManager().Reset();
+	background.Unload();
+}
+
+void Ending::Clear()
+{
+	Engine::GetWindow().Clear(0xFFFFFFF);
+
 }

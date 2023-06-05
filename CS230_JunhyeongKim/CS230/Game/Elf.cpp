@@ -16,4 +16,5 @@ Elf::Elf(Customor* front)
 {
 	sprite.Load("Assets/Elf.spt");
 	Set_Oreder_recipe(RecipeName::LeafSalad);
+	Set_Ingredient_num(5);
 }

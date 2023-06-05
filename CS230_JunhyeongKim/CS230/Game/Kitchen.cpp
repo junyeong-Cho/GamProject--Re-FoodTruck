@@ -55,6 +55,12 @@ void Kitchen::Update(double dt)
 			canUnload = true;
 		}
 	}
+
+	if (Engine::GetUnloadManager().GetRate() <= 0 || Engine::GetUnloadManager().GetMoney() <= 0)
+	{
+		Engine::GetGameStateManager().SetNextGameState(static_cast<int>(States::Ending));
+	}
+
 	cook.GetOrder(RecipeName::AntSalad, recipeBook.GetRecipeBook());
 
 	for (int i = 0; i < sideBowl.size(); ++i)

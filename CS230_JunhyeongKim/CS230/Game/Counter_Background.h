@@ -7,9 +7,6 @@ Project:    Gam150 Project
 Author:     Junhyeong Kim
 Created:    May 17, 2023
 */
-
-#pragma once
-
 #pragma once
 #include <vector>
 #include "../Engine/Texture.h"

@@ -101,6 +101,11 @@ void Counter::Update(double dt)
             Engine::GetGameStateManager().SetNextGameState(static_cast<int>(States::Day_end));
         }
     }
+
+    if (Engine::GetUnloadManager().GetRate() <= 0 || Engine::GetUnloadManager().GetMoney() <= 0)
+    {
+        Engine::GetGameStateManager().SetNextGameState(static_cast<int>(States::Ending));
+    }
 }
 
 void Counter::Draw_UI()
