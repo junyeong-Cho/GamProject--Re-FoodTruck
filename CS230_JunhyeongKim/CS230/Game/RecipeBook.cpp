@@ -7,7 +7,7 @@ extern int wheel;
 extern bool leftClick;
 extern bool rightClick;
 
-RecipeBook::RecipeBook()
+RecipeBook::RecipeBook() 
 {}
 
 void RecipeBook::Load()
@@ -24,14 +24,6 @@ void RecipeBook::Load()
 
 	exitButtonTexture = Engine::GetTextureManager().Load("Assets/Recipe_Button.png");
 	recipeBookIconTexture = Engine::GetTextureManager().Load("Assets/Recipe_book_icon.png");
-
-	Recipe* currentRecipe = recipeBook[static_cast<int>(page)];
-	Math::vec2 pagePos = currentRecipe->GetRecipeTexturePos();
-	Math::vec2 pageSize = static_cast<Math::vec2>(currentRecipe->GetRecipeTextureSize());
-	Math::vec2 buttonGap{ 100.0, 80.0 };
-	exitButtonPos = pagePos + pageSize - buttonGap;
-
-	recipeBookIconPos = Math::vec2(0, 0);
 }
 
 void RecipeBook::Update()
@@ -41,8 +33,8 @@ void RecipeBook::Update()
 		recipe->Update();
 	}
 
-	if (doodle::get_mouse_x() >= recipeBookIconPos.x && doodle::get_mouse_x() <= recipeBookIconPos.x + recipeBookIconTexture->GetSize().x &&
-		doodle::get_mouse_y() >= recipeBookIconPos.y && doodle::get_mouse_y() <= recipeBookIconPos.y + recipeBookIconTexture->GetSize().y)
+	Math::vec2 mouse{ (double)doodle::get_mouse_x(), (double)doodle::get_mouse_y() };
+	if (Engine::GetDrawManager().RectCollision(recipeBookIconPos, recipeBookIconSize, mouse) == true)
 	{
 		if (leftClick == true)
 		{
@@ -55,8 +47,7 @@ void RecipeBook::Update()
 	{
 		page += wheel;
 		wheel = 0;
-		if (doodle::get_mouse_x() >= exitButtonPos.x && doodle::get_mouse_x() <= exitButtonPos.x + exitButtonTexture->GetSize().x &&
-			doodle::get_mouse_y() >= exitButtonPos.y && doodle::get_mouse_y() <= exitButtonPos.y + exitButtonTexture->GetSize().y)
+		if (Engine::GetDrawManager().RectCollision(exitButtonPos, exitButtonSize, Math::vec2{ (double)doodle::get_mouse_x(), (double)doodle::get_mouse_y() }) == true)
 		{
 			if (leftClick == true)
 			{
@@ -75,14 +66,10 @@ void RecipeBook::Draw()
 	if (bookOpen == true)
 	{
 		recipeBook[static_cast<int>(page)]->Draw();
-
-		Math::TransformationMatrix buttonMat = Math::TranslationMatrix(exitButtonPos) * Math::RotationMatrix(0) * Math::ScaleMatrix(1.0);
-		exitButtonTexture->Draw(buttonMat);
+		exitButtonTexture->Draw(Engine::GetDrawManager().GetMatrix(exitButtonTexture, exitButtonPos, exitButtonSize));
 	}
 
-	Math::TransformationMatrix recipeIconMat = Math::TranslationMatrix(recipeBookIconPos) * Math::RotationMatrix(0) * Math::ScaleMatrix(1.0);
-	recipeBookIconTexture->Draw(recipeIconMat);
-
+	recipeBookIconTexture->Draw(Engine::GetDrawManager().GetMatrix(recipeBookIconTexture, recipeBookIconPos, recipeBookIconSize));
 }
 
 void RecipeBook::Unload()

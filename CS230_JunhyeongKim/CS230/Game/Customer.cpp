@@ -274,7 +274,6 @@ void Customor::State_Leaving::Update(GameObject* object, double dt)
 void Customor::State_Leaving::CheckExit(GameObject* object)
 {
     Customor* customor = static_cast<Customor*>(object);
-    std::cout <<  static_cast<int>(customor->oreder_recipe);
 }
 
 

@@ -18,8 +18,12 @@ public:
 	Math::ivec2 GetRecipeTextureSize() { return texture->GetSize(); }
 
 protected:
+	//variables
+	//Recipe Page
 	CS230::Texture* texture;
-	Math::vec2 texturePos;
+	Math::vec2 texturePos{ 280.0, 110.0 };
+	Math::vec2 textureSize{ 830.0, 600.0 };
+
 	RecipeName recippeName;
 	std::vector<Ingredient*> recipe;
 

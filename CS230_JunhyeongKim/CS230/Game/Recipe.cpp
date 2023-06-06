@@ -3,36 +3,31 @@
 
 Recipe::Recipe()
 {
-	lemon = new Lemon({ 0,0 });
-	boiledLemon = new Lemon({ 0,0 });
+	lemon = new Lemon({ 0,0 }, { 0,0 });
+	boiledLemon = new Lemon({ 0,0 }, { 0,0 });
 	boiledLemon->Boil();
 
-	lettuce = new Lettuce({ 0,0 });
+	lettuce = new Lettuce({ 0,0 }, { 0,0 });
 
-	ant = new Ant({ 0,0 });
-	boiledAnt = new Ant({ 0,0 });
+	ant = new Ant({ 0,0 }, { 0,0 });
+	boiledAnt = new Ant({ 0,0 }, { 0,0 });
 	boiledAnt->Boil();
 
-	leaf = new Leaf({ 0,0 });
-	boiledLeaf = new Leaf({ 0,0 });
+	leaf = new Leaf({ 0,0 }, { 0,0 });
+	boiledLeaf = new Leaf({ 0,0 }, { 0,0 });
 	boiledLeaf->Boil();
 
-	salt = new Salt({ 0,0 });
-	boiledSalt = new Salt({ 0,0 });
+	salt = new Salt({ 0,0 }, { 0,0 });
+	boiledSalt = new Salt({ 0,0 }, { 0,0 });
 	boiledSalt->Boil();
 
-	dragonFruit = new DragonFruit({ 0,0 });
-	boiledDragonFruit = new DragonFruit({ 0,0 });
+	dragonFruit = new DragonFruit({ 0,0 }, { 0,0 });
+	boiledDragonFruit = new DragonFruit({ 0,0 }, { 0,0 });
 	boiledDragonFruit->Boil();
 
-	mermaidScales = new MermaidScales({ 0,0 });
-	boiledMermaidScales = new MermaidScales({ 0,0 });
+	mermaidScales = new MermaidScales({ 0,0 }, { 0,0 });
+	boiledMermaidScales = new MermaidScales({ 0,0 }, { 0,0 });
 	boiledMermaidScales->Boil();
-
-	double recipePagePosX = static_cast<double>(Engine::GetWindow().GetSize().x / 5);
-	double recipePagePosY = static_cast<double>(Engine::GetWindow().GetSize().y / 7);
-
-	texturePos = Math::vec2(recipePagePosX, recipePagePosY);
 }
 
 int Recipe::CheckComplete(std::vector<Ingredient*>& plating)
@@ -90,8 +85,7 @@ void Recipe::Update()
 
 void Recipe::Draw()
 {
-	Math::TransformationMatrix matrix = Math::TranslationMatrix(texturePos) * Math::RotationMatrix(0) * Math::ScaleMatrix(1.0);
-	texture->Draw(matrix);
+	texture->Draw(Engine::GetDrawManager().GetMatrix(texture, texturePos, textureSize));
 }
 
 void Recipe::Unload()

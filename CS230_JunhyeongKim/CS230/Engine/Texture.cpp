@@ -17,7 +17,6 @@ CS230::Texture::Texture(const std::filesystem::path& file_path)
     image = doodle::Image{ file_path };
 }
 
-
 void CS230::Texture::Set_tint_color(double red, double green, double blue)
 {
     r = red;
@@ -27,7 +26,7 @@ void CS230::Texture::Set_tint_color(double red, double green, double blue)
 }
 
 
-void CS230::Texture::Draw(Math::TransformationMatrix display_matrix) 
+void CS230::Texture::Draw(Math::TransformationMatrix display_matrix)
 {
     doodle::push_settings();
     if (set_tint == true)
@@ -35,12 +34,12 @@ void CS230::Texture::Draw(Math::TransformationMatrix display_matrix)
         doodle::set_tint_color(r, g, b);
     }
     doodle::apply_matrix(
-        display_matrix[0][0],
-        display_matrix[1][0],
-        display_matrix[0][1],
-        display_matrix[1][1],
-        display_matrix[0][2],
-        display_matrix[1][2]);
+    display_matrix[0][0],
+    display_matrix[1][0],
+    display_matrix[0][1],
+    display_matrix[1][1],
+    display_matrix[0][2],
+    display_matrix[1][2]);
     doodle::draw_image(image, 0, 0);
     doodle::pop_settings();
 }

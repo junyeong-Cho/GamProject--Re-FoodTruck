@@ -16,6 +16,8 @@ Updated:    April 27, 2023
 #include "TextureManager.h"
 #include "Input.h"
 #include "Unload_manager.h"
+#include "OrderManager.h"
+#include "DrawManager.h"
 
 class Engine {
 public:
@@ -42,6 +44,12 @@ public:
     static CS230::Unload_manager& GetUnloadManager() {
         return Instance().unload_manager;
     }
+    static CS230::OrderManager& GetOrderManager() {
+        return Instance().order_manager;
+    }
+    static CS230::DrawManager& GetDrawManager() {
+        return Instance().draw_manager;
+    }
 
     void Start(std::string window_title);
     void Stop();
@@ -66,4 +74,6 @@ private:
     CS230::Window window;
     CS230::Input input;
     CS230::Unload_manager unload_manager;
+    CS230::OrderManager order_manager;
+    CS230::DrawManager draw_manager;
 };

@@ -61,6 +61,7 @@ void Engine::Update() {
         gamestatemanager.Update(dt);
         input.Update();
         window.Update();
+        draw_manager.Update(window.GetSize());
     }
     //Update other services
 }

@@ -9,10 +9,9 @@
 class Ingredient
 {
 public:
-    Ingredient(Math::vec2 pos);
+    Ingredient(Math::vec2 pos, Math::vec2 size);
     void Draw(const std::vector<std::vector<CS230::Texture*>>& texture);
-    void SlotDraw(Math::vec2 pos, const std::vector<std::vector<CS230::Texture*>>& texture);
-    virtual void SetScale(Math::vec2 raito) = 0; // 재료가 그려지는 곳 마다 이게 업데이트 되어야함.
+    void SlotDraw(Math::vec2 pos, Math::vec2 size, const std::vector<std::vector<CS230::Texture*>>& texture);
 
     void Cut();
     int GetCutNum() const { return cutNum; }
@@ -25,22 +24,25 @@ public:
     IngredientName GetName() const { return name; }
     void ChangePalce(KitchenPosition where) { place = where; }
     KitchenPosition GetPlace() const { return place; }
+    void SetWet() { wet = true; }
+    bool GetWet() { return wet; }
 
 protected:
     IngredientName name = IngredientName::Lemon;
     Math::vec2 position;
+    Math::vec2 size;
     int cutNum = 0;
     bool boiled = false;
     bool mouseClick = false;
     KitchenPosition place = KitchenPosition::COUNTER1;
     double scale = 1;
+    bool wet = false;
 };
 
 class Lemon : public Ingredient
 {
 public:
-    Lemon(Math::vec2 pos);
-    void SetScale(Math::vec2 raito) override;
+    Lemon(Math::vec2 pos, Math::vec2 size);
 
 private:
 
@@ -49,8 +51,7 @@ private:
 class Lettuce : public Ingredient
 {
 public:
-    Lettuce(Math::vec2 pos);
-    void SetScale(Math::vec2 raito) override;
+    Lettuce(Math::vec2 pos, Math::vec2 size);
 private:
 
 
@@ -59,8 +60,7 @@ private:
 class Ant : public Ingredient
 {
 public:
-    Ant(Math::vec2 pos);
-    void SetScale(Math::vec2 raito) override;
+    Ant(Math::vec2 pos, Math::vec2 size);
 private:
 
 
@@ -69,8 +69,7 @@ private:
 class Leaf : public Ingredient
 {
 public:
-    Leaf(Math::vec2 pos);
-    void SetScale(Math::vec2 raito) override;
+    Leaf(Math::vec2 pos, Math::vec2 size);
 private:
 
 
@@ -79,8 +78,7 @@ private:
 class Salt : public Ingredient
 {
 public:
-    Salt(Math::vec2 pos);
-    void SetScale(Math::vec2 raito) override;
+    Salt(Math::vec2 pos, Math::vec2 size);
 private:
 
 
@@ -89,8 +87,7 @@ private:
 class DragonFruit : public Ingredient
 {
 public:
-    DragonFruit(Math::vec2 pos);
-    void SetScale(Math::vec2 raito) override;
+    DragonFruit(Math::vec2 pos, Math::vec2 size);
 private:
 
 
@@ -99,8 +96,7 @@ private:
 class MermaidScales : public Ingredient
 {
 public:
-    MermaidScales(Math::vec2 pos);
-    void SetScale(Math::vec2 raito) override;
+    MermaidScales(Math::vec2 pos, Math::vec2 size);
 private:
 
 

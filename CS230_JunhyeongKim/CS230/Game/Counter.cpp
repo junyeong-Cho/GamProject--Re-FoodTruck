@@ -127,8 +127,6 @@ void Counter::Load()
 
         
         Engine::GetUnloadManager().first_load = false;
-
-
     }
 
 
@@ -151,8 +149,8 @@ void Counter::Update(double dt)
     {
         if (Engine::GetUnloadManager().current_customor->Get_State_Name() == "Fwaiting")
         {
-            
             yes_button.update(doodle::get_mouse_x(), doodle::get_mouse_y(), States::Kitchen);
+            Engine::GetOrderManager().SetOrder(Engine::GetUnloadManager().current_customor->Get_Oreder_recipe());
         }
     }
     Engine::GetUnloadManager().GetCounterObjectManager().UpdateAll(dt);
