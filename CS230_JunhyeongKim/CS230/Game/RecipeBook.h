@@ -10,6 +10,7 @@ public:
 	void Draw();
 	void Unload();
 	std::vector<Recipe*>& GetRecipeBook();
+	bool BookOpen() { return bookOpen; }
 
 private:
 	std::vector<Recipe*> recipeBook;

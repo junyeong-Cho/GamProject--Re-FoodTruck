@@ -27,6 +27,8 @@ public:
     void SetWet() { wet = true; }
     bool GetWet() { return wet; }
 
+    void Scoop();
+
 protected:
     IngredientName name = IngredientName::Lemon;
     Math::vec2 position;
@@ -89,7 +91,6 @@ class DragonFruit : public Ingredient
 public:
     DragonFruit(Math::vec2 pos, Math::vec2 size);
 private:
-
 
 };
 

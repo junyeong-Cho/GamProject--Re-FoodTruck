@@ -17,6 +17,8 @@ public:
 	Cook();
     void Load();
 	void Update(double dt);
+	void ToolUpdate();
+	void ToolDraw();
     void Draw();
 	void Unload();
 	void DrawScore();
@@ -106,6 +108,7 @@ private:
 	Ingredient* CreateIngredient(int index);
 	void TrashCan();
 	void ToolTask();
+	void Scooping();
 
 
 

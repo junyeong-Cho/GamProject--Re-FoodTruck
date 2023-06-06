@@ -73,6 +73,16 @@ void Cook::Unload()
 	whatMouseclickIndex = -1;
 }
 
+void Cook::ToolUpdate()
+{
+	tool.Update(operation.Return());
+}
+
+void Cook::ToolDraw()
+{
+	//얘가 항상 제일 위에 그려져야함.
+	tool.Draw();
+}
 
 void Cook::Update(double dt)
 {
@@ -86,7 +96,6 @@ void Cook::Update(double dt)
 		}
 	}
 	operation.Update();
-	tool.Update(operation.Return());
 	SetIngredientsWhere();
 	PutSlot();
 	CreateUsingIngredient();
@@ -108,12 +117,11 @@ void Cook::Draw()
 		pot.DrawSlotRect();
 	}
 	DrawIngredients();
-
-	tool.Draw();
 	plate.ButtonDraw();
 	pot.ButtonDraw();
 	DrawGage();
 	DrawScore();
+
 	//얘가 항상 제일 위에 그려져야함.
 	operation.Draw();
 }
@@ -158,6 +166,10 @@ void Cook::ToolTask()
 	{
 		TrashCan();
 	}
+	else if (tool.GetTool() == ToolName::SCOOP)
+	{
+		Scooping();
+	}
 }
 
 Math::vec2 Cook::WhereISMouse()
@@ -172,31 +184,25 @@ KitchenPosition Cook::GetWhere(Math::vec2 pos)
 		Math::vec2 pos = { sideBowlBoardFirstPos.x + (sideBowlSize.x + sideBowlPadding.x) * i, sideBowlBoardFirstPos.y };
 		if (Engine::GetDrawManager().RectCollision(pos, sideBowlSize, WhereISMouse()) == true)
 		{
-			std::cout << i << '\n';
 			return static_cast<KitchenPosition>(i);
 		}
 	}
 	if (Engine::GetDrawManager().RectCollision(cuttingBoardPos, cuttingBoardSize, WhereISMouse()) == true)
 	{
-		std::cout << "CUTTING_BOARD" << '\n';
 		return KitchenPosition::CUTTING_BOARD;
 	}
 	else if (Engine::GetDrawManager().RectCollision(platePos, plateSize, WhereISMouse()) == true)
 	{
-		std::cout << "BOWL" << '\n';
 		return KitchenPosition::BOWL;
 	}
 	else if (Engine::GetDrawManager().RectCollision(potPos, potSize, WhereISMouse()) == true)
 	{
-		std::cout << "STOVE" << '\n';
 		return KitchenPosition::STOVE;
 	}
 	else if (Engine::GetDrawManager().RectCollision(bellPos, bellSize, WhereISMouse()) == true)
 	{
-		std::cout << "BELL" << '\n';
 		return KitchenPosition::BELL;
 	}
-	std::cout << "ELSE" << '\n';
 	return KitchenPosition::ELSE;
 }
 
@@ -234,12 +240,27 @@ void Cook::Cutting()
 		{
 			if (using_ingredients[i]->IsMouseOn(WhereISMouse(), ingredientTextureManager.GetTexture()) == true && leftClick == true && GetWhere(WhereISMouse()) == KitchenPosition::CUTTING_BOARD)
 			{
-				if (using_ingredients[i]->GetCutNum() > 0)
+				using_ingredients[i]->Cut();
+				leftClick = false;
+			}
+		}
+		leftClick = false;
+	}
+}
+
+void Cook::Scooping()
+{
+	if (using_ingredients.size() != 0)
+	{
+		for (int i = using_ingredients.size() - 1; i >= 0; --i)
+		{
+			if (using_ingredients[i]->IsMouseOn(WhereISMouse(), ingredientTextureManager.GetTexture()) == true && leftClick == true && GetWhere(WhereISMouse()) == KitchenPosition::CUTTING_BOARD)
+			{
+				if (using_ingredients[i]->GetName() == IngredientName::DragonFruit)
 				{
-					using_ingredients[i]->Cut();
+					using_ingredients[i]->Scoop();
 					leftClick = false;
 				}
-				/*leftClick = false;*/
 			}
 		}
 		leftClick = false;

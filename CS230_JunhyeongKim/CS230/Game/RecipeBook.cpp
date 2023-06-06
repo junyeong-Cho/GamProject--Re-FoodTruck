@@ -60,7 +60,6 @@ void RecipeBook::Update()
 }
 
 
-
 void RecipeBook::Draw()
 {
 	if (bookOpen == true)

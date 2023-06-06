@@ -8,9 +8,19 @@ Ingredient::Ingredient(Math::vec2 pos, Math::vec2 size)
 
 void Ingredient::Cut()
 {
-	if (cutNum > 1)
+	if (name != IngredientName::DragonFruit)
 	{
-		--cutNum;
+		if (cutNum > 1)
+		{
+			--cutNum;
+		}
+	}
+	else
+	{
+		if (cutNum > 2)
+		{
+			--cutNum;
+		}
 	}
 }
 
@@ -47,7 +57,6 @@ void Ingredient::SlotDraw(Math::vec2 pos, Math::vec2 size, const std::vector<std
 void Ingredient::Draw(const std::vector<std::vector<CS230::Texture*>>& texture)
 {
 	Math::TransformationMatrix matrix;
-	
 	if (cutNum <= 0)
 	{
 		matrix = Engine::GetDrawManager().GetMatrix(texture[static_cast<int>(name)][texture[static_cast<int>(name)].size() - 1], position, size);
@@ -62,6 +71,17 @@ void Ingredient::Draw(const std::vector<std::vector<CS230::Texture*>>& texture)
 	doodle::no_fill();
 	doodle::draw_rectangle(position.x, position.y, size.x, size.y);
 	doodle::pop_settings();
+}
+
+void Ingredient::Scoop()
+{
+	if (name == IngredientName::DragonFruit)
+	{
+		if (cutNum == 2)
+		{
+			--cutNum;
+		}
+	}
 }
 
 bool Ingredient::IsMouseOn(Math::vec2 mousePos, const std::vector<std::vector<CS230::Texture*>>& texture)

@@ -44,9 +44,14 @@ void Kitchen::Load()
 void Kitchen::Update(double dt)
 {
 	Engine::GetUnloadManager().GetCounterObjectManager().UpdateAll(dt);
-	cook.Update(dt);
+
+	if (recipeBook.BookOpen() != true)
+	{
+		cook.Update(dt);
+		go_counter.update(doodle::get_mouse_x(), doodle::get_mouse_y(), States::Counter);
+	}
+	cook.ToolUpdate();
 	recipeBook.Update();
-	go_counter.update(doodle::get_mouse_x(), doodle::get_mouse_y(), States::Counter);
 
 	SetSideBowl();
 	SetSideBowlRefill();
@@ -92,6 +97,9 @@ void Kitchen::Draw()
 	cook.SetScore(recipeBook.GetRecipeBook());
 	recipeBook.Draw();
 	go_counter.draw();
+
+	//항상 제일 위에 그려져야함.
+	cook.ToolDraw();
 }
 
 void Kitchen::Unload()
