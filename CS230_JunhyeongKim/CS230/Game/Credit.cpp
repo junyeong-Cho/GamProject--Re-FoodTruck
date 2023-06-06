@@ -21,6 +21,7 @@ Credit::Credit() : creditNum(0)
 
 void Credit::Load()
 {
+	creditNum = 0;
 	credits.push_back(Engine::GetTextureManager().Load("Assets/Credit1.png"));
 	credits.push_back(Engine::GetTextureManager().Load("Assets/Credit2.png"));
 	credits.push_back(Engine::GetTextureManager().Load("Assets/Credit3.png"));
@@ -37,24 +38,20 @@ void Credit::Update(double dt)
 	if (Engine::GetInput().KeyJustReleased(CS230::Input::Keys::Enter))
 	{
 		creditNum += 1;
-
 	}
 
 	if (creditNum == 4)
 	{
-
-		creditNum = 0;
 		Engine::GetGameStateManager().SetNextGameState(static_cast<int>(States::Splash));
 	}
 }
 
 void Credit::Draw()
 {
-	if ((creditNum < 4))
+	if (creditNum < 4)
 	{
 		credits[creditNum]->Draw(Math::TranslationMatrix({ (Engine::GetWindow().GetSize() - credits[creditNum]->GetSize()) / 2.0 }));
 	}
-
 }
 
 void Credit::Unload()

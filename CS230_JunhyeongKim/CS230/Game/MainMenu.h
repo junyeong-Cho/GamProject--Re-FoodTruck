@@ -53,12 +53,15 @@ private:
 	std::string Space_shotter;
 	std::string exit;
 
+	CS230::Texture* mainmenu_background;
+
+
 	//CS230::MusicEffect music_effect_main = CS230::MusicEffect("Assets/Sound/Theme/main_theme_pirot.ogg");
 
 
 	int counter = 0;
 
-	uint32_t colors[3] = { 0x7EFACBFF, 0xFFFFFFFF, 0xFFFFFFFF };
+	uint32_t colors[3] = { 0xFF5733FF, 0xFFDF77FF, 0xFFDF77FF };
 	bool shouldUpdateColors = false;
 };
 
