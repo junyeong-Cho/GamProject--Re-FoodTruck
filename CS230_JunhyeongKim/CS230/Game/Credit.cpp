@@ -33,14 +33,12 @@ void Credit::Update(double dt)
 	Engine::GetWindow().Clear(0x000000FF);
 
 
-	//state = true;
-
 	if (Engine::GetInput().KeyJustReleased(CS230::Input::Keys::Enter))
 	{
 		creditNum += 1;
 	}
 
-	if (creditNum == 4)
+	if (creditNum == maxNum)
 	{
 		Engine::GetGameStateManager().SetNextGameState(static_cast<int>(States::Splash));
 	}
@@ -48,7 +46,7 @@ void Credit::Update(double dt)
 
 void Credit::Draw()
 {
-	if (creditNum < 4)
+	if (creditNum < maxNum)
 	{
 		credits[creditNum]->Draw(Math::TranslationMatrix({ (Engine::GetWindow().GetSize() - credits[creditNum]->GetSize()) / 2.0 }));
 	}

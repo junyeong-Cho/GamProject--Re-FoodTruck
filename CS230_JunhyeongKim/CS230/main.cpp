@@ -22,6 +22,7 @@ Created:    March 8, 2023
 #include "Game/Ending.h"
 #include "Game/Day_end.h"
 #include "Game/Credit.h"
+#include "Game/Tutorial.h"
 
 
 int main() {
@@ -46,6 +47,8 @@ int main() {
         engine.GetGameStateManager().AddGameState(day_end);
         Credit credit;
         engine.GetGameStateManager().AddGameState(credit);
+        Tutorial tutorial;
+        engine.GetGameStateManager().AddGameState(tutorial);
         
 
         

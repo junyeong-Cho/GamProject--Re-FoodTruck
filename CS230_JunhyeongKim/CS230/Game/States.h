@@ -18,5 +18,6 @@ enum class States {
     Ending,
     Day_end,
     Credit,
+    Tutorial,
     Exit,
 };
