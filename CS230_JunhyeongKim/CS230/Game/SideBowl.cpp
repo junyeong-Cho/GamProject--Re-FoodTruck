@@ -9,6 +9,11 @@ extern bool leftClick;
 
 SideBowl::SideBowl(Math::vec2 pos, std::string cost) : position(pos), cost(cost)
 {
+	
+}
+
+void SideBowl::Load()
+{
 	texture = Engine::GetTextureManager().Load("Assets/SideBowl.png");
 }
 
@@ -17,6 +22,7 @@ void SideBowl::Draw()
 	texture->Draw(Math::TranslationMatrix(position));
 	DrawCost();
 	DrawButton();
+	DrawRemainingNum();
 }
 
 bool SideBowl::MouseOn(Math::vec2 mouse)
@@ -49,6 +55,16 @@ void SideBowl::DrawCost()
 	}
 	
 }
+
+void SideBowl::DrawRemainingNum()
+{
+	doodle::push_settings();
+	doodle::set_font_size(20);
+	doodle::set_fill_color(doodle::Color(0, 0, 0));
+	doodle::draw_text(std::to_string(number), position.x + texture->GetSize().x / 1.9, position.y + texture->GetSize().y/1.05);
+	doodle::pop_settings();
+}
+
 void SideBowl::Update(double dt)
 {
 	timer += dt;

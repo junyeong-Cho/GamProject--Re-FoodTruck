@@ -8,27 +8,27 @@ extern bool leftClick;
 Kitchen::Kitchen()
 	:go_counter(930.0, 720.0, 120.0, 80.0)
 {
-	cuttingBoardTexture = Engine::GetTextureManager().Load("Assets/Cutting_board.png");
-	kitchenBackgroundTexture = Engine::GetTextureManager().Load("Assets/kitchenBackground.png");
-	bellTexture = Engine::GetTextureManager().Load("Assets/Bell.png");
-
-	orderRecipeTexture.push_back(Engine::GetTextureManager().Load("Assets/LemonSalad_Soso.png"));
-	orderRecipeTexture.push_back(Engine::GetTextureManager().Load("Assets/SaltSalad_Soso.png"));
-	orderRecipeTexture.push_back(Engine::GetTextureManager().Load("Assets/LeafSalad_Soso.png"));
-	orderRecipeTexture.push_back(Engine::GetTextureManager().Load("Assets/AntSalad_Soso.png"));
-	orderRecipeTexture.push_back(Engine::GetTextureManager().Load("Assets/DragonFruitSalad_Soso.png"));
-	orderRecipeTexture.push_back(Engine::GetTextureManager().Load("Assets/MermaidScalesSalad_Soso.png"));
-	orderRecipeTexture.push_back(Engine::GetTextureManager().Load("Assets/WaterSoup_Soso.png"));
-	orderRecipeTexture.push_back(Engine::GetTextureManager().Load("Assets/AntSoup_Soso.png"));
-	orderRecipeTexture.push_back(Engine::GetTextureManager().Load("Assets/StrongSoup_Soso.png"));
-
-	orderUI = Engine::GetTextureManager().Load("Assets/MainFrame.png");
 }
 
 void Kitchen::Load()
 {
 	if (canLoad == true)
 	{
+		cuttingBoardTexture = Engine::GetTextureManager().Load("Assets/Cutting_board.png");
+		kitchenBackgroundTexture = Engine::GetTextureManager().Load("Assets/kitchenBackground.png");
+		bellTexture = Engine::GetTextureManager().Load("Assets/Bell.png");
+
+		orderRecipeTexture.push_back(Engine::GetTextureManager().Load("Assets/LemonSalad_Soso.png"));
+		orderRecipeTexture.push_back(Engine::GetTextureManager().Load("Assets/SaltSalad_Soso.png"));
+		orderRecipeTexture.push_back(Engine::GetTextureManager().Load("Assets/LeafSalad_Soso.png"));
+		orderRecipeTexture.push_back(Engine::GetTextureManager().Load("Assets/AntSalad_Soso.png"));
+		orderRecipeTexture.push_back(Engine::GetTextureManager().Load("Assets/DragonFruitSalad_Soso.png"));
+		orderRecipeTexture.push_back(Engine::GetTextureManager().Load("Assets/MermaidScalesSalad_Soso.png"));
+		orderRecipeTexture.push_back(Engine::GetTextureManager().Load("Assets/WaterSoup_Soso.png"));
+		orderRecipeTexture.push_back(Engine::GetTextureManager().Load("Assets/AntSoup_Soso.png"));
+		orderRecipeTexture.push_back(Engine::GetTextureManager().Load("Assets/StrongSoup_Soso.png"));
+
+		orderUI = Engine::GetTextureManager().Load("Assets/MainFrame.png");
 		cook.Load();
 		recipeBook.Load();
 		canLoad = false;
@@ -36,6 +36,7 @@ void Kitchen::Load()
 		for (int i = 0; i < cook.ingredient_number; ++i)
 		{
 			sideBowl.push_back(SideBowl(Math::vec2{ cook.sideBowlBoardFirstPos.x + (cook.sideBowlSize.x + cook.sideBowlPadding.x) * i, cook.sideBowlBoardFirstPos.y }, "1"));
+			sideBowl[i].Load();
 		}
 		cook.GetOrder(orderRecipe, recipeBook.GetRecipeBook());
 	}
@@ -45,16 +46,22 @@ void Kitchen::Update(double dt)
 {
 	Engine::GetUnloadManager().GetCounterObjectManager().UpdateAll(dt);
 
-	if (recipeBook.BookOpen() != true)
+	if (recipeBook.BookOpen() == false)
 	{
 		cook.Update(dt);
-		go_counter.update(doodle::get_mouse_x(), doodle::get_mouse_y(), States::Counter);
+		if (cook.GetTool() == ToolName::HAND)
+		{
+			go_counter.update(doodle::get_mouse_x(), doodle::get_mouse_y(), States::Counter);
+		}
 	}
 	cook.ToolUpdate();
-	recipeBook.Update();
-
 	SetSideBowl();
-	SetSideBowlRefill();
+	if (cook.GetTool() == ToolName::HAND)
+	{
+		recipeBook.Update();
+		SetSideBowlRefill();
+	}
+
 
 	Engine::GetUnloadManager().Update_timer(dt);
 
@@ -96,7 +103,7 @@ void Kitchen::Draw()
 	cook.Draw();
 	cook.SetScore(recipeBook.GetRecipeBook());
 	recipeBook.Draw();
-	go_counter.draw();
+	go_counter.draw("Counter");
 
 	//항상 제일 위에 그려져야함.
 	cook.ToolDraw();
@@ -119,8 +126,8 @@ void Kitchen::SetSideBowl()
 		sideBowl[i].SetBowlNum(cook.GetSideBwolSize(i));
 		sideBowl[i].Refill();
 	}
-
 }
+
 
 void Kitchen::SetSideBowlRefill()
 {

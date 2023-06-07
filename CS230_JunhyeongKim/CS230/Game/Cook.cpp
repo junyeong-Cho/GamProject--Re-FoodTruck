@@ -39,12 +39,16 @@ void Cook::Load()
 	tool.Load();
 	plate.Load();
 	pot.Load();
+	ingredientTextureManager.Load();
 }
 
 void Cook::Unload()
 {
 	plate.Unload();
 	pot.Unload();
+	operation.Unload();
+	tool.Unload();
+	ingredientTextureManager.Unload();
 	for (int i = 0; i < seven_ingredients.size(); ++i)
 	{
 		for (int j = 0; j < seven_ingredients[i].size(); ++j)
@@ -86,7 +90,6 @@ void Cook::ToolDraw()
 
 void Cook::Update(double dt)
 {
-	SetStoveOn();
 	if (stoveOn == true)
 	{
 		time += dt;
@@ -97,15 +100,37 @@ void Cook::Update(double dt)
 	}
 	operation.Update();
 	SetIngredientsWhere();
-	PutSlot();
-	CreateUsingIngredient();
+
 	plate.Update(dt, orderSize);
 	pot.Update(dt, orderSize);
 
 	GetWhere(WhereISMouse());
-	ToolTask();
-	
-	ClickBell();
+
+	if (tool.GetTool() == ToolName::HAND)
+	{
+		FollowMouseIngredient();
+		PutSlot();
+		CreateUsingIngredient();
+		ClickBell();
+		SetStoveOn();
+		ChangeFoodImage();
+	}
+	else if (tool.GetTool() == ToolName::KNIFE)
+	{
+		Cutting();
+	}
+	else if (tool.GetTool() == ToolName::LADLE)
+	{
+		PotToPlate();
+	}
+	else if (tool.GetTool() == ToolName::TRASHCAN)
+	{
+		TrashCan();
+	}
+	else if (tool.GetTool() == ToolName::SCOOP)
+	{
+		Scooping();
+	}
 }
 
 void Cook::Draw()
@@ -149,30 +174,6 @@ void Cook::DrawIngredients()
 	}
 }
 
-void Cook::ToolTask()
-{
-	if (tool.GetTool() == ToolName::HAND)
-	{
-		FollowMouseIngredient();
-	}
-	else if (tool.GetTool() == ToolName::KNIFE)
-	{
-		Cutting();
-	}
-	else if (tool.GetTool() == ToolName::LADLE)
-	{
-		PotToPlate();
-	}
-	else if (tool.GetTool() == ToolName::TRASHCAN)
-	{
-		TrashCan();
-	}
-	else if (tool.GetTool() == ToolName::SCOOP)
-	{
-		Scooping();
-	}
-}
-
 Math::vec2 Cook::WhereISMouse()
 {
 	return Math::vec2(doodle::get_mouse_x(), doodle::get_mouse_y());
@@ -192,7 +193,7 @@ KitchenPosition Cook::GetWhere(Math::vec2 pos)
 	{
 		return KitchenPosition::CUTTING_BOARD;
 	}
-	else if (Engine::GetDrawManager().RectCollision(platePos, plateSize, WhereISMouse()) == true)
+	else if (Engine::GetDrawManager().RectCollision(platePos, plateCollisionSize, WhereISMouse()) == true)
 	{
 		return KitchenPosition::BOWL;
 	}
@@ -391,6 +392,14 @@ void Cook::SetScore(std::vector<Recipe*>& recipeBook)
 
 void Cook::DrawScore()
 {
+	doodle::push_settings();
+	doodle::set_font_size(Engine::GetDrawManager().Vec(percentTextSize).x);
+	doodle::draw_text( std::to_string(score) + "%", Engine::GetDrawManager().Vec(percentTextPos).x, Engine::GetDrawManager().Vec(percentTextPos).y);
+	doodle::pop_settings();
+}
+
+void Cook::ChangeFoodImage()
+{
 	if (plate.ButtonClick(WhereISMouse()) == true)
 	{
 		if (score >= 0 && score < 40)
@@ -408,10 +417,6 @@ void Cook::DrawScore()
 		canCook = false; // 카운터로 가져다주는 벨 누르면 true가 되어야함.
 		plate.GetIngredientVec().clear();
 	}
-	doodle::push_settings();
-	doodle::set_font_size(Engine::GetDrawManager().Vec(percentTextSize).x);
-	doodle::draw_text( std::to_string(score) + "%", Engine::GetDrawManager().Vec(percentTextPos).x, Engine::GetDrawManager().Vec(percentTextPos).y);
-	doodle::pop_settings();
 }
 
 void Cook::SetStoveOn()

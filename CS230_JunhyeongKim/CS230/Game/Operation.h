@@ -14,6 +14,7 @@ public:
 	void Update();
 	void Draw();
 	ToolName Return();
+	void Unload();
 
 private:
 	std::vector<CS230::Texture*> operationTexture;

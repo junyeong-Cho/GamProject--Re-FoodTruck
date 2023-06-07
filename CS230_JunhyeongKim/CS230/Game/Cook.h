@@ -28,6 +28,7 @@ public:
 	void GetOrder(RecipeName orderRecipe, std::vector<Recipe*>& recipeBook);
 	int GetSideBwolSize(int index) { return seven_ingredients[index].size(); }
 	void Refill(int index);
+	ToolName GetTool() { return tool.GetTool(); }
 	
 
 	//variables
@@ -38,6 +39,8 @@ public:
 	//Plate
 	Math::vec2 platePos{ 580.0, 100.0 };
 	Math::vec2 plateSize{ 300, 200.0 };
+
+	Math::vec2 plateCollisionSize{ 300.0, 300.0 };
 
 	//Plate Button
 	Math::vec2 plateButtonPos{ 820.0, 80.0 };
@@ -84,7 +87,7 @@ public:
 
 	//Ingredient
 	Math::vec2 ingredientSize{ 100.0, 100.0 };
-	Math::vec2 ingredientPadding{ 20.0, 30.0 };
+	Math::vec2 ingredientPadding{ 30.0, 30.0 };
 
 	int ingredient_number{ 7 };
 	void ClickBell();
@@ -107,9 +110,9 @@ private:
 	void SetIngredient();
 	Ingredient* CreateIngredient(int index);
 	void TrashCan();
-	void ToolTask();
 	void Scooping();
 	void DrawLadleSoup();
+	void ChangeFoodImage();
 
 
 

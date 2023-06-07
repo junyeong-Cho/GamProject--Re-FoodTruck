@@ -27,6 +27,18 @@ void Slot::SetSlotPos()
 
 Plate::Plate(Math::vec2 pos, Math::vec2 size, Math::vec2 buttonPos, Math::vec2 buttonSize) : Slot(pos, size, buttonPos, buttonSize)
 {
+
+	standardSlotRectPos.x += padding;
+	SetSlotPos();
+}
+
+Pot::Pot(Math::vec2 pos, Math::vec2 size, Math::vec2 buttonPos, Math::vec2 buttonSize) : Slot(pos, size, buttonPos, buttonSize)
+{
+	standardSlotRectPos.x += padding;
+	SetSlotPos();
+}
+void Plate::Load()
+{
 	texture.push_back(Engine::GetTextureManager().Load("Assets/EmptyPlate.png")); // 0
 
 	texture.push_back(Engine::GetTextureManager().Load("Assets/LemonSalad_Good.png")); //1
@@ -64,25 +76,12 @@ Plate::Plate(Math::vec2 pos, Math::vec2 size, Math::vec2 buttonPos, Math::vec2 b
 	texture.push_back(Engine::GetTextureManager().Load("Assets/StrongSoup_Good.png")); //25
 	texture.push_back(Engine::GetTextureManager().Load("Assets/StrongSoup_Soso.png")); //26
 	texture.push_back(Engine::GetTextureManager().Load("Assets/StrongSoup_Bad.png")); //27
-
-	standardSlotRectPos.x += padding;
-	SetSlotPos();
-}
-
-Pot::Pot(Math::vec2 pos, Math::vec2 size, Math::vec2 buttonPos, Math::vec2 buttonSize) : Slot(pos, size, buttonPos, buttonSize)
-{
-	texture.push_back(Engine::GetTextureManager().Load("Assets/StoveOffPot.png"));
-	texture.push_back(Engine::GetTextureManager().Load("Assets/StoveOnPot.png"));
-
-	standardSlotRectPos.x += padding;
-	SetSlotPos();
-}
-void Plate::Load()
-{
 }
 
 void Pot::Load()
 {
+	texture.push_back(Engine::GetTextureManager().Load("Assets/StoveOffPot.png"));
+	texture.push_back(Engine::GetTextureManager().Load("Assets/StoveOnPot.png"));
 }
 
 void Slot::Draw(int index)

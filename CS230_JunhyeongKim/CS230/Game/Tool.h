@@ -12,6 +12,7 @@ public:
     void Draw();
     void Update(ToolName toolName);
     ToolName GetTool() { return tool; }
+    void Unload();
     
 private:
     ToolName tool = ToolName::HAND;

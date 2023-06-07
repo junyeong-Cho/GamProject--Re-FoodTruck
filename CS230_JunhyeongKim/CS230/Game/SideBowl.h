@@ -12,6 +12,8 @@ public:
 	void DrawCost();
 	void DrawButton();
 	void SetBowlNum(int num) { number = num; }
+	void DrawRemainingNum();
+	void Load();
 
 private:
 	Math::vec2 position;

@@ -3,6 +3,15 @@
 
 Tool::Tool()
 {
+	/*texture.push_back(Engine::GetTextureManager().Load("Assets/Tool_Hand.png"));
+	texture.push_back(Engine::GetTextureManager().Load("Assets/Tool_Knife.png"));
+	texture.push_back(Engine::GetTextureManager().Load("Assets/Tool_Ladle.png"));
+	texture.push_back(Engine::GetTextureManager().Load("Assets/Tool_Scoop.png"));
+	texture.push_back(Engine::GetTextureManager().Load("Assets/Tool_TrashCan.png"));*/
+}
+
+void Tool::Load()
+{
 	texture.push_back(Engine::GetTextureManager().Load("Assets/Tool_Hand.png"));
 	texture.push_back(Engine::GetTextureManager().Load("Assets/Tool_Knife.png"));
 	texture.push_back(Engine::GetTextureManager().Load("Assets/Tool_Ladle.png"));
@@ -10,8 +19,9 @@ Tool::Tool()
 	texture.push_back(Engine::GetTextureManager().Load("Assets/Tool_TrashCan.png"));
 }
 
-void Tool::Load()
+void Tool::Unload()
 {
+	texture.clear();
 }
 
 void Tool::Draw()

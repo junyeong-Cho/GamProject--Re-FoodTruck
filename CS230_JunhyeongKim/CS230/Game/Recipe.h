@@ -11,7 +11,6 @@ public:
 	virtual void Load() = 0;
 	virtual void Draw();
 	int CheckComplete(std::vector<Ingredient*>& plating);
-	void Update();
 	void Unload();
 	int GetTotalNum() { return totalNum; }
 	Math::vec2 GetRecipeTexturePos() { return texturePos; }
