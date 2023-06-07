@@ -40,6 +40,10 @@ public:
     static constexpr double timer_max = 30;
     double random_timer;
 private:
+
+    CS230::SoundEffect* soundEffect = new CS230::SoundEffect();
+
+
     void update_x_velocity(double dt);
 
     bool customer_moved = true;
@@ -142,4 +146,5 @@ private:
 
     //want food
     RecipeName oreder_recipe = RecipeName::AntSalad;
+
 };

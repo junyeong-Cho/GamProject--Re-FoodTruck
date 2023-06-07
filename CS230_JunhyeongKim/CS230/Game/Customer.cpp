@@ -29,6 +29,8 @@ Customor::Customor(Customor* front) :
     current_state->Enter(this);
     timer = random_timer;
     last_timer = static_cast<int>(random_timer);    
+
+    soundEffect->LoadFile("Assets/Sound/SFX/EnteringBell.wav");
 }
 
 void Customor::update_x_velocity(double dt)
@@ -92,9 +94,7 @@ void Customor::State_In_Counter::Update(GameObject* object, double dt)
         {
             customor->UpdatePosition({ 200 * dt,0 });
 
-            CS230::SoundEffect* soundEffect = new CS230::SoundEffect();
-            soundEffect->LoadFile("Assets/Sound/SFX/EnteringBell.wav");
-            soundEffect->Play(0);
+            customor->soundEffect->Play(0);
 
         }
         else

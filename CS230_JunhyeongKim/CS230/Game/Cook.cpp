@@ -9,6 +9,10 @@ extern bool leftClick;
 Cook::Cook() : plate(Plate(Math::vec2{650.0, 80.0})), pot(Pot(Math::vec2{1000.0,-10.0}))
 {
 	Set_Variables();
+
+	soundEffect->LoadFile("Assets/Sound/SFX/Bell.wav");
+	soundEffect->LoadFile("Assets/Sound/SFX/Cutting.wav");
+	soundEffect->LoadFile("Assets/Sound/SFX/TrashcanSound.wav");
 }
 
 void Cook::SetIngredient()
@@ -70,6 +74,8 @@ void Cook::Unload()
 	}
 	using_ingredients.clear();
 	
+
+	delete soundEffect;
 
 	score = 0;
 	time = 0;
@@ -330,8 +336,6 @@ void Cook::a()
 		Engine::GetGameStateManager().SetNextGameState(static_cast<int>(States::Counter));
 		if (plateDrawIndex != 0)
 		{
-			CS230::SoundEffect* soundEffect = new CS230::SoundEffect();
-			soundEffect->LoadFile("Assets/Sound/SFX/Bell.wav");
 			soundEffect->Play(0);
 
 			canCook = true;
@@ -361,9 +365,7 @@ void Cook::Cutting()
 		{
 			if (using_ingredients[i]->IsMouseOn(WhereISMouse(), ingredientTextureManager.GetTexture()) == true && leftClick == true && GetWhere(WhereISMouse()) == KitchenPosition::CUTTING_BOARD)
 			{
-				CS230::SoundEffect* soundEffect = new CS230::SoundEffect();
-				soundEffect->LoadFile("Assets/Sound/SFX/Cutting.wav");
-				soundEffect->Play(0);
+				soundEffect->Play(1);
 
 				if (using_ingredients[i]->GetCutNum() > 0)
 				{
@@ -679,9 +681,7 @@ void Cook::TrashCan()
 	{
 		if (using_ingredients[i]->IsMouseOn(WhereISMouse(), ingredientTextureManager.GetTexture()) == true && leftClick == true)
 		{
-			CS230::SoundEffect* soundEffect = new CS230::SoundEffect();
-			soundEffect->LoadFile("Assets/Sound/SFX/TrashcanSound.wav");
-			soundEffect->Play(0);
+			soundEffect->Play(2);
 
 			leftClick = false;
 			delete using_ingredients[i];

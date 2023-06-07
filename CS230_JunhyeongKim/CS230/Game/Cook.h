@@ -119,7 +119,8 @@ public:
 
 private:
 
-    
+	CS230::SoundEffect* soundEffect = new CS230::SoundEffect();
+
     KitchenPosition GetWhere(Math::vec2 pos);
     void SetIngredientsWhere();
     void Cutting();

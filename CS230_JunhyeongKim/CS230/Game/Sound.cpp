@@ -36,6 +36,8 @@ namespace CS230
 			{
 				musicList[index]->play();
 				Engine::GetLogger().LogEvent("Now playing: " + std::to_string(index));
+
+
 				isMusicPlaying = true;
 			}
 		}
@@ -47,6 +49,7 @@ namespace CS230
 		{
 			music->pause();
 		}
+
 		isMusicPlaying = false;
 	}
 
@@ -95,7 +98,13 @@ namespace CS230
 			sounds[index].setVolume(35);
 
 			sounds[index].play();
-			
+
+			if (sounds[index].getStatus() == sf::Sound::Stopped)
+			{
+				sounds[index].~Sound();
+			}
+
+
 			Engine::GetLogger().LogEvent("Soundeffect played: " + std::to_string(index));
 		}
 	}
