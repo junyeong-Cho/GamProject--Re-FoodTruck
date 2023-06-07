@@ -232,7 +232,7 @@ void Customor::State_Evaluate::CheckExit(GameObject* object)
         switch (customor->grade)
         {
         case static_cast<int>(Grade::NO_FOOD):
-            Engine::GetUnloadManager().Update_rate(-10);
+            Engine::GetUnloadManager().Update_rate(-50);
             break;
         case static_cast<int>(Grade::BAD):
             Engine::GetUnloadManager().Update_money(0);
