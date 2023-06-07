@@ -121,6 +121,7 @@ void Cook::Draw()
 	pot.ButtonDraw();
 	DrawGage();
 	DrawScore();
+	DrawLadleSoup();
 
 	//얘가 항상 제일 위에 그려져야함.
 	operation.Draw();
@@ -499,6 +500,7 @@ void Cook::PotToPlate()
 		{
 			leftClick = false;
 			checkDrawSoup = false;
+			drawSoup = true;
 		}
 	}
 	else
@@ -509,6 +511,7 @@ void Cook::PotToPlate()
 			{
 				leftClick = false;
 				checkDrawSoup = true;
+				drawSoup = true;
 			}
 		}
 	}
@@ -524,7 +527,19 @@ void Cook::PotToPlate()
 				}
 			}
 			checkDrawSoup = false;
+			drawSoup = false;
 		}
+	}
+}
+
+void Cook::DrawLadleSoup()
+{
+	if (drawSoup == true && tool.GetTool() == ToolName::LADLE)
+	{
+		doodle::push_settings();
+		doodle::set_fill_color(doodle::Color(0, 150, 230));
+		doodle::draw_ellipse(WhereISMouse().x - 17, WhereISMouse().y - 15, 30.0);
+		doodle::pop_settings();
 	}
 }
 

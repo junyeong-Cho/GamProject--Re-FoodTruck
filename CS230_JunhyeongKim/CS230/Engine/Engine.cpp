@@ -19,7 +19,7 @@ Engine::Engine() :
 #else 						
     logger(CS230::Logger::Severity::Event, false, last_tick)
 #endif
-{ }
+{}
 
 Engine::~Engine() {}
 
@@ -32,7 +32,6 @@ void Engine::Start(std::string window_title)
     srand(time(nullptr));
     unsigned int seed = rand();
     logger.LogEvent(std::to_string(seed));
-
 }
 
 void Engine::Stop() {

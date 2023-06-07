@@ -14,4 +14,5 @@ Greendragon::Greendragon(Customor* front)
 	:Customor(front)
 {
 	sprite.Load("Assets/Characters/GreenDragon.spt");
+	Set_Oreder_recipe(RecipeName::StrongSoup);
 }

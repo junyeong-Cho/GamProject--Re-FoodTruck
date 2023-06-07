@@ -109,6 +109,7 @@ private:
 	void TrashCan();
 	void ToolTask();
 	void Scooping();
+	void DrawLadleSoup();
 
 
 
@@ -137,4 +138,5 @@ private:
 
 	int refillNum = 3;
 	int firstIngredientNum = 3;
+	bool drawSoup = false;
 };
