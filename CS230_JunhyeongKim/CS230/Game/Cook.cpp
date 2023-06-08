@@ -10,9 +10,10 @@ extern bool leftClick;
 Cook::Cook() : plate(platePos, plateSize, plateButtonPos, plateButtonSize), 
 	pot(potPos, potSize, potButtonPos, potButtonSize)
 {
-	soundEffect->LoadFile("Assets/Sound/SFX/Bell.wav");
-	soundEffect->LoadFile("Assets/Sound/SFX/Cutting.wav");
-	soundEffect->LoadFile("Assets/Sound/SFX/TrashcanSound.wav");
+	soundEffect->LoadFile("Assets/Sound/SFX/Bell.wav"); //0
+	soundEffect->LoadFile("Assets/Sound/SFX/Cutting.wav"); //1
+	soundEffect->LoadFile("Assets/Sound/SFX/TrashcanSound.wav"); //2
+	soundEffect->LoadFile("Assets/Sound/SFX/ScoopingSound.wav"); //3
 }
 
 void Cook::SetIngredient()
@@ -252,6 +253,7 @@ void Cook::Cutting()
 			{
 				using_ingredients[i]->Cut();
 				leftClick = false;
+				soundEffect->Play(1);
 			}
 		}
 		leftClick = false;
@@ -266,17 +268,11 @@ void Cook::Scooping()
 		{
 			if (using_ingredients[i]->IsMouseOn(WhereISMouse(), ingredientTextureManager.GetTexture()) == true && leftClick == true && GetWhere(WhereISMouse()) == KitchenPosition::CUTTING_BOARD)
 			{
-				
-				if (using_ingredients[i]->GetCutNum() > 1)
-				{
-					soundEffect->Play(1);
-
-					using_ingredients[i]->Cut();
-
 				if (using_ingredients[i]->GetName() == IngredientName::DragonFruit)
 				{
 					using_ingredients[i]->Scoop();
-					leftClick = false;
+					soundEffect->Play(3);
+
 				}
 			}
 		}
@@ -489,9 +485,10 @@ void Cook::DrawGage()
 		
 	}
 
-	doodle::pop_settings();
+	doodle::push_settings();
 	doodle::set_font_size(Engine::GetDrawManager().Vec(gageBarTextSize).x);
 	doodle::draw_text(text, Engine::GetDrawManager().Vec(gageBarTextPos).x, Engine::GetDrawManager().Vec(gageBarTextPos).y);
+	doodle::pop_settings();
 
 	//Color
 	doodle::Color baseColor(0, 0, 0, 200);
@@ -618,11 +615,13 @@ void Cook::TrashCan()
 	{
 		leftClick = false;
 		plate.Unload();
+		soundEffect->Play(2);
 	}
 
 	if (GetWhere(WhereISMouse()) == KitchenPosition::STOVE && leftClick == true)
 	{
 		leftClick = false;
 		pot.Unload();
+		soundEffect->Play(2);
 	}
 }

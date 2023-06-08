@@ -151,4 +151,7 @@ private:
 
     //want food
     RecipeName oreder_recipe = RecipeName::AntSalad;
+
+    //ingredient_num
+    unsigned int ingredient_num = 0;
 };
