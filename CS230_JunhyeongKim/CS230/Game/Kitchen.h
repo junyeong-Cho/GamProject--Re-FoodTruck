@@ -31,7 +31,7 @@ public:
     void Draw_CounterButton();
     void Draw_Bell();
     void Draw_CuttingBoard();
-	  void Draw_PaltingSpot();
+	void Draw_PaltingSpot();
     void Draw_Frame_Text();
     void SetOrder();
 

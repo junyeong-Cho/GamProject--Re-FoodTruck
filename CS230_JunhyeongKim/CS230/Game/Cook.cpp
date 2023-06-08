@@ -112,11 +112,10 @@ void Cook::Update(double dt)
 	pot.Update(dt, orderSize);
 
 	GetWhere(WhereISMouse());
-
+	PutSlot();
 	if (tool.GetTool() == ToolName::HAND)
 	{
 		FollowMouseIngredient();
-		PutSlot();
 		CreateUsingIngredient();
 		ClickBell();
 		SetStoveOn();
@@ -423,6 +422,7 @@ void Cook::ChangeFoodImage()
 		{
 			plateDrawIndex = static_cast<int>(order) * 3 + 1;
 		}
+		std::cout << "order : " << static_cast<int>(order) << '\n';
 		canCook = false; // 카운터로 가져다주는 벨 누르면 true가 되어야함.
 		plate.GetIngredientVec().clear();
 	}

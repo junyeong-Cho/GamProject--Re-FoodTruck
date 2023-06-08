@@ -34,17 +34,20 @@ void Kitchen::Load()
 		canLoad = false;
 
 		//Frame for Clock
-		gameobjectmanager.Add(new Frame({ Engine::GetWindow().GetSize().x / 12.5, Engine::GetWindow().GetSize().y / 8.0 * 7.18 }, 1));
+		gameobjectmanager.Add(new Frame({ Engine::GetWindow().GetSize().x / 12.5, Engine::GetWindow().GetSize().y - 70.0 }, 1));
 
 		//Face test
+
 		refutation = new Refutation({ Engine::GetWindow().GetSize().x / 4.0, Engine::GetWindow().GetSize().y / 8.0 * 7.25 });
 		gameobjectmanager.Add(refutation);
 
+
 		//Frame for Refutation
-		gameobjectmanager.Add(new Frame({ Engine::GetWindow().GetSize().x / 4.0, Engine::GetWindow().GetSize().y / 8.0 * 7.18 }, 1));
+		gameobjectmanager.Add(new Frame({ Engine::GetWindow().GetSize().x / 4.0, Engine::GetWindow().GetSize().y - 70.0 }, 1));
+
 
 		//Frame for Money
-		gameobjectmanager.Add(new Frame({ Engine::GetWindow().GetSize().x / 1.3, Engine::GetWindow().GetSize().y / 8.0 * 7.18 }, 2));
+		gameobjectmanager.Add(new Frame({ Engine::GetWindow().GetSize().x / 1.3, Engine::GetWindow().GetSize().y - 78.0 }, 2));
 
 
 		for (int i = 0; i < cook.ingredient_number; ++i)
@@ -52,6 +55,8 @@ void Kitchen::Load()
 			sideBowl.push_back(SideBowl(Math::vec2{ cook.sideBowlBoardFirstPos.x + (cook.sideBowlSize.x + cook.sideBowlPadding.x) * i, cook.sideBowlBoardFirstPos.y }, "1"));
 			sideBowl[i].Load();
 		}
+
+		SetOrder();
 		cook.GetOrder(orderRecipe, recipeBook.GetRecipeBook());
 	}
 }
@@ -99,8 +104,6 @@ void Kitchen::Update(double dt)
 	{
 		Engine::GetGameStateManager().SetNextGameState(static_cast<int>(States::Ending));
 	}
-
-	cook.GetOrder(RecipeName::AntSalad, recipeBook.GetRecipeBook());
 
 	if (Engine::GetOrderManager().GetOrder() != orderRecipe)
 	{
@@ -233,7 +236,8 @@ void Kitchen::Draw_Frame_Text()
 	doodle::set_outline_width(12);
 	doodle::set_outline_color(255, 255, 255);
 	doodle::set_fill_color(255, 161, 74);
-	doodle::draw_text("Time\n " + std::to_string(static_cast<int>(Engine::GetUnloadManager().GetTimer())), Engine::GetWindow().GetSize().x / 12.0 + 10 + Engine::GetWindow().GetSize().x * 0.025, Engine::GetWindow().GetSize().y / 8.0 * 7.55);
+	doodle::draw_text("Time\n ", 145, Engine::GetWindow().GetSize().y / 8.0 * 7.55);
+	doodle::draw_text(std::to_string(static_cast<int>(Engine::GetUnloadManager().GetTimer())), 165, Engine::GetWindow().GetSize().y - 80);
 	doodle::pop_settings();
 
 	//Refutation - frame addapted

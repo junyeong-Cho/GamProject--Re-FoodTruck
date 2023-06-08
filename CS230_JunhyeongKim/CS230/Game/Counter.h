@@ -58,6 +58,4 @@ private:
     int maxRanCustomerNum = 10;
 
 
-
-
 };

@@ -39,7 +39,7 @@ Counter::Counter()
 void Counter::Load()
 {
     //Frame for Clock
-    gameobjectmanager.Add(new Frame({ Engine::GetWindow().GetSize().x / 12.5, Engine::GetWindow().GetSize().y / 8.0 * 7.18 }, 1));
+    gameobjectmanager.Add(new Frame({ Engine::GetWindow().GetSize().x / 12.5, Engine::GetWindow().GetSize().y -70.0 }, 1));
 
     //Face test
     
@@ -48,11 +48,11 @@ void Counter::Load()
     
 
     //Frame for Refutation
-    gameobjectmanager.Add(new Frame({ Engine::GetWindow().GetSize().x / 4.0, Engine::GetWindow().GetSize().y / 8.0 * 7.18 }, 1));
+    gameobjectmanager.Add(new Frame({ Engine::GetWindow().GetSize().x / 4.0, Engine::GetWindow().GetSize().y -  70.0}, 1));
 
 
     //Frame for Money
-    gameobjectmanager.Add(new Frame({ Engine::GetWindow().GetSize().x / 1.3, Engine::GetWindow().GetSize().y / 8.0 * 7.18 }, 2));
+    gameobjectmanager.Add(new Frame({ Engine::GetWindow().GetSize().x / 1.3, Engine::GetWindow().GetSize().y- 78.0 }, 2));
 
 
     srand((unsigned int)time(NULL));
@@ -172,6 +172,7 @@ void Counter::Update(double dt)
 
     if (Engine::GetUnloadManager().GetTimer() <= 0)
     {
+        GetGSComponent<CS230::MusicEffect>()->Stop();
         Engine::GetUnloadManager().Update_Day();
         if (Engine::GetUnloadManager().GetDay() >= 4)
         {
@@ -199,7 +200,8 @@ void Counter::Draw_UI()
     doodle::set_outline_width(12);
     doodle::set_outline_color(255, 255, 255);
     doodle::set_fill_color(255, 161, 74);
-    doodle::draw_text("Time\n " + std::to_string(static_cast<int>(Engine::GetUnloadManager().GetTimer())), Engine::GetWindow().GetSize().x / 12.0 + 10 + Engine::GetWindow().GetSize().x * 0.025, Engine::GetWindow().GetSize().y / 8.0 * 7.55);
+    doodle::draw_text("Time\n ", 145, Engine::GetWindow().GetSize().y / 8.0 * 7.55);
+    doodle::draw_text(std::to_string(static_cast<int>(Engine::GetUnloadManager().GetTimer())), 165, Engine::GetWindow().GetSize().y-80);
     doodle::pop_settings();
 
     //Refutation - frame addapted
@@ -263,5 +265,5 @@ void Counter::Unload()
     //counter_Screen.Unload();
     //background.Unload();
 
-    GetGSComponent<CS230::MusicEffect>()->Stop();
+    //GetGSComponent<CS230::MusicEffect>()->Stop();
 }
