@@ -16,5 +16,5 @@ Giraffe::Giraffe(Customor* front)
 {
 	sprite.Load("Assets/giraffe.spt");
 	Set_Oreder_recipe(RecipeName::LemonSalad);
-
+	Set_Ingredient_num(6);
 }

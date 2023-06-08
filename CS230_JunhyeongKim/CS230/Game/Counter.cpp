@@ -108,24 +108,25 @@ void Counter::Load()
         }
         counter_Screen.Add("Assets/Counter_Screen.png");
 
-        int background_num = rand() / (RAND_MAX / 2);
+        //int background_num = rand() / (RAND_MAX / 2);
 
-        switch (background_num)
-        {
-        case 0:
-            background.Add("Assets/Counter_Background_1.png");
-            break;
-        case 1:
-            background.Add("Assets/Counter_Background_2.png");
-            break;
-        case 2:
-            background.Add("Assets/Counter_Background_3.png");
-            break;
-        default:
-            break;
-        }
+        //switch (background_num)
+        //{
+        //case 0:
+        //    background.Add("Assets/Counter_Background_1.png");
+        //    break;
+        //case 1:
+        //    background.Add("Assets/Counter_Background_2.png");
+        //    break;
+        //case 2:
+        //    background.Add("Assets/Counter_Background_3.png");
+        //    break;
+        //default:
+        //    break;
+        //}
 
-        
+        background.Add("Assets/Counter_Background.png");
+
         Engine::GetUnloadManager().first_load = false;
     }
 
@@ -169,6 +170,11 @@ void Counter::Update(double dt)
         }
     }
 
+
+    if (Engine::GetUnloadManager().GetRate() <= 0 || Engine::GetUnloadManager().GetMoney() <= 0)
+    {
+        Engine::GetGameStateManager().SetNextGameState(static_cast<int>(States::Ending));
+    }
 }
 
 void Counter::Draw_UI()

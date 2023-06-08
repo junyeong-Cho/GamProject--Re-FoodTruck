@@ -79,6 +79,15 @@ void Kitchen::Update(double dt)
 			canUnload = true;
 		}
 	}
+
+
+	if (Engine::GetUnloadManager().GetRate() <= 0 || Engine::GetUnloadManager().GetMoney() <= 0)
+	{
+		Engine::GetGameStateManager().SetNextGameState(static_cast<int>(States::Ending));
+	}
+
+	cook.GetOrder(RecipeName::AntSalad, recipeBook.GetRecipeBook());
+
 	if (Engine::GetOrderManager().GetOrder() != orderRecipe)
 	{
 		SetOrder();
@@ -105,7 +114,7 @@ void Kitchen::Draw()
 	recipeBook.Draw();
 	go_counter.draw("Counter");
 
-	//Ç×»ó Á¦ÀÏ À§¿¡ ±×·ÁÁ®¾ßÇÔ.
+	//í•­ìƒ ì œì¼ ìœ„ì— ê·¸ë ¤ì ¸ì•¼í•¨.
 	cook.ToolDraw();
 }
 
