@@ -45,9 +45,9 @@ void Day_end::Draw()
 	
 	background.Draw();
 
-	doodle::draw_text(std::to_string(Engine::GetUnloadManager().GetMoney()), (Engine::GetWindow().GetSize().x / 1400.0) * 350, (Engine::GetWindow().GetSize().y / 800.0) * 450);
-	std::string Day = std::to_string(Engine::GetUnloadManager().GetDay());
-	doodle::draw_text(Day, (Engine::GetWindow().GetSize().x / 1400.0) * 350, (Engine::GetWindow().GetSize().y / 800.0) * 350);
+	doodle::draw_text(std::to_string(Engine::GetUnloadManager().GetMoney()), (Engine::GetWindow().GetSize().x / 1400.0) * 750, (Engine::GetWindow().GetSize().y / 800.0) * 375);
+	std::string Refutation = std::to_string(Engine::GetUnloadManager().GetRate());
+	doodle::draw_text(Refutation, (Engine::GetWindow().GetSize().x / 1400.0) * 760, (Engine::GetWindow().GetSize().y / 800.0) * 150);
 }
 
 void Day_end::Update(double dt)
