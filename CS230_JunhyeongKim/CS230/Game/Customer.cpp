@@ -282,7 +282,7 @@ void Customor::State_Leaving::CheckExit(GameObject* object)
 void Customor::Update(double dt)
 {
     GameObject::Update(dt);
-    if (front_customor != nullptr && front_customor->current_state->GetName() == "Leaving")
+    if (front_customor != nullptr && front_customor->current_state != nullptr && front_customor->current_state->GetName() == "Leaving")
     {
         front_customor = front_customor->front_customor;
     }

@@ -60,6 +60,7 @@ void Counter::Load()
 
         front_customor = new Giraffe(nullptr);
         Engine::GetUnloadManager().GetCounterObjectManager().Add(front_customor);
+        Engine::GetUnloadManager().current_customor = front_customor;
 
         for (int i = 1; i < customors; i++)
         {
