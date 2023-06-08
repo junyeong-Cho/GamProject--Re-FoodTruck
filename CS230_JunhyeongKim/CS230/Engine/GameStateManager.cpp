@@ -64,7 +64,7 @@ void CS230::GameStateManager::Update(double dt)
             if (current_gamestate->GetName() != "Kitchen")
             {
                 Engine::GetUnloadManager().GetCounterObjectManager().Unload();
-                Engine::GetUnloadManager().Set_timer(200);
+                Engine::GetUnloadManager().Set_timer(10);
                 Engine::GetUnloadManager().first_load = true;
                 
                 /*Engine::GetTextureManager().Unload();*/

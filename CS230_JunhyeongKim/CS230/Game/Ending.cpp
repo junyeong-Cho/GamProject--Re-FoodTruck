@@ -21,16 +21,16 @@ void Ending::Load()
 {
 	if (Engine::GetUnloadManager().GetRate() >= 300 || Engine::GetUnloadManager().GetMoney() >= 300)//good
 	{
-		background.Add("Assets/good.png");
+		background.Add("Assets/Endings/GGEnding.png");
 
 	}
 	else if(Engine::GetUnloadManager().GetRate() >= 100 && Engine::GetUnloadManager().GetMoney() >= 100)//soso
 	{
-		background.Add("Assets/soso.png");
+		background.Add("Assets/Endings/SoSoEnding.png");
 	}
 	else // bad
 	{
-		background.Add("Assets/bad.png");
+		background.Add("Assets/Endings/BadEnding.png");
 	}
 }
 

@@ -9,6 +9,7 @@ Created:    May 7, 2023
 */
 #pragma once
 #include "..\Engine\GameState.h"
+#include "../Game/Counter_Background.h"
 
 class Day_end : public CS230::GameState
 {
@@ -21,4 +22,7 @@ public:
 	void Clear();
 
 	std::string GetName() override { return "Day_end"; }
+
+private:
+	Counter_Background background;
 };
