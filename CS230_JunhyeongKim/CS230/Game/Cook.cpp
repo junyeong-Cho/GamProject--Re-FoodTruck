@@ -365,10 +365,12 @@ void Cook::Cutting()
 		{
 			if (using_ingredients[i]->IsMouseOn(WhereISMouse(), ingredientTextureManager.GetTexture()) == true && leftClick == true && GetWhere(WhereISMouse()) == KitchenPosition::CUTTING_BOARD)
 			{
-				soundEffect->Play(1);
+				
 
-				if (using_ingredients[i]->GetCutNum() > 0)
+				if (using_ingredients[i]->GetCutNum() > 1)
 				{
+					soundEffect->Play(1);
+
 					using_ingredients[i]->Cut();
 				}
 				leftClick = false;
