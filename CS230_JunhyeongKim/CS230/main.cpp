@@ -30,9 +30,6 @@ int main() {
         Engine& engine = Engine::Instance();
         engine.Start("Re : Truck");
 
-
-
-
         Splash splash;
         engine.GetGameStateManager().AddGameState(splash);
         MainMenu mainmenu;

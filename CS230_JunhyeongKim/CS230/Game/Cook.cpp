@@ -6,10 +6,10 @@
 
 extern bool leftClick;
 
-Cook::Cook() : plate(Plate(Math::vec2{650.0, 80.0})), pot(Pot(Math::vec2{1000.0,-10.0}))
-{
-	Set_Variables();
 
+Cook::Cook() : plate(platePos, plateSize, plateButtonPos, plateButtonSize), 
+	pot(potPos, potSize, potButtonPos, potButtonSize)
+{
 	soundEffect->LoadFile("Assets/Sound/SFX/Bell.wav");
 	soundEffect->LoadFile("Assets/Sound/SFX/Cutting.wav");
 	soundEffect->LoadFile("Assets/Sound/SFX/TrashcanSound.wav");
@@ -25,20 +25,13 @@ void Cook::SetIngredient()
 	{
 		for (int i = 0; i < firstIngredientNum; ++i)
 		{
-			seven_ingredients[0].push_back(new Lemon(Math::vec2{ first_X + width, first_Y }));
-			seven_ingredients[1].push_back(new Lettuce(Math::vec2{ first_X, first_Y }));
-			seven_ingredients[2].push_back(new Ant(Math::vec2{ first_X, first_Y }));
-			seven_ingredients[3].push_back(new Leaf(Math::vec2{ first_X, first_Y }));
-			seven_ingredients[4].push_back(new Salt(Math::vec2{ first_X, first_Y }));
-			seven_ingredients[5].push_back(new DragonFruit(Math::vec2{ first_X, first_Y }));
-			seven_ingredients[6].push_back(new MermaidScales(Math::vec2{ first_X, first_Y }));
-		}
-		for (int i = 0; i < ingredient_number; ++i)
-		{
-			for (int j = 0; j < seven_ingredients[i].size(); ++j)
-			{
-				seven_ingredients[i][j]->SetScale(Math::vec2{ Width_raito ,Height_raito });
-			}
+			seven_ingredients[0].push_back(new Lemon(Math::vec2{ sideBowlBoardFirstPos.x + (sideBowlSize.x + sideBowlPadding.x) * 0 + ingredientPadding.x, sideBowlBoardFirstPos .y + ingredientPadding.y }, ingredientSize));
+			seven_ingredients[1].push_back(new Lettuce(Math::vec2{ sideBowlBoardFirstPos.x + (sideBowlSize.x + sideBowlPadding.x) * 1 + ingredientPadding.x, sideBowlBoardFirstPos.y + ingredientPadding.y }, ingredientSize));
+			seven_ingredients[2].push_back(new Ant(Math::vec2{ sideBowlBoardFirstPos.x + (sideBowlSize.x + sideBowlPadding.x) * 2 + ingredientPadding.x, sideBowlBoardFirstPos.y + ingredientPadding.y }, ingredientSize));
+			seven_ingredients[3].push_back(new Leaf(Math::vec2{ sideBowlBoardFirstPos.x + (sideBowlSize.x + sideBowlPadding.x) * 3 + ingredientPadding.x, sideBowlBoardFirstPos.y + ingredientPadding.y }, ingredientSize));
+			seven_ingredients[4].push_back(new Salt(Math::vec2{ sideBowlBoardFirstPos.x + (sideBowlSize.x + sideBowlPadding.x) * 4 + ingredientPadding.x, sideBowlBoardFirstPos.y + ingredientPadding.y }, ingredientSize));
+			seven_ingredients[5].push_back(new DragonFruit(Math::vec2{ sideBowlBoardFirstPos.x + (sideBowlSize.x + sideBowlPadding.x) * 5 + ingredientPadding.x, sideBowlBoardFirstPos.y + ingredientPadding.y }, ingredientSize));
+			seven_ingredients[6].push_back(new MermaidScales(Math::vec2{ sideBowlBoardFirstPos.x + (sideBowlSize.x + sideBowlPadding.x) * 6 + ingredientPadding.x, sideBowlBoardFirstPos.y + ingredientPadding.y }, ingredientSize));
 		}
 	}
 }
@@ -50,14 +43,16 @@ void Cook::Load()
 	tool.Load();
 	plate.Load();
 	pot.Load();
-
-	ChangeIngredientPos();
+	ingredientTextureManager.Load();
 }
 
 void Cook::Unload()
 {
 	plate.Unload();
 	pot.Unload();
+	operation.Unload();
+	tool.Unload();
+	ingredientTextureManager.Unload();
 	for (int i = 0; i < seven_ingredients.size(); ++i)
 	{
 		for (int j = 0; j < seven_ingredients[i].size(); ++j)
@@ -88,121 +83,60 @@ void Cook::Unload()
 	whatMouseclickIndex = -1;
 }
 
-void Cook::Set_Variables()
+void Cook::ToolUpdate()
 {
-	Width_raito = Engine::GetWindow().GetSize().x / 1400.0;
-	Height_raito = Engine::GetWindow().GetSize().y / 800.0;
+	tool.Update(operation.Return());
+}
 
-	//origin
-	endWidth = Width_raito * 1400.0;
-	endHeight = Height_raito * 800.0;
-
-	//side bowl
-	first_X = Width_raito * 60.0;
-	first_Y = Height_raito * 435.0; // 225.0;
-	width = Width_raito * 170.0;
-	height = Height_raito * 140.0;
-
-	//cutting board
-	cuttingBoard_X = Width_raito * 50.0;
-	cuttingBoard_Y = Height_raito * 35.0; // 425.0;
-	cuttingBoard_width = Width_raito * 570.0;
-	cuttingBoard_height = Height_raito * 330.0;
-
-	//bowl
-	bowl_X = Width_raito * 800.0;
-	bowl_Y = Height_raito * 220.0; // 580.0;
-	bowl_width = Width_raito * 280.0;
-
-	//stove
-	stove_X = Width_raito * 980.0;
-	stove_Y = Height_raito * 35.0; // 600.0;
-	stove_width = Width_raito * 380.0;
-	stove_height = Height_raito * 330.0;
-
-	//trashCan
-
-	//Bell
-	bell_X = Width_raito * 1320.0;
-	bell_Y = Height_raito * 505.0; // 295.0;
-	bell_width = Width_raito * 100.0;
-
-	//background
-	topBackground_X1 = zero;
-	topBackground_Y1 = endHeight;
-	topBackground_X2 = endWidth;
-	topBackground_Y2 = endHeight;
-	topBackground_X3 = Width_raito * 1375.0;
-	topBackground_Y3 = Height_raito * 600.0;
-	topBackground_X4 = Width_raito * 25.0;
-	topBackground_Y4 = topBackground_Y3;
-
-	bottomBackground_X1 = topBackground_X4;
-	bottomBackground_Y1 = topBackground_Y3;
-	bottomBackground_X2 = topBackground_X3;
-	bottomBackground_Y2 = topBackground_Y3;
-	bottomBackground_X3 = endWidth;
-	bottomBackground_Y3 = zero;
-	bottomBackground_X4 = zero;
-	bottomBackground_Y4 = zero;
-
-	//clock
-	clock_X = Width_raito * 35.0;
-	clock_Y = Height_raito * 720.0;
-	clock_width = Width_raito * 150.0;
-	clock_height = Height_raito * 60.0;
-
-	//receipt
-	receipt_X = Width_raito * 250.0;
-	receipt_Y = Height_raito * 680.0;
-	receipt_width = Width_raito * 150.0;
-	receipt_height = Height_raito * 100.0;
-
-	//backCounterButton
-	backCounter_X = Width_raito * 800.0;
-	backCounter_Y = Height_raito * 610.0;
-	backCounter_width = Width_raito * 220.0;
-	backCounter_height = Height_raito * 60.0;
-
-	//toollDrawer
-	toolDrawer_X = Width_raito * 1050.0;
-	toolDrawer_Y = Height_raito * 610.0;
-	toolDrawer_width = Width_raito * 140.0;
-	toolDrawer_height = Height_raito * 90.0;
-
-	//refrigerator
-	refrigerator_X = Width_raito * 1225.0;
-	refrigerator_Y = Height_raito * 610.0;
-	refrigerator_width = Width_raito * 100.0;
-	refrigerator_height = Height_raito * 90.0;
-
-	//tool Explain
-	toolExplain_X = Width_raito * 450.0;
-	toolExplain_Y = Height_raito * 680.0;
-	toolExplain_width = Width_raito * 150.0;
-	toolExplain_height = Height_raito * 100.0;
+void Cook::ToolDraw()
+{
+	//ÏñòÍ∞Ä Ìï≠ÏÉÅ Ï†úÏùº ÏúÑÏóê Í∑∏Î†§Ï†∏ÏïºÌï®.
+	tool.Draw();
 }
 
 void Cook::Update(double dt)
 {
-	SetStoveOn();
 	if (stoveOn == true)
 	{
 		time += dt;
+		if (time > 10)
+		{
+			time = 10;
+		}
 	}
-	Set_Variables();
 	operation.Update();
-	tool.Update(operation.Return());
 	SetIngredientsWhere();
-	PutSlot();
-	CreateUsingIngredient();
+
 	plate.Update(dt, orderSize);
 	pot.Update(dt, orderSize);
 
 	GetWhere(WhereISMouse());
-	ToolTask();
-	
-	a();
+
+	if (tool.GetTool() == ToolName::HAND)
+	{
+		FollowMouseIngredient();
+		PutSlot();
+		CreateUsingIngredient();
+		ClickBell();
+		SetStoveOn();
+		ChangeFoodImage();
+	}
+	else if (tool.GetTool() == ToolName::KNIFE)
+	{
+		Cutting();
+	}
+	else if (tool.GetTool() == ToolName::LADLE)
+	{
+		PotToPlate();
+	}
+	else if (tool.GetTool() == ToolName::TRASHCAN)
+	{
+		TrashCan();
+	}
+	else if (tool.GetTool() == ToolName::SCOOP)
+	{
+		Scooping();
+	}
 }
 
 void Cook::Draw()
@@ -214,13 +148,13 @@ void Cook::Draw()
 		pot.DrawSlotRect();
 	}
 	DrawIngredients();
-
-	tool.Draw();
 	plate.ButtonDraw();
 	pot.ButtonDraw();
 	DrawGage();
 	DrawScore();
-	//æÍ∞° «◊ªÛ ¡¶¿œ ¿ßø° ±◊∑¡¡Ææﬂ«‘.
+	DrawLadleSoup();
+
+	//ÏñòÍ∞Ä Ìï≠ÏÉÅ Ï†úÏùº ÏúÑÏóê Í∑∏Î†§Ï†∏ÏïºÌï®.
 	operation.Draw();
 }
 
@@ -232,7 +166,6 @@ void Cook::DrawIngredients()
 		{
 			for (int j = 0; j < seven_ingredients[i].size(); ++j)
 			{
-				seven_ingredients[i][j]->SetScale(Math::vec2{ Width_raito ,Height_raito });
 				seven_ingredients[i][j]->Draw(ingredientTextureManager.GetTexture());
 			}
 		}
@@ -241,30 +174,9 @@ void Cook::DrawIngredients()
 	{
 		for (int i = 0; i < using_ingredients.size(); ++i)
 		{
-			using_ingredients[i]->SetScale(Math::vec2{ Width_raito ,Height_raito });
 			using_ingredients[i]->Draw(ingredientTextureManager.GetTexture());
 		}
 
-	}
-}
-
-void Cook::ToolTask()
-{
-	if (tool.GetTool() == ToolName::HAND)
-	{
-		FollowMouseIngredient();
-	}
-	else if (tool.GetTool() == ToolName::KNIFE)
-	{
-		Cutting();
-	}
-	else if (tool.GetTool() == ToolName::LADLE)
-	{
-		SpotToPlate();
-	}
-	else if (tool.GetTool() == ToolName::TRASHCAN)
-	{
-		TrashCan();
 	}
 }
 
@@ -275,61 +187,34 @@ Math::vec2 Cook::WhereISMouse()
 
 KitchenPosition Cook::GetWhere(Math::vec2 pos)
 {
-	doodle::push_settings();
-	doodle::set_frame_of_reference(doodle::FrameOfReference::RightHanded_OriginBottomLeft);
-	if (pos.y > first_Y && pos.y < first_Y + height)
+	for (int i = 0; i < ingredient_number; ++i)
 	{
-		if (pos.x > first_X + width * 0 && pos.x <= first_X + width * 0 + width)
+		Math::vec2 pos = { sideBowlBoardFirstPos.x + (sideBowlSize.x + sideBowlPadding.x) * i, sideBowlBoardFirstPos.y };
+		if (Engine::GetDrawManager().RectCollision(pos, sideBowlSize, WhereISMouse()) == true)
 		{
-			return KitchenPosition::COUNTER1;
-		}
-		else if (pos.x > first_X + width * 1 && pos.x <= first_X + width * 1 + width)
-		{
-			return KitchenPosition::COUNTER2;
-		}
-		else if (pos.x > first_X + width * 2 && pos.x <= first_X + width * 2 + width)
-		{
-			return KitchenPosition::COUNTER3;
-		}
-		else if (pos.x > first_X + width * 3 && pos.x <= first_X + width * 3 + width)
-		{
-			return KitchenPosition::COUNTER4;
-		}
-		else if (pos.x > first_X + width * 4 && pos.x <= first_X + width * 4 + width)
-		{
-			return KitchenPosition::COUNTER5;
-		}
-		else if (pos.x > first_X + width * 5 && pos.x <= first_X + width * 5 + width)
-		{
-			return KitchenPosition::COUNTER6;
-		}
-		else if (pos.x > first_X + width * 6 && pos.x <= first_X + width * 6 + width)
-		{
-			return KitchenPosition::COUNTER7;
-		}
-		else if (std::sqrt((std::pow((pos.x - bell_X), 2) + (std::pow((pos.y - bell_Y), 2)))) <= bell_width / 2.0)
-		{
-			return KitchenPosition::BELL;
+			return static_cast<KitchenPosition>(i);
 		}
 	}
-	else if (pos.x > cuttingBoard_X && pos.x <= cuttingBoard_X + cuttingBoard_width
-		&& pos.y > cuttingBoard_Y && pos.y < cuttingBoard_Y + cuttingBoard_height)
+	if (Engine::GetDrawManager().RectCollision(cuttingBoardPos, cuttingBoardSize, WhereISMouse()) == true)
 	{
 		return KitchenPosition::CUTTING_BOARD;
 	}
-	else if (std::sqrt((std::pow((pos.x - 800), 2) + (std::pow((pos.y - 230), 2)))) <= 150.0)
+	else if (Engine::GetDrawManager().RectCollision(platePos, plateCollisionSize, WhereISMouse()) == true)
 	{
 		return KitchenPosition::BOWL;
 	}
-	else if (std::sqrt((std::pow((pos.x - 1150), 2) + (std::pow((pos.y - 230), 2)))) <= 150.0)
+	else if (Engine::GetDrawManager().RectCollision(potPos, potSize, WhereISMouse()) == true)
 	{
 		return KitchenPosition::STOVE;
 	}
-	doodle::pop_settings();
+	else if (Engine::GetDrawManager().RectCollision(bellPos, bellSize, WhereISMouse()) == true)
+	{
+		return KitchenPosition::BELL;
+	}
 	return KitchenPosition::ELSE;
 }
 
-void Cook::a()
+void Cook::ClickBell()
 {
 	if (leftClick == true && GetWhere(WhereISMouse()) == KitchenPosition::BELL)
 	{
@@ -361,21 +246,41 @@ void Cook::Cutting()
 {
 	if (using_ingredients.size() != 0)
 	{
-		for (int i = 0; i < using_ingredients.size(); ++i)
+		for (int i = using_ingredients.size() - 1; i >= 0; --i)
+		{
+			if (using_ingredients[i]->IsMouseOn(WhereISMouse(), ingredientTextureManager.GetTexture()) == true && leftClick == true && GetWhere(WhereISMouse()) == KitchenPosition::CUTTING_BOARD)
+			{
+				using_ingredients[i]->Cut();
+				leftClick = false;
+			}
+		}
+		leftClick = false;
+	}
+}
+
+void Cook::Scooping()
+{
+	if (using_ingredients.size() != 0)
+	{
+		for (int i = using_ingredients.size() - 1; i >= 0; --i)
 		{
 			if (using_ingredients[i]->IsMouseOn(WhereISMouse(), ingredientTextureManager.GetTexture()) == true && leftClick == true && GetWhere(WhereISMouse()) == KitchenPosition::CUTTING_BOARD)
 			{
 				
-
 				if (using_ingredients[i]->GetCutNum() > 1)
 				{
 					soundEffect->Play(1);
 
 					using_ingredients[i]->Cut();
+
+				if (using_ingredients[i]->GetName() == IngredientName::DragonFruit)
+				{
+					using_ingredients[i]->Scoop();
+					leftClick = false;
 				}
-				leftClick = false;
 			}
 		}
+		leftClick = false;
 	}
 }
 
@@ -418,7 +323,7 @@ int Cook::WhatIndexMouseClick()
 			}
 			else
 			{
-				for (int i = 0; i < using_ingredients.size(); ++i)
+				for (int i = using_ingredients.size() - 1; i >= 0; --i)
 				{
 					if (using_ingredients[i]->IsMouseOn(WhereISMouse(), ingredientTextureManager.GetTexture()) == true)
 					{
@@ -439,51 +344,35 @@ void Cook::FollowMouseIngredient()
 {
 	if (using_ingredients.size() != 0 && WhatIndexMouseClick() != -1)
 	{
-		using_ingredients[WhatIndexMouseClick()]->ChangePos(WhereISMouse());
+		using_ingredients[WhatIndexMouseClick()]->ChangePos(Math::vec2{ WhereISMouse().x - ingredientSize.x / 2.0, WhereISMouse().y - ingredientSize.y / 2.0 });
 	}
 }
 
 void Cook::PutSlot()
 {
-	if (using_ingredients.size() != 0)
+	if (using_ingredients.size() > whatMouseclickIndex && using_ingredients.size() != 0)
 	{
-		if (leftClick == true)
+		if (leftClick == true && whatMouseclickIndex != -1)
 		{
-			for (int i = 0; i < using_ingredients.size(); ++i)
+			if (using_ingredients[whatMouseclickIndex]->GetPlace() == KitchenPosition::BOWL)
 			{
-				if (using_ingredients[i]->GetPlace() == KitchenPosition::BOWL)
+				if (canCook == true)
 				{
-					if (canCook == true)
+					if (plate.PutIngredient(using_ingredients[whatMouseclickIndex]))
 					{
-						if (plate.PutIngredient(using_ingredients[i]))
-						{
-							using_ingredients.erase(using_ingredients.begin() + i);
-							whatMouseclickIndex = -1;
-						}
-						break;
-					}
-				}
-				else if (using_ingredients[i]->GetPlace() == KitchenPosition::STOVE)
-				{
-					if (pot.PutIngredient(using_ingredients[i]))
-					{
-						using_ingredients.erase(using_ingredients.begin() + i);
+						using_ingredients.erase(using_ingredients.begin() + whatMouseclickIndex);
 						whatMouseclickIndex = -1;
 					}
-					break;
 				}
 			}
-		}
-	}
-}
-
-void Cook::ChangeIngredientPos()
-{
-	for (int i = 0; i < seven_ingredients.size(); ++i)
-	{
-		for (int j = 0; j < seven_ingredients[i].size(); ++j)
-		{
-			seven_ingredients[i][j]->ChangePos(Math::vec2(first_X + width * i, first_Y));
+			else if (using_ingredients[whatMouseclickIndex]->GetPlace() == KitchenPosition::STOVE)
+			{
+				if (pot.PutIngredient(using_ingredients[whatMouseclickIndex]))
+				{
+					using_ingredients.erase(using_ingredients.begin() + whatMouseclickIndex);
+					whatMouseclickIndex = -1;
+				}
+			}
 		}
 	}
 }
@@ -516,6 +405,14 @@ void Cook::SetScore(std::vector<Recipe*>& recipeBook)
 
 void Cook::DrawScore()
 {
+	doodle::push_settings();
+	doodle::set_font_size(Engine::GetDrawManager().Vec(percentTextSize).x);
+	doodle::draw_text( std::to_string(score) + "%", Engine::GetDrawManager().Vec(percentTextPos).x, Engine::GetDrawManager().Vec(percentTextPos).y);
+	doodle::pop_settings();
+}
+
+void Cook::ChangeFoodImage()
+{
 	if (plate.ButtonClick(WhereISMouse()) == true)
 	{
 		if (score >= 0 && score < 40)
@@ -530,10 +427,9 @@ void Cook::DrawScore()
 		{
 			plateDrawIndex = static_cast<int>(order) * 3 + 1;
 		}
-		canCook = false; // ƒ´øÓ≈Õ∑Œ ∞°¡Æ¥Ÿ¡÷¥¬ ∫ß ¥©∏£∏È true∞° µ«æÓæﬂ«‘.
+		canCook = false; // Ïπ¥Ïö¥ÌÑ∞Î°ú Í∞ÄÏ†∏Îã§Ï£ºÎäî Î≤® ÎàÑÎ•¥Î©¥ trueÍ∞Ä ÎêòÏñ¥ÏïºÌï®.
 		plate.GetIngredientVec().clear();
 	}
-	doodle::draw_text( std::to_string(score) + "%", 700, -10);
 }
 
 void Cook::SetStoveOn()
@@ -573,30 +469,48 @@ void Cook::SetStoveOn()
 
 void Cook::DrawGage()
 {
-	if (time > 0 && time < 2)
+	if (time > 0 && time < 4)
 	{
 		text = "Yet";
 	}
-	else if (time >= 2 && time < 4)
+	else if (time >= 4 && time < 6)
 	{
 		text = "Ready";
 		
 	}
-	else if (time >= 4 && time < 6)
+	else if (time >= 6 && time < 8)
 	{
 		text = "Now";
 		
 	}
-	else if (time >= 6)
+	else if (time >= 8)
 	{
 		text = "Fail";
 		
 	}
 
-	doodle::draw_text(text, 1100, -10);
+	doodle::pop_settings();
+	doodle::set_font_size(Engine::GetDrawManager().Vec(gageBarTextSize).x);
+	doodle::draw_text(text, Engine::GetDrawManager().Vec(gageBarTextPos).x, Engine::GetDrawManager().Vec(gageBarTextPos).y);
+
+	//Color
+	doodle::Color baseColor(0, 0, 0, 200);
+	doodle::Color myGageColor(255, 0, 0);
+	doodle::Color targetGageColor(0, 255, 0, 200);
+
+	doodle::push_settings();
+	doodle::set_fill_color(baseColor);
+	doodle::draw_rectangle(Engine::GetDrawManager().Vec(gageBarPos).x, Engine::GetDrawManager().Vec(gageBarPos).y, Engine::GetDrawManager().Vec(wholeGageBarSize).x, Engine::GetDrawManager().Vec(wholeGageBarSize).y);
+
+	doodle::set_fill_color(myGageColor);
+	doodle::draw_rectangle(Engine::GetDrawManager().Vec(gageBarPos).x, Engine::GetDrawManager().Vec(gageBarPos).y, Engine::GetDrawManager().Vec({ time / 10.0 * wholeGageBarSize.x, wholeGageBarSize.y }).x, Engine::GetDrawManager().Vec(wholeGageBarSize).y);
+
+	doodle::set_fill_color(targetGageColor);
+	doodle::draw_rectangle(Engine::GetDrawManager().Vec({ gageBarPos.x + (0.6 * wholeGageBarSize.x), gageBarPos.y}).x, Engine::GetDrawManager().Vec(gageBarPos).y, Engine::GetDrawManager().Vec({0.2 * wholeGageBarSize.x, wholeGageBarSize.y}).x, Engine::GetDrawManager().Vec(wholeGageBarSize).y);
+	doodle::pop_settings();
 }
 
-void Cook::SpotToPlate()
+void Cook::PotToPlate()
 {
 	if (checkDrawSoup == true)
 	{
@@ -604,6 +518,7 @@ void Cook::SpotToPlate()
 		{
 			leftClick = false;
 			checkDrawSoup = false;
+			drawSoup = true;
 		}
 	}
 	else
@@ -614,6 +529,7 @@ void Cook::SpotToPlate()
 			{
 				leftClick = false;
 				checkDrawSoup = true;
+				drawSoup = true;
 			}
 		}
 	}
@@ -629,7 +545,19 @@ void Cook::SpotToPlate()
 				}
 			}
 			checkDrawSoup = false;
+			drawSoup = false;
 		}
+	}
+}
+
+void Cook::DrawLadleSoup()
+{
+	if (drawSoup == true && tool.GetTool() == ToolName::LADLE)
+	{
+		doodle::push_settings();
+		doodle::set_fill_color(doodle::Color(0, 150, 230));
+		doodle::draw_ellipse(WhereISMouse().x - 17, WhereISMouse().y - 15, 30.0);
+		doodle::pop_settings();
 	}
 }
 
@@ -647,32 +575,26 @@ Ingredient* Cook::CreateIngredient(int index)
 	switch (index)
 	{
 	case 0:
-		newOne = new Lemon(Math::vec2{ first_X + width, first_Y });
+		newOne = new Lemon(Math::vec2{ sideBowlBoardFirstPos.x + (sideBowlSize.x + sideBowlPadding.x) * 0 + ingredientPadding.x, sideBowlBoardFirstPos.y + ingredientPadding.y }, ingredientSize);
 		break;
 	case 1:
-		newOne = new Lettuce(Math::vec2{ first_X, first_Y });
+		newOne = new Lettuce(Math::vec2{ sideBowlBoardFirstPos.x + (sideBowlSize.x + sideBowlPadding.x) * 1 + ingredientPadding.x, sideBowlBoardFirstPos.y + ingredientPadding.y }, ingredientSize);
 		break;
 	case 2:
-		newOne = new Ant(Math::vec2{ first_X, first_Y });
+		newOne = new Ant(Math::vec2{ sideBowlBoardFirstPos.x + (sideBowlSize.x + sideBowlPadding.x) * 2 + ingredientPadding.x, sideBowlBoardFirstPos.y + ingredientPadding.y }, ingredientSize);
 		break;
 	case 3:
-		newOne = new Leaf(Math::vec2{ first_X, first_Y });
+		newOne = new Leaf(Math::vec2{ sideBowlBoardFirstPos.x + (sideBowlSize.x + sideBowlPadding.x) * 3 + ingredientPadding.x, sideBowlBoardFirstPos.y + ingredientPadding.y }, ingredientSize);
 		break;
 	case 4:
-		newOne = new Salt(Math::vec2{ first_X, first_Y });
+		newOne = new Salt(Math::vec2{ sideBowlBoardFirstPos.x + (sideBowlSize.x + sideBowlPadding.x) * 4 + ingredientPadding.x, sideBowlBoardFirstPos.y + ingredientPadding.y }, ingredientSize);
 		break;
 	case 5:
-		newOne = new DragonFruit(Math::vec2{ first_X, first_Y });
+		newOne = new DragonFruit(Math::vec2{ sideBowlBoardFirstPos.x + (sideBowlSize.x + sideBowlPadding.x) * 5 + ingredientPadding.x, sideBowlBoardFirstPos.y + ingredientPadding.y }, ingredientSize);
 		break;
 	case 6:
-		newOne = new MermaidScales(Math::vec2{ first_X, first_Y });
+		newOne = new MermaidScales(Math::vec2{ sideBowlBoardFirstPos.x + (sideBowlSize.x + sideBowlPadding.x) * 6 + ingredientPadding.x, sideBowlBoardFirstPos.y + ingredientPadding.y }, ingredientSize);
 		break;
-	}
-
-	if (newOne != nullptr)
-	{
-		newOne->SetScale(Math::vec2{ Width_raito ,Height_raito });
-		newOne->ChangePos(Math::vec2(first_X + width * index, first_Y));
 	}
 	return newOne;
 }

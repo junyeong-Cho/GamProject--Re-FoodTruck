@@ -9,7 +9,6 @@ Created:    May 17, 2023
 */
 #include "Counter_Background.h"
 #include "..\Engine\Engine.h"
-#include <iostream>
 
 
 void Counter_Background::Add(const std::filesystem::path& texturePath)

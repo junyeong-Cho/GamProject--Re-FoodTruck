@@ -9,6 +9,7 @@ Created:    May 7, 2023
 */
 #pragma once
 #include "..\Engine\GameState.h"
+#include "Counter_Background.h"
 
 class Ending : public CS230::GameState
 {
@@ -21,4 +22,6 @@ public:
 	void Clear();
 
 	std::string GetName() override { return "Ending"; }
+private:
+	Counter_Background background;
 };

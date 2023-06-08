@@ -37,6 +37,11 @@ public:
         oreder_recipe = recipename;
     }
 
+    void Set_Ingredient_num(unsigned int num)
+    {
+        ingredient_num = num;
+    }
+
     static constexpr double timer_max = 30;
     double random_timer;
 private:
@@ -133,7 +138,7 @@ private:
     Button evalue;
 
     double button_timer{ 0 };
-    //¾ÕÀ¸·Î ¿ÔÀ» ¶§
+    //Â¾Ã•Ã€Â¸Â·ÃŽ Â¿Ã”Ã€Â» Â¶Â§
     bool can_order = false;
 
     //evaluating
@@ -146,5 +151,4 @@ private:
 
     //want food
     RecipeName oreder_recipe = RecipeName::AntSalad;
-
 };

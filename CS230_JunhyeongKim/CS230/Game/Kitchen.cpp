@@ -6,18 +6,29 @@
 extern bool leftClick;
 
 Kitchen::Kitchen()
-	:go_counter(100,100,100,100)
+	:go_counter(930.0, 720.0, 120.0, 80.0)
 {
-	cuttingBoardTexture = Engine::GetTextureManager().Load("Assets/Cutting_board.png");
-	kitchenBackgroundTexture = Engine::GetTextureManager().Load("Assets/kitchenBackground.png");
-	bellTexture = Engine::GetTextureManager().Load("Assets/Bell.png");
-
 }
 
 void Kitchen::Load()
 {
 	if (canLoad == true)
 	{
+		cuttingBoardTexture = Engine::GetTextureManager().Load("Assets/Cutting_board.png");
+		kitchenBackgroundTexture = Engine::GetTextureManager().Load("Assets/kitchenBackground.png");
+		bellTexture = Engine::GetTextureManager().Load("Assets/Bell.png");
+
+		orderRecipeTexture.push_back(Engine::GetTextureManager().Load("Assets/LemonSalad_Soso.png"));
+		orderRecipeTexture.push_back(Engine::GetTextureManager().Load("Assets/SaltSalad_Soso.png"));
+		orderRecipeTexture.push_back(Engine::GetTextureManager().Load("Assets/LeafSalad_Soso.png"));
+		orderRecipeTexture.push_back(Engine::GetTextureManager().Load("Assets/AntSalad_Soso.png"));
+		orderRecipeTexture.push_back(Engine::GetTextureManager().Load("Assets/DragonFruitSalad_Soso.png"));
+		orderRecipeTexture.push_back(Engine::GetTextureManager().Load("Assets/MermaidScalesSalad_Soso.png"));
+		orderRecipeTexture.push_back(Engine::GetTextureManager().Load("Assets/WaterSoup_Soso.png"));
+		orderRecipeTexture.push_back(Engine::GetTextureManager().Load("Assets/AntSoup_Soso.png"));
+		orderRecipeTexture.push_back(Engine::GetTextureManager().Load("Assets/StrongSoup_Soso.png"));
+
+		orderUI = Engine::GetTextureManager().Load("Assets/MainFrame.png");
 		cook.Load();
 		recipeBook.Load();
 		canLoad = false;
@@ -38,20 +49,33 @@ void Kitchen::Load()
 
 		for (int i = 0; i < cook.ingredient_number; ++i)
 		{
-			sideBowl.push_back(SideBowl(Math::vec2{ cook.first_X + cook.width * i, cook.first_Y }, "100"));
+			sideBowl.push_back(SideBowl(Math::vec2{ cook.sideBowlBoardFirstPos.x + (cook.sideBowlSize.x + cook.sideBowlPadding.x) * i, cook.sideBowlBoardFirstPos.y }, "1"));
+			sideBowl[i].Load();
 		}
+		cook.GetOrder(orderRecipe, recipeBook.GetRecipeBook());
 	}
 }
 
 void Kitchen::Update(double dt)
 {
 	Engine::GetUnloadManager().GetCounterObjectManager().UpdateAll(dt);
-	cook.Update(dt);
-	recipeBook.Update();
-	go_counter.update(doodle::get_mouse_x(), doodle::get_mouse_y(), States::Counter);
 
+	if (recipeBook.BookOpen() == false)
+	{
+		cook.Update(dt);
+		if (cook.GetTool() == ToolName::HAND)
+		{
+			go_counter.update(doodle::get_mouse_x(), doodle::get_mouse_y(), States::Counter);
+		}
+	}
+	cook.ToolUpdate();
 	SetSideBowl();
-	SetSideBowlRefill();
+	if (cook.GetTool() == ToolName::HAND)
+	{
+		recipeBook.Update();
+		SetSideBowlRefill();
+	}
+
 
 	Engine::GetUnloadManager().Update_timer(dt);
 
@@ -69,7 +93,20 @@ void Kitchen::Update(double dt)
 			canUnload = true;
 		}
 	}
+
+
+	if (Engine::GetUnloadManager().GetRate() <= 0 || Engine::GetUnloadManager().GetMoney() <= 0)
+	{
+		Engine::GetGameStateManager().SetNextGameState(static_cast<int>(States::Ending));
+	}
+
 	cook.GetOrder(RecipeName::AntSalad, recipeBook.GetRecipeBook());
+
+	if (Engine::GetOrderManager().GetOrder() != orderRecipe)
+	{
+		SetOrder();
+		cook.GetOrder(orderRecipe, recipeBook.GetRecipeBook());
+	}
 
 	for (int i = 0; i < sideBowl.size(); ++i)
 	{
@@ -91,7 +128,10 @@ void Kitchen::Draw()
 	cook.Draw();
 	cook.SetScore(recipeBook.GetRecipeBook());
 	recipeBook.Draw();
-	go_counter.draw();
+	go_counter.draw("Counter");
+
+	//í•­ìƒ ì œì¼ ìœ„ì— ê·¸ë ¤ì ¸ì•¼í•¨.
+	cook.ToolDraw();
 }
 
 void Kitchen::Unload()
@@ -111,8 +151,8 @@ void Kitchen::SetSideBowl()
 		sideBowl[i].SetBowlNum(cook.GetSideBwolSize(i));
 		sideBowl[i].Refill();
 	}
-
 }
+
 
 void Kitchen::SetSideBowlRefill()
 {
@@ -129,7 +169,6 @@ void Kitchen::SetSideBowlRefill()
 void Kitchen::Draw_UI()
 {
 	Draw_Background();
-	Draw_RecipeBook();
 	Draw_Order();
 	Draw_CounterButton();
 	Draw_Bell();
@@ -143,56 +182,29 @@ void Kitchen::Draw_UI()
 
 void Kitchen::Draw_Background()
 {
-	double scale_x = Engine::GetWindow().GetSize().x / static_cast<double>(kitchenBackgroundTexture->GetSize().x);
-	double scale_y = Engine::GetWindow().GetSize().y / static_cast<double>(kitchenBackgroundTexture->GetSize().y);
+	double scale_x = (double)Engine::GetWindow().GetSize().x / static_cast<double>(kitchenBackgroundTexture->GetSize().x);
+	double scale_y = (double)Engine::GetWindow().GetSize().y / static_cast<double>(kitchenBackgroundTexture->GetSize().y);
 	kitchenBackgroundTexture->Draw(Math::TransformationMatrix() * Math::ScaleMatrix({ scale_x, scale_y }));;
 }
 
 
-void Kitchen::Draw_RecipeBook()
-{
-	
-}
-
 void Kitchen::Draw_Order()
 {
-	//ÁÖ¹® -> º¤ÅÍ¿¡ ³Ö¾î¼­ ¼ø¼­´ë·Î.
+	orderUI->Draw(Engine::GetDrawManager().GetMatrix(orderUI, cook.orderFramePos, cook.orderFrameSize));
+
+	CS230::Texture* foodTexture = orderRecipeTexture[static_cast<int>(orderRecipe)];
+	foodTexture->Draw(Engine::GetDrawManager().GetMatrix(foodTexture, cook.orderRecipePos, cook.orderRecipeSize));
+
 }
 
 void Kitchen::Draw_CounterButton()
 {
-	doodle::push_settings();
-
-	doodle::set_outline_color(doodle::HexColor{ 0xFF7171FF });
-	doodle::set_fill_color(doodle::HexColor{ 0xEBE3C0FF });
-	doodle::set_outline_width(5.0);
-	doodle::smooth_drawing();
-	doodle::draw_rectangle(cook.backCounter_X, cook.backCounter_Y, cook.backCounter_width, cook.backCounter_height);
-	doodle::set_fill_color(doodle::Color(0, 0, 0));
-	doodle::set_font_size(cook.backCounter_width / 6.0);
-	doodle::draw_text("Counter", cook.backCounter_X + cook.backCounter_width / 15.0, cook.backCounter_Y);
-	doodle::pop_settings();
+	
 }
 
 void Kitchen::Draw_Bell()
 {
-	//Ä«¿îÅÍ ¹öÆ°ÀÌ¶û ÀÌ ¹öÆ°ÀÌ¶û ´­·¶À» ¶§ ÃÊ±âÈ­ ÇØÁÖ´Â°Ô ´Ù¸§.
-	/*doodle::push_settings();
-
-	doodle::set_outline_color(doodle::HexColor{ 0xFF7171FF });
-	doodle::set_fill_color(doodle::HexColor{ 0xEBE3C0FF });
-	doodle::set_outline_width(5.0);
-	doodle::smooth_drawing();
-	doodle::draw_ellipse(cook.bell_X, cook.bell_Y, cook.bell_width);
-	doodle::set_fill_color(doodle::Color(0, 0, 0));
-	doodle::set_font_size(cook.bell_width / 3.0);
-	doodle::draw_text(" bell", cook.bell_X - cook.bell_width / 2.0, cook.bell_Y - cook.bell_width / 3.0);
-
-	doodle::pop_settings();*/
-
-	Math::TransformationMatrix matrix = Math::TranslationMatrix(Math::vec2(cook.bell_X - cook.bell_width/1.2, cook.bell_Y - cook.bell_width/1.2)) * Math::RotationMatrix(0) * Math::ScaleMatrix( (cook.bell_width * 1.3)/bellTexture->GetSize().x);
-
-	bellTexture->Draw(matrix);
+	bellTexture->Draw(Engine::GetDrawManager().GetMatrix(bellTexture, cook.bellPos, cook.bellSize));
 }
 
 
@@ -200,10 +212,8 @@ void Kitchen::Draw_Bell()
 void Kitchen::Draw_CuttingBoard()
 {
 	doodle::push_settings();
-	Math::TransformationMatrix matrix = Math::TranslationMatrix(Math::vec2(cook.cuttingBoard_X, cook.cuttingBoard_Y+20)) * Math::RotationMatrix(0) * Math::ScaleMatrix({ cook.cuttingBoard_width / cuttingBoardTexture->GetSize().x, cook.cuttingBoard_height / cuttingBoardTexture->GetSize().y });
-	
+	Math::TransformationMatrix matrix = Engine::GetDrawManager().GetMatrix(cuttingBoardTexture, cook.cuttingBoardPos, cook.cuttingBoardSize);
 	cuttingBoardTexture->Draw(matrix);
-
 	doodle::pop_settings();
 }
 
@@ -244,5 +254,11 @@ void Kitchen::Draw_Frame_Text()
 	doodle::set_fill_color(0, 0, 0);
 	doodle::draw_text(std::to_string(Engine::GetUnloadManager().GetMoney()), Engine::GetWindow().GetSize().x / 1.3 + Engine::GetWindow().GetSize().x * 0.1, Engine::GetWindow().GetSize().y / 8.0 * 7.35);
 	doodle::pop_settings();
+}
+
+
+void Kitchen::SetOrder()
+{
+	orderRecipe = Engine::GetOrderManager().GetOrder();
 }
 

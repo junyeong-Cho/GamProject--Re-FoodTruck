@@ -52,6 +52,8 @@
     <ClCompile Include="Game\SunMan.cpp" />
     <ClCompile Include="Game\Theif.cpp" />
     <ClCompile Include="Game\Amy.cpp" />
+    <ClCompile Include="Engine\DrawManager.cpp" />
+
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Animation.h" />
@@ -82,8 +84,6 @@
     <ClInclude Include="Game\Ingredient.h" />
     <ClInclude Include="Game\IngredientName.h" />
     <ClInclude Include="Game\IngredientTextureManager.h" />
-    <ClInclude Include="Game\InventoryName.h" />
-    <ClInclude Include="Game\InventoryTexture.h" />
     <ClInclude Include="Game\Kitchen.h" />
     <ClInclude Include="Game\KitchenPosition.h" />
     <ClInclude Include="Game\Main_menu.h" />
@@ -116,5 +116,7 @@
     <ClInclude Include="Game\SunMan.h" />
     <ClInclude Include="Game\Theif.h" />
     <ClInclude Include="Game\Amy.h" />
+    <ClInclude Include="Engine\OrderManager.h" />
+    <ClInclude Include="Engine\DrawManager.h" />
   </ItemGroup>
 </Project>

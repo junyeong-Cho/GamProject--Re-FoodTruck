@@ -29,6 +29,8 @@ void Button::draw()
     doodle::set_fill_color(255, 100, 100, alpha);
     doodle::draw_rectangle(Width_raito * x, Height_raito * y, Width_raito * width, Height_raito * height);
     doodle::pop_settings();
+
+    DrawLoading();
 }
 
 
@@ -52,8 +54,10 @@ void Button::draw(std::string text)
     doodle::draw_rectangle(Width_raito * x, Height_raito * y, Width_raito * width, Height_raito * height);
     doodle::set_fill_color(0, alpha);
     doodle::set_font_size(Width_raito * (width / 7.0));
-    doodle::draw_text(text, Width_raito * (x + width / 3), Height_raito * (y + height / 4));
+    doodle::draw_text(text, Width_raito * (x + width / text.size()), Height_raito * (y + height / 4));
     doodle::pop_settings();
+
+    DrawLoading();
 }
 
 void Button::text_draw(std::string text)
@@ -95,9 +99,29 @@ void Button::check_click(States next_state)
     if (doodle::MouseIsPressed == false && checkMouse == true)
     {
         checkMouse = false;
-        Engine::GetGameStateManager().SetNextGameState(static_cast<int>(next_state));
+        if (next_state == States::Kitchen)
+        {
+            canLoadingText = true;
+        }
+        else
+        {
+            Engine::GetGameStateManager().SetNextGameState(static_cast<int>(next_state));
+        }
     }
 
+}
+
+void Button::DrawLoading()
+{
+    if (canLoadingText == true)
+    {
+        doodle::push_settings();
+        doodle::set_font_size(120.0);
+        doodle::draw_text("Loading...", 300.0, 300.0);
+        doodle::pop_settings();
+        Engine::GetGameStateManager().SetNextGameState(static_cast<int>(States::Kitchen));
+        canLoadingText = false;
+    }
 }
 
 void Button::check_click()

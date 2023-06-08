@@ -15,5 +15,8 @@ Elf::Elf(Customor* front)
 	:Customor(front)
 {
 	sprite.Load("Assets/Characters/Elf.spt");
+
 	Set_Oreder_recipe(RecipeName::DragonFruitSalad);
+	Set_Ingredient_num(5);
+
 }
