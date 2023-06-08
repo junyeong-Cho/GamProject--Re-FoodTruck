@@ -9,14 +9,20 @@ class Recipe
 public:
 	Recipe();
 	virtual void Load() = 0;
-	virtual void Draw() = 0;
+	virtual void Draw();
 	int CheckComplete(std::vector<Ingredient*>& plating);
-	void Update();
 	void Unload();
 	int GetTotalNum() { return totalNum; }
+	Math::vec2 GetRecipeTexturePos() { return texturePos; }
+	Math::ivec2 GetRecipeTextureSize() { return texture->GetSize(); }
+
 protected:
+	//variables
+	//Recipe Page
 	CS230::Texture* texture;
-	Math::vec2 texturePos;
+	Math::vec2 texturePos{ 280.0, 110.0 };
+	Math::vec2 textureSize{ 830.0, 600.0 };
+
 	RecipeName recippeName;
 	std::vector<Ingredient*> recipe;
 
@@ -49,7 +55,6 @@ class LemonSalad : public Recipe
 public:
 	LemonSalad();
 	void Load() override;
-	void Draw() override;
 private:
 };
 
@@ -58,7 +63,6 @@ class SaltSalad : public Recipe
 public:
 	SaltSalad();
 	void Load() override;
-	void Draw() override;
 private:
 
 };
@@ -68,7 +72,6 @@ class LeafSalad : public Recipe
 public:
 	LeafSalad();
 	void Load() override;
-	void Draw() override;
 private:
 
 };
@@ -78,7 +81,6 @@ class AntSalad : public Recipe
 public:
 	AntSalad();
 	void Load() override;
-	void Draw() override;
 private:
 
 };
@@ -88,7 +90,6 @@ class DragonFruitSalad : public Recipe
 public:
 	DragonFruitSalad();
 	void Load() override;
-	void Draw() override;
 private:
 
 };
@@ -98,7 +99,6 @@ class MermaidScalesSalad : public Recipe
 public:
 	MermaidScalesSalad();
 	void Load() override;
-	void Draw() override;
 private:
 
 };
@@ -108,7 +108,6 @@ class WaterSoup : public Recipe
 public:
 	WaterSoup();
 	void Load() override;
-	void Draw() override;
 private:
 
 };
@@ -118,7 +117,6 @@ class AntSoup : public Recipe
 public:
 	AntSoup();
 	void Load() override;
-	void Draw() override;
 private:
 
 };
@@ -128,7 +126,6 @@ class StrongSoup : public Recipe
 public:
 	StrongSoup();
 	void Load() override;
-	void Draw() override;
 private:
 
 };

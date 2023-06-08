@@ -17,5 +17,6 @@ enum class States {
     Kitchen,
     Ending,
     Day_end,
-    Exit
+    Credit,
+    Exit,
 };

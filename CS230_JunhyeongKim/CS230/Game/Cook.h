@@ -17,6 +17,8 @@ public:
 	Cook();
     void Load();
 	void Update(double dt);
+	void ToolUpdate();
+	void ToolDraw();
     void Draw();
 	void Unload();
 	void DrawScore();
@@ -26,94 +28,69 @@ public:
 	void GetOrder(RecipeName orderRecipe, std::vector<Recipe*>& recipeBook);
 	int GetSideBwolSize(int index) { return seven_ingredients[index].size(); }
 	void Refill(int index);
+	ToolName GetTool() { return tool.GetTool(); }
 	
 
-	double Width_raito = 0;
-	double Height_raito = 0;
+	//variables
+	//CuttingBoard
+	Math::vec2 cuttingBoardPos{ 60.0, 90.0 };
+	Math::vec2 cuttingBoardSize{ 473.0, 327.0 };
 
-	double first_X{ 0.0 };
-	double first_Y{ 0.0 };
-	double width{ 0.0 };
-	double height{ 0.0 };
+	//Plate
+	Math::vec2 platePos{ 580.0, 100.0 };
+	Math::vec2 plateSize{ 300, 200.0 };
 
-	double cuttingBoard_X{ 0.0 };
-	double cuttingBoard_Y{ 0.0 };
-	double cuttingBoard_width{ 0.0 };
-	double cuttingBoard_height{ 0.0 };
+	Math::vec2 plateCollisionSize{ 300.0, 300.0 };
 
-	double bowl_width{ 0.0 };
-	double bowl_X{ 0.0 };
-	double bowl_Y{ 0.0 };
+	//Plate Button
+	Math::vec2 plateButtonPos{ 820.0, 80.0 };
+	Math::vec2 plateButtonSize{ 60.0, 60.0 };
 
-	double stove_width{ 0.0 };
-	double stove_height{ 0.0 };
-	double stove_X{ 0.0 };
-	double stove_Y{ 0.0 };
+	//Complete Percent Text
+	Math::vec2 percentTextPos{ 680.0, 55.0 };
+	Math::vec2 percentTextSize{ 30.0, 0.0 };
 
-	double trashCan_X{ 0.0 };
-	double trashCan_Y{ 0.0 };
-	double trashCan_width{ 0.0 };
-	double trashCan_height{ 0.0 };
+	//Pot
+	Math::vec2 potPos{ 920.0, 40.0 };
+	Math::vec2 potSize{ 425.0, 400.0 };
 
-	double bell_X{ 0.0 };
-	double bell_Y{ 0.0 };
-	double bell_width{ 0.0 };
+	//Pot Button
+	Math::vec2 potButtonPos{ 1305.0, 160.0 };
+	Math::vec2 potButtonSize{ 60.0, 60.0 };
 
-	double zero{ 0.0 };
-	double endWidth{ 0.0 };
-	double endHeight{ 0.0 };
+	//Pot GageBar
+	Math::vec2 gageBarPos{ 920.0, 40.0 };
+	Math::vec2 wholeGageBarSize{ 250.0, 50.0 };
+	Math::vec2 gageBarTextPos{ 1290.0, 50.0 };
+	Math::vec2 gageBarTextSize{ 30.0, 0 };
 
-	double topBackground_X1{ 0.0 };
-	double topBackground_Y1{ 0.0 };
-	double topBackground_X2{ 0.0 };
-	double topBackground_Y2{ 0.0 };
-	double topBackground_X3{ 0.0 };
-	double topBackground_Y3{ 0.0 };
-	double topBackground_X4{ 0.0 };
-	double topBackground_Y4{ 0.0 };
+	//RecipeBook
+	Math::vec2 recipeBookPos{ 580.0, 720.0 };
+	Math::vec2 recipeBookSize{ 70.0, 80.0 };
 
-	double bottomBackground_X1{ 0.0 };
-	double bottomBackground_Y1{ 0.0 };
-	double bottomBackground_X2{ 0.0 };
-	double bottomBackground_Y2{ 0.0 };
-	double bottomBackground_X3{ 0.0 };
-	double bottomBackground_Y3{ 0.0 };
-	double bottomBackground_X4{ 0.0 };
-	double bottomBackground_Y4{ 0.0 };
+	//OrderFrame
+	Math::vec2 orderFramePos{ 700.0, 670.0 };
+	Math::vec2 orderFrameSize{ 215.0, 130.0 };
 
-	double clock_X{ 0.0 };
-	double clock_Y{ 0.0 };
-	double clock_width{ 0.0 };
-	double clock_height{ 0.0 };
+	//OrderRecipe
+	Math::vec2 orderRecipePos{ 745.0, 710.0 };
+	Math::vec2 orderRecipeSize{ 120.0, 80.0 };
 
-	double receipt_X{ 0.0 };
-	double receipt_Y{ 0.0 };
-	double receipt_width{ 0.0 };
-	double receipt_height{ 0.0 };
+	//Bell
+	Math::vec2 bellPos{ 1245.0, 450.0 };
+	Math::vec2 bellSize{ 115.0, 115.0 };
 
-	double backCounter_X{ 0.0 };
-	double backCounter_Y{ 0.0 };
-	double backCounter_width{ 0.0 };
-	double backCounter_height{ 0.0 };
+	//SideBowl
+	Math::vec2 sideBowlBoardFirstPos{ 65.0, 470.0 };
+	Math::vec2 sideBowlSize{ 155.0, 145.0 };
+	Math::vec2 sideBowlPadding{ 10.0,10.0 };
 
-	double toolDrawer_X{ 0.0 };
-	double toolDrawer_Y{ 0.0 };
-	double toolDrawer_width{ 0.0 };
-	double toolDrawer_height{ 0.0 };
-
-	double refrigerator_X{ 0.0 };
-	double refrigerator_Y{ 0.0 };
-	double refrigerator_width{ 0.0 };
-	double refrigerator_height{ 0.0 };
-
-	double toolExplain_X{ 0.0 };
-	double toolExplain_Y{ 0.0 };
-	double toolExplain_width{ 0.0 };
-	double toolExplain_height{ 0.0 };
+	//Ingredient
+	Math::vec2 ingredientSize{ 100.0, 100.0 };
+	Math::vec2 ingredientPadding{ 30.0, 30.0 };
 
 	int ingredient_number{ 7 };
-	void Set_Variables();
-	void a();
+	void ClickBell();
 
 private:
 
@@ -126,15 +103,16 @@ private:
     int WhatIndexMouseClick();
     void PutSlot();
     void DrawIngredients();
-	void ChangeIngredientPos();
 	void SlotDraw();
 	void SetStoveOn();
-	void SpotToPlate();
+	void PotToPlate();
 	int ReturnScore() { return score; }
 	void SetIngredient();
 	Ingredient* CreateIngredient(int index);
 	void TrashCan();
-	void ToolTask();
+	void Scooping();
+	void DrawLadleSoup();
+	void ChangeFoodImage();
 
 
 
@@ -163,4 +141,5 @@ private:
 
 	int refillNum = 3;
 	int firstIngredientNum = 3;
+	bool drawSoup = false;
 };

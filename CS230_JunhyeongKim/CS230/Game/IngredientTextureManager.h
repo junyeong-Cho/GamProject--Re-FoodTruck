@@ -7,6 +7,8 @@ class IngredientTextureManager
 {
 public:
 	IngredientTextureManager();
+	void Load();
+	void Unload();
 	std::vector<std::vector<CS230::Texture*>> GetTexture() const;
 private:
 	int ingredientNum = 7;

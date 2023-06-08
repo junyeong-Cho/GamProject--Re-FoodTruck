@@ -1,0 +1,13 @@
+Assets/Clock.png
+FrameSize 128 128
+HotSpot 65 15
+Frame 0 0
+Frame 110 0
+Frame 224 0 
+Frame 335 0
+Frame 0 110 
+Frame 109 110 
+Frame 224 110 
+Frame 335 110
+Anim Assets/None.anm
+Anim Assets/ClockMoving.anm

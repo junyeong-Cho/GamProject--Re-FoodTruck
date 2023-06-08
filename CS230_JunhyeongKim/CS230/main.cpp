@@ -10,13 +10,19 @@ Created:    March 8, 2023
 
 #include <iostream>
 
+#include <SFML/Audio.hpp>
+
 #include "Engine/Engine.h"
+
 #include "Game/Splash.h"
+#include "Game/MainMenu.h"
 #include "Game/Main_menu.h"
 #include "Game/Counter.h"
 #include "Game/Kitchen.h"
 #include "Game/Ending.h"
 #include "Game/Day_end.h"
+#include "Game/Credit.h"
+
 
 int main() {
     try {
@@ -25,8 +31,8 @@ int main() {
 
         Splash splash;
         engine.GetGameStateManager().AddGameState(splash);
-        Main_menu main_menu;
-        engine.GetGameStateManager().AddGameState(main_menu);
+        MainMenu mainmenu;
+        engine.GetGameStateManager().AddGameState(mainmenu);
         Counter counter;
         engine.GetGameStateManager().AddGameState(counter);
         Kitchen kitchen;
@@ -35,6 +41,11 @@ int main() {
         engine.GetGameStateManager().AddGameState(ending);
         Day_end day_end;
         engine.GetGameStateManager().AddGameState(day_end);
+        Credit credit;
+        engine.GetGameStateManager().AddGameState(credit);
+        
+
+        
 
         while (engine.HasGameEnded() == false) 
         {

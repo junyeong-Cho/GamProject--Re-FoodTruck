@@ -89,10 +89,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)external\SFML\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)external\SFML\$(Platform)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-main-d.lib;sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-audio-d.lib;sfml-network-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>if not exist "$(OutputPath)Assets" mkdir "$(OutputPath)Assets"
@@ -108,12 +112,16 @@ xcopy /d /y Assets\* "$(OutputPath)Assets"
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)external\SFML\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)external\SFML\$(Platform)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-main.lib;sfml-graphics.lib;sfml-window.lib;sfml-system.lib;sfml-audio.lib;sfml-network.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>if not exist "$(OutputPath)Assets" mkdir "$(OutputPath)Assets"
@@ -127,10 +135,14 @@ xcopy /d /y Assets\* "$(OutputPath)Assets"
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)external\SFML\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)external\SFML\$(Platform)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-main-d.lib;sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-audio-d.lib;sfml-network-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>if not exist "$(OutputPath)Assets" mkdir "$(OutputPath)Assets"
@@ -146,12 +158,16 @@ xcopy /d /y Assets\* "$(OutputPath)Assets"
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)external\SFML\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)external\SFML\$(Platform)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-main.lib;sfml-graphics.lib;sfml-window.lib;sfml-system.lib;sfml-audio.lib;sfml-network.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>if not exist "$(OutputPath)Assets" mkdir "$(OutputPath)Assets"
@@ -162,6 +178,7 @@ xcopy /d /y Assets\* "$(OutputPath)Assets"
   <ItemGroup>
     <ClCompile Include="Engine\Animation.cpp" />
     <ClCompile Include="Engine\Camera.cpp" />
+    <ClCompile Include="Engine\DrawManager.cpp" />
     <ClCompile Include="Engine\Engine.cpp" />
     <ClCompile Include="Engine\GameObject.cpp" />
     <ClCompile Include="Engine\GameObjectManager.cpp" />
@@ -175,32 +192,46 @@ xcopy /d /y Assets\* "$(OutputPath)Assets"
     <ClCompile Include="Engine\Unload_manager.cpp" />
     <ClCompile Include="Engine\Vec2.cpp" />
     <ClCompile Include="Engine\Window.cpp" />
+    <ClCompile Include="Game\Anteater.cpp" />
     <ClCompile Include="Game\Button.cpp" />
+    <ClCompile Include="Game\Clock.cpp" />
     <ClCompile Include="Game\Cook.cpp" />
     <ClCompile Include="Game\Counter.cpp" />
     <ClCompile Include="Game\Counter_Background.cpp" />
+    <ClCompile Include="Game\Credit.cpp" />
     <ClCompile Include="Game\Customer.cpp" />
     <ClCompile Include="Game\Day_end.cpp" />
     <ClCompile Include="Game\Elf.cpp" />
     <ClCompile Include="Game\Ending.cpp" />
+    <ClCompile Include="Game\Fireman.cpp" />
+    <ClCompile Include="Game\Frame.cpp" />
     <ClCompile Include="Game\Giraffe.cpp" />
+    <ClCompile Include="Game\Greendragon.cpp" />
     <ClCompile Include="Game\Ingredient.cpp" />
     <ClCompile Include="Game\IngredientTextureManager.cpp" />
     <ClCompile Include="Game\Kitchen.cpp" />
+    <ClCompile Include="Game\MainMenu.cpp" />
     <ClCompile Include="Game\Main_menu.cpp" />
+    <ClCompile Include="Game\Molu.cpp" />
     <ClCompile Include="Game\Operation.cpp" />
     <ClCompile Include="Game\Pet.cpp" />
     <ClCompile Include="Game\Recipe.cpp" />
     <ClCompile Include="Game\RecipeBook.cpp" />
+    <ClCompile Include="Game\Refutation.cpp" />
     <ClCompile Include="Game\SideBowl.cpp" />
     <ClCompile Include="Game\Slot.cpp" />
+    <ClCompile Include="Game\Sound.cpp" />
     <ClCompile Include="Game\Splash.cpp" />
     <ClCompile Include="Game\Tool.cpp" />
+    <ClCompile Include="Game\Zilien.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Animation.h" />
     <ClInclude Include="Engine\Camera.h" />
+    <ClInclude Include="Engine\Component.h" />
+    <ClInclude Include="Engine\ComponentManager.h" />
+    <ClInclude Include="Engine\DrawManager.h" />
     <ClInclude Include="Engine\Engine.h" />
     <ClInclude Include="Engine\GameObject.h" />
     <ClInclude Include="Engine\GameObjectManager.h" />
@@ -209,6 +240,7 @@ xcopy /d /y Assets\* "$(OutputPath)Assets"
     <ClInclude Include="Engine\Input.h" />
     <ClInclude Include="Engine\Logger.h" />
     <ClInclude Include="Engine\Matrix.h" />
+    <ClInclude Include="Engine\OrderManager.h" />
     <ClInclude Include="Engine\Rect.h" />
     <ClInclude Include="Engine\Sprite.h" />
     <ClInclude Include="Engine\Texture.h" />
@@ -216,35 +248,44 @@ xcopy /d /y Assets\* "$(OutputPath)Assets"
     <ClInclude Include="Engine\Unload_manager.h" />
     <ClInclude Include="Engine\Vec2.h" />
     <ClInclude Include="Engine\Window.h" />
+    <ClInclude Include="Game\Anteater.h" />
     <ClInclude Include="Game\Button.h" />
+    <ClInclude Include="Game\Clock.h" />
     <ClInclude Include="Game\Cook.h" />
     <ClInclude Include="Game\Counter.h" />
     <ClInclude Include="Game\Counter_Background.h" />
+    <ClInclude Include="Game\Credit.h" />
     <ClInclude Include="Game\Customer.h" />
     <ClInclude Include="Game\Day_end.h" />
     <ClInclude Include="Game\Elf.h" />
     <ClInclude Include="Game\Ending.h" />
+    <ClInclude Include="Game\Fireman.h" />
+    <ClInclude Include="Game\Frame.h" />
     <ClInclude Include="Game\Giraffe.h" />
+    <ClInclude Include="Game\Greendragon.h" />
     <ClInclude Include="Game\Ingredient.h" />
     <ClInclude Include="Game\IngredientName.h" />
     <ClInclude Include="Game\IngredientTextureManager.h" />
-    <ClInclude Include="Game\InventoryName.h" />
-    <ClInclude Include="Game\InventoryTexture.h" />
     <ClInclude Include="Game\Kitchen.h" />
     <ClInclude Include="Game\KitchenPosition.h" />
+    <ClInclude Include="Game\MainMenu.h" />
     <ClInclude Include="Game\Main_menu.h" />
+    <ClInclude Include="Game\Molu.h" />
     <ClInclude Include="Game\Operation.h" />
     <ClInclude Include="Game\Pet.h" />
     <ClInclude Include="Game\PetPropertyName.h" />
     <ClInclude Include="Game\Recipe.h" />
     <ClInclude Include="Game\RecipeBook.h" />
     <ClInclude Include="Game\RecipeName.h" />
+    <ClInclude Include="Game\Refutation.h" />
     <ClInclude Include="Game\SideBowl.h" />
     <ClInclude Include="Game\Slot.h" />
+    <ClInclude Include="Game\Sound.h" />
     <ClInclude Include="Game\Splash.h" />
     <ClInclude Include="Game\States.h" />
     <ClInclude Include="Game\Tool.h" />
     <ClInclude Include="Game\ToolName.h" />
+    <ClInclude Include="Game\Zilien.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

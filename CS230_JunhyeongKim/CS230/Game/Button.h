@@ -44,4 +44,6 @@ struct Button
     void update(const int mouse_x, const int mouse_y, States next_state);
 
     void update(const int mouse_x, const int mouse_y);
+    void DrawLoading();
+    bool canLoadingText = false;
 };

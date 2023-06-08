@@ -4,7 +4,7 @@ Reproduction or distribution of this file or its contents without
 prior written consent is prohibited
 File Name:  Elf.cpp
 Project:    CS230 Engine
-Author:     Junhyeong Kim
+Author:     Junyeong Cho
 Created:    March 3, 2023
 */
 
@@ -14,7 +14,7 @@ Created:    March 3, 2023
 Elf::Elf(Customor* front)
 	:Customor(front)
 {
-	sprite.Load("Assets/Elf.spt");
+	sprite.Load("Assets/Characters/Elf.spt");
 	Set_Oreder_recipe(RecipeName::LeafSalad);
 	Set_Ingredient_num(5);
 }

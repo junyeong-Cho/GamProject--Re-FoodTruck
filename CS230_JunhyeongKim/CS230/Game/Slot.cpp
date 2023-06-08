@@ -1,29 +1,43 @@
 #include "Slot.h"
 #include "doodle/drawing.hpp"
-#include <math.h>
 
 #include <iostream>
 
 extern bool leftClick;
 
-Slot::Slot(Math::vec2 pos) : position(pos)
+Slot::Slot(Math::vec2 pos, Math::vec2 size, Math::vec2 buttonPos, Math::vec2 buttonSize) 
+	: position(pos), size(size), buttonPos(buttonPos), buttonSize(buttonSize)
+{
+	standardSlotRectPos.x += pos.x;
+}
+
+void Slot::SetSlotPos()
 {
 	int index = 0;
-	double standardX = pos.x + 40.0;
-	double standardY = pos.y + 210.0;
-	double padding = 60.0;
 	for (int i = 0; i < 4; ++i)
 	{
 		for (int j = 0; j < 4; ++j)
 		{
-			slotPos.insert(std::pair<int, Math::vec2>(index, Math::vec2(standardX + padding * j
-				, standardY - padding * i)));
+			slotPos.insert(std::pair<int, Math::vec2>(index, Math::vec2(standardSlotRectPos.x + (standardSlotRectPadding.x + standardSlotRectSize.x) * j
+				, standardSlotRectPos.y - (standardSlotRectPadding.y + standardSlotRectSize.y) * i)));
 			++index;
 		}
 	}
 }
 
-Plate::Plate(Math::vec2 pos) : Slot(pos)
+Plate::Plate(Math::vec2 pos, Math::vec2 size, Math::vec2 buttonPos, Math::vec2 buttonSize) : Slot(pos, size, buttonPos, buttonSize)
+{
+
+	standardSlotRectPos.x += padding;
+	SetSlotPos();
+}
+
+Pot::Pot(Math::vec2 pos, Math::vec2 size, Math::vec2 buttonPos, Math::vec2 buttonSize) : Slot(pos, size, buttonPos, buttonSize)
+{
+	standardSlotRectPos.x += padding;
+	SetSlotPos();
+}
+void Plate::Load()
 {
 	texture.push_back(Engine::GetTextureManager().Load("Assets/EmptyPlate.png")); // 0
 
@@ -64,29 +78,16 @@ Plate::Plate(Math::vec2 pos) : Slot(pos)
 	texture.push_back(Engine::GetTextureManager().Load("Assets/StrongSoup_Bad.png")); //27
 }
 
-Pot::Pot(Math::vec2 pos) : Slot(pos)
-{
-	texture.push_back(Engine::GetTextureManager().Load("Assets/EmptyPot.png"));
-	texture.push_back(Engine::GetTextureManager().Load("Assets/FullPot.png"));
-}
-void Plate::Load()
-{
-}
-
 void Pot::Load()
 {
+	texture.push_back(Engine::GetTextureManager().Load("Assets/StoveOffPot.png"));
+	texture.push_back(Engine::GetTextureManager().Load("Assets/StoveOnPot.png"));
 }
 
-void Plate::Draw(int index)
+void Slot::Draw(int index)
 {
-	Math::TransformationMatrix matrix = Math::TranslationMatrix(position) * Math::RotationMatrix(0) * Math::ScaleMatrix(0.5);
+	Math::TransformationMatrix matrix = Engine::GetDrawManager().GetMatrix(texture[index], position, size);
 
-	texture[index]->Draw(matrix);
-}
-void Pot::Draw(int index)
-{
-	Math::TransformationMatrix matrix = Math::TranslationMatrix(position) * Math::RotationMatrix(0) * Math::ScaleMatrix(0.3);
-	
 	texture[index]->Draw(matrix);
 }
 
@@ -94,17 +95,23 @@ void Slot::DrawIngredient(const std::vector<std::vector<CS230::Texture*>>& textu
 {
 	for (int i = 0; i < vector.size(); ++i)
 	{
-		vector[i]->SlotDraw(slotPos[i], texture);
+		vector[i]->SlotDraw(slotPos[i], standardSlotRectSize, texture);
 	}
 }
 
 void Slot::DrawSlotRect()
 {
+	doodle::Color slotColor{ 192,192,192,30 };
+
 	for (int i = 0; i < putSize; ++i)
 	{
 		if (vector.size() <= i)
 		{
-			doodle::draw_rectangle(slotPos[i].x, slotPos[i].y, 50, 50);
+			doodle::push_settings();
+			doodle::set_fill_color(slotColor);
+			doodle::draw_rectangle(Engine::GetDrawManager().Vec(slotPos[i]).x, Engine::GetDrawManager().Vec(slotPos[i]).y, 
+				Engine::GetDrawManager().Vec(standardSlotRectSize).x, Engine::GetDrawManager().Vec(standardSlotRectSize).y);
+			doodle::pop_settings();
 		}
 	}
 }
@@ -123,7 +130,7 @@ void Slot::Unload()
 	vector.clear();
 }
 
-bool Slot::PutIngredient(Ingredient* ingredient)
+bool Plate::PutIngredient(Ingredient* ingredient)
 {
 	if (vector.size() < putSize)
 	{
@@ -133,32 +140,27 @@ bool Slot::PutIngredient(Ingredient* ingredient)
 	return false;
 }
 
-void Plate::ButtonDraw()
+bool Pot::PutIngredient(Ingredient* ingredient)
 {
-	doodle::draw_ellipse(910, 40, 60);
-}
-
-void Pot::ButtonDraw()
-{
-	doodle::draw_ellipse(1350, 40, 60);
-} 
-
-bool Plate::ButtonClick(Math::vec2 pos)
-{
-	if (std::sqrt((std::pow((pos.x - 910), 2) + (std::pow((pos.y - 40), 2)))) <= 60)
+	if (vector.size() < putSize)
 	{
-		if (leftClick == true)
-		{
-			leftClick = false;
-			return true;
-		}
+		ingredient->SetWet();
+		vector.push_back(ingredient);
+		return true;
 	}
 	return false;
 }
 
-bool Pot::ButtonClick(Math::vec2 pos)
+void Slot::ButtonDraw()
 {
-	if (std::sqrt((std::pow((pos.x - 1350), 2) + (std::pow((pos.y - 40), 2)))) <= 60)
+	doodle::draw_ellipse(Engine::GetDrawManager().Vec(buttonPos).x, Engine::GetDrawManager().Vec(buttonPos).y, 
+		Engine::GetDrawManager().Vec(buttonSize).x);
+}
+
+
+bool Slot::ButtonClick(Math::vec2 pos)
+{
+	if (Engine::GetDrawManager().CircleCollision(buttonPos, buttonSize, pos) == true)
 	{
 		if (leftClick == true)
 		{

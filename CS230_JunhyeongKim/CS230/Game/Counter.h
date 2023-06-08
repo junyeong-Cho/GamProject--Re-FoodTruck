@@ -8,12 +8,20 @@ Author:     Junhyeong Kim
 Created:    April 30, 2023
 */
 
+
+#include "../Engine/GameObjectManager.h"
+#include "../Engine/ComponentManager.h"
+#include "../Engine/GameObject.h"
 #include "../Engine/GameState.h"
 #include "../Engine/Texture.h"
 #include "../Engine/Sprite.h"
-#include "../Engine/GameObjectManager.h"
+
+
+
+#include "Refutation.h"
 #include "Counter_Background.h"
 #include "Button.h"
+#include "Frame.h"
 
 class Customor;
 
@@ -35,13 +43,21 @@ private:
     //CS230::Texture* guest_image;
     //Math::vec2 guest_position;
 
-
+    //Draw frames
     CS230::GameObjectManager gameobjectmanager;
+
+    Refutation* refutation;
 
     Customor* front_customor = nullptr;
     Button yes_button;
     Counter_Background counter_Screen;
     Counter_Background background;
     int customors = 10;
+
+    int ranCustomerNum;
+    int maxRanCustomerNum = 7;
+
+
+
 
 };

@@ -22,12 +22,12 @@ public:
 
     void Draw_UI();
     void Draw_Background();
-    void Draw_RecipeBook();
     void Draw_Order();
     void Draw_CounterButton();
     void Draw_Bell();
     void Draw_CuttingBoard();
 	void Draw_PaltingSpot();
+    void SetOrder();
 
 
 private:
@@ -36,10 +36,16 @@ private:
     Cook cook;
     RecipeBook recipeBook;
     Button go_counter;
+    Math::vec2 go_counterPos{ 990.0, 720.0 };
+    Math::vec2 go_counterSize{ 120.0, 80.0 };
+
     std::vector<SideBowl> sideBowl;
     CS230::Texture* cuttingBoardTexture;
     CS230::Texture* kitchenBackgroundTexture;
     CS230::Texture* bellTexture;
+    RecipeName orderRecipe;
+    std::vector<CS230::Texture*> orderRecipeTexture;
+    CS230::Texture* orderUI;
 
     void SetSideBowl();
     void SetSideBowlRefill();
