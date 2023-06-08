@@ -2,17 +2,19 @@
 Copyright (C) 2023 DigiPen Institute of Technology
 Reproduction or distribution of this file or its contents without
 prior written consent is prohibited
-File Name:  Anteater.cpp
+File Name:  Theif.cpp
 Project:    CS230 Engine
 Author:     Junyeong Cho
-Created:    May 24, 2023
+Created:    June 3, 2023
 */
 
-#include "Anteater.h"
+#include "Theif.h"
+#include "RecipeName.h"
 
-Anteater::Anteater(Customor* front)
+
+Theif::Theif(Customor* front)
 	:Customor(front)
 {
-	sprite.Load("Assets/Characters/Anteater.spt");
-	Set_Oreder_recipe(RecipeName::AntSalad);
+	sprite.Load("Assets/Characters/Theif.spt");
+	Set_Oreder_recipe(RecipeName::WaterSoup);
 }

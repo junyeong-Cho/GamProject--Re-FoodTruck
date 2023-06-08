@@ -33,6 +33,20 @@ void Kitchen::Load()
 		recipeBook.Load();
 		canLoad = false;
 
+		//Frame for Clock
+		gameobjectmanager.Add(new Frame({ Engine::GetWindow().GetSize().x / 12.5, Engine::GetWindow().GetSize().y / 8.0 * 7.18 }, 1));
+
+		//Face test
+		refutation = new Refutation({ Engine::GetWindow().GetSize().x / 4.0, Engine::GetWindow().GetSize().y / 8.0 * 7.25 });
+		gameobjectmanager.Add(refutation);
+
+		//Frame for Refutation
+		gameobjectmanager.Add(new Frame({ Engine::GetWindow().GetSize().x / 4.0, Engine::GetWindow().GetSize().y / 8.0 * 7.18 }, 1));
+
+		//Frame for Money
+		gameobjectmanager.Add(new Frame({ Engine::GetWindow().GetSize().x / 1.3, Engine::GetWindow().GetSize().y / 8.0 * 7.18 }, 2));
+
+
 		for (int i = 0; i < cook.ingredient_number; ++i)
 		{
 			sideBowl.push_back(SideBowl(Math::vec2{ cook.sideBowlBoardFirstPos.x + (cook.sideBowlSize.x + cook.sideBowlPadding.x) * i, cook.sideBowlBoardFirstPos.y }, "1"));
@@ -100,11 +114,13 @@ void Kitchen::Update(double dt)
 	}
 
 }
+
 void Kitchen::Draw()
 {
 	Engine::GetWindow().Clear(0xEBE3C0FF);
 
 	Draw_UI();
+
 	for (int i = 0; i < cook.ingredient_number; ++i)
 	{
 		sideBowl[i].Draw();
@@ -158,6 +174,10 @@ void Kitchen::Draw_UI()
 	Draw_Bell();
 	Draw_CuttingBoard();
 	Draw_PaltingSpot();
+
+	gameobjectmanager.DrawAll(Math::TransformationMatrix());
+
+	Draw_Frame_Text();
 }
 
 void Kitchen::Draw_Background()
@@ -204,7 +224,41 @@ void Kitchen::Draw_PaltingSpot()
 	doodle::pop_settings();
 }
 
+void Kitchen::Draw_Frame_Text()
+{
+	//Timer - frame addapted
+	doodle::push_settings();
+	doodle::set_font_fade_out_interval(0.5, 0.0);
+	doodle::set_font_size(Engine::GetWindow().GetSize().x / 50.0);
+	doodle::set_outline_width(12);
+	doodle::set_outline_color(255, 255, 255);
+	doodle::set_fill_color(255, 161, 74);
+	doodle::draw_text("Time\n " + std::to_string(static_cast<int>(Engine::GetUnloadManager().GetTimer())), Engine::GetWindow().GetSize().x / 12.0 + 10 + Engine::GetWindow().GetSize().x * 0.025, Engine::GetWindow().GetSize().y / 8.0 * 7.55);
+	doodle::pop_settings();
+
+	//Refutation - frame addapted
+	doodle::push_settings();
+	doodle::set_font_fade_out_interval(0.5, 0.0);
+	doodle::set_font_size(Engine::GetWindow().GetSize().x / 50.0);
+	doodle::set_outline_width(12);
+	doodle::set_outline_color(255, 255, 255);
+	doodle::set_fill_color(255, 161, 74);
+	doodle::draw_text(" Rate\n  " + std::to_string(Engine::GetUnloadManager().GetRate()), Engine::GetWindow().GetSize().x / 5.0 + Engine::GetWindow().GetSize().x * 0.095, Engine::GetWindow().GetSize().y / 8.0 * 7.5);
+	doodle::pop_settings();
+
+	//Money - frame addapted
+	doodle::push_settings();
+	doodle::set_font_fade_out_interval(0.5, 0.0);
+	doodle::set_font_size(Engine::GetWindow().GetSize().x / 50.0);
+	doodle::set_outline_width(12);
+	doodle::set_fill_color(0, 0, 0);
+	doodle::draw_text(std::to_string(Engine::GetUnloadManager().GetMoney()), Engine::GetWindow().GetSize().x / 1.3 + Engine::GetWindow().GetSize().x * 0.1, Engine::GetWindow().GetSize().y / 8.0 * 7.35);
+	doodle::pop_settings();
+}
+
+
 void Kitchen::SetOrder()
 {
 	orderRecipe = Engine::GetOrderManager().GetOrder();
 }
+

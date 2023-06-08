@@ -26,7 +26,9 @@ Customor::Customor(Customor* front) :
     random_timer = static_cast<double>(rand()) / (RAND_MAX / 5) + 10/Engine::GetUnloadManager().GetDay();
     current_state->Enter(this);
     timer = random_timer;
-    last_timer = static_cast<int>(random_timer);
+    last_timer = static_cast<int>(random_timer);    
+
+    soundEffect->LoadFile("Assets/Sound/SFX/EnteringBell.wav");
 }
 
 void Customor::update_x_velocity(double dt)
@@ -70,23 +72,28 @@ void Customor::State_Waiting::CheckExit(GameObject* object)
 
 }
 
-//In_counter
 
+
+//In_counter
 void Customor::State_In_Counter::Enter(GameObject* object)
 {
-    Customor* customor = static_cast<Customor*>(object);
 
+    Customor* customor = static_cast<Customor*>(object);
 }
 
 void Customor::State_In_Counter::Update(GameObject* object, double dt)
 {
+    
     Customor* customor = static_cast<Customor*>(object);
     
     if (customor->random_timer <= 0)
     {
-        if (customor->GetPosition().x < 60.0 * Engine::GetWindow().GetSize().x / 1400.0)
+        if ((customor->GetPosition().x < 60.0 * Engine::GetWindow().GetSize().x / 1400.0))
         {
             customor->UpdatePosition({ 200 * dt,0 });
+
+            customor->soundEffect->Play(0);
+
         }
         else
         {
@@ -94,18 +101,16 @@ void Customor::State_In_Counter::Update(GameObject* object, double dt)
         }
 
         customor->timer -= dt;
-        if (static_cast<int>(customor->timer) < customor->last_timer)
+
+        if ((static_cast<int>(customor->timer) < customor->last_timer))
         {
             customor->last_timer = static_cast<int>(customor->timer);
         }
-
     }
     else 
     {
         customor->random_timer -= dt;
     }
-
-
 
 }
 
@@ -114,11 +119,19 @@ void Customor::State_In_Counter::CheckExit(GameObject* object)
     Customor* customor = static_cast<Customor*>(object);
     if (customor->last_timer == 0)
     {
+
+
         customor->change_state(&customor->state_leaving);
     }
 
     if (customor->front_customor == nullptr || customor->front_customor->current_state->GetName() == "Leaving")
     {
+        /*
+        CS230::SoundEffect* soundEffect = new CS230::SoundEffect();
+        soundEffect->LoadFile("Assets/Sound/SFX/EnteringBell.wav");
+        soundEffect->Play(0);
+        */
+
         customor->change_state(&customor->state_order);
     }
 }
@@ -184,7 +197,6 @@ void Customor::State_Fwaiting::CheckExit(GameObject* object)
 
     if (Engine::GetUnloadManager().food_complete == true)
     {
-        
         customor->change_state(&customor->state_evaluate);
     }
 
@@ -276,6 +288,7 @@ void Customor::State_Leaving::Update(GameObject* object, double dt)
 void Customor::State_Leaving::CheckExit(GameObject* object)
 {
     Customor* customor = static_cast<Customor*>(object);
+
 }
 
 

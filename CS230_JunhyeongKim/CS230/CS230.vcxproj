@@ -192,6 +192,7 @@ xcopy /d /y Assets\* "$(OutputPath)Assets"
     <ClCompile Include="Engine\Unload_manager.cpp" />
     <ClCompile Include="Engine\Vec2.cpp" />
     <ClCompile Include="Engine\Window.cpp" />
+    <ClCompile Include="Game\Amy.cpp" />
     <ClCompile Include="Game\Anteater.cpp" />
     <ClCompile Include="Game\Button.cpp" />
     <ClCompile Include="Game\Clock.cpp" />
@@ -222,7 +223,10 @@ xcopy /d /y Assets\* "$(OutputPath)Assets"
     <ClCompile Include="Game\Slot.cpp" />
     <ClCompile Include="Game\Sound.cpp" />
     <ClCompile Include="Game\Splash.cpp" />
+    <ClCompile Include="Game\SunMan.cpp" />
+    <ClCompile Include="Game\Theif.cpp" />
     <ClCompile Include="Game\Tool.cpp" />
+    <ClCompile Include="Game\Tutorial.cpp" />
     <ClCompile Include="Game\Zilien.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -248,6 +252,7 @@ xcopy /d /y Assets\* "$(OutputPath)Assets"
     <ClInclude Include="Engine\Unload_manager.h" />
     <ClInclude Include="Engine\Vec2.h" />
     <ClInclude Include="Engine\Window.h" />
+    <ClInclude Include="Game\Amy.h" />
     <ClInclude Include="Game\Anteater.h" />
     <ClInclude Include="Game\Button.h" />
     <ClInclude Include="Game\Clock.h" />
@@ -283,8 +288,11 @@ xcopy /d /y Assets\* "$(OutputPath)Assets"
     <ClInclude Include="Game\Sound.h" />
     <ClInclude Include="Game\Splash.h" />
     <ClInclude Include="Game\States.h" />
+    <ClInclude Include="Game\SunMan.h" />
+    <ClInclude Include="Game\Theif.h" />
     <ClInclude Include="Game\Tool.h" />
     <ClInclude Include="Game\ToolName.h" />
+    <ClInclude Include="Game\Tutorial.h" />
     <ClInclude Include="Game\Zilien.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

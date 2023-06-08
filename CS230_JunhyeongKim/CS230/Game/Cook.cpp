@@ -6,10 +6,14 @@
 
 extern bool leftClick;
 
-Cook::Cook() 
-	: plate(platePos, plateSize, plateButtonPos, plateButtonSize), 
+
+Cook::Cook() : plate(platePos, plateSize, plateButtonPos, plateButtonSize), 
 	pot(potPos, potSize, potButtonPos, potButtonSize)
-{}
+{
+	soundEffect->LoadFile("Assets/Sound/SFX/Bell.wav");
+	soundEffect->LoadFile("Assets/Sound/SFX/Cutting.wav");
+	soundEffect->LoadFile("Assets/Sound/SFX/TrashcanSound.wav");
+}
 
 void Cook::SetIngredient()
 {
@@ -66,6 +70,8 @@ void Cook::Unload()
 	using_ingredients.clear();
 	
 
+	delete soundEffect;
+
 	score = 0;
 	time = 0;
 	stoveOn = false;
@@ -84,7 +90,7 @@ void Cook::ToolUpdate()
 
 void Cook::ToolDraw()
 {
-	//¾ê°¡ Ç×»ó Á¦ÀÏ À§¿¡ ±×·ÁÁ®¾ßÇÔ.
+	//ì–˜ê°€ í•­ìƒ ì œì¼ ìœ„ì— ê·¸ë ¤ì ¸ì•¼í•¨.
 	tool.Draw();
 }
 
@@ -148,7 +154,7 @@ void Cook::Draw()
 	DrawScore();
 	DrawLadleSoup();
 
-	//¾ê°¡ Ç×»ó Á¦ÀÏ À§¿¡ ±×·ÁÁ®¾ßÇÔ.
+	//ì–˜ê°€ í•­ìƒ ì œì¼ ìœ„ì— ê·¸ë ¤ì ¸ì•¼í•¨.
 	operation.Draw();
 }
 
@@ -215,6 +221,8 @@ void Cook::ClickBell()
 		Engine::GetGameStateManager().SetNextGameState(static_cast<int>(States::Counter));
 		if (plateDrawIndex != 0)
 		{
+			soundEffect->Play(0);
+
 			canCook = true;
 			plate.GetIngredientVec().clear();
 			plateDrawIndex = 0;
@@ -258,6 +266,13 @@ void Cook::Scooping()
 		{
 			if (using_ingredients[i]->IsMouseOn(WhereISMouse(), ingredientTextureManager.GetTexture()) == true && leftClick == true && GetWhere(WhereISMouse()) == KitchenPosition::CUTTING_BOARD)
 			{
+				
+				if (using_ingredients[i]->GetCutNum() > 1)
+				{
+					soundEffect->Play(1);
+
+					using_ingredients[i]->Cut();
+
 				if (using_ingredients[i]->GetName() == IngredientName::DragonFruit)
 				{
 					using_ingredients[i]->Scoop();
@@ -293,8 +308,6 @@ void Cook::CreateUsingIngredient()
 			}
 		}
 	}
-
-
 }
 
 int Cook::WhatIndexMouseClick()
@@ -414,7 +427,7 @@ void Cook::ChangeFoodImage()
 		{
 			plateDrawIndex = static_cast<int>(order) * 3 + 1;
 		}
-		canCook = false; // Ä«¿îÅÍ·Î °¡Á®´ÙÁÖ´Â º§ ´©¸£¸é true°¡ µÇ¾î¾ßÇÔ.
+		canCook = false; // ì¹´ìš´í„°ë¡œ ê°€ì ¸ë‹¤ì£¼ëŠ” ë²¨ ëˆ„ë¥´ë©´ trueê°€ ë˜ì–´ì•¼í•¨.
 		plate.GetIngredientVec().clear();
 	}
 }
@@ -592,6 +605,8 @@ void Cook::TrashCan()
 	{
 		if (using_ingredients[i]->IsMouseOn(WhereISMouse(), ingredientTextureManager.GetTexture()) == true && leftClick == true)
 		{
+			soundEffect->Play(2);
+
 			leftClick = false;
 			delete using_ingredients[i];
 			using_ingredients.erase(using_ingredients.begin() + i);

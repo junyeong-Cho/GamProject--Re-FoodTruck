@@ -34,17 +34,21 @@ void MainMenu::Load()
 
 	GetGSComponent<CS230::MusicEffect>()->LoadFile("Assets/Sound/Theme/main_theme_pirot.ogg");
 	GetGSComponent<CS230::MusicEffect>()->LoadFile("Assets/Sound/Theme/kitchen_theme.ogg");
+
+	mainmenu_background = Engine::GetTextureManager().Load("Assets/MainmenuBackground.png");
+
+
 }
 
 
 void MainMenu::UpdateMenuTextColors()
 {
-	colors[counter] = 0x7EFACBFF;
-	for (int i = 0; i < 3; ++i)
+	colors[counter] = 0xFF5733FF;
+	for (int i = 0; i < 4; ++i)
 	{
 		if (counter != i)
 		{
-			colors[i] = 0xFFFFFFFF;
+			colors[i] = 0xFFDF77FF;
 		}
 	}
 	shouldUpdateColors = false;
@@ -53,26 +57,34 @@ void MainMenu::UpdateMenuTextColors()
 
 void MainMenu::DrawText()
 {
+	/*
 	doodle::push_settings();
 
 	doodle::draw_text("Re:Truck", (Engine::GetWindow().GetSize().x / 2 - 200), (Engine::GetWindow().GetSize().y - 100));
 
 	doodle::pop_settings();
+	*/
+
 
 	doodle::push_settings();
 	doodle::set_outline_color(doodle::HexColor(colors[0]));
-	doodle::draw_text("Start", (Engine::GetWindow().GetSize().x / 2 - 200), (Engine::GetWindow().GetSize().y - 300));
+	doodle::draw_text("Start", (Engine::GetWindow().GetSize().x / 2 - Engine::GetWindow().GetSize().x / 3.0), (Engine::GetWindow().GetSize().y - Engine::GetWindow().GetSize().y / 1.5));
 	doodle::pop_settings();
 
 
 	doodle::push_settings();
 	doodle::set_outline_color(doodle::HexColor(colors[1]));
-	doodle::draw_text("Exit", (Engine::GetWindow().GetSize().x / 2 - 200), (Engine::GetWindow().GetSize().y - 400));
+	doodle::draw_text("How\n  to\nplay", (Engine::GetWindow().GetSize().x / 2 - Engine::GetWindow().GetSize().x / 6.5), (Engine::GetWindow().GetSize().y - Engine::GetWindow().GetSize().y / 1.65));
 	doodle::pop_settings();
 
 	doodle::push_settings();
 	doodle::set_outline_color(doodle::HexColor(colors[2]));
-	doodle::draw_text("Credit", (Engine::GetWindow().GetSize().x / 2 - 200), (Engine::GetWindow().GetSize().y - 500));
+	doodle::draw_text("Credit", (Engine::GetWindow().GetSize().x / 2 ), (Engine::GetWindow().GetSize().y - Engine::GetWindow().GetSize().y / 1.5));
+	doodle::pop_settings();
+
+	doodle::push_settings();
+	doodle::set_outline_color(doodle::HexColor(colors[3]));
+	doodle::draw_text("Exit", (Engine::GetWindow().GetSize().x / 2 + Engine::GetWindow().GetSize().x / 5.0), (Engine::GetWindow().GetSize().y - Engine::GetWindow().GetSize().y / 1.5));
 	doodle::pop_settings();
 }
 
@@ -81,14 +93,14 @@ void MainMenu::Update(double dt)
 {
 	GetGSComponent<CS230::MusicEffect>()->Play(0);
 
-	if (Engine::GetInput().KeyJustReleased(CS230::Input::Keys::Down))
+	if (Engine::GetInput().KeyJustReleased(CS230::Input::Keys::Right))
 	{
-		counter = (counter + 1) % 3;
+		counter = (counter + 1) % 4;
 		shouldUpdateColors = true;
 	}
-	else if (Engine::GetInput().KeyJustReleased(CS230::Input::Keys::Up))
+	else if (Engine::GetInput().KeyJustReleased(CS230::Input::Keys::Left))
 	{
-		counter = (counter - 1 + 3) % 3;
+		counter = (counter - 1 + 4) % 4;
 		shouldUpdateColors = true;
 	}
 
@@ -107,12 +119,17 @@ void MainMenu::Update(double dt)
 			Engine::GetGameStateManager().SetNextGameState(static_cast<int>(States::Counter));
 			GetGSComponent<CS230::MusicEffect>()->Stop();
 			break;
+
 		case 1:
-			Engine::GetGameStateManager().ClearNextGameState();
+			Engine::GetGameStateManager().SetNextGameState(static_cast<int>(States::Tutorial));
 			break;
-		
+
 		case 2:
 			Engine::GetGameStateManager().SetNextGameState(static_cast<int>(States::Credit));
+			break;
+
+		case 3:
+			Engine::GetGameStateManager().ClearNextGameState();
 			break;
 		
 		}
@@ -126,10 +143,17 @@ void MainMenu::Unload()
 
 void MainMenu::Draw()
 {
-	//Make a title that is in a third color with a nice background color or texture. 
 	Engine::GetWindow().Clear(0x000000FF);
 
+	double scale_x = Engine::GetWindow().GetSize().x / static_cast<double>(mainmenu_background->GetSize().x);
+	double scale_y = Engine::GetWindow().GetSize().y / static_cast<double>(mainmenu_background->GetSize().y);
+
+	mainmenu_background->Draw(Math::TransformationMatrix() * Math::ScaleMatrix({ scale_x, scale_y }));
+
+
 	DrawText();
+
+
 }
 
 void MainMenu::Clear()

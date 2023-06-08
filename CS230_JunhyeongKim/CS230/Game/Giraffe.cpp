@@ -15,6 +15,7 @@ Giraffe::Giraffe(Customor* front)
 	:Customor(front)
 {
 	sprite.Load("Assets/giraffe.spt");
-	Set_Oreder_recipe(RecipeName::LemonSalad);
+
+	Set_Oreder_recipe(RecipeName::LeafSalad);
 	Set_Ingredient_num(6);
 }

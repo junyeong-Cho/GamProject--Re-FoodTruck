@@ -59,6 +59,9 @@ Math::vec2& Math::vec2::operator-=(const vec2& v)
 
 }
 
+
+
+
 Math::vec2 Math::vec2::operator*(double scale)
 {
 	return vec2(x * scale, y * scale);
@@ -71,6 +74,14 @@ Math::vec2& Math::vec2::operator*=(double scale)
 	return *this;
 
 }
+
+Math::vec2 Math::vec2::operator*(const vec2& v)
+{
+	return vec2(x * v.x, y * v.y);
+}
+
+
+
 
 Math::vec2 Math::vec2::operator/(double scale)
 {

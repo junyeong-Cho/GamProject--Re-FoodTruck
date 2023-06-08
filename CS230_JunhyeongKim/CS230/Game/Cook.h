@@ -6,6 +6,8 @@
 #include "KitchenPosition.h"
 #include "Slot.h"
 
+#include "Sound.h"
+
 #include "RecipeBook.h"
 #include "RecipeName.h"
 
@@ -94,7 +96,8 @@ public:
 
 private:
 
-    
+	CS230::SoundEffect* soundEffect = new CS230::SoundEffect();
+
     KitchenPosition GetWhere(Math::vec2 pos);
     void SetIngredientsWhere();
     void Cutting();

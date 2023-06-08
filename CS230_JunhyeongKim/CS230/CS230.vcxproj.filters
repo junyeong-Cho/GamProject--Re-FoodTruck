@@ -49,7 +49,11 @@
     <ClCompile Include="Game\Refutation.cpp" />
     <ClCompile Include="Game\Sound.cpp" />
     <ClCompile Include="Game\Zilien.cpp" />
+    <ClCompile Include="Game\SunMan.cpp" />
+    <ClCompile Include="Game\Theif.cpp" />
+    <ClCompile Include="Game\Amy.cpp" />
     <ClCompile Include="Engine\DrawManager.cpp" />
+
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Animation.h" />
@@ -109,6 +113,9 @@
     <ClInclude Include="Game\Refutation.h" />
     <ClInclude Include="Game\Sound.h" />
     <ClInclude Include="Game\Zilien.h" />
+    <ClInclude Include="Game\SunMan.h" />
+    <ClInclude Include="Game\Theif.h" />
+    <ClInclude Include="Game\Amy.h" />
     <ClInclude Include="Engine\OrderManager.h" />
     <ClInclude Include="Engine\DrawManager.h" />
   </ItemGroup>

@@ -16,12 +16,12 @@ Created:    April 30, 2023
 #include "../Engine/Texture.h"
 #include "../Engine/Sprite.h"
 
-
-
-#include "Refutation.h"
 #include "Counter_Background.h"
+#include "Refutation.h"
 #include "Button.h"
 #include "Frame.h"
+#include "Sound.h"
+
 
 class Customor;
 
@@ -55,7 +55,7 @@ private:
     int customors = 10;
 
     int ranCustomerNum;
-    int maxRanCustomerNum = 7;
+    int maxRanCustomerNum = 10;
 
 
 

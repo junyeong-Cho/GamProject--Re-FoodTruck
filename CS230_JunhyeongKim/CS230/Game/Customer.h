@@ -10,8 +10,12 @@ Created:    March 2, 2023
 
 #pragma once
 #include "..\Engine\GameObject.h"
-#include "Button.h"
+
+
 #include "RecipeName.h"
+#include "Button.h"
+#include "Sound.h"
+
 
 class Customor : public CS230::GameObject
 {
@@ -41,7 +45,13 @@ public:
     static constexpr double timer_max = 30;
     double random_timer;
 private:
+
+    CS230::SoundEffect* soundEffect = new CS230::SoundEffect();
+
+
     void update_x_velocity(double dt);
+
+    bool customer_moved = true;
 
     //state Waiting
     class State_Waiting : public State
@@ -128,7 +138,7 @@ private:
     Button evalue;
 
     double button_timer{ 0 };
-    //¾ÕÀ¸·Î ¿ÔÀ» ¶§
+    //Â¾Ã•Ã€Â¸Â·ÃŽ Â¿Ã”Ã€Â» Â¶Â§
     bool can_order = false;
 
     //evaluating
@@ -141,7 +151,4 @@ private:
 
     //want food
     RecipeName oreder_recipe = RecipeName::AntSalad;
-
-    //ingredient_num
-    unsigned int ingredient_num = 0;
 };
