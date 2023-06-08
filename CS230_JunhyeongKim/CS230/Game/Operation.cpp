@@ -8,11 +8,6 @@ bool rightClick = false;
 
 Operation::Operation()
 {
-	/*operationTexture.push_back(Engine::GetTextureManager().Load("Assets/Hand.png"));
-	operationTexture.push_back(Engine::GetTextureManager().Load("Assets/Knife.png"));
-	operationTexture.push_back(Engine::GetTextureManager().Load("Assets/Ladle.png"));
-	operationTexture.push_back(Engine::GetTextureManager().Load("Assets/Scoop.png"));
-	operationTexture.push_back(Engine::GetTextureManager().Load("Assets/TrashCan.png"));*/
 }
 
 void Operation::Load()

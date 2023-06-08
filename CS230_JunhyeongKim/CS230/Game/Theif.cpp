@@ -17,4 +17,5 @@ Theif::Theif(Customor* front)
 {
 	sprite.Load("Assets/Characters/Theif.spt");
 	Set_Oreder_recipe(RecipeName::WaterSoup);
+	Set_Ingredient_num(3);
 }

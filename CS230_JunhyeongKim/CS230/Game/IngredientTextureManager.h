@@ -12,5 +12,5 @@ public:
 	std::vector<std::vector<CS230::Texture*>> GetTexture() const;
 private:
 	int ingredientNum = 7;
-	std::vector<std::vector <CS230::Texture*>> ingredientTexture{ ingredientNum };
+	std::vector<std::vector <CS230::Texture*>> ingredientTexture;
 };

@@ -29,9 +29,14 @@ void Kitchen::Load()
 		orderRecipeTexture.push_back(Engine::GetTextureManager().Load("Assets/StrongSoup_Soso.png"));
 
 		orderUI = Engine::GetTextureManager().Load("Assets/MainFrame.png");
+
+		Engine::GetLogger().LogDebug("Image load");
+		
 		cook.Load();
+		Engine::GetLogger().LogDebug("Cook load");
+
 		recipeBook.Load();
-		canLoad = false;
+		Engine::GetLogger().LogDebug("recipeBook load");
 
 		//Frame for Clock
 		gameobjectmanager.Add(new Frame({ Engine::GetWindow().GetSize().x / 12.5, Engine::GetWindow().GetSize().y - 70.0 }, 1));
@@ -55,9 +60,14 @@ void Kitchen::Load()
 			sideBowl.push_back(SideBowl(Math::vec2{ cook.sideBowlBoardFirstPos.x + (cook.sideBowlSize.x + cook.sideBowlPadding.x) * i, cook.sideBowlBoardFirstPos.y }, "1"));
 			sideBowl[i].Load();
 		}
+		Engine::GetLogger().LogDebug("sideBowl load");
+		
 
 		SetOrder();
 		cook.GetOrder(orderRecipe, recipeBook.GetRecipeBook());
+		canLoad = false;
+
+		Engine::GetLogger().LogDebug("end load");
 	}
 }
 
@@ -65,6 +75,7 @@ void Kitchen::Update(double dt)
 {
 	Engine::GetUnloadManager().GetCounterObjectManager().UpdateAll(dt);
 
+	cook.ToolUpdate();
 	if (recipeBook.BookOpen() == false)
 	{
 		cook.Update(dt);
@@ -73,7 +84,6 @@ void Kitchen::Update(double dt)
 			go_counter.update(doodle::get_mouse_x(), doodle::get_mouse_y(), States::Counter);
 		}
 	}
-	cook.ToolUpdate();
 	SetSideBowl();
 	if (cook.GetTool() == ToolName::HAND)
 	{

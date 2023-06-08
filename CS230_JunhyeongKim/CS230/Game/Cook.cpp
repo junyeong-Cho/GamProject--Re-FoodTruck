@@ -1,6 +1,5 @@
 #include "Cook.h"
 #include <doodle/drawing.hpp>
-#include <iostream>
 #include "..\Engine\Engine.h"
 #include "States.h"
 
@@ -40,19 +39,30 @@ void Cook::SetIngredient()
 void Cook::Load()
 {
 	SetIngredient();
+	Engine::GetLogger().LogDebug("SetIngredient load");
+
 	operation.Load();
+	Engine::GetLogger().LogDebug("operation load");
+
 	tool.Load();
+	Engine::GetLogger().LogDebug("tool load");
+
 	plate.Load();
+	Engine::GetLogger().LogDebug("plate load");
+
 	pot.Load();
+	Engine::GetLogger().LogDebug("pot load");
+
 	ingredientTextureManager.Load();
+	Engine::GetLogger().LogDebug("ingredientTextureManager load");
 }
 
 void Cook::Unload()
 {
 	plate.Unload();
 	pot.Unload();
-	operation.Unload();
 	tool.Unload();
+	operation.Unload();
 	ingredientTextureManager.Unload();
 	for (int i = 0; i < seven_ingredients.size(); ++i)
 	{
@@ -71,7 +81,7 @@ void Cook::Unload()
 	using_ingredients.clear();
 	
 
-	delete soundEffect;
+	//delete soundEffect; // 이게있으니까 터짐.
 
 	score = 0;
 	time = 0;
@@ -422,7 +432,6 @@ void Cook::ChangeFoodImage()
 		{
 			plateDrawIndex = static_cast<int>(order) * 3 + 1;
 		}
-		std::cout << "order : " << static_cast<int>(order) << '\n';
 		canCook = false; // 카운터로 가져다주는 벨 누르면 true가 되어야함.
 		plate.GetIngredientVec().clear();
 	}
@@ -499,11 +508,11 @@ void Cook::DrawGage()
 	doodle::set_fill_color(baseColor);
 	doodle::draw_rectangle(Engine::GetDrawManager().Vec(gageBarPos).x, Engine::GetDrawManager().Vec(gageBarPos).y, Engine::GetDrawManager().Vec(wholeGageBarSize).x, Engine::GetDrawManager().Vec(wholeGageBarSize).y);
 
-	doodle::set_fill_color(myGageColor);
-	doodle::draw_rectangle(Engine::GetDrawManager().Vec(gageBarPos).x, Engine::GetDrawManager().Vec(gageBarPos).y, Engine::GetDrawManager().Vec({ time / 10.0 * wholeGageBarSize.x, wholeGageBarSize.y }).x, Engine::GetDrawManager().Vec(wholeGageBarSize).y);
-
 	doodle::set_fill_color(targetGageColor);
 	doodle::draw_rectangle(Engine::GetDrawManager().Vec({ gageBarPos.x + (0.6 * wholeGageBarSize.x), gageBarPos.y}).x, Engine::GetDrawManager().Vec(gageBarPos).y, Engine::GetDrawManager().Vec({0.2 * wholeGageBarSize.x, wholeGageBarSize.y}).x, Engine::GetDrawManager().Vec(wholeGageBarSize).y);
+	
+	doodle::set_fill_color(myGageColor);
+	doodle::draw_rectangle(Engine::GetDrawManager().Vec(gageBarPos).x, Engine::GetDrawManager().Vec(gageBarPos).y, Engine::GetDrawManager().Vec({ time / 10.0 * wholeGageBarSize.x, wholeGageBarSize.y }).x, Engine::GetDrawManager().Vec(wholeGageBarSize).y);
 	doodle::pop_settings();
 }
 

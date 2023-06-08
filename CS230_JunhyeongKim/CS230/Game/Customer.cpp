@@ -244,7 +244,7 @@ void Customor::State_Evaluate::CheckExit(GameObject* object)
         switch (customor->grade)
         {
         case static_cast<int>(Grade::NO_FOOD):
-            Engine::GetUnloadManager().Update_rate(-50);
+            Engine::GetUnloadManager().Update_rate(-10);
             break;
         case static_cast<int>(Grade::BAD):
             Engine::GetUnloadManager().Update_money(0);
@@ -307,12 +307,12 @@ void Customor::Draw(Math::TransformationMatrix camera_matrix)
 
     sprite.Draw(camera_matrix * GetMatrix());
 
-
+    doodle::Color textBoxColor{ 204,229,255 };
     if (can_order == true && evaluating == false)
     {
         doodle::push_settings();
-        doodle::set_fill_color(255, 255, 255);
-        doodle::draw_rectangle(Engine::GetWindow().GetSize().x / 4.0, Engine::GetWindow().GetSize().y / 2.0, Engine::GetWindow().GetSize().x / 2.3, Engine::GetWindow().GetSize().y / 4.0);
+        doodle::set_fill_color(textBoxColor);
+        doodle::draw_rectangle(Engine::GetWindow().GetSize().x / 4.0, Engine::GetWindow().GetSize().y / 2.0, Engine::GetWindow().GetSize().x / 2.0, Engine::GetWindow().GetSize().y / 4.0);
         doodle::pop_settings();
 
         doodle::push_settings();
@@ -327,8 +327,8 @@ void Customor::Draw(Math::TransformationMatrix camera_matrix)
     if (current_state->GetName() == "Evaluate")
     {
         doodle::push_settings();
-        doodle::set_fill_color(255, 255, 255);
-        doodle::draw_rectangle(Engine::GetWindow().GetSize().x / 4.0, Engine::GetWindow().GetSize().y / 2.0, Engine::GetWindow().GetSize().x / 2.3, Engine::GetWindow().GetSize().y / 4.0);
+        doodle::set_fill_color(textBoxColor);
+        doodle::draw_rectangle(Engine::GetWindow().GetSize().x / 4.0, Engine::GetWindow().GetSize().y / 2.0, Engine::GetWindow().GetSize().x / 2.0, Engine::GetWindow().GetSize().y / 4.0);
         doodle::pop_settings();
 
         doodle::push_settings();

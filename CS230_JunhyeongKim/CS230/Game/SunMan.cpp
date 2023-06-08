@@ -17,4 +17,5 @@ SunMan::SunMan(Customor* front)
 {
 	sprite.Load("Assets/Characters/SunMan.spt");
 	Set_Oreder_recipe(RecipeName::LemonSalad);
+	Set_Ingredient_num(6);
 }

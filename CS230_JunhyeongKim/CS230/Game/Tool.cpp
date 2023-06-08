@@ -1,5 +1,6 @@
 #include "Tool.h"
 #include "doodle/input.hpp"
+#include <iostream>
 
 Tool::Tool()
 {
@@ -28,11 +29,11 @@ void Tool::Draw()
 {
 	pos.x = doodle::get_mouse_x() - size.x / 2.0;
 	pos.y = doodle::get_mouse_y() - size.y / 2.0;
-	texture[static_cast<int>(tool)]->Draw(Engine::GetDrawManager().GetMatrix(texture[static_cast<int>(tool)], pos, size));
+	texture[static_cast<int>(toolname)]->Draw(Engine::GetDrawManager().GetMatrix(texture[static_cast<int>(toolname)], pos, size));
 	
 }
 
 void Tool::Update(ToolName toolName)
 {
-	tool = toolName;
+	toolname = toolName;
 }

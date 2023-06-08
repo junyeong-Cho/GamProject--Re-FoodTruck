@@ -16,4 +16,5 @@ Zilien::Zilien(Customor* front)
 	sprite.Load("Assets/Characters/ZilienNormal.spt");
 
 	Set_Oreder_recipe(RecipeName::SaltSalad);
+	Set_Ingredient_num(4);
 }

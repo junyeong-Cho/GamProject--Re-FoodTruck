@@ -15,4 +15,5 @@ Greendragon::Greendragon(Customor* front)
 {
 	sprite.Load("Assets/Characters/GreenDragon.spt");
 	Set_Oreder_recipe(RecipeName::StrongSoup);
+	Set_Ingredient_num(9);
 }

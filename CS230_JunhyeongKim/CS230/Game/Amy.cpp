@@ -18,4 +18,5 @@ Amy::Amy(Customor* front)
 	sprite.Load("Assets/Characters/Amy.spt");
 
 	Set_Oreder_recipe(RecipeName::AntSoup);
+	Set_Ingredient_num(4);
 }

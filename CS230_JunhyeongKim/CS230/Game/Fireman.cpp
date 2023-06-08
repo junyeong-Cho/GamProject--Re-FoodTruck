@@ -15,4 +15,5 @@ Fireman::Fireman(Customor* front)
 {
 	sprite.Load("Assets/Characters/FireMan.spt");
 	Set_Oreder_recipe(RecipeName::MermaidScalesSalad);
+	Set_Ingredient_num(8);
 }

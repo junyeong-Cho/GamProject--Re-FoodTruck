@@ -1,7 +1,6 @@
 #include "Slot.h"
 #include "doodle/drawing.hpp"
-
-#include <iostream>
+#include "doodle/input.hpp"
 
 extern bool leftClick;
 
@@ -153,8 +152,32 @@ bool Pot::PutIngredient(Ingredient* ingredient)
 
 void Slot::ButtonDraw()
 {
+	doodle::Color mouseOff{ 255, 204, 204 };
+	doodle::Color mouseOn{ 255, 51, 51 };
+	doodle::Color buttonColor = mouseOff;
+
+	if (Engine::GetDrawManager().CircleCollision(buttonPos, buttonSize, Math::vec2(doodle::get_mouse_x(), doodle::get_mouse_y())) == true)
+	{
+		buttonColor = mouseOn;
+	}
+	else
+	{
+		buttonColor = mouseOff;
+	}
+	doodle::push_settings();
+	doodle::set_fill_color(buttonColor);
 	doodle::draw_ellipse(Engine::GetDrawManager().Vec(buttonPos).x, Engine::GetDrawManager().Vec(buttonPos).y, 
 		Engine::GetDrawManager().Vec(buttonSize).x);
+	doodle::pop_settings();
+
+	doodle::push_settings();
+	doodle::set_font_size(10);
+	doodle::set_fill_color(0);
+	Math::vec2 textPos{ buttonPos };
+	textPos.x -= 20;
+	textPos.y -= 10;
+	doodle::draw_text("Button", Engine::GetDrawManager().Vec(textPos).x, Engine::GetDrawManager().Vec(textPos).y);
+	doodle::pop_settings();
 }
 
 

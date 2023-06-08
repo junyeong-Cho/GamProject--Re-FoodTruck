@@ -11,11 +11,11 @@ public:
     void Load();
     void Draw();
     void Update(ToolName toolName);
-    ToolName GetTool() { return tool; }
+    ToolName GetTool() { return toolname; }
     void Unload();
     
 private:
-    ToolName tool = ToolName::HAND;
+    ToolName toolname = ToolName::HAND;
     std::vector<CS230::Texture*> texture;
     Math::vec2 pos;
     Math::vec2 size{ 70.0, 70.0 };

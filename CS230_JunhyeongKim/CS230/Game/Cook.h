@@ -45,7 +45,7 @@ public:
 	Math::vec2 plateCollisionSize{ 300.0, 300.0 };
 
 	//Plate Button
-	Math::vec2 plateButtonPos{ 820.0, 80.0 };
+	Math::vec2 plateButtonPos{ 840.0, 97.0 };
 	Math::vec2 plateButtonSize{ 60.0, 60.0 };
 
 	//Complete Percent Text
@@ -57,7 +57,7 @@ public:
 	Math::vec2 potSize{ 425.0, 400.0 };
 
 	//Pot Button
-	Math::vec2 potButtonPos{ 1305.0, 160.0 };
+	Math::vec2 potButtonPos{ 1307.0, 160.0 };
 	Math::vec2 potButtonSize{ 60.0, 60.0 };
 
 	//Pot GageBar
