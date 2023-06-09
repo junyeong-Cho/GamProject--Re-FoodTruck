@@ -554,11 +554,12 @@ void Cook::PotToPlate()
 	{
 		if (canCook == true)
 		{
-			for (int i = 0; i < pot.GetIngredientVec().size() && plate.GetIngredientVec().size() <= 16; ++i)
+			int size = pot.GetIngredientVec().size();
+			for (int i = 0; i < size; ++i)
 			{
-				if (plate.PutIngredient(pot.GetIngredientVec()[i]) == true)
+				if (plate.PutIngredient(pot.GetIngredientVec()[0]) == true)
 				{
-					pot.GetIngredientVec().erase(pot.GetIngredientVec().begin() + i);
+					pot.GetIngredientVec().erase(pot.GetIngredientVec().begin());
 				}
 			}
 			checkDrawSoup = false;
