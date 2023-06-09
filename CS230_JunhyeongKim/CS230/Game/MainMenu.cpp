@@ -48,8 +48,7 @@ void MainMenu::UpdateMenuTextColors()
 	{
 		if (counter != i)
 		{
-			//colors[i] = 0xFFDF77FF;
-			colors[i] = 0xFFFFFFFF;
+			colors[i] = 0xFFDF77FF;
 		}
 	}
 	shouldUpdateColors = false;
@@ -58,23 +57,6 @@ void MainMenu::UpdateMenuTextColors()
 
 void MainMenu::DrawText()
 {
-	
-	/*for (int i = 0; i < 4; ++i)
-	{
-		doodle::push_settings();
-		if (i == counter)
-		{
-			doodle::set_fill_color(doodle::Color(255, 113, 119, 50));
-		}
-		else
-		{
-			doodle::set_fill_color(doodle::Color(255,223,119,30));
-		}
-		doodle::set_outline_color(doodle::Color(255, 255, 255));
-		doodle::draw_ellipse(buttonCircleX[i], 320.0, 260.0);
-		doodle::pop_settings();
-	}*/
-
 	doodle::push_settings();
 	doodle::set_fill_color(doodle::Color(255, 113, 119, 50));
 	doodle::set_outline_color(doodle::Color(255, 255, 255));
@@ -82,26 +64,26 @@ void MainMenu::DrawText()
 	doodle::pop_settings();
 
 	doodle::push_settings();
-	doodle::set_outline_color(doodle::Color(0,0,0));
+	doodle::set_outline_color(doodle::Color(255, 255, 255));
 	doodle::set_fill_color(doodle::HexColor(colors[0]));
 	doodle::draw_text("Start", (Engine::GetWindow().GetSize().x / 2 - Engine::GetWindow().GetSize().x / 3.0), (Engine::GetWindow().GetSize().y - Engine::GetWindow().GetSize().y / 1.5));
 	doodle::pop_settings();
 
 
 	doodle::push_settings();
-	doodle::set_outline_color(doodle::Color(0, 0, 0));
+	doodle::set_outline_color(doodle::Color(255, 255, 255));
 	doodle::set_fill_color(doodle::HexColor(colors[1]));
 	doodle::draw_text("How\n  to\nplay", (Engine::GetWindow().GetSize().x / 2 - Engine::GetWindow().GetSize().x / 6.5), (Engine::GetWindow().GetSize().y - Engine::GetWindow().GetSize().y / 1.65) + 22.0);
 	doodle::pop_settings();
 
 	doodle::push_settings();
-	doodle::set_outline_color(doodle::Color(0, 0, 0));
+	doodle::set_outline_color(doodle::Color(255, 255, 255));
 	doodle::set_fill_color(doodle::HexColor(colors[2]));
 	doodle::draw_text("Credit", (Engine::GetWindow().GetSize().x / 2 ), (Engine::GetWindow().GetSize().y - Engine::GetWindow().GetSize().y / 1.5));
 	doodle::pop_settings();
 
 	doodle::push_settings();
-	doodle::set_outline_color(doodle::Color(0, 0, 0));
+	doodle::set_outline_color(doodle::Color(255, 255, 255));
 	doodle::set_fill_color(doodle::HexColor(colors[3]));
 	doodle::draw_text("Exit", (Engine::GetWindow().GetSize().x / 2 + Engine::GetWindow().GetSize().x / 5.0), (Engine::GetWindow().GetSize().y - Engine::GetWindow().GetSize().y / 1.5));
 	doodle::pop_settings();

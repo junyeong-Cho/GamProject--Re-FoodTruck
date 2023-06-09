@@ -61,8 +61,7 @@ private:
 
 	int counter = 0;
 
-	//uint32_t colors[4] = { 0xFF5733FF, 0xFFDF77FF, 0xFFDF77FF, 0xFFDF77FF };
-	uint32_t colors[4] = { 0xFF5733FF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF };
+	uint32_t colors[4] = { 0xFF5733FF, 0xFFDF77FF, 0xFFDF77FF, 0xFFDF77FF };
 	bool shouldUpdateColors = false;
 	std::vector<double> buttonCircleX{ 313.0, 555.0, 800.0, 1050.0 };
 };

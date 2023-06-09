@@ -113,6 +113,8 @@ void Kitchen::Update(double dt)
 	if (Engine::GetUnloadManager().GetRate() <= 0 || Engine::GetUnloadManager().GetMoney() <= 0)
 	{
 		Engine::GetGameStateManager().SetNextGameState(static_cast<int>(States::Ending));
+		canLoad = true;
+		canUnload = true;
 	}
 
 	if (Engine::GetOrderManager().GetOrder() != orderRecipe)
