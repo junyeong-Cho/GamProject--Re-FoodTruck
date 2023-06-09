@@ -162,9 +162,9 @@ LeafSalad::LeafSalad() : Recipe()
 	recipe.push_back(lettuce); //2
 	recipe.push_back(lettuce); //3
 
-	recipe.push_back(leaf); //1
-
 	recipe.push_back(salt); //1
+
+	recipe.push_back(leaf); //1
 
 	totalNum = recipe.size();
 }
@@ -294,8 +294,8 @@ StrongSoup::StrongSoup() : Recipe()
 {
 	recippeName = RecipeName::StrongSoup;
 
-	recipe.push_back(lemon); //1
-	recipe.push_back(lemon); //2
+	recipe.push_back(boiledLemon); //1
+	recipe.push_back(boiledLemon); //2
 
 	recipe.push_back(boiledLeaf); //1
 
@@ -306,8 +306,8 @@ StrongSoup::StrongSoup() : Recipe()
 	recipe.push_back(boiledSalt); //1
 	recipe.push_back(boiledSalt); //2
 
-	recipe.push_back(ant); //1
-	recipe.push_back(ant); //2
+	recipe.push_back(boiledAnt); //1
+	recipe.push_back(boiledAnt); //2
 
 	totalNum = recipe.size();
 }
