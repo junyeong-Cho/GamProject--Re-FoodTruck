@@ -27,7 +27,6 @@
     <ClCompile Include="Game\Ingredient.cpp" />
     <ClCompile Include="Game\IngredientTextureManager.cpp" />
     <ClCompile Include="Game\Kitchen.cpp" />
-    <ClCompile Include="Game\Main_menu.cpp" />
     <ClCompile Include="Game\Operation.cpp" />
     <ClCompile Include="Game\Pet.cpp" />
     <ClCompile Include="Game\Recipe.cpp" />
@@ -45,7 +44,6 @@
     <ClCompile Include="Game\Frame.cpp" />
     <ClCompile Include="Game\Greendragon.cpp" />
     <ClCompile Include="Game\MainMenu.cpp" />
-    <ClCompile Include="Game\Molu.cpp" />
     <ClCompile Include="Game\Refutation.cpp" />
     <ClCompile Include="Game\Sound.cpp" />
     <ClCompile Include="Game\Zilien.cpp" />
@@ -53,7 +51,7 @@
     <ClCompile Include="Game\Theif.cpp" />
     <ClCompile Include="Game\Amy.cpp" />
     <ClCompile Include="Engine\DrawManager.cpp" />
-
+    <ClCompile Include="Game\Tutorial.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Animation.h" />
@@ -86,7 +84,6 @@
     <ClInclude Include="Game\IngredientTextureManager.h" />
     <ClInclude Include="Game\Kitchen.h" />
     <ClInclude Include="Game\KitchenPosition.h" />
-    <ClInclude Include="Game\Main_menu.h" />
     <ClInclude Include="Game\Operation.h" />
     <ClInclude Include="Game\Pet.h" />
     <ClInclude Include="Game\PetPropertyName.h" />
@@ -109,7 +106,6 @@
     <ClInclude Include="Game\Frame.h" />
     <ClInclude Include="Game\Greendragon.h" />
     <ClInclude Include="Game\MainMenu.h" />
-    <ClInclude Include="Game\Molu.h" />
     <ClInclude Include="Game\Refutation.h" />
     <ClInclude Include="Game\Sound.h" />
     <ClInclude Include="Game\Zilien.h" />
@@ -118,5 +114,6 @@
     <ClInclude Include="Game\Amy.h" />
     <ClInclude Include="Engine\OrderManager.h" />
     <ClInclude Include="Engine\DrawManager.h" />
+    <ClInclude Include="Game\Tutorial.h" />
   </ItemGroup>
 </Project>

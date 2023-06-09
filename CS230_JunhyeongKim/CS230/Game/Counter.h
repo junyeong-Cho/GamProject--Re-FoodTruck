@@ -52,10 +52,10 @@ private:
     Button yes_button;
     Counter_Background counter_Screen;
     Counter_Background background;
-    int customors = 10;
+    int customors = 15;
 
     int ranCustomerNum;
-    int maxRanCustomerNum = 10;
+    int kind_customer = 9;
 
 
 };

@@ -30,7 +30,7 @@ namespace CS230
 	{
 		first_load = true;
 		food_complete = false;
-		money = 100;
+		money = 30;
 		rate = 100;
 		day = 1;
 

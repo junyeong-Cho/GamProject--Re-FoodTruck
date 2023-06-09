@@ -23,7 +23,7 @@ Customor::Customor(Customor* front) :
 {
     current_state = &state_waiting;
     //SetScale({ 0.98,0.98 });
-    random_timer = static_cast<double>(rand()) / (RAND_MAX / 5) + 10/Engine::GetUnloadManager().GetDay();
+    random_timer = static_cast<double>(rand()) / (RAND_MAX / 5) + 18/Engine::GetUnloadManager().GetDay();
     current_state->Enter(this);
     timer = random_timer;
     last_timer = static_cast<int>(random_timer);    
@@ -252,11 +252,11 @@ void Customor::State_Evaluate::CheckExit(GameObject* object)
             break;
         case static_cast<int>(Grade::SOSO):
             Engine::GetUnloadManager().Update_money(customor->ingredient_num);
-            Engine::GetUnloadManager().Update_rate(0);
+            Engine::GetUnloadManager().Update_rate(2);
             break;
         case static_cast<int>(Grade::GOOD):
             Engine::GetUnloadManager().Update_money(customor->ingredient_num + 3);
-            Engine::GetUnloadManager().Update_rate(5);
+            Engine::GetUnloadManager().Update_rate(10);
             break;
         default:
             break;
@@ -356,10 +356,7 @@ void Customor::Draw(Math::TransformationMatrix camera_matrix)
         doodle::pop_settings();
         evalue.draw("OK");
     }
-    else if (current_state->GetName() == "In_Counter")
-    {
-      doodle::draw_text(std::to_string(last_timer),  sprite.GetFrameSize().x, GetPosition().y + 400);
-    }
+
 
     if (button_timer > 0.3 && current_state->GetName() == "Order" && evaluating == false)
     {

@@ -16,7 +16,6 @@ Created:    March 8, 2023
 
 #include "Game/Splash.h"
 #include "Game/MainMenu.h"
-#include "Game/Main_menu.h"
 #include "Game/Counter.h"
 #include "Game/Kitchen.h"
 #include "Game/Ending.h"

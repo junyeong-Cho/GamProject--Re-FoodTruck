@@ -58,9 +58,9 @@ namespace CS230
 
 	private:
 		GameObjectManager counter_ObjectManager;
-		int money = 100;
+		int money = 30;
 		int rate = 100;
-		double timer = 300;
+		double timer = 120;
 
 		unsigned int day = 1;
 

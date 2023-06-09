@@ -67,10 +67,6 @@ void Ingredient::Draw(const std::vector<std::vector<CS230::Texture*>>& texture)
 		matrix = Engine::GetDrawManager().GetMatrix(texture[static_cast<int>(name)][texture[static_cast<int>(name)].size() - cutNum], position, size);
 		texture[static_cast<int>(name)][texture[static_cast<int>(name)].size() - cutNum]->Draw(matrix);
 	}
-	doodle::push_settings();
-	doodle::no_fill();
-	doodle::draw_rectangle(position.x, position.y, size.x, size.y);
-	doodle::pop_settings();
 }
 
 void Ingredient::Scoop()

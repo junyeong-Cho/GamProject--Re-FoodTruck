@@ -266,7 +266,7 @@ void Kitchen::Draw_Frame_Text()
 	doodle::set_font_size(Engine::GetWindow().GetSize().x / 50.0);
 	doodle::set_outline_width(12);
 	doodle::set_fill_color(0, 0, 0);
-	doodle::draw_text(std::to_string(Engine::GetUnloadManager().GetMoney()), Engine::GetWindow().GetSize().x / 1.3 + Engine::GetWindow().GetSize().x * 0.1, Engine::GetWindow().GetSize().y / 8.0 * 7.35);
+	doodle::draw_text(std::to_string(Engine::GetUnloadManager().GetMoney()) + "$", Engine::GetWindow().GetSize().x / 1.3 + Engine::GetWindow().GetSize().x * 0.1 + 10.0, Engine::GetWindow().GetSize().y / 8.0 * 7.35+ 5.0);
 	doodle::pop_settings();
 }
 

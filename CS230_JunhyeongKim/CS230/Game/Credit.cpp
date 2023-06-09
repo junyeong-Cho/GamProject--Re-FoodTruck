@@ -7,7 +7,7 @@ Project:    CS230 Engine
 Author:     Junyeong Cho
 Created:    May 26, 2023
 */
-#include "Main_menu.h"
+#include "MainMenu.h"
 #include "..\Engine\Engine.h"
 #include "doodle/drawing.hpp"
 #include "doodle/input.hpp"

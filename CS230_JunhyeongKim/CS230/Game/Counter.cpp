@@ -20,7 +20,6 @@ Created:    April 30, 2023
 #include "Customer.h"
 #include "Giraffe.h"
 #include "Elf.h"
-#include "Molu.h"
 #include "Fireman.h"
 #include "Zilien.h"
 #include "Anteater.h"
@@ -65,78 +64,44 @@ void Counter::Load()
         Engine::GetUnloadManager().GetCounterObjectManager().Add(front_customor);
         Engine::GetUnloadManager().current_customor = front_customor;
 
-        for (int i = 1; i < customors; i++)
+        for (int i = 0; i < customors; i++)
         {
-            //int customer_num = rand() / (RAND_MAX / 2);
-
-            //new logic
-            //Get the random value with using rand() and get the value between 0 ~ 3 value with using rand() % 4
-            /*
-            For example
-            : 4214142140 % 4 -> 0
-            : 4214142141 % 4 -> 1
-            : 4214142142 % 4 -> 2
-            : 4214142143 % 4 -> 3
-            /*________________________*/
-            ranCustomerNum = rand();
-
-
-            switch (((int)ranCustomerNum % maxRanCustomerNum))
+            ranCustomerNum = rand() % kind_customer;
+            switch (ranCustomerNum )
             {
             case 0:
                 front_customor = new Giraffe(front_customor);
                 break;
             case 1:
-                front_customor = new Molu(front_customor);
-                break;
-            case 2:
                 front_customor = new Anteater(front_customor);
                 break;
-            case 3:
+            case 2:
                 front_customor = new Elf(front_customor);
                 break;
-            case 4:
+            case 3:
                 front_customor = new Fireman(front_customor);
                 break;
-            case 5:
+            case 4:
                 front_customor = new Greendragon(front_customor);
                 break;
-            case 6:
+            case 5:
                 front_customor = new Zilien(front_customor);
                 break;
-            case 7:
+            case 6:
                 front_customor = new SunMan(front_customor);
 				break;
-            case 8:
+            case 7:
                 front_customor = new Theif(front_customor);
                 break;
-            case 9:
+            case 8:
                 front_customor = new Amy(front_customor);
 				break;
-
             default:
                 break;
             }
             Engine::GetUnloadManager().GetCounterObjectManager().Add(front_customor);
         }
         counter_Screen.Add("Assets/Counter_Screen.png");
-
-        //int background_num = rand() / (RAND_MAX / 2);
-
-        //switch (background_num)
-        //{
-        //case 0:
-        //    background.Add("Assets/Counter_Background_1.png");
-        //    break;
-        //case 1:
-        //    background.Add("Assets/Counter_Background_2.png");
-        //    break;
-        //case 2:
-        //    background.Add("Assets/Counter_Background_3.png");
-        //    break;
-        //default:
-        //    break;
-        //}
 
         background.Add("Assets/Counter_Background.png");
 
@@ -220,7 +185,7 @@ void Counter::Draw_UI()
     doodle::set_font_size(Engine::GetWindow().GetSize().x / 50.0);
     doodle::set_outline_width(12);
     doodle::set_fill_color(0, 0, 0);
-    doodle::draw_text(std::to_string(Engine::GetUnloadManager().GetMoney()), Engine::GetWindow().GetSize().x / 1.3 + Engine::GetWindow().GetSize().x * 0.1, Engine::GetWindow().GetSize().y / 8.0 * 7.35);
+    doodle::draw_text(std::to_string(Engine::GetUnloadManager().GetMoney())+"$", Engine::GetWindow().GetSize().x / 1.3 + Engine::GetWindow().GetSize().x * 0.1 + 10.0, Engine::GetWindow().GetSize().y / 8.0 * 7.35+ 5.0);
     doodle::pop_settings();
 }
 

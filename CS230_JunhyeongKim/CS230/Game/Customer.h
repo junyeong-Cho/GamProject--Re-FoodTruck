@@ -143,7 +143,7 @@ private:
 
     //evaluating
     bool evaluating = false;
-    unsigned int grade = 0;
+    unsigned int grade = 4;
 
     //timer
     double timer{ 0 };

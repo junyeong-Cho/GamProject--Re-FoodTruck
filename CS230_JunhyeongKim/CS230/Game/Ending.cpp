@@ -19,12 +19,12 @@ Ending::Ending()
 
 void Ending::Load()
 {
-	if (Engine::GetUnloadManager().GetRate() >= 300 || Engine::GetUnloadManager().GetMoney() >= 300)//good
+	if (Engine::GetUnloadManager().GetRate() >= 250 || Engine::GetUnloadManager().GetMoney() >= 100)//good
 	{
 		background.Add("Assets/Endings/GGEnding.png");
 
 	}
-	else if(Engine::GetUnloadManager().GetRate() >= 100 && Engine::GetUnloadManager().GetMoney() >= 100)//soso
+	else if(Engine::GetUnloadManager().GetRate() >= 100 && Engine::GetUnloadManager().GetMoney() >= 30)//soso
 	{
 		background.Add("Assets/Endings/SoSoEnding.png");
 	}

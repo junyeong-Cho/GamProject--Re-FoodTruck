@@ -116,8 +116,8 @@ void Button::DrawLoading()
     if (canLoadingText == true)
     {
         doodle::push_settings();
-        doodle::set_font_size(70);
-        doodle::draw_text("Opening the kitchen door...", 120.0, 300.0);
+        doodle::set_font_size(80);
+        doodle::draw_text("Going to the kitchen...", 130.0, 300.0);
         doodle::pop_settings();
         Engine::GetGameStateManager().SetNextGameState(static_cast<int>(States::Kitchen));
         canLoadingText = false;

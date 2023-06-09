@@ -569,6 +569,7 @@ void Cook::DrawLadleSoup()
 
 void Cook::Refill(int index)
 {
+	Engine::GetUnloadManager().Update_money(-refillNum);
 	for (int i = 0; i < refillNum; ++i)
 	{
 		seven_ingredients[index].push_back(CreateIngredient(index));
