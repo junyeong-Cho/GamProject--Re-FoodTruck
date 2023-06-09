@@ -263,11 +263,13 @@ AntSoup::AntSoup() : Recipe()
 {
 	recippeName = RecipeName::AntSoup;
 
+	recipe.push_back(boiledSalt); //1
+	recipe.push_back(boiledSalt); //2
+	recipe.push_back(boiledSalt); //3
+
 	recipe.push_back(boiledAnt); //1
 	recipe.push_back(boiledAnt); //2
 	recipe.push_back(boiledAnt); //3
-
-	recipe.push_back(boiledSalt); //1
 
 	totalNum = recipe.size();
 }
