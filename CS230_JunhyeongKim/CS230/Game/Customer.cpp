@@ -3,7 +3,7 @@ Copyright (C) 2023 DigiPen Institute of Technology
 Reproduction or distribution of this file or its contents without
 prior written consent is prohibited
 File Name:  Customer.cpp
-Project:    GAM150
+Project:    GAM150  
 Author:     Junhyeong Kim
 Created:    March 2, 2023
 */
@@ -14,7 +14,6 @@ Created:    March 2, 2023
 #include "doodle/input.hpp"
 #include "Counter.h"
 
-
 Customor::Customor(Customor* front) :
     GameObject({ -300.0,138.0 }), front_customor(front),
     Yes(400.0, 800.0 / 3.0, 1400.0 / 10.0, 800.0 / 10.0),
@@ -23,12 +22,15 @@ Customor::Customor(Customor* front) :
 {
     current_state = &state_waiting;
     //SetScale({ 0.98,0.98 });
-    random_timer = static_cast<double>(rand()) / (RAND_MAX / 5) + 18/Engine::GetUnloadManager().GetDay();
+    AddGOComponent(new CS230::SoundEffect);
+    GetGOComponent<CS230::SoundEffect>()->LoadFile("Assets/Sound/SFX/EnteringBell.wav");
+
+
+
+    random_timer = static_cast<double>(rand()) / (RAND_MAX / 5) + 18 / Engine::GetUnloadManager().GetDay();
     current_state->Enter(this);
     timer = random_timer;
-    last_timer = static_cast<int>(random_timer);    
-
-    soundEffect->LoadFile("Assets/Sound/SFX/EnteringBell.wav");
+    last_timer = static_cast<int>(random_timer);
 }
 
 void Customor::update_x_velocity(double dt)
@@ -83,16 +85,16 @@ void Customor::State_In_Counter::Enter(GameObject* object)
 
 void Customor::State_In_Counter::Update(GameObject* object, double dt)
 {
-    
+
     Customor* customor = static_cast<Customor*>(object);
-    
+
     if (customor->random_timer <= 0)
     {
+        customor->in_counter = true;
+
         if ((customor->GetPosition().x < 60.0 * Engine::GetWindow().GetSize().x / 1400.0))
         {
             customor->UpdatePosition({ 200 * dt,0 });
-
-            customor->soundEffect->Play(0);
 
         }
         else
@@ -107,7 +109,7 @@ void Customor::State_In_Counter::Update(GameObject* object, double dt)
             customor->last_timer = static_cast<int>(customor->timer);
         }
     }
-    else 
+    else
     {
         customor->random_timer -= dt;
     }
@@ -126,11 +128,8 @@ void Customor::State_In_Counter::CheckExit(GameObject* object)
 
     if (customor->front_customor == nullptr || customor->front_customor->current_state->GetName() == "Leaving")
     {
-        /*
-        CS230::SoundEffect* soundEffect = new CS230::SoundEffect();
-        soundEffect->LoadFile("Assets/Sound/SFX/EnteringBell.wav");
-        soundEffect->Play(0);
-        */
+
+        customor->in_counter = true;
 
         customor->change_state(&customor->state_order);
     }
@@ -268,7 +267,6 @@ void Customor::State_Evaluate::CheckExit(GameObject* object)
 }
 
 
-
 //Leaving
 void Customor::State_Leaving::Enter(GameObject* object)
 {
@@ -288,16 +286,21 @@ void Customor::State_Leaving::Update(GameObject* object, double dt)
 void Customor::State_Leaving::CheckExit(GameObject* object)
 {
     Customor* customor = static_cast<Customor*>(object);
-
 }
 
 
 void Customor::Update(double dt)
 {
     GameObject::Update(dt);
-    if (front_customor != nullptr && front_customor->current_state != nullptr && front_customor->current_state->GetName() == "Leaving")
+    if (front_customor != nullptr && front_customor->current_state->GetName() == "Leaving")
     {
         front_customor = front_customor->front_customor;
+    }
+
+    if (GetGOComponent<CS230::SoundEffect>() != nullptr && in_counter == true && first_bell == false)
+    {
+        GetGOComponent<CS230::SoundEffect>()->Play(0);
+        first_bell = true;
     }
 }
 
@@ -306,8 +309,8 @@ void Customor::Draw(Math::TransformationMatrix camera_matrix)
 {
 
     sprite.Draw(camera_matrix * GetMatrix());
-
     doodle::Color textBoxColor{ 204,229,255 };
+
     if (can_order == true && evaluating == false)
     {
         doodle::push_settings();
@@ -356,7 +359,6 @@ void Customor::Draw(Math::TransformationMatrix camera_matrix)
         doodle::pop_settings();
         evalue.draw("OK");
     }
-
 
     if (button_timer > 0.3 && current_state->GetName() == "Order" && evaluating == false)
     {

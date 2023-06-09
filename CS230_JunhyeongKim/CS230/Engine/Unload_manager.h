@@ -19,7 +19,6 @@ namespace CS230
 	class Unload_manager
 	{
 	public:
-		void Save_Counter_object(GameObjectManager object_manager);
 		GameObjectManager& GetCounterObjectManager() { return counter_ObjectManager; }
 		const int GetMoney() { return money; }
 		const int GetRate() { return rate; }

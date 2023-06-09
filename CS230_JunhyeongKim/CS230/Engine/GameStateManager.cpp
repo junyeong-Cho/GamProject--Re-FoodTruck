@@ -32,8 +32,8 @@ void CS230::GameStateManager::Update(double dt)
         break;
     case Status::LOADING:
         current_gamestate = next_gamestate;
-        Engine::GetLogger().LogEvent("Load " + current_gamestate->GetName());
 
+        Engine::GetLogger().LogEvent("Load " + current_gamestate->GetName());
         current_gamestate->Load();
         Engine::GetLogger().LogEvent("Load Complete");
         status = Status::UPDATING;
@@ -65,10 +65,13 @@ void CS230::GameStateManager::Update(double dt)
                 Engine::GetUnloadManager().GetCounterObjectManager().Unload();
                 Engine::GetUnloadManager().Set_timer(120);
                 Engine::GetUnloadManager().first_load = true;
-                
+                Engine::GetUnloadManager().Unload();
                 /*Engine::GetTextureManager().Unload();*/
+                Counter->ClearGSComponents();
+
             }
         }
+        
         Engine::GetLogger().LogEvent("Unload Complete");
         if (next_gamestate == nullptr)
         {
@@ -97,6 +100,11 @@ void CS230::GameStateManager::AddGameState(GameState& gamestate)
     if (gamestate.GetName() == "Kitchen")
     {
         Kitchen = &gamestate;
+    }
+
+    if (gamestate.GetName() == "Counter")
+    {
+        Counter = &gamestate;
     }
 }
 

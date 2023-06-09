@@ -9,19 +9,14 @@ Created:    March 8, 2023
 */
 
 #include "Unload_manager.h"
-
+#include "Engine.h"
 namespace CS230
 {
-	void Unload_manager::Save_Counter_object(GameObjectManager object_manager)
-	{
-		for (int i = 0; i < object_manager.GetSize(); i++)
-		{
-			counter_ObjectManager.Add(object_manager.get_object(i));
-		}
-	}
+
 
 	void Unload_manager::Unload()
 	{
+		counter_ObjectManager.Unload();
 		current_customor = nullptr;
 		food_grad = 0;
 	}
@@ -33,6 +28,6 @@ namespace CS230
 		money = 30;
 		rate = 100;
 		day = 1;
-
+	
 	}
 }

@@ -169,6 +169,7 @@ void Kitchen::Unload()
 	{
 		cook.Unload();
 		recipeBook.Unload();
+		ClearGSComponents();
 		canUnload = false;
 	}
 }

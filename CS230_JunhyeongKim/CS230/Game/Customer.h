@@ -154,4 +154,7 @@ private:
 
     //ingredient_num
     unsigned int ingredient_num = 0;
+
+    bool in_counter = false;
+    bool first_bell = false;
 };

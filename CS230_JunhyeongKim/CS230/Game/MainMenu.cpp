@@ -139,7 +139,7 @@ void MainMenu::Update(double dt)
 
 void MainMenu::Unload()
 {
-
+	ClearGSComponents();
 }
 
 void MainMenu::Draw()

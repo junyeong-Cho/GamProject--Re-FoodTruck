@@ -56,12 +56,9 @@ void Counter::Load()
     //Frame for Day
     gameobjectmanager.Add(new Frame({ 30, 730 }, 1));
 
-    srand((unsigned int)time(NULL));
-
-
     if (Engine::GetUnloadManager().first_load == true)
     {
-
+        ClearGSComponents();
         front_customor = new Giraffe(nullptr);
         Engine::GetUnloadManager().GetCounterObjectManager().Add(front_customor);
         Engine::GetUnloadManager().current_customor = front_customor;
@@ -107,15 +104,16 @@ void Counter::Load()
 
         background.Add("Assets/Counter_Background.png");
 
+        //Test version
+        AddGSComponent(new CS230::MusicEffect());
+
+        GetGSComponent<CS230::MusicEffect>()->LoadFile("Assets/Sound/Theme/main_theme_pirot.ogg");
+        GetGSComponent<CS230::MusicEffect>()->LoadFile("Assets/Sound/Theme/kitchen_theme.ogg");
+
         Engine::GetUnloadManager().first_load = false;
     }
 
 
-    //Test version
-    AddGSComponent(new CS230::MusicEffect());
-
-    GetGSComponent<CS230::MusicEffect>()->LoadFile("Assets/Sound/Theme/main_theme_pirot.ogg");
-    GetGSComponent<CS230::MusicEffect>()->LoadFile("Assets/Sound/Theme/kitchen_theme.ogg");
 
 
 }
@@ -238,9 +236,7 @@ void Counter::Unload()
 {
     //Engine::GetUnloadManager().Save_Counter_object(gameobjectmanager);
     gameobjectmanager.Unload();
-    
     //counter_Screen.Unload();
     //background.Unload();
-
     //GetGSComponent<CS230::MusicEffect>()->Stop();
 }

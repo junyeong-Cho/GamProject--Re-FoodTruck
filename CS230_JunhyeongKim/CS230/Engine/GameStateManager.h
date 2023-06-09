@@ -50,5 +50,7 @@ namespace CS230 {
         GameState* next_gamestate = nullptr;
 
         GameState* Kitchen = nullptr;
+        GameState* Counter = nullptr;
+
     };
 }

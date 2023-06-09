@@ -32,7 +32,10 @@ namespace CS230 {
         {
             return componentmanager.GetComponent<T>();
         }
-
+        void ClearGSComponents()
+        {
+            componentmanager.Clear();
+        }
     protected:
         void AddGSComponent(Component* component)
         {
@@ -50,10 +53,7 @@ namespace CS230 {
             componentmanager.RemoveComponent<T>();
         }
 
-        void ClearGSComponents()
-        {
-            componentmanager.Clear();
-        }
+
 
     private:
         ComponentManager componentmanager;
