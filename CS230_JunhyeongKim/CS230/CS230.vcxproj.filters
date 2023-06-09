@@ -37,7 +37,6 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Game\Day_end.cpp" />
     <ClCompile Include="Game\Anteater.cpp" />
-    <ClCompile Include="Game\Clock.cpp" />
     <ClCompile Include="Game\Credit.cpp" />
     <ClCompile Include="Game\Fireman.cpp" />
     <ClCompile Include="Game\Frame.cpp" />
@@ -97,7 +96,6 @@
     <ClInclude Include="Engine\Component.h" />
     <ClInclude Include="Engine\ComponentManager.h" />
     <ClInclude Include="Game\Anteater.h" />
-    <ClInclude Include="Game\Clock.h" />
     <ClInclude Include="Game\Credit.h" />
     <ClInclude Include="Game\Fireman.h" />
     <ClInclude Include="Game\Frame.h" />

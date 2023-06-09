@@ -66,7 +66,7 @@ void Kitchen::Load()
 
 		for (int i = 0; i < cook.ingredient_number; ++i)
 		{
-			sideBowl.push_back(SideBowl(Math::vec2{ cook.sideBowlBoardFirstPos.x + (cook.sideBowlSize.x + cook.sideBowlPadding.x) * i, cook.sideBowlBoardFirstPos.y }, "1"));
+			sideBowl.push_back(SideBowl(Math::vec2{ cook.sideBowlBoardFirstPos.x + (cook.sideBowlSize.x + cook.sideBowlPadding.x) * i, cook.sideBowlBoardFirstPos.y }, "3"));
 			sideBowl[i].Load();
 		}
 		Engine::GetLogger().LogDebug("sideBowl load");
@@ -109,6 +109,8 @@ void Kitchen::Update(double dt)
 		if (Engine::GetUnloadManager().GetDay() >= 4)
 		{
 			Engine::GetGameStateManager().SetNextGameState(static_cast<int>(States::Ending));
+			canLoad = true;
+			canUnload = true;
 		}
 		else
 		{

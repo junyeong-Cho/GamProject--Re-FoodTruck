@@ -2,10 +2,11 @@
 Copyright (C) 2023 DigiPen Institute of Technology
 Reproduction or distribution of this file or its contents without
 prior written consent is prohibited
-File Name:  Credit.cpp
+File Name:  Tutorial.cpp
 Project:    GAM150
 Author:     Junyeong Cho
 Created:    May 26, 2023
+Updated:    June 9, 2023
 */
 
 #include "..\Engine\Engine.h"
