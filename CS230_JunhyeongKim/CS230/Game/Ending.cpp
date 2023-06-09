@@ -19,7 +19,7 @@ Ending::Ending()
 
 void Ending::Load()
 {
-	if (Engine::GetUnloadManager().GetRate() >= 250 || Engine::GetUnloadManager().GetMoney() >= 100)//good
+	if (Engine::GetUnloadManager().GetRate() >= 200 || Engine::GetUnloadManager().GetMoney() >= 70)//good
 	{
 		background.Add("Assets/Endings/GGEnding.png");
 

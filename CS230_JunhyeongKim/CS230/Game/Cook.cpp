@@ -100,6 +100,7 @@ void Cook::Unload()
 	potDrawIndex = 0;
 	plateDrawIndex = 0;
 	checkDrawSoup = false;
+	drawSoup = false;
 	canCook = true;
 	whatMouseclickIndex = -1;
 }

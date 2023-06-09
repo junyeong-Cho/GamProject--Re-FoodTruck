@@ -38,21 +38,23 @@ Counter::Counter()
 void Counter::Load()
 {
     //Frame for Clock
-    gameobjectmanager.Add(new Frame({ Engine::GetWindow().GetSize().x / 12.5, Engine::GetWindow().GetSize().y -70.0 }, 1));
+    gameobjectmanager.Add(new Frame({ 210 , 730 }, 1));
 
     //Face test
-    
-    refutation = new Refutation({ Engine::GetWindow().GetSize().x / 4.0, Engine::GetWindow().GetSize().y / 8.0 * 7.25 });
+
+    refutation = new Refutation({ 400, Engine::GetWindow().GetSize().y / 8.0 * 7.25 });
     gameobjectmanager.Add(refutation);
-    
+
 
     //Frame for Refutation
-    gameobjectmanager.Add(new Frame({ Engine::GetWindow().GetSize().x / 4.0, Engine::GetWindow().GetSize().y -  70.0}, 1));
+    gameobjectmanager.Add(new Frame({ 395, 730 }, 1));
 
 
     //Frame for Money
-    gameobjectmanager.Add(new Frame({ Engine::GetWindow().GetSize().x / 1.3, Engine::GetWindow().GetSize().y- 78.0 }, 2));
+    gameobjectmanager.Add(new Frame({ Engine::GetWindow().GetSize().x / 1.3, Engine::GetWindow().GetSize().y - 78.0 }, 2));
 
+    //Frame for Day
+    gameobjectmanager.Add(new Frame({ 30, 730 }, 1));
 
     srand((unsigned int)time(NULL));
 
@@ -139,7 +141,7 @@ void Counter::Update(double dt)
     {
         GetGSComponent<CS230::MusicEffect>()->Stop();
         Engine::GetUnloadManager().Update_Day();
-        if (Engine::GetUnloadManager().GetDay() >= 4)
+        if (Engine::GetUnloadManager().GetDay() > 4)
         {
             Engine::GetGameStateManager().SetNextGameState(static_cast<int>(States::Ending));
         }
@@ -165,8 +167,8 @@ void Counter::Draw_UI()
     doodle::set_outline_width(12);
     doodle::set_outline_color(255, 255, 255);
     doodle::set_fill_color(255, 161, 74);
-    doodle::draw_text("Time\n ", 145, Engine::GetWindow().GetSize().y / 8.0 * 7.55);
-    doodle::draw_text(std::to_string(static_cast<int>(Engine::GetUnloadManager().GetTimer())), 165, Engine::GetWindow().GetSize().y-80);
+    doodle::draw_text("Time\n ", 240, Engine::GetWindow().GetSize().y / 8.0 * 7.55);
+    doodle::draw_text(std::to_string(static_cast<int>(Engine::GetUnloadManager().GetTimer())), 255, Engine::GetWindow().GetSize().y - 80);
     doodle::pop_settings();
 
     //Refutation - frame addapted
@@ -176,7 +178,7 @@ void Counter::Draw_UI()
     doodle::set_outline_width(12);
     doodle::set_outline_color(255, 255, 255);
     doodle::set_fill_color(255, 161, 74);
-    doodle::draw_text(" Rate\n  " + std::to_string(Engine::GetUnloadManager().GetRate()), Engine::GetWindow().GetSize().x / 5.0 + Engine::GetWindow().GetSize().x * 0.095, Engine::GetWindow().GetSize().y / 8.0 * 7.5);
+    doodle::draw_text(" Rate\n  " + std::to_string(Engine::GetUnloadManager().GetRate()), 455, 755);
     doodle::pop_settings();
 
     //Money - frame addapted
@@ -185,7 +187,17 @@ void Counter::Draw_UI()
     doodle::set_font_size(Engine::GetWindow().GetSize().x / 50.0);
     doodle::set_outline_width(12);
     doodle::set_fill_color(0, 0, 0);
-    doodle::draw_text(std::to_string(Engine::GetUnloadManager().GetMoney())+"$", Engine::GetWindow().GetSize().x / 1.3 + Engine::GetWindow().GetSize().x * 0.1 + 10.0, Engine::GetWindow().GetSize().y / 8.0 * 7.35+ 5.0);
+    doodle::draw_text(std::to_string(Engine::GetUnloadManager().GetMoney()) + "$", Engine::GetWindow().GetSize().x / 1.3 + Engine::GetWindow().GetSize().x * 0.1 + 10.0, Engine::GetWindow().GetSize().y / 8.0 * 7.35 + 5.0);
+    doodle::pop_settings();
+
+    //Day
+    doodle::push_settings();
+    doodle::set_font_fade_out_interval(0.5, 0.0);
+    doodle::set_font_size(Engine::GetWindow().GetSize().x / 50.0);
+    doodle::set_outline_width(12);
+    doodle::set_outline_color(255, 255, 255);
+    doodle::set_fill_color(255, 161, 74);
+    doodle::draw_text("DAY " + std::to_string(Engine::GetUnloadManager().GetDay()), 60, 735);
     doodle::pop_settings();
 }
 
