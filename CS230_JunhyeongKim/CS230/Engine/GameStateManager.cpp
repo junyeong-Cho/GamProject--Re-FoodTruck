@@ -3,15 +3,14 @@ Copyright (C) 2023 DigiPen Institute of Technology
 Reproduction or distribution of this file or its contents without
 prior written consent is prohibited
 File Name:  GameStateManager.cpp
-Project:    CS230 Engine
-Author:     Jonathan Holmes, Junhyeong Kim
+Project:    GAM150
+Author:     Junhyeong Kim
 Created:    March 8, 2023
-Updated:    March 17, 2023
+Updated:    June 9, 2023
 */
 
 #include "GameStateManager.h"
 #include "Engine.h"
-#include <iostream>
 
 CS230::GameStateManager::GameStateManager() { }
 

@@ -1,3 +1,13 @@
+/*
+Copyright (C) 2023 DigiPen Institute of Technology
+Reproduction or distribution of this file or its contents without
+prior written consent is prohibited
+File Name:  Slot.cpp
+Project:    GAM150
+Author:     Yeaseul Lim
+Created:    May 23, 2023
+Upeated:    June 9, 2023
+*/
 #include "Slot.h"
 #include "doodle/drawing.hpp"
 #include "doodle/input.hpp"

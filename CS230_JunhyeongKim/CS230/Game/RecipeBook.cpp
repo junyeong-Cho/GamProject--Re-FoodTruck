@@ -1,7 +1,16 @@
+/*
+Copyright (C) 2023 DigiPen Institute of Technology
+Reproduction or distribution of this file or its contents without
+prior written consent is prohibited
+File Name:  RecipeBook.cpp
+Project:    GAM150
+Author:     Yeaseul Lim
+Created:    March 20, 2023
+Upeated:    June 2, 2023
+*/
 #include "RecipeBook.h"
 #include "doodle/drawing.hpp"
 #include "doodle/input.hpp"
-#include <iostream>
 
 extern int wheel;
 extern bool leftClick;
@@ -29,8 +38,6 @@ void RecipeBook::Load()
 	{
 		recipeBook[i]->Load();
 	}
-
-	std::cout << recipeBook.size() << std::endl;
 }
 
 void RecipeBook::Update()

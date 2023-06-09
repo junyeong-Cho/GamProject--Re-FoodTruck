@@ -1,3 +1,13 @@
+/*
+Copyright (C) 2023 DigiPen Institute of Technology
+Reproduction or distribution of this file or its contents without
+prior written consent is prohibited
+File Name:  SideBowl.h
+Project:    GAM150
+Author:     Yeaseul Lim
+Created:    May 23, 2023
+Upeated:    June 2, 2023
+*/
 #pragma once
 #include "../Engine/vec2.h"
 #include "../Engine/Texture.h"

@@ -28,7 +28,6 @@
     <ClCompile Include="Game\IngredientTextureManager.cpp" />
     <ClCompile Include="Game\Kitchen.cpp" />
     <ClCompile Include="Game\Operation.cpp" />
-    <ClCompile Include="Game\Pet.cpp" />
     <ClCompile Include="Game\Recipe.cpp" />
     <ClCompile Include="Game\RecipeBook.cpp" />
     <ClCompile Include="Game\SideBowl.cpp" />
@@ -85,8 +84,6 @@
     <ClInclude Include="Game\Kitchen.h" />
     <ClInclude Include="Game\KitchenPosition.h" />
     <ClInclude Include="Game\Operation.h" />
-    <ClInclude Include="Game\Pet.h" />
-    <ClInclude Include="Game\PetPropertyName.h" />
     <ClInclude Include="Game\Recipe.h" />
     <ClInclude Include="Game\RecipeBook.h" />
     <ClInclude Include="Game\RecipeName.h" />

@@ -3,10 +3,11 @@ Copyright (C) 2023 DigiPen Institute of Technology
 Reproduction or distribution of this file or its contents without
 prior written consent is prohibited
 File Name:  Engine.h
-Project:    CS230 Engine
+Project:    GAM150
 Author:     Jonathan Holmes, Junhyeong Kim
+Second Author : Yeaseul Lim
 Created:    March 8, 2023
-Updated:    April 27, 2023
+Updated:    June 9, 2023
 */
 #pragma once
 #include <chrono>

@@ -1,7 +1,15 @@
+/*
+Copyright (C) 2023 DigiPen Institute of Technology
+Reproduction or distribution of this file or its contents without
+prior written consent is prohibited
+File Name:  DrawManager.cpp
+Project:    GAM150
+Author:     Yeaseul Lim
+Created:    June  6, 2023
+*/
+
 #include "DrawManager.h"
 #include <math.h>
-
-#include <iostream>
 
 void CS230::DrawManager::Update(const Math::ivec2& windowSize)
 {

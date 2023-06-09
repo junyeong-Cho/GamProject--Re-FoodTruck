@@ -1,6 +1,15 @@
+/*
+Copyright (C) 2023 DigiPen Institute of Technology
+Reproduction or distribution of this file or its contents without
+prior written consent is prohibited
+File Name:  Kitchen.cpp
+Project:    GAM150
+Author:     Yeaseul Lim
+Created:    March 10, 2023
+Updated:    June 9, 2023
+*/
 #include "Kitchen.h"
 #include "doodle/drawing.hpp"
-#include <iostream>
 #include "..\Engine\Engine.h"
 
 extern bool leftClick;
