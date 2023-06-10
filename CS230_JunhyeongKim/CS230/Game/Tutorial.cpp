@@ -25,6 +25,10 @@ void Tutorial::Load()
 	tutorialNum = 0;
 	
 	//Push back the images at here!
+	tutorials.push_back(Engine::GetTextureManager().Load("Assets/Tutorial1.jpg"));
+	tutorials.push_back(Engine::GetTextureManager().Load("Assets/Tutorial2.jpg"));
+	tutorials.push_back(Engine::GetTextureManager().Load("Assets/Tutorial3.jpg"));
+	tutorials.push_back(Engine::GetTextureManager().Load("Assets/Tutorial4.jpg"));
 
 }
 

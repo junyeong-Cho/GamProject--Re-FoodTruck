@@ -49,22 +49,16 @@ void Cook::SetIngredient()
 void Cook::Load()
 {
 	SetIngredient();
-	Engine::GetLogger().LogDebug("SetIngredient load");
 
 	operation.Load();
-	Engine::GetLogger().LogDebug("operation load");
 
 	tool.Load();
-	Engine::GetLogger().LogDebug("tool load");
 
 	plate.Load();
-	Engine::GetLogger().LogDebug("plate load");
 
 	pot.Load();
-	Engine::GetLogger().LogDebug("pot load");
 
 	ingredientTextureManager.Load();
-	Engine::GetLogger().LogDebug("ingredientTextureManager load");
 }
 
 void Cook::Unload()
