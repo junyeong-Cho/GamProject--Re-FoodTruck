@@ -34,7 +34,7 @@ void Tutorial::Load()
 
 void Tutorial::Update(double dt)
 {
-	Engine::GetWindow().Clear(0x000000FF);
+	Engine::GetWindow().Clear(0XF8F6E9FF);
 
 
 
