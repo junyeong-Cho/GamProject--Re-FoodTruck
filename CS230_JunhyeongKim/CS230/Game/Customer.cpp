@@ -231,8 +231,6 @@ void Customor::State_Evaluate::Update(GameObject* object, double dt)
 {
     Customor* customor = static_cast<Customor*>(object);
     customor->drawFoodIndex = (static_cast<int>(customor->Get_Oreder_recipe()) * 3) + (customor->grade - 1);
-    Engine::GetLogger().LogDebug(std::to_string(customor->drawFoodIndex) + " = " + std::to_string(static_cast<int>(customor->Get_Oreder_recipe())) + " * 3 + " +
-        std::to_string(customor->grade) + " -1");
     customor->evalue.update(doodle::get_mouse_x(), doodle::get_mouse_y());
 }
 
