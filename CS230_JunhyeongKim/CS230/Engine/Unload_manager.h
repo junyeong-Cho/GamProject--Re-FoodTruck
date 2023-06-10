@@ -47,6 +47,9 @@ namespace CS230
 			food_complete = true;
 		}
 
+		void Set_foodTextureIndex(int index) { foodTextureIndex = index; }
+		int Get_foodTextureIndex() { return foodTextureIndex; }
+
 		void Reset();
 
 		void Unload();
@@ -65,5 +68,6 @@ namespace CS230
 
 
 		double food_grad = 0;
+		int foodTextureIndex = 0;
 	};
 }

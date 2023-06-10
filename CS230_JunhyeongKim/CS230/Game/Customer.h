@@ -29,6 +29,8 @@ public:
     virtual std::string Grade_bad_text() { return "hello!"; }
     virtual std::string Grade_soso_text() { return "hello!"; }
     virtual std::string Grade_good_text() { return "hello!"; }
+    bool CanDrawFood() { return canDrawFood; }
+    int DrawFoodIndex() { return drawFoodIndex; }
 
     RecipeName Get_Oreder_recipe() { return oreder_recipe; }
 
@@ -157,4 +159,7 @@ private:
 
     bool in_counter = false;
     bool first_bell = false;
+
+    bool canDrawFood = false;
+    int drawFoodIndex = 0;
 };

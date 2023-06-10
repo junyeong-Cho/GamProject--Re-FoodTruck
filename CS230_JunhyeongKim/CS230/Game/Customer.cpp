@@ -208,7 +208,7 @@ void Customor::State_Evaluate::Enter(GameObject* object)
 {
     Customor* customor = static_cast<Customor*>(object);
 
-
+    customor->canDrawFood = false;
     if (customor->grade != static_cast<int>(Grade::NO_FOOD))
     {
         if (Engine::GetUnloadManager().Getfood_grad() < 40)
@@ -223,14 +223,16 @@ void Customor::State_Evaluate::Enter(GameObject* object)
         {
             customor->grade = static_cast<int>(Grade::GOOD);
         }
-
+        customor->canDrawFood = true;
     }
 }
 
 void Customor::State_Evaluate::Update(GameObject* object, double dt)
 {
     Customor* customor = static_cast<Customor*>(object);
-
+    customor->drawFoodIndex = (static_cast<int>(customor->Get_Oreder_recipe()) * 3) + (customor->grade - 1);
+    Engine::GetLogger().LogDebug(std::to_string(customor->drawFoodIndex) + " = " + std::to_string(static_cast<int>(customor->Get_Oreder_recipe())) + " * 3 + " +
+        std::to_string(customor->grade) + " -1");
     customor->evalue.update(doodle::get_mouse_x(), doodle::get_mouse_y());
 }
 
@@ -260,7 +262,7 @@ void Customor::State_Evaluate::CheckExit(GameObject* object)
         default:
             break;
         }
-
+        customor->canDrawFood = false;
         Engine::GetUnloadManager().food_complete = false;
         customor->change_state(&customor->state_leaving);
     }

@@ -110,6 +110,43 @@ void Counter::Load()
         GetGSComponent<CS230::MusicEffect>()->LoadFile("Assets/Sound/Theme/main_theme_pirot.ogg");
         GetGSComponent<CS230::MusicEffect>()->LoadFile("Assets/Sound/Theme/kitchen_theme.ogg");
 
+        //FoodTexture
+        foodTexture.push_back(Engine::GetTextureManager().Load("Assets/LemonSalad_Bad.png")); //0
+        foodTexture.push_back(Engine::GetTextureManager().Load("Assets/LemonSalad_Soso.png")); //1
+        foodTexture.push_back(Engine::GetTextureManager().Load("Assets/LemonSalad_Good.png")); //2
+
+        foodTexture.push_back(Engine::GetTextureManager().Load("Assets/SaltSalad_Bad.png")); //3
+        foodTexture.push_back(Engine::GetTextureManager().Load("Assets/SaltSalad_Soso.png")); //4
+        foodTexture.push_back(Engine::GetTextureManager().Load("Assets/SaltSalad_Good.png")); //5
+
+        foodTexture.push_back(Engine::GetTextureManager().Load("Assets/LeafSalad_Bad.png")); //6
+        foodTexture.push_back(Engine::GetTextureManager().Load("Assets/LeafSalad_Soso.png")); //7
+        foodTexture.push_back(Engine::GetTextureManager().Load("Assets/LeafSalad_Good.png")); //8
+
+        foodTexture.push_back(Engine::GetTextureManager().Load("Assets/AntSalad_Bad.png")); //9
+        foodTexture.push_back(Engine::GetTextureManager().Load("Assets/AntSalad_Soso.png")); //10
+        foodTexture.push_back(Engine::GetTextureManager().Load("Assets/AntSalad_Good.png")); //11
+
+        foodTexture.push_back(Engine::GetTextureManager().Load("Assets/DragonFruitSalad_Bad.png")); //12
+        foodTexture.push_back(Engine::GetTextureManager().Load("Assets/DragonFruitSalad_Soso.png")); //13
+        foodTexture.push_back(Engine::GetTextureManager().Load("Assets/DragonFruitSalad_Good.png")); //14
+
+        foodTexture.push_back(Engine::GetTextureManager().Load("Assets/MermaidScalesSalad_Bad.png")); //15
+        foodTexture.push_back(Engine::GetTextureManager().Load("Assets/MermaidScalesSalad_Soso.png")); //16
+        foodTexture.push_back(Engine::GetTextureManager().Load("Assets/MermaidScalesSalad_Good.png")); //17
+
+        foodTexture.push_back(Engine::GetTextureManager().Load("Assets/WaterSoup_Bad.png")); //18
+        foodTexture.push_back(Engine::GetTextureManager().Load("Assets/WaterSoup_Soso.png")); //19
+        foodTexture.push_back(Engine::GetTextureManager().Load("Assets/WaterSoup_Good.png")); //20
+
+        foodTexture.push_back(Engine::GetTextureManager().Load("Assets/AntSoup_Bad.png")); //21
+        foodTexture.push_back(Engine::GetTextureManager().Load("Assets/AntSoup_Soso.png")); //22
+        foodTexture.push_back(Engine::GetTextureManager().Load("Assets/AntSoup_Good.png")); //23
+
+        foodTexture.push_back(Engine::GetTextureManager().Load("Assets/StrongSoup_Bad.png")); //24
+        foodTexture.push_back(Engine::GetTextureManager().Load("Assets/StrongSoup_Soso.png")); //25
+        foodTexture.push_back(Engine::GetTextureManager().Load("Assets/StrongSoup_Good.png")); //26
+
         Engine::GetUnloadManager().first_load = false;
     }
 
@@ -225,6 +262,7 @@ void Counter::Draw()
     gameobjectmanager.DrawAll(Math::TransformationMatrix());
 
     Draw_UI();
+    DrawFood();
 }
 
 void Counter::Clear()
@@ -239,4 +277,18 @@ void Counter::Unload()
     //counter_Screen.Unload();
     //background.Unload();
     //GetGSComponent<CS230::MusicEffect>()->Stop();
+}
+
+void Counter::DrawFood()
+{
+    if (Engine::GetUnloadManager().current_customor != nullptr)
+    {
+        if (Engine::GetUnloadManager().current_customor->CanDrawFood() == true)
+        {
+            Math::TransformationMatrix matrix = Engine::GetDrawManager().GetMatrix(foodTexture[Engine::GetUnloadManager().current_customor->DrawFoodIndex()],
+                Math::vec2{ 340.0, 50.0 }, Math::vec2{ 300.0, 200.0 });
+            Engine::GetLogger().LogDebug(std::to_string(Engine::GetUnloadManager().current_customor->DrawFoodIndex()));
+                foodTexture[Engine::GetUnloadManager().current_customor->DrawFoodIndex()]->Draw(matrix);
+        }
+    }
 }

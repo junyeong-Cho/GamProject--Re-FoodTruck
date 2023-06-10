@@ -37,6 +37,7 @@ public:
     void Unload() override;
     void Clear();
     void Draw_UI();
+    void DrawFood();
 
     std::string GetName() override { return "Counter"; }
 private:
@@ -53,6 +54,7 @@ private:
     Counter_Background counter_Screen;
     Counter_Background background;
     int customors = 30;
+    std::vector<CS230::Texture*> foodTexture;
 
     int ranCustomerNum;
     int kind_customer = 9;

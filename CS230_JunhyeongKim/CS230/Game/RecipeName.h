@@ -10,15 +10,15 @@ Created:    March 20, 2023
 #pragma once
 enum class RecipeName
 {
-	LemonSalad, //1
-	SaltSalad, //2
-	LeafSalad, //3
-	AntSalad, //4
-	DragonFruitSalad, //5
-	MermaidScalesSalad, //6
-	WaterSoup, //7
-	AntSoup, //8
-	StrongSoup //9
+	LemonSalad, //0
+	SaltSalad, //1
+	LeafSalad, //2
+	AntSalad, //3
+	DragonFruitSalad, //4
+	MermaidScalesSalad, //5
+	WaterSoup, //6
+	AntSoup, //7
+	StrongSoup //8
 };
 
 inline RecipeName& operator+=(RecipeName& name, int value)
