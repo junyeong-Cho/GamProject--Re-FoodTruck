@@ -21,7 +21,7 @@ Updated:    June 9, 2023
 #include "RecipeBook.h"
 #include "SideBowl.h"
 
-#include "Refutation.h"
+#include "Reputation.h"
 #include "Customer.h"
 #include "Frame.h"
 
@@ -71,5 +71,5 @@ private:
     CS230::GameObjectManager gameobjectmanager;
 
     //Draw refutation
-    Refutation* refutation;
+    Reputation* refutation;
 };

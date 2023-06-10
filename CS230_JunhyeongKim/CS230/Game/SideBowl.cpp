@@ -58,7 +58,7 @@ void SideBowl::DrawCost()
 	{
 		doodle::push_settings();
 		doodle::set_font_size(20);
-		doodle::draw_text(cost + "$", position.x + texture->GetSize().x / 2.7, position.y + texture->GetSize().y / 4.0);
+		doodle::draw_text("$" + cost, position.x + texture->GetSize().x / 2.7, position.y + texture->GetSize().y / 4.0);
 		doodle::pop_settings();
 	}
 	

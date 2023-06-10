@@ -2,28 +2,28 @@
 Copyright (C) 2023 DigiPen Institute of Technology
 Reproduction or distribution of this file or its contents without
 prior written consent is prohibited
-File Name:  Refutation.cpp
+File Name:  Reputation.cpp
 Project:    GAM150
 Author:     Junyeong cho
 Created:    March 8, 2023
 Updated:    May  28, 2023
 */
-#include "Refutation.h"
+#include "Reputation.h"
 
 
-Refutation::Refutation(Math::vec2 position) : GameObject(position)
+Reputation::Reputation(Math::vec2 position) : GameObject(position)
 {
 	sprite.Load("Assets/RefutationFaces/RefutationFaces.spt");
 	current_state = &state_idle;
 	current_state->Enter(this);
 }
 
-void Refutation::Update(double dt)
+void Reputation::Update(double dt)
 {
 	GameObject::Update(dt);
 }
 
-void Refutation::DrawRefutation()
+void Reputation::DrawRefutation()
 {
 	doodle::draw_rectangle(Engine::GetWindow().GetSize().x / 5.0, Engine::GetWindow().GetSize().y / 8.0 * 7.3, Engine::GetWindow().GetSize().x * 0.15, Engine::GetWindow().GetSize().y * 0.07);
 	doodle::push_settings();
@@ -35,20 +35,20 @@ void Refutation::DrawRefutation()
 }
 
 
-void Refutation::State_Idle::Enter(GameObject* object)
+void Reputation::State_Idle::Enter(GameObject* object)
 {
-	Refutation* refutation = static_cast<Refutation*>(object);
+	Reputation* refutation = static_cast<Reputation*>(object);
 	refutation->sprite.PlayAnimation(static_cast<int>(Animations::Idle));
 }
 
-void Refutation::State_Idle::Update(GameObject* object, double dt)
+void Reputation::State_Idle::Update(GameObject* object, double dt)
 {
 
 }
 
-void Refutation::State_Idle::CheckExit(GameObject* object)
+void Reputation::State_Idle::CheckExit(GameObject* object)
 {
-	Refutation* refutation = static_cast<Refutation*>(object);
+	Reputation* refutation = static_cast<Reputation*>(object);
 
 
 	if ((Engine::GetUnloadManager().GetRate() <= 100) && (Engine::GetUnloadManager().GetRate() > 75))
@@ -59,19 +59,19 @@ void Refutation::State_Idle::CheckExit(GameObject* object)
 
 
 
-void Refutation::State_Happy::Enter(GameObject* object)
+void Reputation::State_Happy::Enter(GameObject* object)
 {
-	Refutation* refutation = static_cast<Refutation*>(object);
+	Reputation* refutation = static_cast<Reputation*>(object);
 	refutation->sprite.PlayAnimation(static_cast<int>(Animations::Happy));
 }
 
-void Refutation::State_Happy::Update(GameObject* object, double dt)
+void Reputation::State_Happy::Update(GameObject* object, double dt)
 {
 }
 
-void Refutation::State_Happy::CheckExit(GameObject* object)
+void Reputation::State_Happy::CheckExit(GameObject* object)
 {
-	Refutation* refutation = static_cast<Refutation*>(object);
+	Reputation* refutation = static_cast<Reputation*>(object);
 	if ((Engine::GetUnloadManager().GetRate() <= 75) && (Engine::GetUnloadManager().GetRate() > 50))
 	{
 		refutation->change_state(&refutation->state_normal);
@@ -86,19 +86,19 @@ void Refutation::State_Happy::CheckExit(GameObject* object)
 	}
 }
 
-void Refutation::State_Normal::Enter(GameObject* object)
+void Reputation::State_Normal::Enter(GameObject* object)
 {
-	Refutation* refutation = static_cast<Refutation*>(object);
+	Reputation* refutation = static_cast<Reputation*>(object);
 	refutation->sprite.PlayAnimation(static_cast<int>(Animations::Normal));
 }
 
-void Refutation::State_Normal::Update(GameObject* object, double dt)
+void Reputation::State_Normal::Update(GameObject* object, double dt)
 {
 }
 
-void Refutation::State_Normal::CheckExit(GameObject* object)
+void Reputation::State_Normal::CheckExit(GameObject* object)
 {
-	Refutation* refutation = static_cast<Refutation*>(object);
+	Reputation* refutation = static_cast<Reputation*>(object);
 	if ((Engine::GetUnloadManager().GetRate() <= 100) && (Engine::GetUnloadManager().GetRate() > 75))
 	{
 		refutation->change_state(&refutation->state_happy);
@@ -117,19 +117,19 @@ void Refutation::State_Normal::CheckExit(GameObject* object)
 	}
 }
 
-void Refutation::State_Angry::Enter(GameObject* object)
+void Reputation::State_Angry::Enter(GameObject* object)
 {
-	Refutation* refutation = static_cast<Refutation*>(object);
+	Reputation* refutation = static_cast<Reputation*>(object);
 	refutation->sprite.PlayAnimation(static_cast<int>(Animations::Angry));
 }
 
-void Refutation::State_Angry::Update(GameObject* object, double dt)
+void Reputation::State_Angry::Update(GameObject* object, double dt)
 {
 }
 
-void Refutation::State_Angry::CheckExit(GameObject* object)
+void Reputation::State_Angry::CheckExit(GameObject* object)
 {
-	Refutation* refutation = static_cast<Refutation*>(object);
+	Reputation* refutation = static_cast<Reputation*>(object);
 	if ((Engine::GetUnloadManager().GetRate() <= 100) && (Engine::GetUnloadManager().GetRate() > 75))
 	{
 		refutation->change_state(&refutation->state_happy);

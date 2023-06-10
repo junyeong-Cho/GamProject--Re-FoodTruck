@@ -17,7 +17,7 @@ Created:    April 30, 2023
 #include "../Engine/Sprite.h"
 
 #include "Counter_Background.h"
-#include "Refutation.h"
+#include "Reputation.h"
 #include "Button.h"
 #include "Frame.h"
 #include "Sound.h"
@@ -46,7 +46,7 @@ private:
     //Draw frames
     CS230::GameObjectManager gameobjectmanager;
 
-    Refutation* refutation;
+    Reputation* refutation;
 
     Customor* front_customor = nullptr;
     Button yes_button;

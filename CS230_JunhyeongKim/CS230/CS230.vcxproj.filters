@@ -42,7 +42,7 @@
     <ClCompile Include="Game\Frame.cpp" />
     <ClCompile Include="Game\Greendragon.cpp" />
     <ClCompile Include="Game\MainMenu.cpp" />
-    <ClCompile Include="Game\Refutation.cpp" />
+    <ClCompile Include="Game\Reputation.cpp" />
     <ClCompile Include="Game\Sound.cpp" />
     <ClCompile Include="Game\Zilien.cpp" />
     <ClCompile Include="Game\SunMan.cpp" />
@@ -101,7 +101,7 @@
     <ClInclude Include="Game\Frame.h" />
     <ClInclude Include="Game\Greendragon.h" />
     <ClInclude Include="Game\MainMenu.h" />
-    <ClInclude Include="Game\Refutation.h" />
+    <ClInclude Include="Game\Reputation.h" />
     <ClInclude Include="Game\Sound.h" />
     <ClInclude Include="Game\Zilien.h" />
     <ClInclude Include="Game\SunMan.h" />

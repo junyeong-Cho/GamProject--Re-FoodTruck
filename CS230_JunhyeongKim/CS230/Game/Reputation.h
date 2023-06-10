@@ -21,10 +21,10 @@ Updated:    May  28, 2023
 #include "../Engine/Engine.h"
 
 
-class Refutation : public CS230::GameObject
+class Reputation : public CS230::GameObject
 {
 public:
-    Refutation(Math::vec2 position);
+    Reputation(Math::vec2 position);
 
     void Update(double dt) override;
 
