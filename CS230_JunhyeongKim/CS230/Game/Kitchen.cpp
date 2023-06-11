@@ -38,14 +38,9 @@ void Kitchen::Load()
 		orderRecipeTexture.push_back(Engine::GetTextureManager().Load("Assets/StrongSoup_Soso.png"));
 
 		orderUI = Engine::GetTextureManager().Load("Assets/MainFrame.png");
-
-		Engine::GetLogger().LogDebug("Image load");
-		
 		cook.Load();
-		Engine::GetLogger().LogDebug("Cook load");
 
 		recipeBook.Load();
-		Engine::GetLogger().LogDebug("recipeBook load");
 
 		//Frame for Clock
 		gameobjectmanager.Add(new Frame({ 210 , 730 }, 1));
@@ -72,14 +67,12 @@ void Kitchen::Load()
 			sideBowl.push_back(SideBowl(Math::vec2{ cook.sideBowlBoardFirstPos.x + (cook.sideBowlSize.x + cook.sideBowlPadding.x) * i, cook.sideBowlBoardFirstPos.y }, "3"));
 			sideBowl[i].Load();
 		}
-		Engine::GetLogger().LogDebug("sideBowl load");
 		
 
 		SetOrder();
 		cook.GetOrder(orderRecipe, recipeBook.GetRecipeBook());
 		canLoad = false;
 
-		Engine::GetLogger().LogDebug("end load");
 	}
 }
 

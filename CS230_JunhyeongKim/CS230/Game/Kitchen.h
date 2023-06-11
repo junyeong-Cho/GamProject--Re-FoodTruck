@@ -22,7 +22,6 @@ Updated:    June 9, 2023
 #include "SideBowl.h"
 
 #include "Reputation.h"
-#include "Customer.h"
 #include "Frame.h"
 
 class Kitchen : public CS230::GameState

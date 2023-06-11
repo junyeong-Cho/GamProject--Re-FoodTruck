@@ -287,7 +287,6 @@ void Counter::DrawFood()
         {
             Math::TransformationMatrix matrix = Engine::GetDrawManager().GetMatrix(foodTexture[Engine::GetUnloadManager().current_customor->DrawFoodIndex()],
                 Math::vec2{ 340.0, 50.0 }, Math::vec2{ 300.0, 200.0 });
-            Engine::GetLogger().LogDebug(std::to_string(Engine::GetUnloadManager().current_customor->DrawFoodIndex()));
                 foodTexture[Engine::GetUnloadManager().current_customor->DrawFoodIndex()]->Draw(matrix);
         }
     }

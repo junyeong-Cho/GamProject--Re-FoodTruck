@@ -11,7 +11,6 @@ Created:    June  6, 2023
 #include "Vec2.h"
 #include "Matrix.h"
 #include "Texture.h"
-#include "Rect.h"
 
 namespace CS230
 {

@@ -43,7 +43,6 @@ void IngredientTextureManager::Load()
 	ingredientTexture[static_cast<int>(IngredientName::MermaidScales)].push_back(Engine::GetTextureManager().Load("Assets/MermaidScales2.png"));
 	ingredientTexture[static_cast<int>(IngredientName::MermaidScales)].push_back(Engine::GetTextureManager().Load("Assets/MermaidScales3.png"));
 
-	Engine::GetLogger().LogDebug("Load ingredientTexture size : " + std::to_string(ingredientTexture.size()));
 }
 
 void IngredientTextureManager::Unload()
@@ -51,10 +50,8 @@ void IngredientTextureManager::Unload()
 	for (int i = 0; i < ingredientTexture.size(); ++i)
 	{
 		ingredientTexture[i].clear();
-		Engine::GetLogger().LogDebug("ingredientTexture index: " + std::to_string(i) + " size : " + std::to_string(ingredientTexture[i].size()));
 	}
 	ingredientTexture.clear();
-	Engine::GetLogger().LogDebug("Unload ingredientTexture size : " + std::to_string(ingredientTexture.size()));
 }
 
 std::vector<std::vector<CS230::Texture*>> IngredientTextureManager::GetTexture() const

@@ -177,7 +177,6 @@ xcopy /d /y Assets\* "$(OutputPath)Assets"
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Animation.cpp" />
-    <ClCompile Include="Engine\Camera.cpp" />
     <ClCompile Include="Engine\DrawManager.cpp" />
     <ClCompile Include="Engine\Engine.cpp" />
     <ClCompile Include="Engine\GameObject.cpp" />
@@ -228,7 +227,6 @@ xcopy /d /y Assets\* "$(OutputPath)Assets"
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Animation.h" />
-    <ClInclude Include="Engine\Camera.h" />
     <ClInclude Include="Engine\Component.h" />
     <ClInclude Include="Engine\ComponentManager.h" />
     <ClInclude Include="Engine\DrawManager.h" />
@@ -241,7 +239,6 @@ xcopy /d /y Assets\* "$(OutputPath)Assets"
     <ClInclude Include="Engine\Logger.h" />
     <ClInclude Include="Engine\Matrix.h" />
     <ClInclude Include="Engine\OrderManager.h" />
-    <ClInclude Include="Engine\Rect.h" />
     <ClInclude Include="Engine\Sprite.h" />
     <ClInclude Include="Engine\Texture.h" />
     <ClInclude Include="Engine\TextureManager.h" />
