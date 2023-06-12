@@ -116,6 +116,22 @@ void Kitchen::Update(double dt)
 		}
 	}
 
+	if (Engine::GetInput().KeyJustReleased(CS230::Input::Keys::Space))
+	{
+		GetGSComponent<CS230::MusicEffect>()->Stop();
+		Engine::GetUnloadManager().Update_Day();
+		if (Engine::GetUnloadManager().GetDay() > 4)
+		{
+			Engine::GetGameStateManager().SetNextGameState(static_cast<int>(States::Ending));
+		}
+		else
+		{
+			Engine::GetGameStateManager().SetNextGameState(static_cast<int>(States::Day_end));
+		}
+		canLoad = true;
+		canUnload = true;
+	}
+
 
 	if (Engine::GetUnloadManager().GetRate() <= 0 || Engine::GetUnloadManager().GetMoney() <= 0)
 	{
