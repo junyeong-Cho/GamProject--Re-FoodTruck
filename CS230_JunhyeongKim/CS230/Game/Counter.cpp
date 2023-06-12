@@ -59,7 +59,7 @@ void Counter::Load()
     if (Engine::GetUnloadManager().first_load == true)
     {
         ClearGSComponents();
-        front_customor = new Giraffe(nullptr);
+        front_customor = new Greendragon(nullptr);
         Engine::GetUnloadManager().GetCounterObjectManager().Add(front_customor);
         Engine::GetUnloadManager().current_customor = front_customor;
 
