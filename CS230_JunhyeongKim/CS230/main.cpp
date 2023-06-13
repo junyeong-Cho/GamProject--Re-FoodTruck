@@ -3,9 +3,10 @@ Copyright (C) 2023 DigiPen Institute of Technology
 Reproduction or distribution of this file or its contents without
 prior written consent is prohibited
 File Name:  main.cpp
-Project:    CS230 Engine
-Author:     Jonathan Holmes
+Project:    GAM150
+Author:     Junyeong Cho, Junhyeong Kim, Yeaseul Lim
 Created:    March 8, 2023
+Updated:    June 13, 2023
 */
 
 #include <iostream>
@@ -27,7 +28,7 @@ Created:    March 8, 2023
 int main() {
     try {
         Engine& engine = Engine::Instance();
-        engine.Start("Re : Truck");
+        engine.Start("Re : Food Truck");
 
         Splash splash;
         engine.GetGameStateManager().AddGameState(splash);

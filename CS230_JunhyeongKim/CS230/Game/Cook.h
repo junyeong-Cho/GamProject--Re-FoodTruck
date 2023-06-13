@@ -129,7 +129,7 @@ private:
 
 
 
-    //using_ingredients 벡터 중 몇번째 인덱스를 가리키고 있는지.
+    //Which index of the using_ingredients vector is pointing to.
     int whatMouseclickIndex = -1;
 
     std::vector<std::vector<Ingredient*>> seven_ingredients;

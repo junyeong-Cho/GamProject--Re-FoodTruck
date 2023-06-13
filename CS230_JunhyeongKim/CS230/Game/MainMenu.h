@@ -13,8 +13,6 @@ Updated:    June  9, 2023
 #pragma once
 
 #include "../Game/States.h"
-
-//#include "../Engine/SoundComponentManager.h"
 #include "../Engine/GameObjectManager.h"
 #include "../Engine/TextureManager.h"
 #include "../Engine/Texture.h"
@@ -54,9 +52,6 @@ private:
 	std::string exit;
 
 	CS230::Texture* mainmenu_background;
-
-
-	//CS230::MusicEffect music_effect_main = CS230::MusicEffect("Assets/Sound/Theme/main_theme_pirot.ogg");
 
 
 	int counter = 0;

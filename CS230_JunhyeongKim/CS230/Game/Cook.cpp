@@ -85,8 +85,6 @@ void Cook::Unload()
 	using_ingredients.clear();
 	
 
-	//delete soundEffect; // 이게있으니까 터짐.
-
 	score = 0;
 	time = 0;
 	stoveOn = false;
@@ -106,7 +104,7 @@ void Cook::ToolUpdate()
 
 void Cook::ToolDraw()
 {
-	//얘가 항상 제일 위에 그려져야함.
+	//Always have to be drawn at the top.
 	tool.Draw();
 }
 

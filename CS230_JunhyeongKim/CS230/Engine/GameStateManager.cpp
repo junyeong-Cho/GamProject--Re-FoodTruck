@@ -66,7 +66,6 @@ void CS230::GameStateManager::Update(double dt)
                 Engine::GetUnloadManager().Set_timer(120);
                 Engine::GetUnloadManager().first_load = true;
                 Engine::GetUnloadManager().Unload();
-                /*Engine::GetTextureManager().Unload();*/
                 Counter->ClearGSComponents();
 
             }

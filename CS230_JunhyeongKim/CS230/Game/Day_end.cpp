@@ -55,7 +55,6 @@ void Day_end::Update(double dt)
 	if (Engine::GetInput().KeyJustReleased(CS230::Input::Keys::Enter))
 	{
 		Engine::GetGameStateManager().SetNextGameState(static_cast<int>(States::Counter));
-		//Engine::GetGameStateManager().ClearNextGameState();
 	}
 }
 

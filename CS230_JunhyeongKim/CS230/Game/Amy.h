@@ -15,7 +15,7 @@ class Amy : public Customor
 {
 public:
 	Amy(Customor* front);
-	std::string Order_text()      { return "Could you give me a sone AntSoup please?"; };
+	std::string Order_text()      { return "Could you give me a some AntSoup please?"; };
 	std::string Grade_bad_text()  { return "Umm...It's bad"; }
 	std::string Grade_soso_text() { return "It's quite edible~!"; }
 	std::string Grade_good_text() { return "Wonderful!"; }

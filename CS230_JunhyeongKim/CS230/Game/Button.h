@@ -36,7 +36,7 @@ struct Button
     int mouseX = 0;
     int mouseY = 0;
 
-    /** x좌표, y좌표, 버튼 가로길이, 버튼 세로길이, 현재장면변수 순으로 적으세용*/
+    /** Write down in the order of x coordinate, y coordinate, button horizontal length, button vertical length, and current scene variable*/
     Button(double tempX, double tempY, double tempWidth, double tempHeight);
 
     //have name button
@@ -49,7 +49,7 @@ struct Button
     void text_draw(std::string text);
     void check_click();
     void check_click(States next_state);
-    /** 마우스x좌표, 마우스y좌표, 다음장면 순으로 적으세용*/
+    /** Write down mouse x coordinate, mouse y coordinate, and next scene in order*/
     void update(const int mouse_x, const int mouse_y, States next_state);
 
     void update(const int mouse_x, const int mouse_y);

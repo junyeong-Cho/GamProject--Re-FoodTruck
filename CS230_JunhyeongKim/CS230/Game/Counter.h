@@ -41,8 +41,6 @@ public:
 
     std::string GetName() override { return "Counter"; }
 private:
-    //CS230::Texture* guest_image;
-    //Math::vec2 guest_position;
 
     //Draw frames
     CS230::GameObjectManager gameobjectmanager;

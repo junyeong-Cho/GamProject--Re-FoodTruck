@@ -59,10 +59,10 @@ int Recipe::CheckComplete(std::vector<Ingredient*>& plating)
 		}
 		double tempSameCut = sameCut;
 		
-		//재료가 들어오기만 하면 일단 점수+
+		//Once the ingredients come in, the score is added.
 		totalScore += putSomething;
 
-		//같은 재료이면 점수+
+		//Points are added for the same material.
 		if (plating[i]->GetName() == recipe[i]->GetName())
 		{
 			totalScore += sameIngredient;
@@ -70,7 +70,7 @@ int Recipe::CheckComplete(std::vector<Ingredient*>& plating)
 			tempSameCut -= differCutScore * (plating[i]->GetCutNum() - 1);
 			totalScore += tempSameCut;
 
-			//같은 boiled이면 점수+
+			//If it is the same boiled, score is added.
 			if (plating[i]->GetBoiled() == recipe[i]->GetBoiled())
 			{
 				totalScore += sameBoil;

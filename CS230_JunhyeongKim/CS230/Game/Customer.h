@@ -140,7 +140,6 @@ private:
     Button evalue;
 
     double button_timer{ 0 };
-    //¾ÕÀ¸·Î ¿ÔÀ» ¶§
     bool can_order = false;
 
     //evaluating
