@@ -27,7 +27,7 @@ Customor::Customor(Customor* front) :
 
 
 
-    random_timer = static_cast<double>(rand()) / (RAND_MAX / 5) + 18 / Engine::GetUnloadManager().GetDay();
+    random_timer = static_cast<double>(rand()) / (RAND_MAX / 5) + 80/ Engine::GetUnloadManager().GetDay();
     current_state->Enter(this);
     timer = random_timer;
     last_timer = static_cast<int>(random_timer);
