@@ -21,7 +21,6 @@ Customor::Customor(Customor* front) :
     evalue(1400.0 / 2.5, 800.0 / 3.0, 1400.0 / 10.0, 800 / 10.0)
 {
     current_state = &state_waiting;
-    //SetScale({ 0.98,0.98 });
     AddGOComponent(new CS230::SoundEffect);
     GetGOComponent<CS230::SoundEffect>()->LoadFile("Assets/Sound/SFX/EnteringBell.wav");
 
