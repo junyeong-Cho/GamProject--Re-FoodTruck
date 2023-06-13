@@ -101,6 +101,19 @@
     <PostBuildEvent>
       <Command>if not exist "$(OutputPath)Assets" mkdir "$(OutputPath)Assets"
 xcopy /d /y Assets\* "$(OutputPath)Assets"
+xcopy /y /s "$(ProjectDir)openal32.dll" "$(OutDir)"
+xcopy /y /s "$(ProjectDir)sfml-audio-2.dll" "$(OutDir)"
+xcopy /y /s "$(ProjectDir)sfml-graphics-2.dll" "$(OutDir)"
+xcopy /y /s "$(ProjectDir)sfml-network-2.dll" "$(OutDir)"
+xcopy /y /s "$(ProjectDir)sfml-system-2.dll" "$(OutDir)"
+xcopy /y /s "$(ProjectDir)sfml-window-2.dll" "$(OutDir)"
+xcopy /y /s "$(ProjectDir)sfml-audio.lib" "$(OutDir)"
+xcopy /y /s "$(ProjectDir)sfml-graphics.lib" "$(OutDir)"
+xcopy /y /s "$(ProjectDir)sfml-network.lib" "$(OutDir)"
+xcopy /y /s "$(ProjectDir)sfml-system.lib" "$(OutDir)"
+xcopy /y /s "$(ProjectDir)sfml-window.lib" "$(OutDir)"
+xcopy /y /s "$(ProjectDir)sfml-main.lib" "$(OutDir)"
+xcopy /y /e /i "$(ProjectDir)Assets" "$(OutDir)Assets"
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -126,6 +139,19 @@ xcopy /d /y Assets\* "$(OutputPath)Assets"
     <PostBuildEvent>
       <Command>if not exist "$(OutputPath)Assets" mkdir "$(OutputPath)Assets"
 xcopy /d /y Assets\* "$(OutputPath)Assets"
+xcopy /y /s "$(ProjectDir)openal32.dll" "$(OutDir)"
+xcopy /y /s "$(ProjectDir)sfml-audio-2.dll" "$(OutDir)"
+xcopy /y /s "$(ProjectDir)sfml-graphics-2.dll" "$(OutDir)"
+xcopy /y /s "$(ProjectDir)sfml-network-2.dll" "$(OutDir)"
+xcopy /y /s "$(ProjectDir)sfml-system-2.dll" "$(OutDir)"
+xcopy /y /s "$(ProjectDir)sfml-window-2.dll" "$(OutDir)"
+xcopy /y /s "$(ProjectDir)sfml-audio.lib" "$(OutDir)"
+xcopy /y /s "$(ProjectDir)sfml-graphics.lib" "$(OutDir)"
+xcopy /y /s "$(ProjectDir)sfml-network.lib" "$(OutDir)"
+xcopy /y /s "$(ProjectDir)sfml-system.lib" "$(OutDir)"
+xcopy /y /s "$(ProjectDir)sfml-window.lib" "$(OutDir)"
+xcopy /y /s "$(ProjectDir)sfml-main.lib" "$(OutDir)"
+xcopy /y /e /i "$(ProjectDir)Assets" "$(OutDir)Assets"
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -147,6 +173,19 @@ xcopy /d /y Assets\* "$(OutputPath)Assets"
     <PostBuildEvent>
       <Command>if not exist "$(OutputPath)Assets" mkdir "$(OutputPath)Assets"
 xcopy /d /y Assets\* "$(OutputPath)Assets"
+xcopy /y /s "$(ProjectDir)openal32.dll" "$(OutDir)"
+xcopy /y /s "$(ProjectDir)sfml-audio-2.dll" "$(OutDir)"
+xcopy /y /s "$(ProjectDir)sfml-graphics-2.dll" "$(OutDir)"
+xcopy /y /s "$(ProjectDir)sfml-network-2.dll" "$(OutDir)"
+xcopy /y /s "$(ProjectDir)sfml-system-2.dll" "$(OutDir)"
+xcopy /y /s "$(ProjectDir)sfml-window-2.dll" "$(OutDir)"
+xcopy /y /s "$(ProjectDir)sfml-audio.lib" "$(OutDir)"
+xcopy /y /s "$(ProjectDir)sfml-graphics.lib" "$(OutDir)"
+xcopy /y /s "$(ProjectDir)sfml-network.lib" "$(OutDir)"
+xcopy /y /s "$(ProjectDir)sfml-system.lib" "$(OutDir)"
+xcopy /y /s "$(ProjectDir)sfml-window.lib" "$(OutDir)"
+xcopy /y /s "$(ProjectDir)sfml-main.lib" "$(OutDir)"
+xcopy /y /e /i "$(ProjectDir)Assets" "$(OutDir)Assets"
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -172,6 +211,19 @@ xcopy /d /y Assets\* "$(OutputPath)Assets"
     <PostBuildEvent>
       <Command>if not exist "$(OutputPath)Assets" mkdir "$(OutputPath)Assets"
 xcopy /d /y Assets\* "$(OutputPath)Assets"
+xcopy /y /s "$(ProjectDir)openal32.dll" "$(OutDir)"
+xcopy /y /s "$(ProjectDir)sfml-audio-2.dll" "$(OutDir)"
+xcopy /y /s "$(ProjectDir)sfml-graphics-2.dll" "$(OutDir)"
+xcopy /y /s "$(ProjectDir)sfml-network-2.dll" "$(OutDir)"
+xcopy /y /s "$(ProjectDir)sfml-system-2.dll" "$(OutDir)"
+xcopy /y /s "$(ProjectDir)sfml-window-2.dll" "$(OutDir)"
+xcopy /y /s "$(ProjectDir)sfml-audio.lib" "$(OutDir)"
+xcopy /y /s "$(ProjectDir)sfml-graphics.lib" "$(OutDir)"
+xcopy /y /s "$(ProjectDir)sfml-network.lib" "$(OutDir)"
+xcopy /y /s "$(ProjectDir)sfml-system.lib" "$(OutDir)"
+xcopy /y /s "$(ProjectDir)sfml-window.lib" "$(OutDir)"
+xcopy /y /s "$(ProjectDir)sfml-main.lib" "$(OutDir)"
+xcopy /y /e /i "$(ProjectDir)Assets" "$(OutDir)Assets"
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
