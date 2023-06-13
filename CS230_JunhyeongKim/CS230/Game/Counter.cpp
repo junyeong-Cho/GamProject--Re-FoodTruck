@@ -59,9 +59,12 @@ void Counter::Load()
     if (Engine::GetUnloadManager().first_load == true)
     {
         ClearGSComponents();
-        front_customor = new Greendragon(nullptr);
+        front_customor = new Theif(nullptr);
         Engine::GetUnloadManager().GetCounterObjectManager().Add(front_customor);
         Engine::GetUnloadManager().current_customor = front_customor;
+
+        front_customor = new Greendragon(front_customor);
+        Engine::GetUnloadManager().GetCounterObjectManager().Add(front_customor);
 
         for (int i = 0; i < customors; i++)
         {

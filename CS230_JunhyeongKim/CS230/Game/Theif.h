@@ -15,7 +15,7 @@ class Theif : public Customor
 {
 public:
 	Theif(Customor* front);
-	std::string Order_text()	  { return "Give me watersoupt quick!!"; };
+	std::string Order_text()	  { return "Give me watersoup quick!!"; };
 	std::string Grade_bad_text()  { return "Well...Well.."; }
 	std::string Grade_soso_text() { return "It's quite edible~!"; }
 	std::string Grade_good_text() { return "That was perfect!"; }
